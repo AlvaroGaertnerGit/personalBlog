@@ -15,7 +15,7 @@ function Hero({ className, children, ...props }: React.ComponentProps<"section">
       className={cn("flex min-h-dvh items-center", className)}
       {...props}
     >
-      <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+      <Container className="grid gap-12 sm:gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20">
         {children}
       </Container>
     </Section>
@@ -26,7 +26,7 @@ function HeroContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="hero-content"
-      className={cn("flex flex-col gap-8 lg:gap-10", className)}
+      className={cn("flex flex-col gap-8 sm:gap-10 lg:gap-12", className)}
       {...props}
     />
   )
@@ -37,7 +37,7 @@ function HeroEyebrow({ className, children, ...props }: React.ComponentProps<"p"
     <p
       data-slot="hero-eyebrow"
       className={cn(
-        "text-muted-foreground inline-flex items-center gap-2 text-sm font-medium tracking-wide uppercase",
+        "text-muted-foreground inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase",
         className
       )}
       {...props}
@@ -53,7 +53,7 @@ function HeroTitle({ className, ...props }: React.ComponentProps<"h1">) {
     <h1
       data-slot="hero-title"
       className={cn(
-        "text-4xl leading-tight font-semibold text-balance tracking-tight sm:text-6xl lg:text-7xl",
+        "text-4xl leading-tight font-semibold text-balance tracking-tight sm:text-6xl lg:text-7xl lg:tracking-[-0.02em]",
         className
       )}
       {...props}
@@ -65,7 +65,10 @@ function HeroDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
       data-slot="hero-description"
-      className={cn("text-muted-foreground max-w-prose text-lg text-pretty", className)}
+      className={cn(
+        "text-muted-foreground max-w-prose text-lg leading-relaxed text-pretty sm:text-xl",
+        className
+      )}
       {...props}
     />
   )
@@ -112,7 +115,7 @@ const heroMediaVariants = cva(
         video: "aspect-video",
       },
       fit: {
-        contained: "flex items-center justify-center p-6",
+        contained: "flex items-center justify-center p-6 sm:p-8 lg:p-10",
         full: "",
       },
     },

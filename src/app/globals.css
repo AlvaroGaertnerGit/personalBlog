@@ -178,15 +178,28 @@
 }
 
 @layer utilities {
-  /* Ambient 24s opacity drift on the background wash only — outside the
-     interaction-transition tokens in src/lib/motion.ts on purpose, this is
-     a decorative loop, not a UI transition. Hand-rolled utility (not a
-     Tailwind `@utility`), so `motion-safe:`/`motion-reduce:` variants can't
-     attach to it — gate reduced motion here directly instead, per the
-     motion skill's "CSS animation outside motion.* components" case. */
+  /* Ambient 24s opacity drift on the background wash, plus the Hero's
+     one-shot entrance fades — outside the interaction-transition tokens in
+     src/lib/motion/ on purpose, these are decorative/page-load animations,
+     not UI transitions. Hand-rolled utilities (not Tailwind `@utility`s),
+     so `motion-safe:`/`motion-reduce:` variants can't attach to them — gate
+     reduced motion here directly instead, per the motion skill's "CSS
+     animation outside motion.* components" case. With reduced motion
+     requested, both fade-in animations simply don't exist, so the wash and
+     grid render at their final (fully opaque) state immediately — no
+     separate fallback rule needed. */
   @media (prefers-reduced-motion: no-preference) {
     .animate-background-breathe {
-      animation: background-breathe 24s ease-in-out infinite;
+      /* The one-shot intro fade runs first; the ambient loop doesn't start
+         until it finishes (24s loop delayed by the intro's 0.6s), and both
+         land on opacity: 1 at the handoff so there's no visible seam. */
+      animation:
+        hero-bg-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both,
+        background-breathe 24s ease-in-out 0.6s infinite;
+    }
+
+    .animate-hero-grid-in {
+      animation: hero-grid-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
   }
 }
@@ -198,5 +211,23 @@
   }
   50% {
     opacity: 0.65;
+  }
+}
+
+@keyframes hero-bg-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-grid-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

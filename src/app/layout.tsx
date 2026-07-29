@@ -14,14 +14,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// TODO: replace [Your Name] with the real name/tagline before launch.
+// TODO: replace [Álvaro Gaertner] with the real name/tagline before launch.
 export const metadata: Metadata = {
   title: {
-    default: "[Your Name] | AI-Native Software Portfolio",
-    template: "%s | [Your Name]",
+    default: "[Álvaro Gaertner] | AI-Native Software Portfolio",
+    template: "%s | [Álvaro Gaertner]",
   },
   description:
-    "Portfolio of [Your Name]. An AI-native personal website with projects built for quality, performance, and craft.",
+    "Portfolio of [Álvaro Gaertner]. An AI-native personal website with projects built for quality, performance, and craft.",
 };
 
 export default function RootLayout({

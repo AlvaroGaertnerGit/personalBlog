@@ -1,12 +1,13 @@
 import type { Variants } from "framer-motion"
 
-import { distance, duration, easing } from "@/lib/motion"
+import { distance } from "./distances"
+import { transitions } from "./transitions"
 
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: duration.base, ease: easing.out },
+    transition: transitions.enter,
   },
 }
 
@@ -15,7 +16,7 @@ export const fadeInUp: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: duration.base, ease: easing.out },
+    transition: transitions.enter,
   },
 }
 
@@ -24,7 +25,7 @@ export const fadeInDown: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: duration.base, ease: easing.out },
+    transition: transitions.enter,
   },
 }
 
@@ -33,7 +34,7 @@ export const scaleIn: Variants = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: duration.base, ease: easing.out },
+    transition: transitions.enter,
   },
 }
 
@@ -46,19 +47,39 @@ export const staggerContainer: Variants = {
 
 export const staggerItem: Variants = fadeInUp
 
+// Hero-only: the one place distance.lg (24px, "hero content" per
+// reference/tokens.md) and transitions.enterSlow (0.6s, "Hero/page-level
+// entrances") are meant to be used together. Keep staggerContainer/
+// staggerItem above generic for future non-hero use (e.g. a projects grid).
+export const heroStaggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.12 },
+  },
+}
+
+export const heroStaggerItem: Variants = {
+  hidden: { opacity: 0, y: distance.lg },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: transitions.enterSlow,
+  },
+}
+
 // For whileHover / whileTap — not part of the Variants catalog above,
 // whileHover/whileTap take a plain target object, not a hidden/visible map.
 export const hoverLift = {
   y: -distance.xs,
-  transition: { duration: duration.fast, ease: easing.out },
+  transition: transitions.hover,
 }
 
 export const hoverScale = {
   scale: 1.02,
-  transition: { duration: duration.fast, ease: easing.out },
+  transition: transitions.hover,
 }
 
 export const tapScale = {
   scale: 0.98,
-  transition: { duration: duration.instant, ease: easing.out },
+  transition: transitions.press,
 }

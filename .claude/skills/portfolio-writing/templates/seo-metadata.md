@@ -13,8 +13,8 @@ plain string. See `src/app/layout.tsx` for the root export.
   ```ts
   export const metadata: Metadata = {
     title: {
-      default: "Your Name — what you build",
-      template: "%s | Your Name",
+      default: "Álvaro Gaertner — what you build",
+      template: "%s | Álvaro Gaertner",
     },
   }
   ```
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 export async function generateMetadata({ params }): Promise<Metadata> {
   const project = await getProject(params.slug)
   return {
-    title: project.name, // becomes "Project Name | Your Name" via the template
+    title: project.name, // becomes "Project Name | Álvaro Gaertner" via the template
     description: project.oneLineSummary, // 70-160 chars, the Outcome line from project-description.md
   }
 }
