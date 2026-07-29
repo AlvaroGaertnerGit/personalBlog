@@ -113,7 +113,7 @@ function auditFile(path) {
 }
 
 function main() {
-  const files = walk(root);
+  const files = statSync(root).isDirectory() ? walk(root) : [root];
   const report = [];
 
   for (const file of files) {
@@ -128,7 +128,7 @@ function main() {
   if (asJson) {
     console.log(JSON.stringify({ files: report, totalFindings }, null, 2));
   } else if (totalFindings === 0) {
-    console.log(`design-system audit: 0 findings across ${files.length} files in ${root}/`);
+    console.log(`design-system audit: 0 findings across ${files.length} files in ${root}`);
   } else {
     for (const { file, findings } of report) {
       console.log(`\n${file}`);
@@ -139,7 +139,7 @@ function main() {
       }
     }
     console.log(
-      `\ndesign-system audit: ${totalFindings} finding(s) across ${report.length} file(s) in ${root}/`
+      `\ndesign-system audit: ${totalFindings} finding(s) across ${report.length} file(s) in ${root}`
     );
   }
 

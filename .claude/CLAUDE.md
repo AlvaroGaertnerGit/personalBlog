@@ -100,3 +100,5 @@ When proposing a solution:
 - Avoid unnecessary complexity.
 
 Act as a senior frontend engineer, not as a code generator.
+
+For every implementation task, follow this default workflow unless explicitly instructed otherwise: Plan Agent → relevant Skills → Worker Agent → Observer Agent → Verify Skill → Code Review Skill.
