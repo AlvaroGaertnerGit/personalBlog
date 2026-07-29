@@ -33,8 +33,19 @@ export const SCOPE_IDLE_ANIMATE = {
   rotate: [0, -0.6],
   scale: [1, 1.015],
 }
+
+// Living Atmospheres (Sprint 3): the one numeric variance breathing pace
+// has between themes — "breathing is a little more noticeable" in light,
+// "breathing slightly slower" in dark — a ±0.2s nudge off the original 4s,
+// read by use-scope-motion.ts. Everything else about idle (the keyframe
+// shape above, the easing/repeatType below) is identical between themes.
+export const SCOPE_IDLE_DURATION_BY_THEME = {
+  light: 3.8,
+  dark: 4.2,
+} as const
+
 export const SCOPE_IDLE_TRANSITION: Transition = {
-  duration: 4,
+  duration: SCOPE_IDLE_DURATION_BY_THEME.dark,
   repeat: Infinity,
   repeatType: "mirror",
   ease: "easeInOut",

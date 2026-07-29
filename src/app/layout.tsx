@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/motion-provider";
 import { Background } from "@/components/layout/background";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { ScopeDockProvider } from "@/components/scope/companion";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +36,16 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="relative isolate min-h-full flex flex-col">
-        <Background />
-        <MotionProvider>{children}</MotionProvider>
+        <ThemeProvider>
+          <Background />
+          <MotionProvider>
+            <ThemeToggle className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6" />
+            <ScopeDockProvider>{children}</ScopeDockProvider>
+          </MotionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,11 +1,14 @@
 "use client"
 
+import { useTheme } from "next-themes"
+
 import { useIsReducedMotion } from "@/hooks/use-is-reduced-motion"
 
 import {
   SCOPE_HAPPY_ANIMATE,
   SCOPE_HAPPY_TRANSITION,
   SCOPE_IDLE_ANIMATE,
+  SCOPE_IDLE_DURATION_BY_THEME,
   SCOPE_IDLE_TRANSITION,
   SCOPE_MOODS,
   SCOPE_REDUCED_TRANSITION,
@@ -17,6 +20,7 @@ import type { ScopeMood } from "./scope.types"
 // pair.
 function useScopeMotion(mood: ScopeMood) {
   const isReduced = useIsReducedMotion()
+  const { resolvedTheme } = useTheme()
   const spec = SCOPE_MOODS[mood]
 
   if (isReduced) {
@@ -31,7 +35,16 @@ function useScopeMotion(mood: ScopeMood) {
   }
 
   if (mood === "idle") {
-    return { animate: SCOPE_IDLE_ANIMATE, transition: SCOPE_IDLE_TRANSITION, glow: spec.glow }
+    // Living Atmospheres: breathing pace is the one thing that varies by
+    // theme (see SCOPE_IDLE_DURATION_BY_THEME) — everything else about the
+    // idle transition stays exactly as authored in scope-motion.ts.
+    const duration =
+      resolvedTheme === "light" ? SCOPE_IDLE_DURATION_BY_THEME.light : SCOPE_IDLE_DURATION_BY_THEME.dark
+    return {
+      animate: SCOPE_IDLE_ANIMATE,
+      transition: { ...SCOPE_IDLE_TRANSITION, duration },
+      glow: spec.glow,
+    }
   }
 
   if (mood === "happy") {

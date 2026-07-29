@@ -87,13 +87,16 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
 
-  /* Scope's brand palette — see docs/scope-docs/scope. Fixed on purpose:
-     Scope is a physical character with one canonical appearance, not a
-     themeable UI surface, so these are intentionally NOT redefined under
-     .dark (a real object doesn't recolor itself when the room lighting
-     changes). Converted from the character sheet's exact hex values
-     (#F2F2F0 / #0B0B0D / #2B2B2E / #A78BFA / #FFC168) to oklch to match
-     this file's convention, not eyeballed. */
+  /* Scope's brand palette — see docs/scope-docs/scope. The shell,
+     proportions, and materials are fixed forever (a real object doesn't
+     redesign itself when the room lighting changes) — shell/display/details
+     below are never redefined under .dark. Converted from the character
+     sheet's exact hex values (#F2F2F0 / #0B0B0D / #2B2B2E / #A78BFA /
+     #FFC168) to oklch to match this file's convention, not eyeballed.
+     --scope-accent/--scope-warm get one narrow, intentional exception (see
+     .dark below, added for Sprint 3's "Living Atmospheres" — Scope's core
+     reads a few degrees cooler in dark mode, the same fixed shape and
+     material, just a different room to stand in). */
   --scope-shell: oklch(0.961 0.003 106.449);
   --scope-display: oklch(0.151 0.004 285.878);
   --scope-details: oklch(0.29 0.005 286.059);
@@ -133,6 +136,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* The one intentional exception noted above the :root scope palette —
+     "slightly cooler core" / "calmer presence" in dark mode. Hue nudged a
+     few degrees toward blue, lightness/chroma trimmed a touch — same
+     shape, same material, quietly different light in the room. */
+  --scope-accent: oklch(0.68 0.15 299);
+  --scope-warm: oklch(0.8 0.1 80);
 }
 
 @layer base {
@@ -229,5 +239,48 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Atmosphere sweep — the cinematic theme transition (see
+   src/components/theme/use-theme-transition.ts, which wraps next-themes'
+   setTheme in document.startViewTransition). Not a plain color cross-fade:
+   the browser's default view-transition cross-fade is disabled on both
+   snapshots, and the *new* atmosphere is revealed by an expanding circle
+   anchored at the top-right corner — matching the toggle's own position —
+   so it reads as light sweeping across the interface toward the bottom-left,
+   per the sprint brief. Duration/easing are literal values matching
+   duration.slower (0.6s) / easing.out exactly, the same "CSS animation
+   outside motion.* components" convention this file already uses for
+   hero-bg-in/hero-grid-in above. Nothing here runs unless
+   document.startViewTransition actually fired, which use-theme-transition.ts
+   already skips under reduced motion — this media query is a second,
+   belt-and-suspenders gate, not the only one. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-new(root) {
+    clip-path: circle(0% at 100% 0%);
+    animation: atmosphere-sweep 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Scope during theme changes: it never celebrates the switch, its core
+     just softly follows the new atmosphere — a gentle fill cross-fade on
+     the display's glow/accent shapes (the only parts of Scope wired to
+     --scope-accent) whenever that variable's value changes under .dark.
+     Feet/shell/eye fills never reference --scope-accent, so this rule is
+     silently inert for them; scope.tsx itself is untouched. */
+  [data-slot="scope"] :is(circle, rect, text) {
+    transition: fill 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes atmosphere-sweep {
+  to {
+    clip-path: circle(150% at 100% 0%);
   }
 }
