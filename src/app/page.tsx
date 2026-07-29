@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 
-import { CompanionMark } from "@/components/companion/companion";
+import { Scope } from "@/components/scope/scope";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -51,7 +51,7 @@ export default function Home() {
         </HeroActions>
       </HeroContent>
       <HeroMedia>
-        <CompanionMark />
+        <Scope className="size-40 sm:size-48" />
       </HeroMedia>
     </Hero>
   );

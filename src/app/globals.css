@@ -46,6 +46,11 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --color-scope-shell: var(--scope-shell);
+  --color-scope-display: var(--scope-display);
+  --color-scope-details: var(--scope-details);
+  --color-scope-accent: var(--scope-accent);
+  --color-scope-warm: var(--scope-warm);
 }
 
 :root {
@@ -81,6 +86,19 @@
   --sidebar-ring: oklch(0.708 0 0);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+
+  /* Scope's brand palette — see docs/scope-docs/scope. Fixed on purpose:
+     Scope is a physical character with one canonical appearance, not a
+     themeable UI surface, so these are intentionally NOT redefined under
+     .dark (a real object doesn't recolor itself when the room lighting
+     changes). Converted from the character sheet's exact hex values
+     (#F2F2F0 / #0B0B0D / #2B2B2E / #A78BFA / #FFC168) to oklch to match
+     this file's convention, not eyeballed. */
+  --scope-shell: oklch(0.961 0.003 106.449);
+  --scope-display: oklch(0.151 0.004 285.878);
+  --scope-details: oklch(0.29 0.005 286.059);
+  --scope-accent: oklch(0.709 0.159 293.541);
+  --scope-warm: oklch(0.85 0.128 74.502);
 }
 
 .dark {
