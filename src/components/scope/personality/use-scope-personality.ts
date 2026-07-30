@@ -16,8 +16,8 @@ import {
 // How long Scope must go undisturbed before it does something small on its
 // own. Randomized per wait, never a fixed interval, so it never reads as a
 // loop with a tell.
-const MIN_IDLE_DELAY_MS = 6000
-const MAX_IDLE_DELAY_MS = 14000
+const MIN_IDLE_DELAY_MS = 3000
+const MAX_IDLE_DELAY_MS = 7000
 
 function randomDelay() {
   return MIN_IDLE_DELAY_MS + Math.random() * (MAX_IDLE_DELAY_MS - MIN_IDLE_DELAY_MS)
