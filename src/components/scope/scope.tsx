@@ -124,7 +124,7 @@ function Scope({
         className="h-full w-full"
       >
         <motion.div animate={animate} transition={transition} className="h-full w-full">
-        <svg viewBox="0 -20 160 200" className="h-full w-full">
+        <svg viewBox="0 -30 160 210" className="h-full w-full">
           <defs>
             <linearGradient id="scope-shell-gradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="var(--scope-shell)" />
@@ -243,14 +243,21 @@ function Scope({
           <motion.g style={{ x: parallaxX, y: parallaxY }}>
             {/* a faint inner-edge stroke suggests the display sits
                 recessed into the shell rather than flush with it */}
-            <rect
-              x="24"
-              y="26"
-              width="112"
-              height="108"
-              rx="30"
+            <path
+              d="
+                M46 34
+                H114
+                C129 34 140 45 140 60
+                V92
+                C140 109 127 122 110 122
+                H50
+                C33 122 20 109 20 92
+                V60
+                C20 45 31 34 46 34
+                Z
+              "
               className="fill-scope-display stroke-scope-details"
-              strokeOpacity="0.4"
+              strokeOpacity="0.35"
               strokeWidth="1"
             />
 
@@ -290,20 +297,20 @@ function Scope({
             <motion.g style={{ x: leftEyeX, y: gazeY }}>
               <motion.g style={{ scaleY: blinkScaleY }}>
                 <rect
-                  x="55"
-                  y="60"
-                  width="20"
-                  height="40"
-                  rx="10"
+                  x="53"
+                  y="58"
+                  width="22"
+                  height="42"
+                  rx="11"
                   className="fill-scope-warm blur-sm"
                   opacity={0.4}
                 />
                 <motion.rect
-                  x="57"
-                  y="63"
-                  width="16"
-                  height="34"
-                  rx="8"
+                  x="56"
+                  y="61"
+                  width="18"
+                  height="36"
+                  rx="9"
                   className="fill-scope-warm"
                   initial={false}
                   animate={{ scaleY: eyeScaleY }}
@@ -315,19 +322,19 @@ function Scope({
               <motion.g style={{ scaleY: blinkScaleY }}>
                 <rect
                   x="85"
-                  y="60"
-                  width="20"
-                  height="40"
-                  rx="10"
+                  y="58"
+                  width="22"
+                  height="42"
+                  rx="11"
                   className="fill-scope-warm blur-sm"
                   opacity={0.4}
-                />
+                  />
                 <motion.rect
-                  x="87"
-                  y="63"
-                  width="16"
-                  height="34"
-                  rx="8"
+                  x="88"
+                  y="61"
+                  width="18"
+                  height="36"
+                  rx="9"
                   className="fill-scope-warm"
                   initial={false}
                   animate={{ scaleY: eyeScaleY }}
