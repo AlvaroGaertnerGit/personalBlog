@@ -303,7 +303,7 @@ function Scope({
                   x="53"
                   y="58"
                   width="22"
-                  height="42"
+                  height="32"
                   rx="11"
                   className="fill-scope-warm blur-sm"
                   opacity={0.4}
@@ -312,7 +312,7 @@ function Scope({
                   x="56"
                   y="61"
                   width="18"
-                  height="36"
+                  height="32"
                   rx="9"
                   className="fill-scope-warm"
                   initial={false}
@@ -327,7 +327,7 @@ function Scope({
                   x="85"
                   y="58"
                   width="22"
-                  height="42"
+                  height="32"
                   rx="11"
                   className="fill-scope-warm blur-sm"
                   opacity={0.4}
@@ -336,7 +336,7 @@ function Scope({
                   x="88"
                   y="61"
                   width="18"
-                  height="36"
+                  height="32"
                   rx="9"
                   className="fill-scope-warm"
                   initial={false}
