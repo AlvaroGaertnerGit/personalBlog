@@ -96,7 +96,7 @@ The load-bearing rules, enforced by convention across the codebase:
 
 ### How future sections plug in
 
-A new page section should be a Server Component by default, built from `Section` + `Container` (`src/components/layout/`), using `Reveal` (`src/components/motion/reveal.tsx`) for scroll-triggered entry and the shared `variants`/`transitions` tokens for anything else. If the section wants Scope to visit it, it mounts a `<ScopeDock>` (see §6) — it never renders `<Scope>` directly. Any client-only interactivity (like the companion demo card) should be pulled into its own small client leaf component rather than promoting the whole section to `"use client"`.
+A new page section should be a Server Component by default, built from `Section` + `Container` (`src/components/layout/`), using `Reveal` (`src/components/motion/reveal.tsx`) for scroll-triggered entry and the shared `variants`/`transitions` tokens for anything else. If the section wants Scope to visit it, it mounts a `<ScopeDock>` (see §6) — it never renders `<Scope>` directly. Any client-only interactivity (like the About section's hover/tab hotspots, `about-workbench.tsx`) should be pulled into its own small client leaf component rather than promoting the whole section to `"use client"`.
 
 ---
 
@@ -146,7 +146,7 @@ This is implemented as a dock/registry/travel system under `src/components/scope
 
 **Why it travels instead of teleporting.** The cross-section move uses `springs.companion` — deliberately much heavier and slower than any ordinary UI spring — so a dock change reads as "Scope chose to walk over there," not as a UI element snapping into a new position. This heavy-travel behavior is one of the defining ideas of the whole portfolio: every section that exists should be able to define where Scope naturally wants to be, and the character should feel like a single continuous presence moving through a real space, not a decoration re-instantiated per section.
 
-Two docks exist today: `hero` (the Hero's media slot) and `companion-demo` (a placeholder section demonstrating the system ahead of a real Projects section — see `src/components/sections/companion-demo-section.tsx`). Adding a new resting place is: mount a `<ScopeDock id="..." config={{...}} />` sized the way Scope should read there. Nothing else.
+Two docks exist today: `hero` (the Hero's media slot) and `about` (the About section's intro slot, `mood: "observe"` — see `src/components/sections/about-section.tsx`). Adding a new resting place is: mount a `<ScopeDock id="..." config={{...}} />` sized the way Scope should read there. Nothing else.
 
 ---
 
@@ -202,13 +202,13 @@ In practice:
 - Scope's implementation, finalized as of SPR-003.3: the `<Scope>` SVG component (dominant glossy face plate, two warm-amber eyes, an antenna, a slightly flattened ivory shell — see §4), its five-mood motion vocabulary (`scope-motion.ts`, including per-mood `eyeScaleY`), mood-resolution hook (`use-scope-motion.ts`), an independent cursor-presence physics layer (`use-scope-presence.ts`) — body tilt, eye tracking with velocity-based lead and a continuous micro-jitter, parallax, contact shadow, antenna sway, and proximity-based interaction intensity — and an independent autonomous idle-personality layer (`personality/`, see §4) with a 15-gesture pool spanning body, eye, and antenna behaviour, including real blink mechanics (keyframe-array `scaleY`, not opacity) and an anticipation lead-in on body gestures.
 - The companion system in full: dock registration, one shared `IntersectionObserver`-driven active-dock resolution, heavy cross-section travel via `springs.companion`, and a self-resolving hover-acknowledge mechanism.
 - The one-time Hero greeting ("Hi. I'm Scope.", `scope-greeting.tsx`) — the sole exception to "Scope never speaks," session-scoped via `sessionStorage`.
-- Two live docks: the Hero (`id="hero"`) and a placeholder companion-demo section (`id="companion-demo"`) that exists specifically to exercise the dock/travel/acknowledge system ahead of a real Projects section.
+- The About section (SPR-004.1, "The Workbench" — `src/components/sections/about-section.tsx`) — the real second dock (`id="about"`, `mood: "observe"`), replacing the companion-demo placeholder ahead of the roadmap's original Sprint 4→6 order (Projects hasn't been built yet; About was pulled forward). One unified glass scene reusing the Hero's own frame material (border/gradient/blur/bg-grid, at a much fainter opacity than Hero's own — this panel is mostly body text, not an empty decorative box) rather than a grid of separate cards. Content is four "hotspots" ("Now teaching" / "Now building" / "Now exploring" / "Philosophy") built on shadcn/`@base-ui`'s `Tabs` (real ARIA tablist/tabpanel semantics, not hand-rolled buttons), revealed one at a time — hovering or focusing a hotspot activates it and also triggers Scope's acknowledge reaction (`about-workbench.tsx`), plus a shared cursor-tracked spotlight (a raw CSS-custom-property, no React state, same technique as `use-scope-presence.ts`, gated behind `useIsReducedMotion()`). Deliberately not a bio/résumé/timeline/skill-bar list. Copy lives in `about-content.ts`, separated from layout per the portfolio-writing skill. Note for any future dock placed in a column above body text in the same frame: Scope's own rendered size is scaled from its intrinsic size-40/48 by `config.scale`, so it can visually overflow a smaller dock box — this section's dock/text gap (`gap-12 sm:gap-16`) is sized to clear that, not just for spacing.
 - The Atmosphere system: theme provider, custom toggle, and the full `document.startViewTransition`-driven cinematic sweep, including Scope's own subtle cross-theme adaptation.
 - A standalone `/scope` debug route (`src/app/scope/`) — a mood-picker lab (keyboard shortcuts 1–5) with a live debug readout, useful for reviewing Scope's motion (including personality gestures) in isolation.
 
 **Partially implemented / known debt:**
 
-- Only two sections exist in the live page (Hero + the companion-demo placeholder) — there is no real Projects, About, or Contact content yet, so the companion system's real test (many genuinely different resting places) hasn't happened.
+- Only two sections exist in the live page (Hero + About) — there is no real Projects or Contact content yet, so the companion system's real test (many genuinely different resting places, not just two) hasn't happened.
 - The Hero's `HeroMedia` frame is still showing its `contained`/`square` placeholder variant, not a real project visual.
 - `src/types/` and `src/utils/` exist as empty placeholders with no content yet.
 - Site metadata in `layout.tsx` still has a literal `[Álvaro Gaertner]` placeholder pending the real name/tagline.
@@ -217,7 +217,7 @@ In practice:
 
 **Not started:**
 
-- Projects, Project Detail, About, and Contact experiences (Sprints 4–7 below).
+- Projects, Project Detail, and Contact experiences (Sprints 4, 5, and 7 below). About (Sprint 6) is done, out of the original order — see above.
 - The design direction question flagged in §4 (whether to keep the current ceramic-body Scope or pursue the gimbal/ring exploration in `docs/design/`) is unresolved.
 
 Update this section after every sprint — it should always be a snapshot a new session can trust without reading git history.
@@ -232,11 +232,11 @@ Update this section after every sprint — it should always be a snapshot a new 
 
 **Sprint 3 — Atmosphere & Companion System.** Build the light/dark "atmosphere" system with its cinematic transition, and generalize Scope from "a component rendered in the Hero" into a portfolio-wide companion that travels between docked resting places.
 
-**Sprint 4 — Projects Experience.** The real projects grid/listing — the first genuine second (and third, ...) resting place for Scope beyond the current placeholder demo section.
+**Sprint 4 — Projects Experience.** The real projects grid/listing — a further resting place for Scope beyond the Hero and About.
 
 **Sprint 5 — Project Detail Experience.** Individual project pages/case studies.
 
-**Sprint 6 — About Experience.** The personal/professional narrative section.
+**Sprint 6 — About Experience.** ~~The personal/professional narrative section.~~ Done (as SPR-004 in this project's own sprint numbering) — pulled forward ahead of Projects/Project Detail; see §10.
 
 **Sprint 7 — Contact Experience.** The contact surface.
 

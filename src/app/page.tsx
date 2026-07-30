@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
 import { ScopeDock, ScopeGreeting } from "@/components/scope/companion";
-import { CompanionDemoSection } from "@/components/sections/companion-demo-section";
+import { AboutSection } from "@/components/sections/about-section";
 import { buttonVariants } from "@/components/ui/button";
 import { heroStaggerContainer, heroStaggerItem } from "@/lib/motion/variants";
 import { cn } from "@/lib/utils";
@@ -86,7 +86,7 @@ export default function Home() {
           </div>
         </div>
       </Hero>
-      <CompanionDemoSection />
+      <AboutSection />
     </>
   );
 }
