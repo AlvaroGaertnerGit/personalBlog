@@ -98,6 +98,9 @@ function Scope({
   const leftEyeX = useCombinedMotionValue([gazeX, eyeConverge], ([a, b]) => a + b)
   const rightEyeX = useCombinedMotionValue([gazeX, eyeConverge], ([a, b]) => a - b)
 
+  const mouthX = useCombinedMotionValue([gazeX], ([x]) => x * 0.3)
+  const mouthY = useCombinedMotionValue([gazeY], ([y]) => y * 0.25)
+
   return (
     <div
       ref={ref}
@@ -341,6 +344,58 @@ function Scope({
                   transition={transition}
                 />
               </motion.g>
+            </motion.g>
+            <motion.g
+              style={{x: mouthX, y: mouthY, scaleY: blinkScaleY }}
+              animate={{
+                y: mood === "happy" ? -1 : 0,
+              }}
+              transition={transition}
+            >
+              {/* mouth glow */}
+              <rect
+                x="74"
+                y="95"
+                width="14"
+                height="6"
+                rx="3"
+                className="fill-scope-warm blur-sm"
+                opacity={0.22}
+              />
+
+              {/* mouth */}
+              <motion.rect
+                x="75"
+                y="96"
+                width="12"
+                height="4"
+                rx="2"
+                className="fill-scope-warm"
+                initial={false}
+                animate={{
+                  scaleX:
+                    mood === "thinking"
+                      ? 0.82
+                      : mood === "happy"
+                      ? 1.18
+                      : mood === "curious"
+                      ? 1.08
+                      : 1,
+
+                  scaleY:
+                    mood === "thinking"
+                      ? 0.85
+                      : mood === "happy"
+                      ? 1.05
+                      : 1,
+
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+              />
             </motion.g>
           </motion.g>
         </svg>
