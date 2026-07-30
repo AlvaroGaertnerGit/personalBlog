@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { animate, useMotionValue, type MotionValue } from "framer-motion"
+import { animate, useMotionValue, type MotionValue, type Transition } from "framer-motion"
 
 import { useIsReducedMotion } from "@/hooks/use-is-reduced-motion"
+import { computeAttentionOffset } from "./attention-target"
 import {
   ANTICIPATE_TRANSITION,
   BLINK_PATTERNS,
@@ -21,6 +22,17 @@ const MAX_IDLE_DELAY_MS = 14000
 function randomDelay() {
   return MIN_IDLE_DELAY_MS + Math.random() * (MAX_IDLE_DELAY_MS - MIN_IDLE_DELAY_MS)
 }
+
+// SPR-005 — "look at target": an occasional glance toward a registered
+// point of interest (a project world's own ball/graph marker — see
+// ScopeDockConfig.attentionTarget), layered into the exact same scheduling
+// rhythm as every other gesture below rather than a separate timer. The
+// reach/range geometry lives in attention-target.ts, kept out of this file
+// so its own arithmetic doesn't add to this hook's complexity.
+const ATTENTION_LOOK_CHANCE = 0.35
+const ATTENTION_HOLD_MS = 900
+const ATTENTION_TO_TRANSITION: Transition = { type: "spring", stiffness: 90, damping: 16, mass: 0.6 }
+const ATTENTION_BACK_TRANSITION: Transition = { type: "spring", stiffness: 80, damping: 20, mass: 0.6 }
 
 function pickGesture(exclude: PersonalityGestureName | null): PersonalityGestureName {
   const pool = exclude
@@ -108,7 +120,10 @@ interface ScopePersonality {
 // any cursor activity simply defers the idle timer (see the debounce
 // below), so a gesture can never fire while the visitor is actively
 // moving the mouse.
-function useScopePersonality(): ScopePersonality {
+function useScopePersonality(
+  scopeRef: React.RefObject<HTMLElement | null>,
+  attentionTarget?: React.RefObject<Element | null>
+): ScopePersonality {
   const isReduced = useIsReducedMotion()
 
   const rotate = useMotionValue(0)
@@ -125,6 +140,21 @@ function useScopePersonality(): ScopePersonality {
   // leaves and returns to idle) without needing to live at module scope,
   // which would leak state across every <Scope> instance ever mounted.
   const lastGestureRef = React.useRef<PersonalityGestureName | null>(null)
+
+  // `attentionTarget` changes identity every time the active dock changes
+  // (a different world's ref, or none) — but the scheduling effect below
+  // deliberately stays mounted across dock/mood changes (only `armed`
+  // reruns it, per the SPR-003.4 fix). Mirroring that fix's own mistake
+  // here would mean a stale target from whichever dock was active when the
+  // effect last mounted. A "latest value" ref, synced on every render,
+  // keeps runGesture() reading the current target without needing the big
+  // effect to restart. `scopeRef` doesn't need this: it's the same stable
+  // ref object for Scope's whole lifetime, and only `.current` is read
+  // fresh each time, which a plain ref already gives for free.
+  const attentionTargetRef = React.useRef(attentionTarget)
+  React.useEffect(() => {
+    attentionTargetRef.current = attentionTarget
+  }, [attentionTarget])
 
   // Gated only on reduced-motion, deliberately NOT on `mood`. This hook used
   // to also require `mood === "idle"`, back when idle was the only resting
@@ -185,8 +215,56 @@ function useScopePersonality(): ScopePersonality {
       await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
     }
 
+    // Reads both rects live at fire-time (never cached) so it stays correct
+    // even though the target may itself be in motion (a bouncing ball, a
+    // point riding a graph) — geometry lives in attention-target.ts.
+    async function runLookAt(target: Element) {
+      const scopeEl = scopeRef.current
+      if (!scopeEl) return
+
+      const { dx, dy } = computeAttentionOffset(
+        scopeEl.getBoundingClientRect(),
+        target.getBoundingClientRect()
+      )
+
+      activeControls = [
+        animate(eyeOffsetX, dx, ATTENTION_TO_TRANSITION),
+        animate(eyeOffsetY, dy, ATTENTION_TO_TRANSITION),
+      ]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+      if (cancelled) return
+
+      await new Promise<void>((resolve) => {
+        timeoutId = window.setTimeout(resolve, ATTENTION_HOLD_MS)
+      })
+      if (cancelled) return
+
+      activeControls = [
+        animate(eyeOffsetX, 0, ATTENTION_BACK_TRANSITION),
+        animate(eyeOffsetY, 0, ATTENTION_BACK_TRANSITION),
+      ]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+    }
+
     async function runGesture() {
       dispatch({ type: "gesture-start" })
+
+      // A registered point of interest gets first refusal, at a fixed
+      // probability, before falling through to the ordinary gesture pool
+      // below — deliberately NOT added to PERSONALITY_GESTURE_NAMES itself
+      // (see the comment on ATTENTION_* above): that pool is static data,
+      // this is a live-computed target, and this branch leaves the
+      // existing pool's selection/repeat-avoidance logic untouched.
+      const attentionEl = attentionTargetRef.current?.current
+      if (attentionEl && Math.random() < ATTENTION_LOOK_CHANCE) {
+        await runLookAt(attentionEl)
+        if (!cancelled) {
+          dispatch({ type: "gesture-end" })
+          scheduleNext(randomDelay())
+        }
+        return
+      }
+
       const lastGesture = lastGestureRef.current
       const name = pickGesture(lastGesture)
       lastGestureRef.current = name

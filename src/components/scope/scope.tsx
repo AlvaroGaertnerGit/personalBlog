@@ -44,7 +44,12 @@ import { useScopePresence } from "./use-scope-presence"
 //   with mood's own eyeScaleY — see the nested <motion.g> below, not a
 //   useTransform combinator, since mood's eyeScaleY isn't a MotionValue),
 //   eyeOffsetX/Y and eyeConverge on the eyes' gaze (additive with
-//   presence's eyeX/eyeY), and antennaFlex on the antenna.
+//   presence's eyeX/eyeY), and antennaFlex on the antenna. SPR-005:
+//   Personality also takes this component's own `ref` plus the optional
+//   `attentionTarget` prop below, so it can occasionally aim eyeOffsetX/Y
+//   at a registered point of interest (a project world's ball/graph
+//   marker) instead of a scripted offset — still the same eyeOffsetX/Y
+//   channel, no new composition wiring needed here.
 //
 // Framer merges every transform-shaped style key (x, y, rotate, rotateX,
 // rotateY, scale, scaleY, ...) on one style object into a single CSS
@@ -56,9 +61,14 @@ import { useScopePresence } from "./use-scope-presence"
 // one technique was used over the other.
 function Scope({
   mood = "idle",
+  attentionTarget,
   className,
   ...props
-}: React.ComponentProps<"div"> & { mood?: ScopeMood }) {
+}: React.ComponentProps<"div"> & {
+  mood?: ScopeMood
+  /** SPR-005: an element Personality may occasionally glance toward — see use-scope-personality.ts. */
+  attentionTarget?: React.RefObject<Element | null>
+}) {
   const ref = React.useRef<HTMLDivElement>(null)
   const { animate, transition, glow, eyeScaleY } = useScopeMotion(mood)
   const {
@@ -83,7 +93,7 @@ function Scope({
     eyeOffsetY,
     eyeConverge,
     antennaFlex,
-  } = useScopePersonality()
+  } = useScopePersonality(ref, attentionTarget)
 
   // Additive: presence's continuous gaze position + personality's
   // occasional look-up/down nudge. Both are real MotionValues — combined

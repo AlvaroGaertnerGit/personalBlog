@@ -98,7 +98,11 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
       className="pointer-events-none absolute top-0 left-0 z-30 origin-top-left"
       style={{ x, y, scale, rotate }}
     >
-      <Scope mood={mood} className="size-40 sm:size-48" />
+      <Scope
+        mood={mood}
+        attentionTarget={dockConfig.attentionTarget}
+        className="size-40 sm:size-48"
+      />
     </motion.div>
   )
 }

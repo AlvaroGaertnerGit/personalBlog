@@ -1,3 +1,5 @@
+import type { RefObject } from "react"
+
 import type { ScopeMood } from "@/components/scope/scope.types"
 
 // The extensibility point Sprint 3's "Future Architecture" section asks
@@ -15,10 +17,31 @@ export interface ScopeDockConfig {
   facing?: number
   /** Relative size vs. the companion's base rendered size. Defaults to 1. */
   scale?: number
+  /**
+   * SPR-005: an element Scope's Personality system may occasionally glance
+   * toward while resting at this dock (see use-scope-personality.ts's
+   * "look at target" gesture) — e.g. a project world's own bouncing ball or
+   * a point tracing a graph. Optional and purely geometric: the dock/
+   * companion system never knows or cares what the element *is*, only
+   * where it is on screen. Defaults to a permanently-null ref (nothing to
+   * glance at).
+   */
+  // `Element`, not `HTMLElement`: a project world's point of interest can
+  // just as easily be an SVG node (a circle riding a graph) as an HTML div
+  // (a ball) — `getBoundingClientRect()`, the only thing this is ever used
+  // for, lives on `Element` itself.
+  attentionTarget?: RefObject<Element | null>
 }
+
+// A stable, permanently-null ref — the "nothing to look at" default. Kept
+// as one shared constant rather than `{ current: null }` inlined per
+// consumer so every dock without its own attentionTarget points at the
+// exact same object, not a fresh one per render.
+const NULL_ATTENTION_TARGET: RefObject<Element | null> = { current: null }
 
 export const DEFAULT_SCOPE_DOCK_CONFIG: Required<ScopeDockConfig> = {
   mood: "idle",
   facing: 0,
   scale: 1,
+  attentionTarget: NULL_ATTENTION_TARGET,
 }
