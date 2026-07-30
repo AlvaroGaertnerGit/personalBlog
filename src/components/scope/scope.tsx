@@ -83,7 +83,7 @@ function Scope({
     eyeOffsetY,
     eyeConverge,
     antennaFlex,
-  } = useScopePersonality(mood)
+  } = useScopePersonality()
 
   // Additive: presence's continuous gaze position + personality's
   // occasional look-up/down nudge. Both are real MotionValues — combined

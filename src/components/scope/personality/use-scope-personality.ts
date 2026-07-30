@@ -4,7 +4,6 @@ import * as React from "react"
 import { animate, useMotionValue, type MotionValue } from "framer-motion"
 
 import { useIsReducedMotion } from "@/hooks/use-is-reduced-motion"
-import type { ScopeMood } from "../scope.types"
 import {
   ANTICIPATE_TRANSITION,
   BLINK_PATTERNS,
@@ -109,7 +108,7 @@ interface ScopePersonality {
 // any cursor activity simply defers the idle timer (see the debounce
 // below), so a gesture can never fire while the visitor is actively
 // moving the mouse.
-function useScopePersonality(mood: ScopeMood): ScopePersonality {
+function useScopePersonality(): ScopePersonality {
   const isReduced = useIsReducedMotion()
 
   const rotate = useMotionValue(0)
@@ -127,7 +126,20 @@ function useScopePersonality(mood: ScopeMood): ScopePersonality {
   // which would leak state across every <Scope> instance ever mounted.
   const lastGestureRef = React.useRef<PersonalityGestureName | null>(null)
 
-  const armed = mood === "idle" && !isReduced
+  // Gated only on reduced-motion, deliberately NOT on `mood`. This hook used
+  // to also require `mood === "idle"`, back when idle was the only resting
+  // state Scope could be in. The companion dock system (SPR-003.4) then
+  // added a second resting mood — "observe", for the demo-section dock —
+  // and that condition silently broke: every idle blink/gesture, plus this
+  // effect's listeners, got torn down the instant Scope docked anywhere
+  // that wasn't literally "idle", and never recovered until mood happened
+  // to become "idle" again. Personality is designed to be a fully
+  // independent layer, composed additively/multiplicatively with Motion and
+  // Presence at the scope.tsx composition point (see the comments there) —
+  // it has no business re-deciding whether "now" is an appropriate moment
+  // for mood based on a hardcoded string it doesn't own. Presence already
+  // runs unconditionally the same way; Personality now matches it.
+  const armed = !isReduced
 
   React.useEffect(() => {
     if (!armed) {

@@ -1,0 +1,32 @@
+- generic [active] [ref=f2e1]:
+  - button "Switch to dark atmosphere" [ref=f2e2]:
+    - generic [ref=f2e3]: Toggle atmosphere
+  - generic [ref=f2e7]:
+    - generic [ref=f2e11]:
+      - generic [ref=f2e12]:
+        - paragraph [ref=f2e13]: Computer Science & Software Development Teacher
+        - heading "I teach developers the AI-native workflows I use to ship real projects." [level=1] [ref=f2e15]
+      - paragraph [ref=f2e17]: I teach Software Development to vocational (FP) students in Spain. Alongside that, I build the tools I teach with, like this site and Tournamently, a padel tournament platform.
+      - generic [ref=f2e19]:
+        - link "GitHub" [ref=f2e20] [cursor=pointer]:
+          - /url: https://github.com/AlvaroGaertnerGit
+        - link "LinkedIn" [ref=f2e21] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/alvarogaertner2262331b1
+    - region [ref=f2e28]:
+      - generic [ref=f2e30]:
+        - generic [ref=f2e32]:
+          - paragraph [ref=f2e33]: Elsewhere in the portfolio
+          - heading "More sections are taking shape" [level=2] [ref=f2e35]
+          - paragraph [ref=f2e36]: A preview stop for Scope's companion system — real project write-ups land in a future sprint.
+        - generic [ref=f2e37]:
+          - button "Card one Scope notices on hover." [ref=f2e38]:
+            - generic [ref=f2e39]: Card one
+            - generic [ref=f2e40]: Scope notices on hover.
+          - button "Card two Scope notices on hover." [ref=f2e41]:
+            - generic [ref=f2e42]: Card two
+            - generic [ref=f2e43]: Scope notices on hover.
+          - button "Card three Scope notices on hover." [ref=f2e44]:
+            - generic [ref=f2e45]: Card three
+            - generic [ref=f2e46]: Scope notices on hover.
+  - button "Open Next.js Dev Tools" [ref=f2e52] [cursor=pointer]
+  - alert [ref=f2e56]

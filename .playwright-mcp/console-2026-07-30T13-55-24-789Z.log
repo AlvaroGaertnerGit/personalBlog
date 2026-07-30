@@ -1,0 +1,19 @@
+[     114ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[     186ms] [LOG] [Fast Refresh] done in 172ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[     275ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[     298ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[     531ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[     532ms] [LOG] [Fast Refresh] done in 105ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   94976ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   95240ms] [LOG] [Fast Refresh] done in 369ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   95344ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   95472ms] [LOG] [Fast Refresh] done in 232ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   99011ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  102349ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  105691ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  109314ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  112921ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  120258ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  127819ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  135160ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[  142513ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=gKcae7pCM34CKyRHCgttP' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422

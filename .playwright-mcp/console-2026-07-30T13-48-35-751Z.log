@@ -1,0 +1,46 @@
+[     878ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[     971ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   87738ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   87818ms] [LOG] [Fast Refresh] done in 180ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   89237ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   89296ms] [LOG] [Fast Refresh] done in 161ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   99609ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[   99614ms] [LOG] [Fast Refresh] done in 108ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  128469ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  128567ms] [LOG] [Fast Refresh] done in 202ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  131730ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  131783ms] [LOG] [Fast Refresh] done in 155ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  171273ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  171279ms] [LOG] [Fast Refresh] done in 110ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  185957ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  186007ms] [LOG] [Fast Refresh] done in 154ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  371871ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  372189ms] [LOG] [Fast Refresh] done in 421ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  375853ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  376078ms] [LOG] [Fast Refresh] done in 127ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  376098ms] ReferenceError: mood is not defined
+    at useScopePersonality (http://localhost:3000/_next/static/chunks/src_01ao5uc._.js?id=%255Bproject%255D%252Fsrc%252Fcomponents%252Fscope%252Fpersonality%252Fuse-scope-personality.ts+%255Bapp-client%255D+%2528ecmascript%2529:96:19)
+    at Scope (http://localhost:3000/_next/static/chunks/src_01ao5uc._.js:1852:347)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:9061:186)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:10179:316)
+    at processRootScheduleInMicrotask (http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:10200:106)
+    at http://localhost:3000/_next/static/chunks/1sgq_next_dist_compiled_react-dom_0zj6l_s._.js:10274:158
+[  376266ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  376281ms] [LOG] [Fast Refresh] done in 124ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  384937ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  384941ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  384946ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:3330
+[  385252ms] [LOG] [Fast Refresh] done in 105ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  385404ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  385436ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  387886ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[  388134ms] [LOG] [Fast Refresh] done in 150ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
