@@ -17,4 +17,6 @@ export interface ScopeMotionSpec {
   y: number
   /** 0–1, how bright the display/core reads. */
   glow: number
+  /** Multiplier on each eye's base height — the "squint ↔ widen" expression axis. 1 = neutral. */
+  eyeScaleY: number
 }

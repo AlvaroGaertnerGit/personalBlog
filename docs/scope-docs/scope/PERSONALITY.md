@@ -1,5 +1,12 @@
 # Scope
 
+> **Superseded as of SPR-003.3 ("Character Finalization").** `SCOPE.md` and
+> `VISUAL_LANGUAGE.md` (both v2.0), plus the reference image at
+> `references/image.png`, are now the only three sources of truth. This
+> file is kept for history — its spirit (curious, calm, humble, never the
+> protagonist) still holds, but SCOPE.md v2.0 is the current, authoritative
+> statement of it.
+
 > "Curiosity. Observed."
 
 ---
@@ -108,15 +115,17 @@ Visitors should feel like meeting the same character everywhere.
 
 # Communication
 
-Scope never speaks.
+Scope never speaks (one exception: a single, one-time session greeting —
+"Hi. I'm Scope." — see the companion system docs; after that it is silent
+for the rest of the visit).
 
 No voice.
 
-No mouth.
+No mouth, ever, in any form.
 
 No speech bubbles.
 
-No text.
+No text, other than the one greeting above.
 
 It communicates through:
 
@@ -125,10 +134,16 @@ It communicates through:
 - light
 - timing
 - orientation
+- **eyes** (as of SPR-003.2 — see the revision note in SCOPE_UNDERSTANDING.md)
 
-The display is not a face.
-
-It is a window into its current state.
+The display *is* now a simple face — this is a deliberate reversal of the
+earlier position ("the display is not a face"), made because user testing
+showed the abstract glyph didn't earn an emotional connection. It stays
+strictly non-realistic: two plain geometric eye-marks, no eyebrows, no
+eyelids, no iris/pupil, no mouth, expression carried only by height
+(squint ↔ widen) and brightness — never a curve, a wink, or a shape swap.
+The eyes are still a window into Scope's state, just a warmer, more
+legible one than a code glyph was.
 
 ---
 
@@ -198,13 +213,17 @@ Rounded silhouette.
 
 Soft transitions.
 
-Large glossy display.
+Large glossy display — as of SPR-003.2, a dominant viewport, not a small
+inset panel.
 
 Warm ceramic shell.
 
 Tiny expressive supports.
 
-Subtle purple lighting.
+Warm lighting (amber/gold) is the primary signal, carried by the eyes and
+core glow — resolves the earlier "purple vs. amber" ambiguity in the warm
+direction. A small trace of purple remains only as a secondary accent
+detail (a tiny indicator light), not the face itself.
 
 Every angle should be recognizable by silhouette alone.
 
@@ -253,8 +272,11 @@ When generating anything related to Scope:
 - Never redesign the silhouette.
 - Never add arms.
 - Never add a mouth.
-- Never add realistic eyes.
-- Never make Scope talk.
+- Never add realistic eyes — no eyebrows, no eyelids, no iris/pupil. Two
+  plain geometric eye-marks (height/brightness only) are the intended
+  exception as of SPR-003.2, not an invitation to add expression detail
+  beyond that.
+- Never make Scope talk, other than its one-time session greeting.
 - Never make Scope the center of attention.
 
 Always preserve:

@@ -90,15 +90,18 @@
   /* Scope's brand palette — see docs/scope-docs/scope. The shell,
      proportions, and materials are fixed forever (a real object doesn't
      redesign itself when the room lighting changes) — shell/display/details
-     below are never redefined under .dark. Converted from the character
-     sheet's exact hex values (#F2F2F0 / #0B0B0D / #2B2B2E / #A78BFA /
-     #FFC168) to oklch to match this file's convention, not eyeballed.
+     below are never redefined under .dark.
      --scope-accent/--scope-warm get one narrow, intentional exception (see
      .dark below, added for Sprint 3's "Living Atmospheres" — Scope's core
      reads a few degrees cooler in dark mode, the same fixed shape and
-     material, just a different room to stand in). */
-  --scope-shell: oklch(0.961 0.003 106.449);
-  --scope-display: oklch(0.151 0.004 285.878);
+     material, just a different room to stand in).
+     SPR-003.3 (character finalization, VISUAL_LANGUAGE.md v2.0): --scope-
+     shell gained a touch more chroma — "warm ivory," not near-white-gray —
+     and --scope-display deepened and lost its former purple undertone —
+     "deep black... almost mirror-like," a true neutral-black with only the
+     faintest warm (not cool) tint. */
+  --scope-shell: oklch(0.95 0.018 75);
+  --scope-display: oklch(0.1 0.006 50);
   --scope-details: oklch(0.29 0.005 286.059);
   --scope-accent: oklch(0.709 0.159 293.541);
   --scope-warm: oklch(0.85 0.128 74.502);

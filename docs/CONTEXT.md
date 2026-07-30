@@ -46,10 +46,14 @@ src/
                          Section. No visual opinions beyond spacing/structure.
     motion/              Reusable motion wrappers: Reveal (scroll-in), Stagger.
     scope/               Scope the character itself — the <Scope> SVG
-                         component, its motion vocabulary, and two physics
-                         hooks (mood animation, cursor presence).
+                         component, its motion vocabulary, and three
+                         independent physics hooks (mood animation, cursor
+                         presence, autonomous idle personality).
+    scope/personality/   The Personality System: why/when Scope does small,
+                         unprompted things while idle (see §4).
     scope/companion/     The companion system: how the one shared Scope
                          instance decides where to be and travels there.
+                         Also owns the one-time Hero greeting (see §4, §5).
     sections/            Page-level section components (e.g. the companion
                          demo section).
     theme/               Light/dark ("atmosphere") provider, toggle, and the
@@ -75,6 +79,7 @@ Scope's *implementation* lives at `src/components/scope/`:
 - `scope-motion.ts` — the single source of truth for every numeric motion value per mood (scale, rotate, y, glow, timing). Nothing outside this file should hardcode a Scope animation value.
 - `use-scope-motion.ts` — resolves a mood into a ready-to-spread Framer `animate`/`transition` pair, theme- and reduced-motion-aware.
 - `use-scope-presence.ts` — a second, independent motion layer: cursor-derived body tilt, eye tracking, parallax, and contact shadow. Layers on top of the mood system via separate transform channels (`animate` vs. `style`) so neither system needs to know about the other.
+- `personality/use-scope-personality.ts` — a third independent layer: autonomous idle micro-gestures (see §4). Same pattern as presence — a self-contained hook returning plain motion values, composed into `scope.tsx`'s existing `style` objects, with zero knowledge of the other two layers.
 
 The companion system (where Scope *is*, as opposed to how it moves) lives at `src/components/scope/companion/` — see §6.
 
@@ -97,21 +102,25 @@ A new page section should be a Server Component by default, built from `Section`
 
 ## 4. Scope
 
-Full detail lives in `docs/scope-docs/scope/` (identity, personality, constraints) and `docs/design/` (exploratory industrial-design specs — see the note at the end of this section). This is a summary, not a replacement for either.
+As of SPR-003.3 ("Character Finalization"), the only two authoritative design docs are `docs/scope-docs/scope/SCOPE.md` and `VISUAL_LANGUAGE.md` (both v2.0), plus the reference image at `docs/scope-docs/scope/references/image.png` — read those, not the other files in that folder, which are kept for history and now carry a banner pointing here. `docs/design/` (exploratory industrial-design specs — see the open question at the end of this section) remains separate and unrelated. This section is a summary, not a replacement for the two v2.0 docs.
 
-**Role.** Scope is the portfolio's companion — the physical manifestation of curiosity. Its purpose is not to solve problems; it's to make people want to solve them. It accompanies visitors while they look at the work here; it does not perform, teach, or assist.
+**Role.** Scope is the portfolio's companion — the physical manifestation of curiosity. It quietly accompanies visitors; it never explains, guides, or asks — it simply observes. The emotional target is explicit in canon: not "a cute animated robot," but "I miss that little guy."
 
-**Personality.** Curious, calm, humble, thoughtful, playful (in a Luxo Jr. sense, not childish), reliable. Every trait is defined as much by restraint as by action — the character *is* the discipline of not interrupting.
+**Personality.** Curious, gentle, quiet, patient, observant, innocent, calm. Never funny, loud, hyperactive, chaotic, childish, comedic, or clumsy. Expressed through movement, not performance — the character *is* the discipline of not interrupting.
 
-**Movement.** Motion is Scope's entire expressive vocabulary, because it has no face and no voice. Movements are slow, smooth, deliberate, and always caused by something specific — never decorative, never on a timer for its own sake. Five moods are currently implemented: `idle`, `curious`, `thinking`, `observe`, `happy`. This set is closed by design — a new mood must be checked against these five for redundancy before being added.
+**Physical form.** A rounded, almost-spherical ceramic shell (warm ivory), a large glossy near-black face plate (~70% of the visible front — "the body exists only to support the face"), two warm-amber vertical pill eyes, tiny rounded feet, and one small flexible antenna. Proportions are deliberately face-dominant and small-bodied — "vulnerable, never heroic, always approachable," per `SCOPE.md` v2.0's Core Design Principle and Scale sections. Five moods are implemented: `idle`, `curious`, `thinking`, `observe`, `happy` — a closed set; a new mood must be checked against these five for redundancy first.
 
-**Interaction philosophy.** Scope reacts; it never initiates. It leans toward what's interesting, dims and pauses while "thinking," and allows itself exactly one small, brief hop of happiness that immediately resolves back to idle. It never asks to be noticed.
+**Eyes — the primary expression channel.** Two plain geometric pills, never a curve, star, or shape swap. Mood sets a resting expression (`eyeScaleY`: narrowed for thinking, widened for observe/curious); personality layers transient behaviour on top — real blinks (`blink`/`double-blink`/`slow-blink`, a literal scaleY close-open via a keyframe-array tween, composed with mood's own scaleY through a nested element, not a combinator, since mood's value isn't a `MotionValue`), brief squint/widen, and small gaze shifts (look-up/look-down/converge) that add to presence's continuous cursor-tracking gaze. Presence also adds a tiny, always-on jitter to the eyes ("never perfectly static") and an antenna that softly lags the body's own tilt ("reacts to movement... like a living creature"). Expression is built entirely from timing, spacing, and movement — never eyebrows, eyelids, iris/pupil detail, or a mouth.
 
-**Why it never speaks.** No voice, no mouth, no speech bubbles, no text. Communication happens entirely through movement, posture, light, timing, and orientation. The display's `{ }` glyph is explicitly not a face — it's described in the source docs as Scope's "soul," a window into its state, not an expression.
+**Why it (almost) never speaks.** No voice, no mouth, no speech bubbles, no text, with one exception — see below.
 
-**Why it should never become the protagonist.** The portfolio and the person's work are always the subject; Scope is the witness. Any moment of Scope's "happiness" is a reaction to the visitor's or the portfolio's work — never a celebration of itself. This is a hard rule: Scope must never be larger, louder, or more central than the content around it.
+**Why it should never become the protagonist.** The portfolio and the person's work are always the subject; Scope is the witness. Any moment of Scope's "happiness" is a reaction to the visitor's or the portfolio's work — never a celebration of itself.
 
-**A documented open question, worth knowing about going in:** the design-exploration documents in `docs/design/` (`scope-companion-spec.md`, `scope-engineering-instruments.md`, `scope-silhouette-exploration.md`) explore a substantially different physical form for Scope — an aluminum gimbal/ring holding a floating core, arrived at through a structured design process that ultimately recommends "The Reference Wheel," a spinning-disk concept. **That exploration was not adopted.** The actual implementation (`src/components/scope/scope.tsx`) still builds the earlier, currently-canonical design from `docs/scope-docs/scope/`: a rounded ceramic body on two small feet, with a glossy display showing `{ }`. Treat `docs/scope-docs/scope/` plus the live code as the current source of truth, and `docs/design/` as an unmerged exploration — a real decision needs to be made (and recorded here) before either adopting or formally shelving that direction.
+**Personality System (autonomous idle behaviour).** `src/components/scope/personality/` is a third independent layer on top of mood and cursor presence — while Scope rests at `idle`, undisturbed, it occasionally performs one behaviour from a deliberately large, varied pool (body: glance-left/right, tiny-tilt, posture-shift, stretch, bounce; eyes: blink family, squint, widen, look-up/down, converge; antenna: antenna-flex) before returning to neutral. Timing is randomized (~6–14s, never fixed) and any cursor activity defers the next one — presence's own cursor-tilt already reads as "attentive" the instant the visitor moves. A large pool with one firing at a time is what "vary naturally, never loop identically" (the docs' own words) actually requires. It does not add a 6th mood, and goes fully dormant outside `idle`, under `prefers-reduced-motion`, and while the tab is hidden.
+
+**The one exception to "Scope never speaks."** Once per browser session (`sessionStorage`, key `scope:greeted`), the first time the Hero loads, a small caption — "Hi. I'm Scope." — fades in near Scope's Hero dock, holds ~2s, and fades out, never to reappear that session. Implemented in `src/components/scope/companion/scope-greeting.tsx`, deliberately outside the mood/personality system: Scope's own mood stays `idle` throughout, the text does the introducing. No background, border, or tail — a plain caption, not a chat bubble.
+
+**A documented open question, worth knowing about going in:** the design-exploration documents in `docs/design/` (`scope-companion-spec.md`, `scope-engineering-instruments.md`, `scope-silhouette-exploration.md`) explore a substantially different physical form for Scope — an aluminum gimbal/ring holding a floating core, arrived at through a structured design process that ultimately recommends "The Reference Wheel," a spinning-disk concept. **That exploration was not adopted** and remains unrelated to the finalized character above — a real decision still needs to be made (and recorded here) before either adopting or formally shelving that gimbal/ring direction.
 
 ---
 
@@ -190,19 +199,21 @@ In practice:
 - Project scaffold: Next.js 16 App Router, Tailwind v4, TypeScript, ESLint/Prettier, Husky + lint-staged.
 - Motion token system (`src/lib/motion/`) — durations, easings, springs, transitions, variants, viewport, distances — fully built and in use.
 - `Hero`, `Section`, `Container`, `Background`, `Reveal`, `Stagger` — the structural + motion primitive layer.
-- Scope's implementation: the `<Scope>` SVG component, its five-mood motion vocabulary (`scope-motion.ts`), mood-resolution hook (`use-scope-motion.ts`), and an independent cursor-presence physics layer (`use-scope-presence.ts`) — body tilt, eye tracking with velocity-based lead, parallax, contact shadow.
+- Scope's implementation, finalized as of SPR-003.3: the `<Scope>` SVG component (dominant glossy face plate, two warm-amber eyes, an antenna, a slightly flattened ivory shell — see §4), its five-mood motion vocabulary (`scope-motion.ts`, including per-mood `eyeScaleY`), mood-resolution hook (`use-scope-motion.ts`), an independent cursor-presence physics layer (`use-scope-presence.ts`) — body tilt, eye tracking with velocity-based lead and a continuous micro-jitter, parallax, contact shadow, antenna sway, and proximity-based interaction intensity — and an independent autonomous idle-personality layer (`personality/`, see §4) with a 15-gesture pool spanning body, eye, and antenna behaviour, including real blink mechanics (keyframe-array `scaleY`, not opacity) and an anticipation lead-in on body gestures.
 - The companion system in full: dock registration, one shared `IntersectionObserver`-driven active-dock resolution, heavy cross-section travel via `springs.companion`, and a self-resolving hover-acknowledge mechanism.
+- The one-time Hero greeting ("Hi. I'm Scope.", `scope-greeting.tsx`) — the sole exception to "Scope never speaks," session-scoped via `sessionStorage`.
 - Two live docks: the Hero (`id="hero"`) and a placeholder companion-demo section (`id="companion-demo"`) that exists specifically to exercise the dock/travel/acknowledge system ahead of a real Projects section.
 - The Atmosphere system: theme provider, custom toggle, and the full `document.startViewTransition`-driven cinematic sweep, including Scope's own subtle cross-theme adaptation.
-- A standalone `/scope` debug route (`src/app/scope/`) — a mood-picker lab (keyboard shortcuts 1–5) with a live debug readout, useful for reviewing Scope's motion in isolation.
+- A standalone `/scope` debug route (`src/app/scope/`) — a mood-picker lab (keyboard shortcuts 1–5) with a live debug readout, useful for reviewing Scope's motion (including personality gestures) in isolation.
 
 **Partially implemented / known debt:**
 
-- `use-scope-presence.ts` and `scope.tsx` currently contain leftover `console.log("SCOPE_DEBUG ...")` debug statements from active development on the cursor-presence system — these should be removed before this is considered finished, not treated as intentional logging.
 - Only two sections exist in the live page (Hero + the companion-demo placeholder) — there is no real Projects, About, or Contact content yet, so the companion system's real test (many genuinely different resting places) hasn't happened.
 - The Hero's `HeroMedia` frame is still showing its `contained`/`square` placeholder variant, not a real project visual.
 - `src/types/` and `src/utils/` exist as empty placeholders with no content yet.
 - Site metadata in `layout.tsx` still has a literal `[Álvaro Gaertner]` placeholder pending the real name/tagline.
+- Future "curiosity" behaviour (Scope briefly noticing newly-appeared page elements, e.g. Project Cards) is intentionally unbuilt; the existing `useScopeAcknowledge()` hover mechanism is almost certainly the right trigger point for that later, not a new system.
+- A known, accepted gap from SPR-003.3: the accent dot's `interactionIntensity` (presence) has no `pointerleave` handling, so it holds its last value rather than decaying to 0 if the cursor exits the browser window entirely — a small limitation, not an oversight (see the comment in `use-scope-presence.ts`).
 
 **Not started:**
 

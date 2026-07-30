@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
-import { ScopeDock } from "@/components/scope/companion";
+import { ScopeDock, ScopeGreeting } from "@/components/scope/companion";
 import { CompanionDemoSection } from "@/components/sections/companion-demo-section";
 import { buttonVariants } from "@/components/ui/button";
 import { heroStaggerContainer, heroStaggerItem } from "@/lib/motion/variants";
@@ -68,13 +68,23 @@ export default function Home() {
             </StaggerItem>
           </StaggerGroup>
         </HeroContent>
-        <HeroMedia>
-          {/* Scope no longer renders directly here — this dock just marks
-              Scope's Hero platform (the companion system's one shared
-              instance lives in companion-scope.tsx, see
-              src/components/scope/companion/). */}
-          <ScopeDock id="hero" config={{ mood: "idle" }} className="size-40 sm:size-48" />
-        </HeroMedia>
+        {/* The `relative` wrapper exists so ScopeGreeting can be anchored
+            just below the Hero platform while living *outside* HeroMedia's
+            card — that card is `overflow-hidden` (see hero.tsx), so a
+            caption meant to float near, not inside, the glass panel has to
+            sit here as a sibling rather than a child. */}
+        <div className="relative">
+          <HeroMedia>
+            {/* Scope no longer renders directly here — this dock just marks
+                Scope's Hero platform (the companion system's one shared
+                instance lives in companion-scope.tsx, see
+                src/components/scope/companion/). */}
+            <ScopeDock id="hero" config={{ mood: "idle" }} className="size-40 sm:size-48" />
+          </HeroMedia>
+          <div className="absolute inset-x-0 -bottom-10 flex justify-center sm:-bottom-12">
+            <ScopeGreeting />
+          </div>
+        </div>
       </Hero>
       <CompanionDemoSection />
     </>

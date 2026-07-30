@@ -86,6 +86,8 @@ function ScopeLab() {
         <dd>{spec.y}px</dd>
         <dt className="text-muted-foreground">Glow</dt>
         <dd>{spec.glow.toFixed(2)}</dd>
+        <dt className="text-muted-foreground">Eye scale</dt>
+        <dd>{spec.eyeScaleY.toFixed(2)}</dd>
       </dl>
     </div>
   );

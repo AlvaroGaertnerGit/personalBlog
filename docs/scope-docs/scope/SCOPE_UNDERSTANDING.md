@@ -1,5 +1,12 @@
 # Scope — Understanding Document
 
+> **Superseded as of SPR-003.3 ("Character Finalization").** `SCOPE.md` and
+> `VISUAL_LANGUAGE.md` were rewritten to v2.0 and are now, along with the
+> reference image at `references/image.png`, the only three sources of
+> truth. Everything below (including the §11 revision note, itself about
+> SPR-003.2) is historical context for how Scope's design arrived here —
+> read it for background, not as the current spec.
+
 *Written after reading every file in this folder (`README.md`, `SCOPE.md`, `CLAUDE.md`,
 `PERSONALITY.md`, `VISUAL_LANGUAGE.md`, `MOVEMENT.md`, `CONSTRAINTS.md`) and the character
 sheet at `references/scope.png`. This is a single merged mental model, not a file-by-file
@@ -235,9 +242,14 @@ should be validated against whatever the actual page designs turn out to need.*
 *(Written for code review — a violation of any of these should block a merge.)*
 
 - [ ] No spoken output, text bubbles, or written dialogue attributed to Scope, anywhere.
-- [ ] No arms, no human-style eyes, no face-like expression system added to the display.
+- [ ] No arms, no human-*style* (realistic) eyes — no eyebrows, no eyelids, no iris/pupil.
+      **Superseded in part by SPR-003.2** (see §11): a face-like expression system IS now
+      present, but strictly geometric (two plain eye-marks, height/brightness only) — the
+      part of this rule that still holds is "never realistic, never a curve, never a shape
+      swap," not "never any face at all."
 - [ ] No change to silhouette, proportions, shell/display/feet materials, or the core color
-      palette without an explicit design decision recorded outside of code.
+      palette without an explicit design decision recorded outside of code. (SPR-003.2 *is*
+      that explicit decision for the face/eyes and core glow color — see §11.)
 - [ ] No animation without a triggering reason — no idle-loop-for-its-own-sake, no motion
       added purely because a component "felt static."
 - [ ] No motion that snaps, rushes, or exaggerates beyond the documented "light, smooth,
@@ -248,9 +260,11 @@ should be validated against whatever the actual page designs turn out to need.*
       actual page content around it.
 - [ ] No new emotional state introduced without checking it against the five documented
       ones (Idle, Curious, Thinking, Observe, Happy) for redundancy or personality drift.
-- [ ] No glyph or display change that replaces `{ }` as the resting/default mark shown on
-      the display (see the open question in §10 about whether the glyph itself varies by
-      state).
+- [ ] ~~No glyph or display change that replaces `{ }` as the resting/default mark shown on
+      the display~~ — **superseded by SPR-003.2** (see §11): the `{ }` glyph has been
+      replaced by two geometric eyes as Scope's primary expressive mark. This also resolves
+      §10's open question about whether the glyph varies by state — there is no longer a
+      glyph; the question is moot.
 - [ ] No treatment of Scope as a chatbot, assistant, mascot-with-dialogue, or drone in any
       copy, comment, or component name — the category itself is rejected, not just the
       look.
@@ -295,6 +309,45 @@ text files and the reference sheet, with no contradictions.
   decision behind it.
 
 **What should be documented going forward:** a resolution to the amber/cyan-vs-purple
-discrepancy; an explicit answer on whether the display glyph varies by state; and — before
-any Playground, Navigation, Footer, or 404 implementation — a short decision note for each,
-the same way Hero and Loading already have an obvious, well-supported answer.
+discrepancy (resolved by §11 below); an explicit answer on whether the display glyph varies
+by state (moot as of §11 — there is no longer a glyph); and — before any Playground,
+Navigation, Footer, or 404 implementation — a short decision note for each, the same way
+Hero and Loading already have an obvious, well-supported answer.
+
+---
+
+## 11. Revision Note — SPR-003.2, "Scope Design Evolution"
+
+**Why:** user testing feedback was that Scope reads as "a clever animated icon," not
+something visitors feel protective of — beautiful and technically impressive, but not
+emotionally connecting. A new visual reference was reviewed for *principles*, not copied
+(see the sprint's own analysis in `docs/CONTEXT.md` / the sprint plan for the extract-vs-
+reject breakdown). This note exists so a future reader hits an explicit, dated decision
+instead of rediscovering that several statements above no longer hold.
+
+**What actually changed:**
+- The `{ }` glyph is retired. Two plain, geometric, warm-glowing eye-marks are now Scope's
+  primary expressive mark and its "soul." They remain strictly non-realistic — no
+  eyebrows/eyelids/iris/pupil, no curves, no shape-swap expressions (never a smile, a wink,
+  or a star) — expression is carried only by height (a squint ↔ widen axis, `eyeScaleY` in
+  code) and brightness/position, the same restrained vocabulary the glyph used to carry.
+- The face plate grew from a small inset panel into a dominant viewport — "more face, less
+  shell margin" is most of what makes this read warmer.
+- The core glow (and now the eyes themselves) shifted from purple to warm amber/gold,
+  resolving the amber-vs-purple ambiguity this document flagged in §4 — in the warm
+  direction, using the palette's own pre-existing `--scope-warm` token. A small trace of
+  purple (`--scope-accent`) remains only as a minor secondary detail (a small indicator
+  light on the shell), not removed entirely.
+- The idle personality gestures (glance/tilt/posture/focus-pulse, plus idle's own breathing
+  loop) were amplified roughly 25-30% and gained a brief "anticipation" lead-in, addressing
+  feedback that they were "technically correct but almost imperceptible." Still well under
+  the mood system's own magnitudes — "less is more" held as the ceiling, just a higher floor
+  underneath it.
+- No antenna was added — the brief's own instruction was to reject antennae without a
+  strong conceptual purpose, and none is established anywhere in canon.
+
+**What did NOT change:** the silhouette family (rounded body, two stub feet), the
+personality traits (§3), the movement principles (§5), the "what Scope is not" list (§6) —
+chatbot/assistant/mascot/drone are all still rejected — Scope's silence (except its one
+greeting), and its refusal to be the protagonist (§2, §8). This was an evolution of *how*
+curiosity is expressed physically, not a change to *what* Scope is or represents.
