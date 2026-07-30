@@ -1,4 +1,4 @@
-export { ScopeDockProvider } from "./scope-dock-context"
+export { ScopeDockProvider, useScopeDockContext } from "./scope-dock-context"
 export { ScopeDock } from "./scope-dock"
 export { ScopeGreeting } from "./scope-greeting"
 export { useScopeAcknowledge } from "./use-scope-acknowledge"

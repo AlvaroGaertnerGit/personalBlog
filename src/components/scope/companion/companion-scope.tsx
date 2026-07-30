@@ -25,7 +25,14 @@ interface CompanionScopeProps {
 // Only transform/opacity ever animate here, per the motion skill's golden
 // rule — width/height/top/left are never touched.
 function CompanionScope({ stageRef }: CompanionScopeProps) {
-  const { activeDockId, getDockElement, getDockConfig, isAcknowledging } = useScopeDockContext()
+  const {
+    activeDockId,
+    getDockElement,
+    getDockConfig,
+    isAcknowledging,
+    isSceneTransitioning,
+    registerScopeMotionValues,
+  } = useScopeDockContext()
   const shouldReduceMotion = useReducedMotion()
   const hasPositioned = React.useRef(false)
 
@@ -34,8 +41,23 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
   const scale = useMotionValue(1)
   const rotate = useMotionValue(0)
 
+  // SPR-006: hand these same motion values to ScopeDockContext so
+  // ThemeTransitionProvider can animate them directly during the theme
+  // curtain sequence instead of duplicating this positioning mechanism.
+  // Identity is stable for the component's lifetime, so registering once on
+  // mount is enough.
+  React.useLayoutEffect(() => {
+    registerScopeMotionValues({ x, y, scale, rotate })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const dockConfig = activeDockId ? getDockConfig(activeDockId) : DEFAULT_SCOPE_DOCK_CONFIG
-  const mood = isAcknowledging ? "curious" : dockConfig.mood
+  // While the theme-transition curtain sequence has commandeered Scope, mood
+  // is forced to "observe" (lean-forward, wider eyes) — the same body
+  // language a settle-in resting mood already reads as "focused" — rather
+  // than whatever dock/acknowledge state happened to be active when the
+  // sequence began.
+  const mood = isSceneTransitioning ? "observe" : isAcknowledging ? "curious" : dockConfig.mood
 
   // Runs synchronously before paint (useLayoutEffect, not useEffect) so the
   // very first render never flashes at the (0,0) default before jumping to
@@ -43,6 +65,14 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
   // in scope-dock.tsx for why its own registration effect is also a layout
   // effect, for the same reason.
   React.useLayoutEffect(() => {
+    // SPR-006: while the theme-transition curtain sequence owns Scope's
+    // position, this effect stands down entirely rather than fighting the
+    // sequence's own animate() calls on the same motion values. It's in the
+    // dep array below, so ending the transition re-runs this effect —
+    // a no-op re-sync, since the sequence always restores Scope to exactly
+    // this same target before releasing control.
+    if (isSceneTransitioning) return
+
     const stage = stageRef.current
     const dock = activeDockId ? getDockElement(activeDockId) : null
     if (!stage || !dock) return
@@ -72,13 +102,15 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
     animate(scale, targetScale, springs.companion)
     animate(rotate, targetRotate, springs.companion)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeDockId, dockConfig.scale, dockConfig.facing])
+  }, [activeDockId, dockConfig.scale, dockConfig.facing, isSceneTransitioning])
 
   // Re-measure on resize (a reflow can move a dock without activeDockId
   // ever changing) — always instant, resizing the window isn't a moment
-  // that should trigger a "travel" animation.
+  // that should trigger a "travel" animation. Skipped while the theme
+  // sequence owns Scope's position, for the same reason as the effect above.
   React.useEffect(() => {
     function onResize() {
+      if (isSceneTransitioning) return
       const stage = stageRef.current
       const dock = activeDockId ? getDockElement(activeDockId) : null
       if (!stage || !dock) return
@@ -89,7 +121,7 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
     }
     window.addEventListener("resize", onResize)
     return () => window.removeEventListener("resize", onResize)
-  }, [activeDockId, getDockElement, stageRef, x, y])
+  }, [activeDockId, getDockElement, stageRef, x, y, isSceneTransitioning])
 
   return (
     <motion.div
@@ -101,6 +133,7 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
       <Scope
         mood={mood}
         attentionTarget={dockConfig.attentionTarget}
+        suspended={isSceneTransitioning}
         className="size-40 sm:size-48"
       />
     </motion.div>

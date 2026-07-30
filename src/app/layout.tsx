@@ -5,6 +5,7 @@ import { MotionProvider } from "@/components/motion-provider";
 import { Background } from "@/components/layout/background";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { ThemeTransitionProvider } from "@/components/theme/theme-transition-controller";
 import { ScopeDockProvider } from "@/components/scope/companion";
 
 const geistSans = Geist({
@@ -42,8 +43,18 @@ export default function RootLayout({
         <ThemeProvider>
           <Background />
           <MotionProvider>
-            <ThemeToggle className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6" />
-            <ScopeDockProvider>{children}</ScopeDockProvider>
+            {/* SPR-006: ThemeTransitionProvider must sit inside
+                ScopeDockProvider — it borrows Scope's position via
+                useScopeDockContext() to run the theme-transition curtain
+                sequence. ThemeToggle moves inside it too (it's
+                position:fixed, so this doesn't affect layout) since it now
+                triggers that sequence instead of switching themes itself. */}
+            <ScopeDockProvider>
+              <ThemeTransitionProvider>
+                <ThemeToggle className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6" />
+                {children}
+              </ThemeTransitionProvider>
+            </ScopeDockProvider>
           </MotionProvider>
         </ThemeProvider>
       </body>

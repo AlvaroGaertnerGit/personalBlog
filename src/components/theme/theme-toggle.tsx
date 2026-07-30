@@ -1,11 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useTheme } from "next-themes"
 
 import { useMounted } from "@/hooks/use-mounted"
 import { transitions } from "@/lib/motion"
 import { cn } from "@/lib/utils"
-import { useThemeTransition } from "./use-theme-transition"
+import { useThemeTransition } from "./theme-transition-controller"
 
 // Deliberately not a sun/moon OS-style switch — "the toggle should never
 // feel like an operating system control." A small pill with a sliding
@@ -16,8 +17,14 @@ import { useThemeTransition } from "./use-theme-transition"
 // only things that animate — transform/opacity only, per the motion
 // skill's golden rule — using the shared `toggle` transition token so this
 // stays on the same motion language as every other state-toggle in the app.
+//
+// SPR-006: this component only ever triggers the cinematic sequence — "do
+// not place this logic inside the button" — everything about *how* the
+// theme actually changes lives in ThemeTransitionProvider
+// (theme-transition-controller.tsx).
 function ThemeToggle({ className, ...props }: React.ComponentProps<"button">) {
-  const { theme, toggleTheme } = useThemeTransition()
+  const { resolvedTheme: theme } = useTheme()
+  const { playThemeTransition, isTransitioning } = useThemeTransition()
   // next-themes can't know the resolved theme during SSR/the first client
   // render (it depends on localStorage/matchMedia) — resolving `isDark`
   // straight from `theme` would render "light" on the server and then
@@ -32,12 +39,13 @@ function ThemeToggle({ className, ...props }: React.ComponentProps<"button">) {
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={playThemeTransition}
+      disabled={isTransitioning}
       aria-label={isDark ? "Switch to light atmosphere" : "Switch to dark atmosphere"}
       aria-pressed={isDark}
       data-slot="theme-toggle"
       className={cn(
-        "border-border bg-muted/80 relative inline-flex h-7 w-12 shrink-0 items-center rounded-full border backdrop-blur-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+        "border-border bg-muted/80 relative inline-flex h-7 w-12 shrink-0 items-center rounded-full border backdrop-blur-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-default",
         className
       )}
       {...props}

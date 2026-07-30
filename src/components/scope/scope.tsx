@@ -62,12 +62,22 @@ import { useScopePresence } from "./use-scope-presence"
 function Scope({
   mood = "idle",
   attentionTarget,
+  suspended = false,
   className,
   ...props
 }: React.ComponentProps<"div"> & {
   mood?: ScopeMood
   /** SPR-005: an element Personality may occasionally glance toward — see use-scope-personality.ts. */
   attentionTarget?: React.RefObject<Element | null>
+  /**
+   * SPR-006: true while an external orchestrator (the theme-transition
+   * curtain sequence) has commandeered Scope — pauses idle gestures
+   * (Personality) and cursor gaze tracking (Presence) so nothing fights the
+   * sequence's own animation of Scope's wrapper transform. Mood is still
+   * externally owned as always; the caller is expected to also override
+   * `mood` while this is true (see companion-scope.tsx).
+   */
+  suspended?: boolean
 }) {
   const ref = React.useRef<HTMLDivElement>(null)
   const { animate, transition, glow, eyeScaleY } = useScopeMotion(mood)
@@ -83,7 +93,7 @@ function Scope({
     shadowScaleX,
     antennaRotate,
     interactionIntensity,
-  } = useScopePresence(ref)
+  } = useScopePresence(ref, suspended)
   const {
     rotate: personalityRotate,
     y: personalityY,
@@ -93,7 +103,7 @@ function Scope({
     eyeOffsetY,
     eyeConverge,
     antennaFlex,
-  } = useScopePersonality(ref, attentionTarget)
+  } = useScopePersonality(ref, attentionTarget, suspended)
 
   // Additive: presence's continuous gaze position + personality's
   // occasional look-up/down nudge. Both are real MotionValues — combined

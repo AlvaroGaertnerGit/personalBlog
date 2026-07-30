@@ -245,45 +245,24 @@
   }
 }
 
-/* Atmosphere sweep — the cinematic theme transition (see
-   src/components/theme/use-theme-transition.ts, which wraps next-themes'
-   setTheme in document.startViewTransition). Not a plain color cross-fade:
-   the browser's default view-transition cross-fade is disabled on both
-   snapshots, and the *new* atmosphere is revealed by an expanding circle
-   anchored at the top-right corner — matching the toggle's own position —
-   so it reads as light sweeping across the interface toward the bottom-left,
-   per the sprint brief. Duration/easing are literal values matching
-   duration.slower (0.6s) / easing.out exactly, the same "CSS animation
-   outside motion.* components" convention this file already uses for
-   hero-bg-in/hero-grid-in above. Nothing here runs unless
-   document.startViewTransition actually fired, which use-theme-transition.ts
-   already skips under reduced motion — this media query is a second,
-   belt-and-suspenders gate, not the only one. */
+/* SPR-006: the theme swap itself is now hidden entirely behind the
+   ThemeTransitionProvider curtain sequence (src/components/theme/
+   theme-transition-controller.tsx) — the theme class only ever flips once
+   the curtain fully covers the viewport, so there's nothing left for a
+   visible page-wide sweep to do; the old circular clip-path
+   view-transition sweep (and document.startViewTransition/flushSync in the
+   now-deleted use-theme-transition.ts) has been retired.
+
+   This rule survives that retirement on its own merits: Scope never
+   celebrates a theme switch, its core just softly follows the new
+   atmosphere — a gentle fill cross-fade on the display's glow/accent
+   shapes (the only parts of Scope wired to --scope-accent) whenever that
+   variable's value changes under .dark. Feet/shell/eye fills never
+   reference --scope-accent, so this rule is silently inert for them;
+   scope.tsx itself is untouched. Still gated to
+   prefers-reduced-motion: no-preference on its own. */
 @media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-
-  ::view-transition-new(root) {
-    clip-path: circle(0% at 100% 0%);
-    animation: atmosphere-sweep 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  /* Scope during theme changes: it never celebrates the switch, its core
-     just softly follows the new atmosphere — a gentle fill cross-fade on
-     the display's glow/accent shapes (the only parts of Scope wired to
-     --scope-accent) whenever that variable's value changes under .dark.
-     Feet/shell/eye fills never reference --scope-accent, so this rule is
-     silently inert for them; scope.tsx itself is untouched. */
   [data-slot="scope"] :is(circle, rect, text) {
     transition: fill 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-}
-
-@keyframes atmosphere-sweep {
-  to {
-    clip-path: circle(150% at 100% 0%);
   }
 }

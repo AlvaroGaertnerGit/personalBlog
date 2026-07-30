@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import type { MotionValue } from "framer-motion"
 
 import { CompanionScope } from "./companion-scope"
 import { DEFAULT_SCOPE_DOCK_CONFIG, type ScopeDockConfig } from "./scope-docks"
@@ -8,6 +9,19 @@ import { DEFAULT_SCOPE_DOCK_CONFIG, type ScopeDockConfig } from "./scope-docks"
 interface DockEntry {
   element: HTMLElement
   config: ScopeDockConfig
+}
+
+// The wrapper-level transform values CompanionScope's own dock-follow
+// animation drives — see companion-scope.tsx. Exposed (not stored as React
+// state — these are Framer MotionValues, imperative by design, the same
+// convention every other MotionValue in this codebase follows) so an
+// external orchestrator (ThemeTransitionProvider) can temporarily animate
+// them directly instead of duplicating Scope's positioning mechanism.
+interface ScopeMotionValues {
+  x: MotionValue<number>
+  y: MotionValue<number>
+  scale: MotionValue<number>
+  rotate: MotionValue<number>
 }
 
 interface ScopeDockContextValue {
@@ -18,6 +32,23 @@ interface ScopeDockContextValue {
   getDockConfig: (id: string) => Required<ScopeDockConfig>
   acknowledge: () => void
   isAcknowledging: boolean
+  /**
+   * SPR-006: true while the theme-transition curtain sequence is
+   * commandeering Scope — CompanionScope's own dock-follow effect stands
+   * down while this is true (see companion-scope.tsx), mood is forced to
+   * "observe", and personality/presence are suspended. This context only
+   * owns the flag + the raw motion values; the actual choreography lives in
+   * ThemeTransitionProvider (src/components/theme/theme-transition-controller.tsx)
+   * — kept out of here on purpose, this is mechanism, not policy.
+   */
+  isSceneTransitioning: boolean
+  beginSceneTransition: () => void
+  endSceneTransition: () => void
+  /** Registered once by CompanionScope on mount; null before that. */
+  registerScopeMotionValues: (values: ScopeMotionValues) => void
+  getScopeMotionValues: () => ScopeMotionValues | null
+  /** The stage every dock position (and Scope's own x/y) is measured against. */
+  stageRef: React.RefObject<HTMLDivElement | null>
 }
 
 const ScopeDockContext = React.createContext<ScopeDockContextValue | null>(null)
@@ -44,6 +75,16 @@ function ScopeDockProvider({ children }: { children: React.ReactNode }) {
   const [activeDockId, setActiveDockId] = React.useState<string | null>(null)
   const [isAcknowledging, setIsAcknowledging] = React.useState(false)
   const acknowledgeTimeout = React.useRef<number | undefined>(undefined)
+
+  const [isSceneTransitioning, setIsSceneTransitioning] = React.useState(false)
+  const scopeMotionValuesRef = React.useRef<ScopeMotionValues | null>(null)
+
+  const beginSceneTransition = React.useCallback(() => setIsSceneTransitioning(true), [])
+  const endSceneTransition = React.useCallback(() => setIsSceneTransitioning(false), [])
+  const registerScopeMotionValues = React.useCallback((values: ScopeMotionValues) => {
+    scopeMotionValuesRef.current = values
+  }, [])
+  const getScopeMotionValues = React.useCallback(() => scopeMotionValuesRef.current, [])
 
   const pickActiveDock = React.useCallback(() => {
     let bestId: string | null = null
@@ -142,8 +183,27 @@ function ScopeDockProvider({ children }: { children: React.ReactNode }) {
       getDockConfig,
       acknowledge,
       isAcknowledging,
+      isSceneTransitioning,
+      beginSceneTransition,
+      endSceneTransition,
+      registerScopeMotionValues,
+      getScopeMotionValues,
+      stageRef,
     }),
-    [registerDock, unregisterDock, activeDockId, getDockElement, getDockConfig, acknowledge, isAcknowledging]
+    [
+      registerDock,
+      unregisterDock,
+      activeDockId,
+      getDockElement,
+      getDockConfig,
+      acknowledge,
+      isAcknowledging,
+      isSceneTransitioning,
+      beginSceneTransition,
+      endSceneTransition,
+      registerScopeMotionValues,
+      getScopeMotionValues,
+    ]
   )
 
   return (

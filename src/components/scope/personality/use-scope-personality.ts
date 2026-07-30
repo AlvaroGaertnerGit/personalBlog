@@ -122,7 +122,8 @@ interface ScopePersonality {
 // moving the mouse.
 function useScopePersonality(
   scopeRef: React.RefObject<HTMLElement | null>,
-  attentionTarget?: React.RefObject<Element | null>
+  attentionTarget?: React.RefObject<Element | null>,
+  suspended = false
 ): ScopePersonality {
   const isReduced = useIsReducedMotion()
 
@@ -169,7 +170,11 @@ function useScopePersonality(
   // it has no business re-deciding whether "now" is an appropriate moment
   // for mood based on a hardcoded string it doesn't own. Presence already
   // runs unconditionally the same way; Personality now matches it.
-  const armed = !isReduced
+  // SPR-006: `suspended` is the theme-transition curtain sequence's "stop
+  // idle gestures" signal — the exact same disarm path reduced-motion
+  // already takes below (reset everything to neutral, tear down the
+  // scheduler), just temporary rather than permanent for the session.
+  const armed = !isReduced && !suspended
 
   React.useEffect(() => {
     if (!armed) {

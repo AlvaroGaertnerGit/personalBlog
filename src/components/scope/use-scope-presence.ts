@@ -111,7 +111,10 @@ interface ScopePresence {
 // physics of its own independent of the thing casting it. antennaRotate
 // and interactionIntensity are two further derived values — see their
 // own comments below.
-function useScopePresence(ref: React.RefObject<HTMLElement | null>): ScopePresence {
+function useScopePresence(
+  ref: React.RefObject<HTMLElement | null>,
+  suspended = false
+): ScopePresence {
   const isReduced = useIsReducedMotion()
   const rawX = useMotionValue(0)
   const rawY = useMotionValue(0)
@@ -133,7 +136,21 @@ function useScopePresence(ref: React.RefObject<HTMLElement | null>): ScopePresen
     // Reduced motion: never attach the listeners, so rawX/rawY (and
     // everything derived from them below) stay at their initial 0 —
     // disables body rotation, parallax, and eye tracking in one move.
-    if (isReduced) return
+    //
+    // SPR-006: `suspended` is the same idea for the theme-transition curtain
+    // sequence — "stop gaze tracking" while Scope is commandeered. Unlike
+    // reduced motion, this can toggle back on, so raw values are explicitly
+    // eased back to neutral (not just left wherever the cursor last was)
+    // by setting them to 0 — the existing springs below take it from there,
+    // smoothly settling rotateX/Y/eyeX/Y back to center rather than freezing
+    // mid-glance.
+    if (isReduced || suspended) {
+      rawX.set(0)
+      rawY.set(0)
+      eyeTargetX.set(0)
+      eyeTargetY.set(0)
+      return
+    }
 
     function updateCenter() {
       const rect = ref.current?.getBoundingClientRect()
@@ -167,7 +184,7 @@ function useScopePresence(ref: React.RefObject<HTMLElement | null>): ScopePresen
       window.removeEventListener("scroll", updateCenter)
       window.removeEventListener("pointermove", onPointerMove)
     }
-  }, [isReduced, ref, rawX, rawY, eyeTargetX, eyeTargetY, hasInteracted])
+  }, [isReduced, suspended, ref, rawX, rawY, eyeTargetX, eyeTargetY, hasInteracted])
 
   const rawRotateY = useTransform(rawX, [-1, 1], [-MAX_ROTATE_Y, MAX_ROTATE_Y])
   const rotateY = useSpring(rawRotateY, BODY_SPRING)
