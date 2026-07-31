@@ -5,6 +5,22 @@ import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 import { useScopePersonality } from "./personality/use-scope-personality"
+import {
+  SCOPE_ACCENT_DOT,
+  SCOPE_ANTENNA_PATH,
+  SCOPE_ANTENNA_TIP,
+  SCOPE_DISPLAY_PATH,
+  SCOPE_DISPLAY_SHEEN,
+  SCOPE_EYE_LEFT,
+  SCOPE_EYE_RIGHT,
+  SCOPE_FEET,
+  SCOPE_GLOW_RECT,
+  SCOPE_MOUTH_GLOW,
+  SCOPE_MOUTH_MAIN,
+  SCOPE_SHELL,
+  SCOPE_SHELL_SHEEN,
+  SCOPE_VIEWBOX,
+} from "./scope-geometry"
 import { SCOPE_GLOW_TRANSITION } from "./scope-motion"
 import type { ScopeMood } from "./scope.types"
 import { useCombinedMotionValue } from "./use-combined-motion-value"
@@ -147,7 +163,7 @@ function Scope({
         className="h-full w-full"
       >
         <motion.div animate={animate} transition={transition} className="h-full w-full">
-        <svg viewBox="0 -30 160 210" className="h-full w-full">
+        <svg viewBox={SCOPE_VIEWBOX} className="h-full w-full">
           <defs>
             <linearGradient id="scope-shell-gradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="var(--scope-shell)" />
@@ -162,11 +178,7 @@ function Scope({
               since the face is the light source, not a neutral panel with
               an accent trim. */}
           <motion.rect
-            x="14"
-            y="14"
-            width="132"
-            height="128"
-            rx="36"
+            {...SCOPE_GLOW_RECT}
             className="fill-scope-warm blur-md"
             initial={false}
             animate={{ opacity: glow * 0.5 }}
@@ -175,8 +187,8 @@ function Scope({
           />
 
           {/* feet */}
-          <rect x="42" y="146" width="24" height="28" rx="12" className="fill-scope-details" />
-          <rect x="92" y="146" width="24" height="28" rx="12" className="fill-scope-details" />
+          <rect {...SCOPE_FEET[0]} className="fill-scope-details" />
+          <rect {...SCOPE_FEET[1]} className="fill-scope-details" />
 
           {/* shell — a soft top-to-bottom shade plus a hairline edge
               stroke, so it stays legible even against a near-white
@@ -184,10 +196,7 @@ function Scope({
               (rx > ry) rather than a perfect circle — "almost spherical,
               slightly flattened at the bottom" per VISUAL_LANGUAGE.md. */}
           <ellipse
-            cx="80"
-            cy="78"
-            rx="75"
-            ry="71"
+            {...SCOPE_SHELL}
             fill="url(#scope-shell-gradient)"
             stroke="var(--scope-details)"
             strokeOpacity="0.1"
@@ -197,7 +206,7 @@ function Scope({
           {/* a soft top sheen suggesting a sculpted, matte-ceramic shell
               surface — deliberately faint and tucked near the top edge so
               it never competes with the face below it. */}
-          <ellipse cx="70" cy="22" rx="34" ry="14" className="fill-scope-shell" opacity="0.12" />
+          <ellipse {...SCOPE_SHELL_SHEEN} className="fill-scope-shell" opacity="0.12" />
 
           {/* antenna — required by VISUAL_LANGUAGE.md v2.0 ("tiny,
               elegant, flexible... an insect antenna, not technology... a
@@ -218,16 +227,14 @@ function Scope({
           <motion.g style={{ rotate: antennaRotate, transformOrigin: "50% 100%" }}>
             <motion.g style={{ rotate: antennaFlex, transformOrigin: "50% 100%" }}>
               <path
-                d="M 66 9 Q 61 -5 68 -15"
+                d={SCOPE_ANTENNA_PATH}
                 stroke="var(--scope-details)"
                 strokeWidth="3"
                 strokeLinecap="round"
                 fill="none"
               />
               <circle
-                cx="68"
-                cy="-17"
-                r="6"
+                {...SCOPE_ANTENNA_TIP}
                 className="fill-scope-shell"
                 stroke="var(--scope-details)"
                 strokeOpacity="0.15"
@@ -251,9 +258,7 @@ function Scope({
               circle to 0 is visually equivalent to hiding it and goes
               through the proven path. */}
           <motion.circle
-            cx="139"
-            cy="54"
-            r="3.5"
+            {...SCOPE_ACCENT_DOT}
             className="fill-scope-accent"
             style={{ scale: interactionIntensity }}
           />
@@ -267,18 +272,7 @@ function Scope({
             {/* a faint inner-edge stroke suggests the display sits
                 recessed into the shell rather than flush with it */}
             <path
-              d="
-                M46 34
-                H114
-                C129 34 140 45 140 60
-                V92
-                C140 109 127 122 110 122
-                H50
-                C33 122 20 109 20 92
-                V60
-                C20 45 31 34 46 34
-                Z
-              "
+              d={SCOPE_DISPLAY_PATH}
               className="fill-scope-display stroke-scope-details"
               strokeOpacity="0.35"
               strokeWidth="1"
@@ -289,11 +283,11 @@ function Scope({
                 actual reflection; VISUAL_LANGUAGE.md v2.0 is explicit
                 that reflections should stay minimal. */}
             <ellipse
-              cx="55"
-              cy="50"
-              rx="30"
-              ry="14"
-              transform="rotate(-25 55 50)"
+              cx={SCOPE_DISPLAY_SHEEN.cx}
+              cy={SCOPE_DISPLAY_SHEEN.cy}
+              rx={SCOPE_DISPLAY_SHEEN.rx}
+              ry={SCOPE_DISPLAY_SHEEN.ry}
+              transform={`rotate(${SCOPE_DISPLAY_SHEEN.rotationDeg} ${SCOPE_DISPLAY_SHEEN.cx} ${SCOPE_DISPLAY_SHEEN.cy})`}
               className="fill-scope-shell blur-sm"
               opacity="0.07"
             />
@@ -319,21 +313,9 @@ function Scope({
                 SVG transform-origin behaves once Framer forces fill-box. */}
             <motion.g style={{ x: leftEyeX, y: gazeY }}>
               <motion.g style={{ scaleY: blinkScaleY }}>
-                <rect
-                  x="53"
-                  y="58"
-                  width="22"
-                  height="32"
-                  rx="11"
-                  className="fill-scope-warm blur-sm"
-                  opacity={0.4}
-                />
+                <rect {...SCOPE_EYE_LEFT.bloom} className="fill-scope-warm blur-sm" opacity={0.4} />
                 <motion.rect
-                  x="56"
-                  y="61"
-                  width="18"
-                  height="32"
-                  rx="9"
+                  {...SCOPE_EYE_LEFT.main}
                   className="fill-scope-warm"
                   initial={false}
                   animate={{ scaleY: eyeScaleY }}
@@ -343,21 +325,9 @@ function Scope({
             </motion.g>
             <motion.g style={{ x: rightEyeX, y: gazeY }}>
               <motion.g style={{ scaleY: blinkScaleY }}>
-                <rect
-                  x="85"
-                  y="58"
-                  width="22"
-                  height="32"
-                  rx="11"
-                  className="fill-scope-warm blur-sm"
-                  opacity={0.4}
-                />
+                <rect {...SCOPE_EYE_RIGHT.bloom} className="fill-scope-warm blur-sm" opacity={0.4} />
                 <motion.rect
-                  x="88"
-                  y="61"
-                  width="18"
-                  height="32"
-                  rx="9"
+                  {...SCOPE_EYE_RIGHT.main}
                   className="fill-scope-warm"
                   initial={false}
                   animate={{ scaleY: eyeScaleY }}
@@ -373,23 +343,11 @@ function Scope({
               transition={transition}
             >
               {/* mouth glow */}
-              <rect
-                x="74"
-                y="95"
-                width="14"
-                height="6"
-                rx="3"
-                className="fill-scope-warm blur-sm"
-                opacity={0.22}
-              />
+              <rect {...SCOPE_MOUTH_GLOW} className="fill-scope-warm blur-sm" opacity={0.22} />
 
               {/* mouth */}
               <motion.rect
-                x="75"
-                y="96"
-                width="12"
-                height="4"
-                rx="2"
+                {...SCOPE_MOUTH_MAIN}
                 className="fill-scope-warm"
                 initial={false}
                 animate={{

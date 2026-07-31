@@ -15,16 +15,20 @@ import {
 } from "react-email"
 
 import { CONTACT_ENDING_LINE } from "@/components/sections/contact-content"
-import { COLOR, SANS_FONT, SERIF_FONT, ScopeSeal } from "./shared"
+import { ScopeStatic } from "@/components/scope/scope-static"
+import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME, SERIF_FONT } from "./shared"
 
 // SPR-010 — "the letter continues." See sendContactEmail() in resend.tsx
 // for how this is actually sent — as a React element via Resend's own
 // `react` option, never rendered to an HTML string by hand (React's normal
 // escaping is what keeps a visitor's own message safe to interpolate here
-// with zero manual sanitizing). Shared colors/fonts/Scope's seal live in
-// ./shared.tsx — this is the internal notification (to the site owner);
+// with zero manual sanitizing). Shared colors/fonts live in ./shared.tsx —
+// this is the internal notification (to the site owner);
 // visitor-confirmation-email.tsx is the visitor-facing reply, built from
-// the same foundation.
+// the same foundation. Scope himself is ScopeStatic — the exact canonical
+// shapes scope.tsx draws on the live site, not a redrawn illustration; see
+// that component's own comment for why a "use client" component like the
+// real, animated <Scope> can't be rendered here at all.
 
 // Splits on newlines and rejoins with real <br /> elements rather than
 // relying on `white-space: pre-wrap` (inconsistent support in older
@@ -63,7 +67,7 @@ function ContactEmail({ name, email, message, deliveredAt }: ContactEmailProps) 
     <Html lang="en">
       <Head />
       <Preview>A new idea has arrived — Scope carried it here.</Preview>
-      <Tailwind config={{ presets: [pixelBasedPreset] }}>
+      <Tailwind config={{ presets: [pixelBasedPreset], theme: { extend: SCOPE_EMAIL_THEME } }}>
         <Body style={{ backgroundColor: COLOR.page, fontFamily: SANS_FONT, margin: 0, padding: "40px 16px" }}>
           <Container
             style={{
@@ -76,7 +80,7 @@ function ContactEmail({ name, email, message, deliveredAt }: ContactEmailProps) 
             }}
           >
             <Section style={{ textAlign: "center", marginBottom: "20px" }}>
-              <ScopeSeal />
+              <ScopeStatic className="h-13 w-13" />
             </Section>
 
             <Heading

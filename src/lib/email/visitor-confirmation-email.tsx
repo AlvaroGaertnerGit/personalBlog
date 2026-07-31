@@ -12,7 +12,8 @@ import {
 } from "react-email"
 
 import { CONTACT_ENDING_LINE } from "@/components/sections/contact-content"
-import { COLOR, SANS_FONT, ScopeSeal } from "./shared"
+import { ScopeStatic } from "@/components/scope/scope-static"
+import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME } from "./shared"
 
 interface VisitorConfirmationEmailProps {
   name: string
@@ -23,14 +24,16 @@ interface VisitorConfirmationEmailProps {
 // confirms he arrived. Deliberately short — "do not repeat the message
 // they already wrote, they know what they sent" — and deliberately not in
 // Scope's own voice: Scope never speaks (see docs/scope-docs/scope/), so
-// this is Álvaro's own signed reply, with Scope appearing only as the
-// small seal that carried it, exactly as on the site itself.
+// this is Álvaro's own signed reply, with Scope appearing only as
+// ScopeStatic — the exact canonical shapes scope.tsx draws on the live
+// site, carrying the letter here exactly as on the site itself, not a
+// redrawn illustration.
 function VisitorConfirmationEmail({ name }: VisitorConfirmationEmailProps) {
   return (
     <Html lang="en">
       <Head />
       <Preview>Scope safely delivered your letter.</Preview>
-      <Tailwind config={{ presets: [pixelBasedPreset] }}>
+      <Tailwind config={{ presets: [pixelBasedPreset], theme: { extend: SCOPE_EMAIL_THEME } }}>
         <Body style={{ backgroundColor: COLOR.page, fontFamily: SANS_FONT, margin: 0, padding: "40px 16px" }}>
           <Container
             style={{
@@ -43,7 +46,7 @@ function VisitorConfirmationEmail({ name }: VisitorConfirmationEmailProps) {
             }}
           >
             <Section style={{ textAlign: "center", marginBottom: "20px" }}>
-              <ScopeSeal />
+              <ScopeStatic className="h-13 w-13" />
             </Section>
 
             <Heading
