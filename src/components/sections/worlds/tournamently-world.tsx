@@ -14,13 +14,6 @@ import { useIsReducedMotion } from "@/hooks/use-is-reduced-motion"
 // target" gesture occasionally glances at the ball on its own schedule via
 // config.attentionTarget below; the two happening to coincide sometimes is
 // what makes it read as genuine noticing rather than a scripted cue.
-// const MIN_HOP_DELAY_MS = 5000
-// const MAX_HOP_DELAY_MS = 8500
-// // Same spring tuning as Scope's own "bounce" gesture (personality-gestures.ts)
-// // — a deliberate visual rhyme between how Scope bounces and how the ball does.
-// const HOP_UP: Transition = { type: "spring", stiffness: 100, damping: 12, mass: 1 }
-// const HOP_DOWN: Transition = { type: "spring", stiffness: 90, damping: 14, mass: 1 }
-
 const MIN_HOP_DELAY_MS = 2000
 const MAX_HOP_DELAY_MS = 3500
 
@@ -53,17 +46,6 @@ function TournamentlyWorld() {
     let cancelled = false
     let timeoutId: number | undefined
 
-    // async function hop() {
-    //   const up = animate(ballY, -8, HOP_UP)
-    //   await up.finished.catch(() => {})
-    //   if (cancelled) return
-
-    //   const down = animate(ballY, 0, HOP_DOWN)
-    //   await down.finished.catch(() => {})
-    //   if (cancelled) return
-
-    //   timeoutId = window.setTimeout(hop, hopDelay())
-    // }
     async function hop() {
       const up = animate(ballY, -20, HOP_UP)
       await up.finished.catch(() => {})
@@ -105,18 +87,6 @@ function TournamentlyWorld() {
           config={{ mood: "observe", scale: 0.75, attentionTarget: ballRef }}
           className="size-32 sm:size-40"
         />
-        {/* <div className="relative mb-2 size-3.5">
-          <div
-            aria-hidden="true"
-            className="bg-scope-warm/40 absolute -inset-2 rounded-full blur-md"
-          />
-          <motion.div
-            ref={ballRef}
-            aria-hidden="true"
-            style={{ y: ballY }}
-            className="bg-scope-warm relative size-3.5 rounded-full"
-          />
-        </div> */}
         <motion.div
           ref={ballRef}
           aria-hidden="true"

@@ -351,7 +351,7 @@ function Scope({
                   rx="11"
                   className="fill-scope-warm blur-sm"
                   opacity={0.4}
-                  />
+                />
                 <motion.rect
                   x="88"
                   y="61"
