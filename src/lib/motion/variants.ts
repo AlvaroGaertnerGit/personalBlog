@@ -20,6 +20,20 @@ export const fadeInUp: Variants = {
   },
 }
 
+// Same geometry as fadeInUp, settling in on transitions.enterSlow instead
+// of transitions.enter — for reveals that should read calmer/slower than
+// the default entrance (SPR-008's Open Notebook: every page, its ending
+// page, and its three intro lines all use this) without inventing a new
+// distance/easing/duration token.
+export const fadeInUpSlow: Variants = {
+  hidden: { opacity: 0, y: distance.md },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: transitions.enterSlow,
+  },
+}
+
 export const fadeInDown: Variants = {
   hidden: { opacity: 0, y: -distance.md },
   visible: {

@@ -31,6 +31,7 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
     getDockConfig,
     isAcknowledging,
     isSceneTransitioning,
+    sceneMood,
     registerScopeMotionValues,
   } = useScopeDockContext()
   const shouldReduceMotion = useReducedMotion()
@@ -52,12 +53,14 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
   }, [])
 
   const dockConfig = activeDockId ? getDockConfig(activeDockId) : DEFAULT_SCOPE_DOCK_CONFIG
-  // While the theme-transition curtain sequence has commandeered Scope, mood
-  // is forced to "observe" (lean-forward, wider eyes) — the same body
-  // language a settle-in resting mood already reads as "focused" — rather
-  // than whatever dock/acknowledge state happened to be active when the
-  // sequence began.
-  const mood = isSceneTransitioning ? "observe" : isAcknowledging ? "curious" : dockConfig.mood
+  // While an orchestrator has commandeered Scope, mood is forced to
+  // `sceneMood` (defaults to "observe" — lean-forward, wider eyes, the same
+  // body language a settle-in resting mood already reads as "focused") —
+  // rather than whatever dock/acknowledge state happened to be active when
+  // the sequence began. SPR-009: `sceneMood` is settable per-orchestrator
+  // (see scope-dock-context.tsx) so e.g. Contact's departure beat can walk
+  // away at "idle" instead of staying "observe" for its entire sequence.
+  const mood = isSceneTransitioning ? sceneMood : isAcknowledging ? "curious" : dockConfig.mood
 
   // Runs synchronously before paint (useLayoutEffect, not useEffect) so the
   // very first render never flashes at the (0,0) default before jumping to

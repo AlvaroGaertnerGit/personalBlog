@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/motion-provider";
 import { Background } from "@/components/layout/background";
@@ -16,6 +16,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// SPR-008 — the Open Notebook section's own serif face (font-notebook in
+// globals.css), scoped to that section only, never the site's body font.
+// Regular weight + italic only — nothing in that section pairs this font
+// with font-medium/font-semibold, so a second static weight would just be
+// unused build output.
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400"],
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -69,10 +81,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full overflow-x-hidden antialiased`}
       suppressHydrationWarning
     >
-      <body className="relative isolate min-h-full flex flex-col">
+      {/* SPR-009: Contact's departure sequence deliberately moves Scope
+          (absolutely positioned inside the companion stage, see
+          scope-dock-context.tsx) a little past the desk panel's own right
+          edge so it visibly exits rather than just shrinking in place —
+          that transform can briefly exceed the document's normal content
+          width. overflow-x-hidden on both <html> (the element the
+          browser's own horizontal scrollbar actually reflects) and <body>
+          is what keeps that from ever growing the page into a
+          horizontally scrollable one, without touching normal vertical
+          scroll behavior anywhere else. */}
+      <body className="relative isolate flex min-h-full flex-col overflow-x-hidden">
         <ThemeProvider>
           <Background />
           <MotionProvider>

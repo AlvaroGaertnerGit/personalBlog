@@ -10,6 +10,12 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  /* SPR-008 — the Open Notebook section's own serif, named after the
+     section (not a generic "editorial"/"serif" alias) so it doesn't read
+     as a second general-purpose type option next to font-sans/font-mono —
+     never applied outside src/components/sections/notebook-*.tsx. See
+     src/app/layout.tsx for the next/font/google load. */
+  --font-notebook: var(--font-newsreader);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -214,6 +220,20 @@
     .animate-hero-grid-in {
       animation: hero-grid-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
+
+    /* SPR-008.1 — the Open Notebook workspace's connecting-line "draw-on"
+       (notebook-workspace.tsx). A CSS animation, not a JS-toggled
+       transition: each <path> is remounted with a fresh key whenever the
+       selected thread changes, and animations (unlike transitions) always
+       play from `from` on mount with no property-change trigger needed —
+       avoids a setState-in-effect just to flip a "start the transition now"
+       flag (see the component's own comment for why that was rejected).
+       stroke-dasharray is fixed and generous (300) rather than measured via
+       getTotalLength(): these are short segments between vertically
+       stacked list items, never long enough to need the exact value. */
+    .animate-notebook-line-draw {
+      animation: notebook-line-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   }
 }
 
@@ -242,6 +262,15 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes notebook-line-draw {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 0;
   }
 }
 

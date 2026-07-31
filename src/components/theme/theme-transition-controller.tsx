@@ -70,7 +70,7 @@ type ScopeMotionValues = {
 function ThemeTransitionProvider({ children }: { children: React.ReactNode }) {
   const { resolvedTheme, setTheme } = useTheme()
   const shouldReduceMotion = useReducedMotion()
-  const { getScopeMotionValues, stageRef, beginSceneTransition, endSceneTransition } =
+  const { getScopeMotionValues, stageRef, beginSceneTransition, endSceneTransition, isSceneTransitioning } =
     useScopeDockContext()
 
   const curtainProgress = useMotionValue(0)
@@ -168,6 +168,18 @@ function ThemeTransitionProvider({ children }: { children: React.ReactNode }) {
       return
     }
 
+    // SPR-009: another orchestrator (Contact's departure sequence) may
+    // already be commandeering Scope's motion values — including
+    // permanently, once Scope has narratively left the portfolio for good.
+    // Starting a second animate() sequence on the same shared values here
+    // would fight whichever one is already running. The toggle should keep
+    // working either way, just without its own cinematic curtain, since
+    // Scope isn't available to star in it.
+    if (isSceneTransitioning) {
+      setTheme(next)
+      return
+    }
+
     const motionValues = getScopeMotionValues()
     const stage = stageRef.current
     // Scope hasn't registered its motion values yet (e.g. this fires before
@@ -181,7 +193,15 @@ function ThemeTransitionProvider({ children }: { children: React.ReactNode }) {
     isPlayingRef.current = true
     setIsTransitioning(true)
     void runSequence(motionValues, stage, next)
-  }, [resolvedTheme, shouldReduceMotion, setTheme, getScopeMotionValues, stageRef, runSequence])
+  }, [
+    resolvedTheme,
+    shouldReduceMotion,
+    isSceneTransitioning,
+    setTheme,
+    getScopeMotionValues,
+    stageRef,
+    runSequence,
+  ])
 
   const value = React.useMemo<ThemeTransitionContextValue>(
     () => ({ playThemeTransition, isTransitioning }),

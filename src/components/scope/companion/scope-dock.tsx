@@ -25,17 +25,30 @@ interface ScopeDockProps extends Omit<React.ComponentProps<"div">, "id"> {
 // on first load).
 function ScopeDock({ id, config, className, ...props }: ScopeDockProps) {
   const ref = React.useRef<HTMLDivElement>(null)
-  const { registerDock, unregisterDock } = useScopeDockContext()
+  const { registerDock, unregisterDock, updateDockConfig } = useScopeDockContext()
 
   React.useLayoutEffect(() => {
     const element = ref.current
     if (!element) return
     registerDock(id, element, config ?? {})
     return () => unregisterDock(id)
-    // config is captured once at registration — docks describe a fixed
-    // resting spot, not a value that changes after mount.
+    // config is only the *initial* config at registration — docks describe a
+    // fixed resting spot for almost every caller, but see the effect below
+    // for the one section (SPR-009's Contact) whose config legitimately
+    // changes after mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, registerDock, unregisterDock])
+
+  // SPR-009: keyed on the individual config fields, not the `config` object
+  // reference — every existing call site passes a fresh object literal
+  // (e.g. `config={{ mood: "idle" }}`) on every render, which would fire
+  // this effect on every single render if it depended on the object itself.
+  // Keying on the primitive values means it only fires when a value
+  // genuinely changes, which is zero times for every dock except Contact's.
+  React.useEffect(() => {
+    updateDockConfig(id, config ?? {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, config?.mood, config?.scale, config?.facing, config?.attentionTarget, updateDockConfig])
 
   return (
     <div

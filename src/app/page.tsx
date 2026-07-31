@@ -3,6 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
 import { ScopeDock, ScopeGreeting } from "@/components/scope/companion";
 import { AboutSection } from "@/components/sections/about-section";
+import { ContactSection } from "@/components/sections/contact-section";
+import { NotebookSection } from "@/components/sections/notebook-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { buttonVariants } from "@/components/ui/button";
 import { heroStaggerContainer, heroStaggerItem } from "@/lib/motion/variants";
@@ -89,6 +91,8 @@ export default function Home() {
       </Hero>
       <AboutSection />
       <ProjectsSection />
+      <NotebookSection />
+      <ContactSection />
     </>
   );
 }
