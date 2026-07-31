@@ -1,4 +1,4 @@
-import { sendContactEmail } from "@/lib/email/resend"
+import { sendContactEmail, sendVisitorConfirmationEmail } from "@/lib/email/resend"
 import { contactSchema } from "@/schemas/contact"
 
 // True if the honeypot field is filled in — a real visitor never reaches
@@ -50,6 +50,22 @@ export async function POST(request: Request) {
     // submission response should reveal. Full reason is server-logged only.
     console.error("[/api/contact] delivery failed:", result.reason)
     return Response.json({ ok: false }, { status: 500 })
+  }
+
+  // The internal notification above is the priority and has already
+  // succeeded by this point — the visitor's own confirmation is a nice-to-
+  // have on top of that, never allowed to affect the response. If it
+  // fails (including the known current limitation that Resend's shared
+  // sender can't yet reach an arbitrary visitor inbox — see
+  // sendVisitorConfirmationEmail's own comment), log it and move on
+  // silently; the visitor never sees this failure.
+  try {
+    const confirmation = await sendVisitorConfirmationEmail({ name, email })
+    if (!confirmation.ok) {
+      console.error("[/api/contact] visitor confirmation failed:", confirmation.reason)
+    }
+  } catch (err) {
+    console.error("[/api/contact] visitor confirmation threw:", err)
   }
 
   return Response.json({ ok: true }, { status: 200 })

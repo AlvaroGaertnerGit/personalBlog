@@ -27,8 +27,12 @@ interface ContactFormProps {
 // collects every named field's value into a single `formValues` object on
 // submit — no per-field React state needed. Outcomes are reported upward
 // via props; per the brief there's no toast/modal/success UI in here at
-// all — a successful delivery unmounts this component entirely (handled by
-// the parent's own scene transition), so there's nothing to reset or clear.
+// all. SPR-009.3: this component is never unmounted on success — it stays
+// mounted, fields turning read-only (`pending` never resets back to false
+// after a real delivery, only after an error/retry), riding along inside
+// contact-desk.tsx's own physically-animating paper as it seals, slides,
+// folds, and is accepted. "Physical continuity": the visitor's own written
+// words are still visible the whole time, never swapped for other content.
 //
 // SPR-009.1: fields are deliberately borderless/underline-only (overriding
 // Input/Textarea's own default boxed chrome via className, not changing
@@ -100,7 +104,7 @@ function ContactForm({ className, onFirstInteraction, onSubmittingChange, onDeli
         <Input
           required
           placeholder={CONTACT_FORM_COPY.namePlaceholder}
-          disabled={pending}
+          readOnly={pending}
           onFocus={handleFirstFocus}
           className={fieldClassName}
         />
@@ -112,7 +116,7 @@ function ContactForm({ className, onFirstInteraction, onSubmittingChange, onDeli
           type="email"
           required
           placeholder={CONTACT_FORM_COPY.emailPlaceholder}
-          disabled={pending}
+          readOnly={pending}
           className={fieldClassName}
         />
       </Field.Root>
@@ -122,7 +126,7 @@ function ContactForm({ className, onFirstInteraction, onSubmittingChange, onDeli
         <Textarea
           required
           placeholder={CONTACT_FORM_COPY.messagePlaceholder}
-          disabled={pending}
+          readOnly={pending}
           rows={3}
           className={cn(fieldClassName, "resize-none")}
         />

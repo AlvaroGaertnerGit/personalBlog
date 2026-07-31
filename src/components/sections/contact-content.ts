@@ -13,6 +13,10 @@ export const CONTACT_INTRO = {
 // button — short, an active verb, and it's literally what happens next
 // (Scope carries the note away). errorMessage is deliberately quiet, not
 // alarming — a failed request is a small inconvenience here, not a crisis.
+// replayLabel (SPR-009.3): the quiet secondary invitation once Scope has
+// walked off with a letter — deliberately not "Send another" or "Reset,"
+// which would read as a form/UI action rather than an invitation to begin
+// the same ritual again.
 export const CONTACT_FORM_COPY = {
   nameLabel: "Name",
   namePlaceholder: "Your name",
@@ -23,6 +27,7 @@ export const CONTACT_FORM_COPY = {
   submitLabel: "Pass it to Scope",
   submittingLabel: "Delivering…",
   errorMessage: "That didn't quite land. Try again?",
+  replayLabel: "Write another letter",
 } as const
 
 // Confirmed exact string with the site owner — the one line left on screen
