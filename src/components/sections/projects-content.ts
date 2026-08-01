@@ -44,7 +44,7 @@ export const PROJECTS: readonly Project[] = [
     title: "MathView",
     description:
       "A place to actually see the math, not just read it. Built for the students I teach, who'd rather explore a graph than stare at a textbook.",
-    stack: ["Next.js", "TypeScript", "React"],
+    stack: ["Angular", "Python", "Matlab"],
     links: [
       { label: "Live site", href: "#" },
       { label: "GitHub", href: "#" },
