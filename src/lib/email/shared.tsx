@@ -28,16 +28,22 @@ export const SANS_FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 export const SERIF_FONT = "Georgia, 'Iowan Old Style', Charter, 'Times New Roman', serif"
 
 // Scope himself used to be rendered inline here as ScopeStatic's own SVG
-// markup — replaced once it turned out Gmail strips inline <svg> elements
-// from HTML email bodies entirely (a sanitizer policy, not a rendering
-// bug), so nothing between the shell tags below ever actually reached a
-// Gmail inbox. SCOPE_MARK_URL instead points at a real PNG, rasterized from
-// the exact same canonical shapes by src/app/api/scope-mark/route.tsx
-// (Satori/ImageResponse, already used by this project's opengraph-image.tsx)
-// — every email client renders a plain <img>. Falls back to localhost the
-// same way layout.tsx/sitemap.ts/robots.ts already do; email images must be
-// an absolute, publicly reachable URL, so this only actually resolves once
-// deployed with NEXT_PUBLIC_SITE_URL set.
+// markup — replaced once it turned out an inline <svg> tag isn't rendered
+// by Gmail or Outlook at all (confirmed against caniemail.com, not assumed;
+// Apple Mail only partially), so nothing between the shell tags below ever
+// actually reached most inboxes. SCOPE_MARK_URL instead points at a real
+// PNG, rasterized from the exact same canonical shapes by
+// src/app/api/scope-mark/route.tsx (Satori/ImageResponse, already used by
+// this project's opengraph-image.tsx) — every email client renders a plain
+// <img>. Falls back to localhost the same way layout.tsx/sitemap.ts/
+// robots.ts already do; email images must be an absolute, publicly
+// reachable URL, so this only actually resolves once deployed with
+// NEXT_PUBLIC_SITE_URL set. That value must be the host that serves
+// requests directly (a 3xx redirect — e.g. an apex domain configured to
+// redirect to a `www` subdomain in Vercel's own domain settings — breaks
+// image loading in most mail clients' fetchers, which was a real, observed
+// production bug here: confirm with `curl -sI` that the configured host
+// itself returns 200, not a redirect, before trusting this URL).
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
 export const SCOPE_MARK_URL = `${SITE_URL}/api/scope-mark`
 
@@ -45,9 +51,10 @@ export const SCOPE_MARK_URL = `${SITE_URL}/api/scope-mark`
 // card, text, borders, ...) — email-safe hex equivalents of this project's
 // oklch --scope-* tokens (globals.css); CSS custom properties don't reach
 // most email clients, so this is the one place those tokens get translated,
-// not re-chosen. No longer resolves a Scope SVG's own fill-scope-* classes
-// (see SCOPE_MARK_URL above) but scope-raster.tsx's HEX constants intentionally
-// mirror these same values so the rasterized mark stays visually identical.
+// not re-chosen. Also the one source scope-static.tsx reads its own fill
+// colors from (as literal hex, not Tailwind classNames — Satori has no
+// Tailwind build to resolve those against), so the rasterized mark and the
+// rest of each template's own palette can never drift apart.
 export const SCOPE_EMAIL_THEME = {
   colors: {
     "scope-warm": "#e0ad5e",

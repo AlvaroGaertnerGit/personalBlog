@@ -1,11 +1,9 @@
 // Scope's shape, and only its shape — every coordinate/path string that
 // defines what Scope physically looks like, extracted out of scope.tsx so
 // it has exactly one author. scope.tsx (the live, animated, "use client"
-// component) and scope-raster.tsx (a plain, non-client renderer used
-// wherever a "use client" component categorically cannot run — rasterized
-// to a PNG for email clients, which never hydrate in a browser at all, and
-// whose HTML sanitizers strip inline SVG regardless) both build their own
-// markup from these same numbers. Nothing here is ever animated directly;
+// component) and scope-static.tsx (a plain, non-client renderer, rasterized
+// to a PNG for email clients — see that file's own comment for why) both
+// build their own markup from these same numbers. Nothing here is ever animated directly;
 // scope.tsx wraps these shapes in motion.* elements and drives their style/
 // animate props independently — this file only answers "where is each
 // shape, and what's its geometry," never "how does it move."
