@@ -18,7 +18,7 @@ import { NOTEBOOK_INTRO, RESEARCH_THREADS } from "./notebook-content"
 // here needs client state.
 function NotebookSection() {
   return (
-    <Section aria-labelledby="notebook-heading">
+    <Section id="notebook" aria-labelledby="notebook-heading">
       <Container className="flex flex-col gap-24 sm:gap-32">
         {/* Centered, tall, and quiet — the one deliberate break from every
             other section's left-aligned intro. Three independent reveals,

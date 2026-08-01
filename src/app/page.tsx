@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
+import { SectionNavigator } from "@/components/navigation";
 import { ScopeDock, ScopeGreeting } from "@/components/scope/companion";
 import { AboutSection } from "@/components/sections/about-section";
 import { ContactSection } from "@/components/sections/contact-section";
@@ -22,7 +23,7 @@ import {
 export default function Home() {
   return (
     <>
-      <Hero>
+      <Hero id="hero">
         <HeroContent>
           {/* display:contents — StaggerGroup only orchestrates timing
               (its own variant has no opacity/transform, see
@@ -93,6 +94,7 @@ export default function Home() {
       <ProjectsSection />
       <NotebookSection />
       <ContactSection />
+      <SectionNavigator />
     </>
   );
 }

@@ -14,7 +14,7 @@ import { CONTACT_INTRO } from "./contact-content"
 // form) lives in ContactDesk, the section's one client leaf.
 function ContactSection() {
   return (
-    <Section aria-labelledby="contact-heading">
+    <Section id="contact" aria-labelledby="contact-heading">
       <Container className="flex flex-col gap-10 sm:gap-12">
         <Reveal className="flex flex-col gap-3">
           <p className="text-muted-foreground inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase">

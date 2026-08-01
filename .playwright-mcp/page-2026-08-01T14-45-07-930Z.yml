@@ -1,0 +1,127 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - button "Switch to dark atmosphere" [ref=e210]:
+      - generic [ref=e4]: Toggle atmosphere
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - paragraph [ref=e13]: Computer Science & Software Development Teacher
+        - heading "I teach developers the AI-native workflows I use to ship real projects." [level=1] [ref=e15]
+      - paragraph [ref=e17]: I teach Software Development to vocational (FP) students in Spain. Alongside that, I build the tools I teach with, like this site and Tournamently, a padel tournament platform.
+      - generic [ref=e19]:
+        - link "GitHub" [ref=e20] [cursor=pointer]:
+          - /url: https://github.com/AlvaroGaertnerGit
+        - link "LinkedIn" [ref=e21] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/alvarogaertner2262331b1
+    - region [ref=e28]:
+      - generic [ref=e31]:
+        - generic [ref=e33]:
+          - paragraph [ref=e34]: Inside the workbench
+          - heading "I teach how to build with AI. Then I go build it myself." [level=2] [ref=e36]
+        - generic [ref=e37]:
+          - paragraph [ref=e38]: Hover or tap to look closer.
+          - generic [ref=e40]:
+            - tablist [ref=e41]:
+              - tab "Now teaching" [selected] [ref=e42]
+              - tab "Now building" [ref=e43]
+              - tab "Now exploring" [ref=e44]
+              - tab "Philosophy" [ref=e45]
+            - tabpanel "Now teaching" [ref=e175]: I'm 22 and teach Software Development at Gredos San Diego Guadarrama, in Spain. Most days I'm explaining something in class that I was still figuring out myself the week before.
+    - region [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: What I've actually built
+          - heading "Where the philosophy turns into software." [level=2] [ref=e53]
+        - generic [ref=e54]:
+          - generic [ref=e67]:
+            - generic [ref=e68]:
+              - heading "Tournamently" [level=3] [ref=e69]
+              - paragraph [ref=e70]: "Padel tournaments, organized end to end: brackets, scheduling, and live results. The AI handles the parts nobody wants to do by hand."
+            - generic [ref=e71]:
+              - generic [ref=e72]: Next.js
+              - generic [ref=e73]: TypeScript
+              - generic [ref=e74]: Supabase
+            - generic [ref=e75]:
+              - link "Live site" [ref=e76] [cursor=pointer]:
+                - /url: "#"
+              - link "GitHub" [ref=e77] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - heading "MathView" [level=3] [ref=e88]
+              - paragraph [ref=e89]: A place to actually see the math, not just read it. Built for the students I teach, who'd rather explore a graph than stare at a textbook.
+            - generic [ref=e90]:
+              - generic [ref=e91]: Angular
+              - generic [ref=e92]: Python
+              - generic [ref=e93]: Matlab
+            - generic [ref=e94]:
+              - link "Live site" [ref=e95] [cursor=pointer]:
+                - /url: "#"
+              - link "GitHub" [ref=e96] [cursor=pointer]:
+                - /url: "#"
+    - region [ref=e97]:
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - paragraph [ref=e101]: You weren't supposed to see this.
+          - heading "Open notebook." [level=2] [ref=e103]
+          - generic [ref=e105]:
+            - paragraph [ref=e106]: These aren't finished ideas.
+            - paragraph [ref=e107]: They're the questions I'm trying to answer.
+        - generic [ref=e109]:
+          - tablist [ref=e112]:
+            - tab "Context Engineering" [selected] [ref=e113]
+            - tab "AI Agents" [ref=e115]
+            - tab "MCP Ecosystem" [ref=e117]
+            - tab "Local Models" [ref=e119]
+            - tab "AI-native UX" [ref=e121]
+            - tab "Autonomous Software Engineering" [ref=e123]
+            - tab "···" [ref=e125]
+          - tabpanel "Context Engineering" [ref=e176]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - heading "How much context is actually enough?" [level=3] [ref=e131]
+                - generic [ref=e132]: Testing
+              - generic [ref=e133]:
+                - paragraph [ref=e134]: Latest finding
+                - paragraph [ref=e135]: Context scales better than prompting.
+              - generic [ref=e136]:
+                - paragraph [ref=e137]: Current hypothesis
+                - paragraph [ref=e138]: Architecture scales better than context, past a certain point.
+              - generic [ref=e139]:
+                - paragraph [ref=e140]: Research notes
+                - paragraph [ref=e141]: Need more evidence before calling this settled.
+    - region [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - paragraph [ref=e145]: One last thing
+          - heading "Write it down." [level=2] [ref=e147]
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e163]: Name
+            - textbox "Name" [ref=e164]:
+              - /placeholder: Your name
+          - generic [ref=e165]:
+            - generic [ref=e166]: Email
+            - textbox "Email" [ref=e167]:
+              - /placeholder: you@example.com
+          - generic [ref=e168]:
+            - generic [ref=e169]: Your idea
+            - textbox "Your idea" [ref=e170]:
+              - /placeholder: What's the idea?
+          - generic:
+            - textbox
+          - button "Pass it to Scope" [ref=e171]
+    - generic [ref=e212]:
+      - button "Close section navigation" [expanded] [active] [ref=e349]
+      - list [ref=e350]:
+        - listitem [ref=e351]:
+          - button "Home" [ref=e352]
+        - listitem [ref=e357]:
+          - button "About" [ref=e358]
+        - listitem [ref=e363]:
+          - button "Projects" [ref=e364]
+        - listitem [ref=e369]:
+          - button "Notebook" [ref=e370]
+        - listitem [ref=e375]:
+          - button "Contact" [ref=e376]
+  - button "Open Next.js Dev Tools" [ref=e182] [cursor=pointer]
+  - alert [ref=e186]

@@ -27,7 +27,7 @@ const PROJECT_WORLDS: Record<string, ComponentType> = {
 // dock's attentionTarget ref has to live where the target element does).
 function ProjectsSection() {
   return (
-    <Section aria-labelledby="projects-heading">
+    <Section id="projects" aria-labelledby="projects-heading">
       <Container className="flex flex-col gap-10 sm:gap-12">
         <Reveal className="flex flex-col gap-3">
           <p className="text-muted-foreground inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase">

@@ -20,7 +20,7 @@ import { ABOUT_HOTSPOTS, ABOUT_INTRO } from "./about-content"
 // instance rendered elsewhere (companion-scope.tsx), not mounted here.
 function AboutSection() {
   return (
-    <Section aria-labelledby="about-heading">
+    <Section id="about" aria-labelledby="about-heading">
       <Container>
         <Reveal className="border-border/60 from-muted/50 to-muted/10 relative overflow-hidden rounded-4xl border bg-gradient-to-b p-8 backdrop-blur-sm sm:p-10 lg:p-14">
           {/* Same bg-grid texture Hero uses, but at a fraction of its

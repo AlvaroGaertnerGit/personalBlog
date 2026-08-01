@@ -1,0 +1,131 @@
+- generic [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - button "Switch to dark atmosphere" [ref=f2e3]:
+      - generic [ref=f2e4]: Toggle atmosphere
+    - generic [ref=f2e11]:
+      - generic [ref=f2e12]:
+        - paragraph [ref=f2e13]: Computer Science & Software Development Teacher
+        - heading "I teach developers the AI-native workflows I use to ship real projects." [level=1] [ref=f2e15]
+      - paragraph [ref=f2e17]: I teach Software Development to vocational (FP) students in Spain. Alongside that, I build the tools I teach with, like this site and Tournamently, a padel tournament platform.
+      - generic [ref=f2e19]:
+        - link "GitHub" [ref=f2e20] [cursor=pointer]:
+          - /url: https://github.com/AlvaroGaertnerGit
+        - link "LinkedIn" [ref=f2e21] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/alvarogaertner2262331b1
+    - region [ref=f2e28]:
+      - generic [ref=f2e31]:
+        - generic [ref=f2e33]:
+          - paragraph [ref=f2e34]: Inside the workbench
+          - heading "I teach how to build with AI. Then I go build it myself." [level=2] [ref=f2e36]
+        - generic [ref=f2e37]:
+          - paragraph [ref=f2e38]: Hover or tap to look closer.
+          - generic [ref=f2e40]:
+            - tablist [ref=f2e41]:
+              - tab "Now teaching" [selected] [ref=f2e42]
+              - tab "Now building" [ref=f2e43]
+              - tab "Now exploring" [ref=f2e44]
+              - tab "Philosophy" [ref=f2e45]
+            - tabpanel "Now teaching" [ref=f2e183]: I'm 22 and teach Software Development at Gredos San Diego Guadarrama, in Spain. Most days I'm explaining something in class that I was still figuring out myself the week before.
+    - region [ref=f2e48]:
+      - generic [ref=f2e49]:
+        - generic [ref=f2e50]:
+          - paragraph [ref=f2e51]: What I've actually built
+          - heading "Where the philosophy turns into software." [level=2] [ref=f2e53]
+        - generic [ref=f2e54]:
+          - generic [ref=f2e67]:
+            - generic [ref=f2e68]:
+              - heading "Tournamently" [level=3] [ref=f2e69]
+              - paragraph [ref=f2e70]: "Padel tournaments, organized end to end: brackets, scheduling, and live results. The AI handles the parts nobody wants to do by hand."
+            - generic [ref=f2e71]:
+              - generic [ref=f2e72]: Next.js
+              - generic [ref=f2e73]: TypeScript
+              - generic [ref=f2e74]: Supabase
+            - generic [ref=f2e75]:
+              - link "Live site" [ref=f2e76] [cursor=pointer]:
+                - /url: "#"
+              - link "GitHub" [ref=f2e77] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=f2e86]:
+            - generic [ref=f2e87]:
+              - heading "MathView" [level=3] [ref=f2e88]
+              - paragraph [ref=f2e89]: A place to actually see the math, not just read it. Built for the students I teach, who'd rather explore a graph than stare at a textbook.
+            - generic [ref=f2e90]:
+              - generic [ref=f2e91]: Angular
+              - generic [ref=f2e92]: Python
+              - generic [ref=f2e93]: Matlab
+            - generic [ref=f2e94]:
+              - link "Live site" [ref=f2e95] [cursor=pointer]:
+                - /url: "#"
+              - link "GitHub" [ref=f2e96] [cursor=pointer]:
+                - /url: "#"
+    - region [ref=f2e97]:
+      - generic [ref=f2e98]:
+        - generic [ref=f2e99]:
+          - paragraph [ref=f2e101]: You weren't supposed to see this.
+          - heading "Open notebook." [level=2] [ref=f2e103]
+          - generic [ref=f2e105]:
+            - paragraph [ref=f2e106]: These aren't finished ideas.
+            - paragraph [ref=f2e107]: They're the questions I'm trying to answer.
+        - generic [ref=f2e109]:
+          - tablist [ref=f2e112]:
+            - tab "Context Engineering" [selected] [ref=f2e113]
+            - tab "AI Agents" [ref=f2e115]
+            - tab "MCP Ecosystem" [ref=f2e117]
+            - tab "Local Models" [ref=f2e119]
+            - tab "AI-native UX" [ref=f2e121]
+            - tab "Autonomous Software Engineering" [ref=f2e123]
+            - tab "···" [ref=f2e125]
+          - tabpanel "Context Engineering" [ref=f2e185]:
+            - generic [ref=f2e129]:
+              - generic [ref=f2e130]:
+                - heading "How much context is actually enough?" [level=3] [ref=f2e131]
+                - generic [ref=f2e132]: Testing
+              - generic [ref=f2e133]:
+                - paragraph [ref=f2e134]: Latest finding
+                - paragraph [ref=f2e135]: Context scales better than prompting.
+              - generic [ref=f2e136]:
+                - paragraph [ref=f2e137]: Current hypothesis
+                - paragraph [ref=f2e138]: Architecture scales better than context, past a certain point.
+              - generic [ref=f2e139]:
+                - paragraph [ref=f2e140]: Research notes
+                - paragraph [ref=f2e141]: Need more evidence before calling this settled.
+    - region [ref=f2e142]:
+      - generic [ref=f2e143]:
+        - generic [ref=f2e144]:
+          - paragraph [ref=f2e145]: One last thing
+          - heading "Write it down." [level=2] [ref=f2e147]
+        - generic [ref=f2e161]:
+          - generic [ref=f2e162]:
+            - generic [ref=f2e163]: Name
+            - textbox "Name" [ref=f2e164]:
+              - /placeholder: Your name
+          - generic [ref=f2e165]:
+            - generic [ref=f2e166]: Email
+            - textbox "Email" [ref=f2e167]:
+              - /placeholder: you@example.com
+          - generic [ref=f2e168]:
+            - generic [ref=f2e169]: Your idea
+            - textbox "Your idea" [ref=f2e170]:
+              - /placeholder: What's the idea?
+          - generic:
+            - textbox
+          - button "Pass it to Scope" [ref=f2e171]
+    - navigation "Section navigation" [ref=f2e187]:
+      - list [ref=f2e189]:
+        - listitem [ref=f2e190]:
+          - generic: Home
+          - button "Home" [ref=f2e191]
+        - listitem [ref=f2e194]:
+          - generic: About
+          - button "About" [ref=f2e195]
+        - listitem [ref=f2e198]:
+          - generic: Projects
+          - button "Projects" [ref=f2e199]
+        - listitem [ref=f2e202]:
+          - generic: Notebook
+          - button "Notebook" [ref=f2e203]
+        - listitem [ref=f2e206]:
+          - generic: Contact
+          - button "Contact" [active] [ref=f2e207]
+  - button "Open Next.js Dev Tools" [ref=f2e179] [cursor=pointer]
+  - alert [ref=f2e186]
