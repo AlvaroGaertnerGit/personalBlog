@@ -137,6 +137,7 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
         mood={mood}
         attentionTarget={dockConfig.attentionTarget}
         suspended={isSceneTransitioning}
+        resetSignal={activeDockId}
         className="size-40 sm:size-48"
       />
     </motion.div>

@@ -245,5 +245,28 @@ export const PERSONALITY_GESTURE_NAMES = [
   ...Object.keys(BLINK_PATTERNS),
 ] as PersonalityGestureName[]
 
+// SPR-011 (the "trust" touch interaction, refined) — the first-click
+// reaction draws from this curated subset of the pool above, played via a
+// shuffle bag (see shuffle-bag.ts) rather than a bespoke animation of its
+// own. Every one of these gestures was already tuned for "subtle, under a
+// second, physically plausible" as an idle behaviour — reusing them
+// directly means the touch interaction never needs its own animation code
+// for this stage at all, and a visitor who's already seen Scope glance or
+// twitch his antenna idly will recognize the same small vocabulary,
+// not a second, separate one. Deliberately excludes gestures whose read
+// depends on genuinely idle, unprompted timing to make sense (widen's own
+// "noticing something" quality fits a touch perfectly; squint/converge/
+// double-blink lean more procedural/idle-specific and are left to the
+// autonomous scheduler alone).
+export const TOUCH_NOTICE_POOL: readonly PersonalityGestureName[] = [
+  "tiny-tilt",
+  "widen",
+  "glance-left",
+  "glance-right",
+  "antenna-flex",
+  "bounce",
+  "slow-blink",
+]
+
 export { ANTICIPATE_TRANSITION }
 export type { PersonalityGestureSpec }

@@ -10,8 +10,10 @@ import {
   BLINK_PATTERNS,
   PERSONALITY_GESTURES,
   PERSONALITY_GESTURE_NAMES,
+  TOUCH_NOTICE_POOL,
   type PersonalityGestureName,
 } from "./personality-gestures"
+import { createShuffleBag, type ShuffleBag } from "./shuffle-bag"
 
 // How long Scope must go undisturbed before it does something small on its
 // own. Randomized per wait, never a fixed interval, so it never reads as a
@@ -21,6 +23,34 @@ const MAX_IDLE_DELAY_MS = 7000
 
 function randomDelay() {
   return MIN_IDLE_DELAY_MS + Math.random() * (MAX_IDLE_DELAY_MS - MIN_IDLE_DELAY_MS)
+}
+
+// SPR-011 architectural fix — the root cause of a real deadlock: every
+// "hold at the peak, then continue" step (runGesture's pool-gesture hold,
+// runLookAt's hold, runTouch's three holds) used to capture its own
+// setTimeout id into the SAME closure variable the idle scheduler's own
+// scheduleNext() used for its "when's the next gesture" timer. Any
+// pointermove anywhere on the page (onActivity, entirely unrelated to
+// whichever hold happened to be in flight) called scheduleNext(), which
+// unconditionally cleared that shared variable — silently orphaning
+// whichever hold's resolve callback currently occupied it. That hold's
+// `await` then never settled, its owning async function never returned,
+// and (once touch() started depending on that function's own completion
+// to reset its cooldown flags) the whole personality system could
+// deadlock permanently from nothing more than ordinary mouse movement —
+// confirmed live, reproducibly, before this fix.
+//
+// The fix is ownership, not another guard: `wait()`'s own setTimeout id
+// never leaves this function's local scope, so nothing outside a given
+// hold — not the idle scheduler, not any other gesture — can ever reach
+// in and clear it. Every hold below uses this instead of hand-rolling its
+// own `new Promise((resolve) => { sharedVar = setTimeout(resolve, ms) })`.
+// The idle scheduler's own timer (idleTimeoutId, in the effect below)
+// is the one timer that legitimately needs external cancellation
+// (onActivity pushing it out, cleanup canceling a pending call) — it
+// stays a variable for exactly that reason, but nothing else touches it.
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => window.setTimeout(resolve, ms))
 }
 
 // SPR-005 — "look at target": an occasional glance toward a registered
@@ -86,7 +116,24 @@ interface ScopePersonality {
   eyeOffsetY: MotionValue<number>
   eyeConverge: MotionValue<number>
   antennaFlex: MotionValue<number>
+  /**
+   * The "trust" touch interaction — call on a direct click/tap on Scope's
+   * own painted shapes (see scope.tsx). A stable function reference; safe
+   * to use directly as an onClick handler. No-ops silently (never throws)
+   * while reduced motion/suspended, or while any gesture — autonomous or a
+   * prior touch — is already mid-flight, per the same "ignore repeated
+   * interactions until the previous one has fully completed" contract the
+   * site owner asked for.
+   */
+  touch: () => void
 }
+
+// How long Scope "remembers" being touched before quietly becoming shy
+// again — "roughly 20-30 seconds," per the site owner's own brief. Reset
+// on every successful touch, so it only ever fires after a genuine pause.
+const FAMILIARITY_DECAY_MS = 25000
+
+type TouchStage = 0 | 1 | 2
 
 // Scope's autonomous idle-gesture layer — the "why and when" of occasional,
 // unprompted micro-behaviour. SCOPE_UNDERSTANDING.md §5 already treats
@@ -123,7 +170,17 @@ interface ScopePersonality {
 function useScopePersonality(
   scopeRef: React.RefObject<HTMLElement | null>,
   attentionTarget?: React.RefObject<Element | null>,
-  suspended = false
+  suspended = false,
+  /**
+   * SPR-011 ("trust" touch interaction) — any value whose *identity change*
+   * means "Scope moved on to somewhere else" (in practice, the active dock
+   * id) resets the touch familiarity progression back to shy. A plain
+   * optional value, exactly like `attentionTarget` above and for the same
+   * reason: this hook stays fully context-free and keeps working in the
+   * provider-less /scope debug lab, which simply never passes this and so
+   * never resets on "leaving a dock" — correct for that standalone page.
+   */
+  resetSignal?: string | null
 ): ScopePersonality {
   const isReduced = useIsReducedMotion()
 
@@ -157,6 +214,79 @@ function useScopePersonality(
     attentionTargetRef.current = attentionTarget
   }, [attentionTarget])
 
+  // SPR-011 — the "trust" touch interaction's own state, kept alongside
+  // the rest rather than in a parallel hook/system per the site owner's
+  // own instruction. Refs, not React state, for the same reason
+  // lastGestureRef/attentionTargetRef already are: touch() (below) needs
+  // synchronous, immediate truth from a plain click handler, not a value
+  // that only updates on the next render.
+  //
+  // - isGesturingRef: true while ANYTHING is playing — an autonomous
+  //   gesture or a touch reaction — checked by touch() itself so a click
+  //   during either kind is ignored, not just during another touch.
+  // - isTouchActiveRef: true only while a touch reaction specifically is
+  //   playing — checked by the autonomous scheduler (runGesture, below) so
+  //   it defers rather than fighting a touch reaction for the same motion
+  //   values; it does not need to reach into or cancel that scheduler's own
+  //   pending timer to do so (see runGesture's own guard).
+  // - familiarityRef: 0/1/2 — first/second/third-plus click. Caps at 2
+  //   rather than looping back to 0 once trust is earned; only resets via
+  //   the decay timer below or a resetSignal change.
+  // - runTouchRef: the current armed run's own runTouch closure (defined
+  //   inside the scheduling effect below, where it can share that effect's
+  //   activeControls/cancelled machinery) — set to null whenever disarmed
+  //   or torn down, so touch() calling in that state is a clean, silent
+  //   no-op rather than reaching into a stale closure.
+  const isGesturingRef = React.useRef(false)
+  const isTouchActiveRef = React.useRef(false)
+  const familiarityRef = React.useRef<TouchStage>(0)
+  const familiarityDecayTimeoutRef = React.useRef<number | undefined>(undefined)
+  const runTouchRef = React.useRef<((stage: TouchStage) => Promise<void>) | null>(null)
+
+  // The first-click reaction's own shuffle bag (see shuffle-bag.ts and
+  // TOUCH_NOTICE_POOL) — a lazy useState initializer, not a ref, since
+  // reading ref.current during render (the classic "lazy ref init" idiom)
+  // is disallowed by this project's hooks lint; useState's initializer
+  // function is still guaranteed to run exactly once per mount, giving the
+  // same stable, created-once instance this needs.
+  const [noticeBag] = React.useState<ShuffleBag<PersonalityGestureName>>(() =>
+    createShuffleBag(TOUCH_NOTICE_POOL)
+  )
+
+  // "Leaves wherever he was touched" — generalized as "resetSignal's own
+  // identity changed," never anything Hero-specific (see this param's own
+  // comment above). Also correctly resets on first mount (familiarity is
+  // already 0 then, a harmless no-op). The shuffle bag resets alongside
+  // familiarity — becoming shy again should also mean rediscovering the
+  // same small variety of first reactions, not picking up mid-bag.
+  React.useEffect(() => {
+    familiarityRef.current = 0
+    noticeBag.reset()
+    window.clearTimeout(familiarityDecayTimeoutRef.current)
+  }, [resetSignal, noticeBag])
+
+  const touch = React.useCallback(() => {
+    const run = runTouchRef.current
+    if (!run || isGesturingRef.current || isTouchActiveRef.current) return
+
+    const stage = familiarityRef.current
+    isTouchActiveRef.current = true
+    isGesturingRef.current = true
+    dispatch({ type: "gesture-start" })
+
+    void run(stage).finally(() => {
+      isTouchActiveRef.current = false
+      isGesturingRef.current = false
+      dispatch({ type: "gesture-end" })
+      familiarityRef.current = Math.min(stage + 1, 2) as TouchStage
+      window.clearTimeout(familiarityDecayTimeoutRef.current)
+      familiarityDecayTimeoutRef.current = window.setTimeout(() => {
+        familiarityRef.current = 0
+        noticeBag.reset()
+      }, FAMILIARITY_DECAY_MS)
+    })
+  }, [noticeBag])
+
   // Gated only on reduced-motion, deliberately NOT on `mood`. This hook used
   // to also require `mood === "idle"`, back when idle was the only resting
   // state Scope could be in. The companion dock system (SPR-003.4) then
@@ -187,18 +317,27 @@ function useScopePersonality(
       eyeOffsetY.set(0)
       eyeConverge.set(0)
       antennaFlex.set(0)
+      runTouchRef.current = null
+      isGesturingRef.current = false
+      isTouchActiveRef.current = false
+      familiarityRef.current = 0
+      noticeBag.reset()
+      window.clearTimeout(familiarityDecayTimeoutRef.current)
       return
     }
 
     dispatch({ type: "armed" })
 
     let cancelled = false
-    let timeoutId: number | undefined
+    // The idle scheduler's own timer, and ONLY the idle scheduler's — see
+    // this file's own note on wait() above for why every gesture's hold
+    // phase deliberately does not use a variable like this one.
+    let idleTimeoutId: number | undefined
     let activeControls: ReturnType<typeof animate>[] = []
 
     function scheduleNext(delay: number) {
-      window.clearTimeout(timeoutId)
-      timeoutId = window.setTimeout(runGesture, delay)
+      window.clearTimeout(idleTimeoutId)
+      idleTimeoutId = window.setTimeout(runGesture, delay)
     }
 
     // Any cursor activity or the tab regaining visibility pushes the idle
@@ -211,7 +350,7 @@ function useScopePersonality(
 
     function onVisibilityChange() {
       if (document.visibilityState === "visible") onActivity()
-      else window.clearTimeout(timeoutId)
+      else window.clearTimeout(idleTimeoutId)
     }
 
     async function runBlink(name: "blink" | "double-blink" | "slow-blink") {
@@ -220,66 +359,14 @@ function useScopePersonality(
       await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
     }
 
-    // Reads both rects live at fire-time (never cached) so it stays correct
-    // even though the target may itself be in motion (a bouncing ball, a
-    // point riding a graph) — geometry lives in attention-target.ts.
-    async function runLookAt(target: Element) {
-      const scopeEl = scopeRef.current
-      if (!scopeEl) return
-
-      const { dx, dy } = computeAttentionOffset(
-        scopeEl.getBoundingClientRect(),
-        target.getBoundingClientRect()
-      )
-
-      activeControls = [
-        animate(eyeOffsetX, dx, ATTENTION_TO_TRANSITION),
-        animate(eyeOffsetY, dy, ATTENTION_TO_TRANSITION),
-      ]
-      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
-      if (cancelled) return
-
-      await new Promise<void>((resolve) => {
-        timeoutId = window.setTimeout(resolve, ATTENTION_HOLD_MS)
-      })
-      if (cancelled) return
-
-      activeControls = [
-        animate(eyeOffsetX, 0, ATTENTION_BACK_TRANSITION),
-        animate(eyeOffsetY, 0, ATTENTION_BACK_TRANSITION),
-      ]
-      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
-    }
-
-    async function runGesture() {
-      dispatch({ type: "gesture-start" })
-
-      // A registered point of interest gets first refusal, at a fixed
-      // probability, before falling through to the ordinary gesture pool
-      // below — deliberately NOT added to PERSONALITY_GESTURE_NAMES itself
-      // (see the comment on ATTENTION_* above): that pool is static data,
-      // this is a live-computed target, and this branch leaves the
-      // existing pool's selection/repeat-avoidance logic untouched.
-      const attentionEl = attentionTargetRef.current?.current
-      if (attentionEl && Math.random() < ATTENTION_LOOK_CHANCE) {
-        await runLookAt(attentionEl)
-        if (!cancelled) {
-          dispatch({ type: "gesture-end" })
-          scheduleNext(randomDelay())
-        }
-        return
-      }
-
-      const lastGesture = lastGestureRef.current
-      const name = pickGesture(lastGesture)
-      lastGestureRef.current = name
-
+    // Plays one named PERSONALITY_GESTURES entry's full anticipate → to →
+    // hold → back sequence. Shared by the autonomous scheduler (runGesture,
+    // below) AND the touch interaction's own first-click reaction (see
+    // TOUCH_NOTICE_POOL/noticeBag) — a reused gesture is genuinely
+    // reused code here, never a second copy of the same timing tuned twice.
+    async function playGesture(name: PersonalityGestureName) {
       if (isBlinkGesture(name)) {
         await runBlink(name)
-        if (!cancelled) {
-          dispatch({ type: "gesture-end" })
-          scheduleNext(randomDelay())
-        }
         return
       }
 
@@ -316,9 +403,7 @@ function useScopePersonality(
       await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
       if (cancelled) return
 
-      await new Promise<void>((resolve) => {
-        timeoutId = window.setTimeout(resolve, spec.holdMs)
-      })
+      await wait(spec.holdMs)
       if (cancelled) return
 
       activeControls = []
@@ -332,10 +417,153 @@ function useScopePersonality(
       if (spec.antennaFlex !== undefined) activeControls.push(animate(antennaFlex, 0, spec.back))
 
       await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+    }
+
+    // Reads both rects live at fire-time (never cached) so it stays correct
+    // even though the target may itself be in motion (a bouncing ball, a
+    // point riding a graph) — geometry lives in attention-target.ts.
+    async function runLookAt(target: Element) {
+      const scopeEl = scopeRef.current
+      if (!scopeEl) return
+
+      const { dx, dy } = computeAttentionOffset(
+        scopeEl.getBoundingClientRect(),
+        target.getBoundingClientRect()
+      )
+
+      activeControls = [
+        animate(eyeOffsetX, dx, ATTENTION_TO_TRANSITION),
+        animate(eyeOffsetY, dy, ATTENTION_TO_TRANSITION),
+      ]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
       if (cancelled) return
 
-      dispatch({ type: "gesture-end" })
-      scheduleNext(randomDelay())
+      await wait(ATTENTION_HOLD_MS)
+      if (cancelled) return
+
+      activeControls = [
+        animate(eyeOffsetX, 0, ATTENTION_BACK_TRANSITION),
+        animate(eyeOffsetY, 0, ATTENTION_BACK_TRANSITION),
+      ]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+    }
+
+    // SPR-011 — the "trust" touch interaction's three reactions, refined
+    // once live: the first click no longer always plays the same motion.
+    // "Never presented immediately... discovered gradually" — a visitor
+    // who sees the identical reaction every first click would learn the
+    // trick instead of wondering about the character. touch() (outside
+    // this effect) owns the cooldown/familiarity bookkeeping; this
+    // function only ever plays one stage's motion.
+    async function runTouch(stage: TouchStage) {
+      if (stage === 0) {
+        // First click — one of a small, shuffled variety (see
+        // TOUCH_NOTICE_POOL/noticeBag and playGesture above), never the
+        // same gesture twice in a row. Deliberately NOT its own bespoke
+        // animation: every candidate already exists as a well-tuned,
+        // sub-second autonomous gesture, so reusing playGesture here is
+        // genuine code reuse, not a second implementation of the same idea.
+        await playGesture(noticeBag.next())
+        return
+      }
+
+      if (stage === 1) {
+        // Second click — always the same, deliberately: "I'm starting to
+        // trust you" reads as recognition *because* it's consistent, not
+        // varied, unlike stage 0. A quiet laugh — a deeper squint than any
+        // stage-0 pool gesture ever uses, still shallower than stage 2's
+        // (which stays the deepest, most expressive moment in the whole
+        // system), paired with a small, soft, restrained lift — warmer and
+        // more deliberate than a flicker, never as large as the full
+        // stretch below.
+        activeControls = [
+          animate(y, -3, { type: "spring", stiffness: 90, damping: 15, mass: 1 }),
+          animate(blinkScaleY, 0.4, { duration: 0.2, ease: "easeOut" }),
+        ]
+        await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+        if (cancelled) return
+
+        await wait(260)
+        if (cancelled) return
+
+        activeControls = [
+          animate(y, 0, { type: "spring", stiffness: 80, damping: 18, mass: 1 }),
+          animate(blinkScaleY, 1, { duration: 0.25, ease: "easeInOut" }),
+        ]
+        await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+        return
+      }
+
+      // stage === 2 — the full stretch: "a sleepy cat... Baymax... Pixar
+      // squash & stretch. Never elastic. Never exaggerated." Smaller and
+      // slower than mood "happy"'s hop (y -14) — this must read as
+      // settling into a stretch, never jumping. The eyes hold at the
+      // deepest squint anywhere in the personality system — below the pool
+      // gesture "squint" (0.6), above a blink's momentary dip (0.08) — for
+      // long enough (~550ms) that it reads as a deliberate, happy
+      // expression, never an involuntary blink. Per the site owner's own
+      // resolved decision: still the same eye pill, pushed further than
+      // anywhere else, never a new shape (see this file's own header and
+      // docs/scope-docs/scope/ for why).
+      activeControls = [animate(scale, 0.97, { type: "spring", stiffness: 120, damping: 14, mass: 0.8 })]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+      if (cancelled) return
+
+      activeControls = [
+        animate(scale, 1.07, { type: "spring", stiffness: 55, damping: 14, mass: 1.4 }),
+        animate(y, -5, { type: "spring", stiffness: 55, damping: 14, mass: 1.4 }),
+        animate(blinkScaleY, 0.22, { duration: 0.35, ease: "easeInOut" }),
+      ]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+      if (cancelled) return
+
+      await wait(550)
+      if (cancelled) return
+
+      activeControls = [
+        animate(scale, 1, { type: "spring", stiffness: 60, damping: 16, mass: 1.2 }),
+        animate(y, 0, { type: "spring", stiffness: 60, damping: 16, mass: 1.2 }),
+        animate(blinkScaleY, 1, { duration: 0.4, ease: "easeInOut" }),
+      ]
+      await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+    }
+
+    runTouchRef.current = runTouch
+
+    async function runGesture() {
+      // A touch reaction is playing — defer rather than fight it for the
+      // same motion values. No need to cancel/reach into this scheduler's
+      // own pending timer to do so; re-arming with a fresh random delay is
+      // enough, and touch() never lets a click through while this is true
+      // in the first place.
+      if (isTouchActiveRef.current) {
+        scheduleNext(randomDelay())
+        return
+      }
+
+      dispatch({ type: "gesture-start" })
+      isGesturingRef.current = true
+
+      // A registered point of interest gets first refusal, at a fixed
+      // probability, before falling through to the ordinary gesture pool
+      // below — deliberately NOT added to PERSONALITY_GESTURE_NAMES itself
+      // (see the comment on ATTENTION_* above): that pool is static data,
+      // this is a live-computed target, and this branch leaves the
+      // existing pool's selection/repeat-avoidance logic untouched.
+      const attentionEl = attentionTargetRef.current?.current
+      if (attentionEl && Math.random() < ATTENTION_LOOK_CHANCE) {
+        await runLookAt(attentionEl)
+      } else {
+        const name = pickGesture(lastGestureRef.current)
+        lastGestureRef.current = name
+        await playGesture(name)
+      }
+
+      if (!cancelled) {
+        dispatch({ type: "gesture-end" })
+        isGesturingRef.current = false
+        scheduleNext(randomDelay())
+      }
     }
 
     window.addEventListener("pointermove", onActivity)
@@ -345,16 +573,21 @@ function useScopePersonality(
 
     return () => {
       cancelled = true
-      window.clearTimeout(timeoutId)
+      window.clearTimeout(idleTimeoutId)
       activeControls.forEach((controls) => controls.stop())
       window.removeEventListener("pointermove", onActivity)
       window.removeEventListener("pointerdown", onActivity)
       document.removeEventListener("visibilitychange", onVisibilityChange)
+      runTouchRef.current = null
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [armed])
 
-  return { rotate, y, scale, blinkScaleY, eyeOffsetX, eyeOffsetY, eyeConverge, antennaFlex }
+  React.useEffect(() => {
+    return () => window.clearTimeout(familiarityDecayTimeoutRef.current)
+  }, [])
+
+  return { rotate, y, scale, blinkScaleY, eyeOffsetX, eyeOffsetY, eyeConverge, antennaFlex, touch }
 }
 
 export { useScopePersonality }

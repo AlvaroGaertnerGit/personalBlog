@@ -65,7 +65,13 @@ import { useScopePresence } from "./use-scope-presence"
 //   `attentionTarget` prop below, so it can occasionally aim eyeOffsetX/Y
 //   at a registered point of interest (a project world's ball/graph
 //   marker) instead of a scripted offset — still the same eyeOffsetX/Y
-//   channel, no new composition wiring needed here.
+//   channel, no new composition wiring needed here. SPR-011: Personality
+//   also exposes `touch()`, wired to onClick on the shell/display shapes
+//   below — the "trust" interaction (notice → suppressed bounce → full
+//   stretch across repeated touches) plays over these exact same
+//   rotate/y/scale/blinkScaleY/antennaFlex channels, so nothing here
+//   composes any differently whether a reaction came from the autonomous
+//   scheduler or a direct touch.
 //
 // Framer merges every transform-shaped style key (x, y, rotate, rotateX,
 // rotateY, scale, scaleY, ...) on one style object into a single CSS
@@ -79,6 +85,7 @@ function Scope({
   mood = "idle",
   attentionTarget,
   suspended = false,
+  resetSignal,
   className,
   ...props
 }: React.ComponentProps<"div"> & {
@@ -94,6 +101,13 @@ function Scope({
    * `mood` while this is true (see companion-scope.tsx).
    */
   suspended?: boolean
+  /**
+   * SPR-011: an identity that changes when Scope has "moved on" — in
+   * practice the active dock id — resetting the touch/"trust" familiarity
+   * progression back to shy. See useScopePersonality's own comment on this
+   * same parameter for why it's a plain optional value, not context.
+   */
+  resetSignal?: string | null
 }) {
   const ref = React.useRef<HTMLDivElement>(null)
   const { animate, transition, glow, eyeScaleY } = useScopeMotion(mood)
@@ -119,7 +133,8 @@ function Scope({
     eyeOffsetY,
     eyeConverge,
     antennaFlex,
-  } = useScopePersonality(ref, attentionTarget, suspended)
+    touch,
+  } = useScopePersonality(ref, attentionTarget, suspended, resetSignal)
 
   // Additive: presence's continuous gaze position + personality's
   // occasional look-up/down nudge. Both are real MotionValues — combined
@@ -194,13 +209,23 @@ function Scope({
               stroke, so it stays legible even against a near-white
               background in light mode. A very slightly flattened ellipse
               (rx > ry) rather than a perfect circle — "almost spherical,
-              slightly flattened at the bottom" per VISUAL_LANGUAGE.md. */}
+              slightly flattened at the bottom" per VISUAL_LANGUAGE.md.
+              SPR-011: also the touch interaction's click surface — see the
+              display path below for the other half of it, and this
+              component's own header comment for why `pointerEvents: "auto"`
+              here is safe despite CompanionScope's wrapper being
+              pointer-events-none (a child re-enabling it still receives and
+              bubbles clicks normally). No `cursor: pointer` anywhere on
+              purpose — a hand cursor would read as "clickable UI," which
+              this deliberately isn't; it should only ever be discovered. */}
           <ellipse
             {...SCOPE_SHELL}
             fill="url(#scope-shell-gradient)"
             stroke="var(--scope-details)"
             strokeOpacity="0.1"
             strokeWidth="2"
+            style={{ pointerEvents: "auto" }}
+            onClick={touch}
           />
 
           {/* a soft top sheen suggesting a sculpted, matte-ceramic shell
@@ -270,12 +295,16 @@ function Scope({
               slightly back from its bezel. */}
           <motion.g style={{ x: parallaxX, y: parallaxY }}>
             {/* a faint inner-edge stroke suggests the display sits
-                recessed into the shell rather than flush with it */}
+                recessed into the shell rather than flush with it. SPR-011:
+                the other half of the touch click surface, see the shell
+                ellipse's own comment above. */}
             <path
               d={SCOPE_DISPLAY_PATH}
               className="fill-scope-display stroke-scope-details"
               strokeOpacity="0.35"
               strokeWidth="1"
+              style={{ pointerEvents: "auto" }}
+              onClick={touch}
             />
 
             {/* a soft, low-opacity diagonal highlight — just enough to
