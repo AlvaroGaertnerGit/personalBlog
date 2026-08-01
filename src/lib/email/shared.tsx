@@ -27,18 +27,27 @@ export const SANS_FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 // a webfont email clients mostly won't load anyway.
 export const SERIF_FONT = "Georgia, 'Iowan Old Style', Charter, 'Times New Roman', serif"
 
-// Scope himself is rendered by ScopeStatic (src/components/scope/
-// scope-static.tsx) — the *same* canonical shapes/paths scope.tsx draws on
-// the live site, sourced from the same scope-geometry.ts/scope-motion.ts,
-// never redrawn here. That component styles itself with the site's own
-// Tailwind classNames (fill-scope-warm, fill-scope-shell, ...); this is
-// the theme extension both email templates pass to react-email's own
-// <Tailwind> wrapper so those classNames resolve to real colors in an
-// email context the same way the site's real Tailwind build resolves them
-// in a browser. Values are the email-safe hex equivalents of this
-// project's oklch --scope-* tokens (globals.css) — CSS custom properties
-// don't reach most email clients, so this is the one place those tokens
-// get translated, not re-chosen.
+// Scope himself used to be rendered inline here as ScopeStatic's own SVG
+// markup — replaced once it turned out Gmail strips inline <svg> elements
+// from HTML email bodies entirely (a sanitizer policy, not a rendering
+// bug), so nothing between the shell tags below ever actually reached a
+// Gmail inbox. SCOPE_MARK_URL instead points at a real PNG, rasterized from
+// the exact same canonical shapes by src/app/api/scope-mark/route.tsx
+// (Satori/ImageResponse, already used by this project's opengraph-image.tsx)
+// — every email client renders a plain <img>. Falls back to localhost the
+// same way layout.tsx/sitemap.ts/robots.ts already do; email images must be
+// an absolute, publicly reachable URL, so this only actually resolves once
+// deployed with NEXT_PUBLIC_SITE_URL set.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+export const SCOPE_MARK_URL = `${SITE_URL}/api/scope-mark`
+
+// Kept for the rest of each template's own Tailwind classNames (the letter
+// card, text, borders, ...) — email-safe hex equivalents of this project's
+// oklch --scope-* tokens (globals.css); CSS custom properties don't reach
+// most email clients, so this is the one place those tokens get translated,
+// not re-chosen. No longer resolves a Scope SVG's own fill-scope-* classes
+// (see SCOPE_MARK_URL above) but scope-raster.tsx's HEX constants intentionally
+// mirror these same values so the rasterized mark stays visually identical.
 export const SCOPE_EMAIL_THEME = {
   colors: {
     "scope-warm": "#e0ad5e",

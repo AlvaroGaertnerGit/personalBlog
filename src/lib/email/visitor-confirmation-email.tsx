@@ -4,6 +4,7 @@ import {
   Head,
   Heading,
   Html,
+  Img,
   Preview,
   Section,
   Tailwind,
@@ -12,8 +13,7 @@ import {
 } from "react-email"
 
 import { CONTACT_ENDING_LINE } from "@/components/sections/contact-content"
-import { ScopeStatic } from "@/components/scope/scope-static"
-import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME } from "./shared"
+import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME, SCOPE_MARK_URL } from "./shared"
 
 interface VisitorConfirmationEmailProps {
   name: string
@@ -24,10 +24,10 @@ interface VisitorConfirmationEmailProps {
 // confirms he arrived. Deliberately short — "do not repeat the message
 // they already wrote, they know what they sent" — and deliberately not in
 // Scope's own voice: Scope never speaks (see docs/scope-docs/scope/), so
-// this is Álvaro's own signed reply, with Scope appearing only as
-// ScopeStatic — the exact canonical shapes scope.tsx draws on the live
-// site, carrying the letter here exactly as on the site itself, not a
-// redrawn illustration.
+// this is Álvaro's own signed reply, with Scope appearing as a rasterized
+// PNG (SCOPE_MARK_URL, see shared.tsx) of the exact canonical shapes
+// scope.tsx draws on the live site — not the inline <ScopeStatic> SVG this
+// used to be, which Gmail strips from email bodies entirely.
 function VisitorConfirmationEmail({ name }: VisitorConfirmationEmailProps) {
   return (
     <Html lang="en">
@@ -46,7 +46,7 @@ function VisitorConfirmationEmail({ name }: VisitorConfirmationEmailProps) {
             }}
           >
             <Section style={{ textAlign: "center", marginBottom: "20px" }}>
-              <ScopeStatic className="h-13 w-13" />
+              <Img src={SCOPE_MARK_URL} width={40} height={52} alt="Scope" style={{ margin: "0 auto" }} />
             </Section>
 
             <Heading

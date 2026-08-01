@@ -54,11 +54,8 @@ export async function POST(request: Request) {
 
   // The internal notification above is the priority and has already
   // succeeded by this point — the visitor's own confirmation is a nice-to-
-  // have on top of that, never allowed to affect the response. If it
-  // fails (including the known current limitation that Resend's shared
-  // sender can't yet reach an arbitrary visitor inbox — see
-  // sendVisitorConfirmationEmail's own comment), log it and move on
-  // silently; the visitor never sees this failure.
+  // have on top of that, never allowed to affect the response. If it fails,
+  // log it and move on silently; the visitor never sees this failure.
   try {
     const confirmation = await sendVisitorConfirmationEmail({ name, email })
     if (!confirmation.ok) {

@@ -6,6 +6,7 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
@@ -15,8 +16,7 @@ import {
 } from "react-email"
 
 import { CONTACT_ENDING_LINE } from "@/components/sections/contact-content"
-import { ScopeStatic } from "@/components/scope/scope-static"
-import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME, SERIF_FONT } from "./shared"
+import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME, SCOPE_MARK_URL, SERIF_FONT } from "./shared"
 
 // SPR-010 — "the letter continues." See sendContactEmail() in resend.tsx
 // for how this is actually sent — as a React element via Resend's own
@@ -25,10 +25,11 @@ import { COLOR, SANS_FONT, SCOPE_EMAIL_THEME, SERIF_FONT } from "./shared"
 // with zero manual sanitizing). Shared colors/fonts live in ./shared.tsx —
 // this is the internal notification (to the site owner);
 // visitor-confirmation-email.tsx is the visitor-facing reply, built from
-// the same foundation. Scope himself is ScopeStatic — the exact canonical
-// shapes scope.tsx draws on the live site, not a redrawn illustration; see
-// that component's own comment for why a "use client" component like the
-// real, animated <Scope> can't be rendered here at all.
+// the same foundation. Scope himself is a rasterized PNG (SCOPE_MARK_URL,
+// see shared.tsx) of the exact canonical shapes scope.tsx draws on the live
+// site, not a redrawn illustration — an inline <ScopeStatic> SVG was the
+// first attempt here, but Gmail strips inline <svg> markup from email
+// bodies entirely, so it never actually appeared once delivered.
 
 // Splits on newlines and rejoins with real <br /> elements rather than
 // relying on `white-space: pre-wrap` (inconsistent support in older
@@ -80,7 +81,7 @@ function ContactEmail({ name, email, message, deliveredAt }: ContactEmailProps) 
             }}
           >
             <Section style={{ textAlign: "center", marginBottom: "20px" }}>
-              <ScopeStatic className="h-13 w-13" />
+              <Img src={SCOPE_MARK_URL} width={40} height={52} alt="Scope" style={{ margin: "0 auto" }} />
             </Section>
 
             <Heading
