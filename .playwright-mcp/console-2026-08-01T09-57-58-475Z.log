@@ -12,3 +12,9 @@
 [ 6768805ms] [LOG] [Fast Refresh] done in 157ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
 [ 6801043ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
 [ 6801105ms] [LOG] [Fast Refresh] done in 167ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[ 8603051ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[ 8604123ms] [LOG] [Fast Refresh] done in 1172ms @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_1j2a2xq._.js:2489
+[ 8666137ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=8LwxgIpe8bHEXt-AR1hVo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[ 8669486ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=8LwxgIpe8bHEXt-AR1hVo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[ 8672826ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=8LwxgIpe8bHEXt-AR1hVo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
+[ 8676167ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=8LwxgIpe8bHEXt-AR1hVo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/1sgq_next_dist_client_0legh3m._.js:13422
