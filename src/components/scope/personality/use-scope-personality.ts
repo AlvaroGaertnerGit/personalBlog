@@ -4,6 +4,7 @@ import * as React from "react"
 import { animate, useMotionValue, type MotionValue, type Transition } from "framer-motion"
 
 import { useIsReducedMotion } from "@/hooks/use-is-reduced-motion"
+import { SCOPE_STILLNESS_FADE_MS } from "../scope-motion"
 import { computeAttentionOffset } from "./attention-target"
 import {
   ANTICIPATE_TRANSITION,
@@ -64,6 +65,21 @@ const ATTENTION_HOLD_MS = 900
 const ATTENTION_TO_TRANSITION: Transition = { type: "spring", stiffness: 90, damping: 16, mass: 0.6 }
 const ATTENTION_BACK_TRANSITION: Transition = { type: "spring", stiffness: 80, damping: 20, mass: 0.6 }
 
+// Living Moment 001, "The Stillness Moment" (docs/scope-docs/scope/
+// LIVING_SCOPE.md) — the foundational Living Moment, built from
+// subtraction rather than addition: breathing itself briefly stops. The
+// rarity comes from the cause being genuinely rare, not from a probability
+// roll layered on top (see MOMENT_PRINCIPLES.md's "rarity... reflects how
+// significant the underlying cause actually is") — true, uninterrupted
+// inactivity this long is already an unusual thing for a visitor to do.
+// Three minutes of real stillness (no pointer, no scroll, no keys) before
+// it's even eligible; once played, it does not repeat within the same
+// uninterrupted stretch — only genuine activity re-arms it (see
+// onActivity below), so a visitor who simply walks away for an hour sees
+// it exactly once, not on a repeating cadence.
+const STILLNESS_MIN_INACTIVITY_MS = 180_000
+const STILLNESS_HOLD_MS = 2500
+
 function pickGesture(exclude: PersonalityGestureName | null): PersonalityGestureName {
   const pool = exclude
     ? PERSONALITY_GESTURE_NAMES.filter((name) => name !== exclude)
@@ -116,6 +132,19 @@ interface ScopePersonality {
   eyeOffsetY: MotionValue<number>
   eyeConverge: MotionValue<number>
   antennaFlex: MotionValue<number>
+  /**
+   * Living Moment 001 — true while Scope is holding the Stillness Moment.
+   * Forwarded into useScopeMotion(mood, isStill) at the scope.tsx
+   * composition point, which owns the actual breathing loop and decides
+   * whether this produces any visible effect (see that hook's own
+   * comment). A plain boolean, not a new animated channel — it gates an
+   * existing one. React state, deliberately, not a ref like everything
+   * else in this file: this is the one value that needs to trigger a
+   * re-render (of whichever consumer reads it), since it changes what
+   * scope.tsx passes to a sibling hook — every other piece of state here
+   * only ever needs synchronous truth inside this hook's own closures.
+   */
+  isStill: boolean
   /**
    * The "trust" touch interaction — call on a direct click/tap on Scope's
    * own painted shapes (see scope.tsx). A stable function reference; safe
@@ -253,6 +282,11 @@ function useScopePersonality(
     createShuffleBag(TOUCH_NOTICE_POOL)
   )
 
+  // Living Moment 001 — see the interface's own comment on isStill above
+  // for why this is React state rather than a ref, unlike everything else
+  // in this file.
+  const [isStill, setIsStill] = React.useState(false)
+
   // "Leaves wherever he was touched" — generalized as "resetSignal's own
   // identity changed," never anything Hero-specific (see this param's own
   // comment above). Also correctly resets on first mount (familiarity is
@@ -306,6 +340,25 @@ function useScopePersonality(
   // scheduler), just temporary rather than permanent for the session.
   const armed = !isReduced && !suspended
 
+  // Living Moment 001's isStill reset on disarm is deliberately done here,
+  // during render, rather than inside the effect below — this project's
+  // hooks lint disallows calling a state setter synchronously in an
+  // effect body. React's own docs carve out exactly this case ("adjust
+  // state when a prop changes," comparing against the previous value
+  // during render) — done with a second piece of state rather than a ref,
+  // since this project's lint also disallows reading/writing a ref during
+  // render. It also avoids a real bug a naive effect-body reset would
+  // still have missed: if disarmed while stillness is mid-flight and
+  // re-armed before that sequence's own cleanup runs, isStill could
+  // otherwise stay stuck `true` indefinitely (nothing else ever sets it
+  // back to false) — this fires on every disarm transition specifically,
+  // closing that gap.
+  const [wasArmed, setWasArmed] = React.useState(armed)
+  if (wasArmed !== armed) {
+    setWasArmed(armed)
+    if (!armed && isStill) setIsStill(false)
+  }
+
   React.useEffect(() => {
     if (!armed) {
       dispatch({ type: "disarmed" })
@@ -335,16 +388,34 @@ function useScopePersonality(
     let idleTimeoutId: number | undefined
     let activeControls: ReturnType<typeof animate>[] = []
 
+    // Living Moment 001's own eligibility state. `lastActivityAt` tracks
+    // real elapsed time since the last genuine interaction — deliberately
+    // separate from the ordinary idle-gesture delay above, which only ever
+    // needs to remember a few seconds, not a multi-minute stretch.
+    // `hasPlayedThisStretch` is what keeps the moment from repeating on a
+    // cadence while a visitor simply stays away — only onActivity (real
+    // interaction) re-arms it, not the passage of time alone.
+    let lastActivityAt = Date.now()
+    let hasPlayedStillnessThisStretch = false
+
     function scheduleNext(delay: number) {
       window.clearTimeout(idleTimeoutId)
       idleTimeoutId = window.setTimeout(runGesture, delay)
     }
 
-    // Any cursor activity or the tab regaining visibility pushes the idle
-    // timer back out — a debounce, not a periodic poll. This is the entire
-    // mechanism behind "occasionally, when left alone."
+    // Any real interaction — cursor, scroll, keyboard — or the tab
+    // regaining visibility pushes the idle timer back out and resets the
+    // Stillness Moment's own longer clock; a debounce, not a periodic
+    // poll. This is the entire mechanism behind "occasionally, when left
+    // alone." Scroll and keydown are listened for here for the first time
+    // (previously only pointermove/pointerdown) — the Stillness Moment's
+    // own trigger explicitly requires "no scrolling... no keyboard
+    // interaction," which the ordinary gesture scheduler's own "any
+    // activity" framing already implied but never fully covered.
     function onActivity() {
       dispatch({ type: "activity" })
+      lastActivityAt = Date.now()
+      hasPlayedStillnessThisStretch = false
       scheduleNext(randomDelay())
     }
 
@@ -357,6 +428,27 @@ function useScopePersonality(
       const pattern = BLINK_PATTERNS[name]
       activeControls = [animate(blinkScaleY, pattern.keyframes, pattern.transition)]
       await Promise.all(activeControls.map((c) => c.finished)).catch(() => {})
+    }
+
+    // Living Moment 001, "The Stillness Moment." Deliberately touches none
+    // of this hook's own motion values — there is no gesture to play. It
+    // only sets isStill, which useScopeMotion (composed at scope.tsx,
+    // see that hook's own comment) reads to decide whether to pause the
+    // breathing loop. No anticipation, no eye motion, no antenna flex —
+    // "no blinking, no looking around" is already true for free here,
+    // since nothing in the ordinary gesture pool is running concurrently
+    // (this only ever plays from inside runGesture, in the same single-
+    // flight slot every other gesture already uses).
+    async function runStillness() {
+      setIsStill(true)
+      await wait(SCOPE_STILLNESS_FADE_MS)
+      if (cancelled) return
+
+      await wait(STILLNESS_HOLD_MS)
+      if (cancelled) return
+
+      setIsStill(false)
+      await wait(SCOPE_STILLNESS_FADE_MS)
     }
 
     // Plays one named PERSONALITY_GESTURES entry's full anticipate → to →
@@ -544,19 +636,35 @@ function useScopePersonality(
       dispatch({ type: "gesture-start" })
       isGesturingRef.current = true
 
-      // A registered point of interest gets first refusal, at a fixed
-      // probability, before falling through to the ordinary gesture pool
-      // below — deliberately NOT added to PERSONALITY_GESTURE_NAMES itself
-      // (see the comment on ATTENTION_* above): that pool is static data,
-      // this is a live-computed target, and this branch leaves the
-      // existing pool's selection/repeat-avoidance logic untouched.
-      const attentionEl = attentionTargetRef.current?.current
-      if (attentionEl && Math.random() < ATTENTION_LOOK_CHANCE) {
-        await runLookAt(attentionEl)
+      // Living Moment 001 gets first refusal, ahead of even the attention-
+      // target glance below — the rarest, most deliberate moment in the
+      // whole system should never lose a coin-flip to an ordinary idle
+      // gesture on the one occasion it's actually eligible. Deterministic
+      // once eligible, not an additional probability roll on top (see
+      // this file's own comment on STILLNESS_MIN_INACTIVITY_MS): the
+      // rarity already comes from how rarely true, uninterrupted
+      // inactivity this long happens at all.
+      const isStillnessEligible =
+        !hasPlayedStillnessThisStretch && Date.now() - lastActivityAt >= STILLNESS_MIN_INACTIVITY_MS
+
+      if (isStillnessEligible) {
+        hasPlayedStillnessThisStretch = true
+        await runStillness()
       } else {
-        const name = pickGesture(lastGestureRef.current)
-        lastGestureRef.current = name
-        await playGesture(name)
+        // A registered point of interest gets first refusal, at a fixed
+        // probability, before falling through to the ordinary gesture pool
+        // below — deliberately NOT added to PERSONALITY_GESTURE_NAMES itself
+        // (see the comment on ATTENTION_* above): that pool is static data,
+        // this is a live-computed target, and this branch leaves the
+        // existing pool's selection/repeat-avoidance logic untouched.
+        const attentionEl = attentionTargetRef.current?.current
+        if (attentionEl && Math.random() < ATTENTION_LOOK_CHANCE) {
+          await runLookAt(attentionEl)
+        } else {
+          const name = pickGesture(lastGestureRef.current)
+          lastGestureRef.current = name
+          await playGesture(name)
+        }
       }
 
       if (!cancelled) {
@@ -568,6 +676,8 @@ function useScopePersonality(
 
     window.addEventListener("pointermove", onActivity)
     window.addEventListener("pointerdown", onActivity)
+    window.addEventListener("scroll", onActivity, { passive: true })
+    window.addEventListener("keydown", onActivity)
     document.addEventListener("visibilitychange", onVisibilityChange)
     scheduleNext(randomDelay())
 
@@ -577,6 +687,8 @@ function useScopePersonality(
       activeControls.forEach((controls) => controls.stop())
       window.removeEventListener("pointermove", onActivity)
       window.removeEventListener("pointerdown", onActivity)
+      window.removeEventListener("scroll", onActivity)
+      window.removeEventListener("keydown", onActivity)
       document.removeEventListener("visibilitychange", onVisibilityChange)
       runTouchRef.current = null
     }
@@ -587,7 +699,7 @@ function useScopePersonality(
     return () => window.clearTimeout(familiarityDecayTimeoutRef.current)
   }, [])
 
-  return { rotate, y, scale, blinkScaleY, eyeOffsetX, eyeOffsetY, eyeConverge, antennaFlex, touch }
+  return { rotate, y, scale, blinkScaleY, eyeOffsetX, eyeOffsetY, eyeConverge, antennaFlex, isStill, touch }
 }
 
 export { useScopePersonality }

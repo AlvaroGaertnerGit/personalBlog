@@ -116,3 +116,30 @@ export const SCOPE_GLOW_TRANSITION: Transition = {
   duration: 0.5,
   ease: "easeInOut",
 }
+
+// Living Moment 001, "The Stillness Moment" (docs/scope-docs/scope/
+// LIVING_SCOPE.md) — the one moment built from subtraction rather than
+// addition: breathing itself, not a gesture, briefly stops. This target
+// deliberately equals SCOPE_IDLE_ANIMATE's own resting start point (y: 0,
+// rotate: 0, scale: 1) — fading TO the loop's own first frame and back
+// FROM it is what makes both the entry and the exit seamless; the loop
+// simply picks back up from exactly where it was already sitting, with no
+// frame a visitor could point to as "when it changed." One transition,
+// reused for both directions, slow enough that neither reads as a discrete
+// event on its own.
+export const SCOPE_STILLNESS_ANIMATE = { y: 0, rotate: 0, scale: 1 }
+// Exported in ms, separately from the Transition below, because
+// use-scope-personality.ts's own sequencing needs this exact number too
+// (to wait for the fade to visually finish before holding) — one source
+// number for both, rather than a second literal that could quietly drift
+// out of sync with the actual animation duration. 1.2s: slow enough to
+// read as "fading," clearly slower than anything else in the personality
+// pool (150-350ms), while keeping fade-in + hold (2.5s) + fade-out under
+// LIVING_SCOPE.md's "under 5 seconds" ceiling for every Living Moment —
+// a longer, more generous fade would read more gently in isolation but
+// would break that hard constraint once the hold is added.
+export const SCOPE_STILLNESS_FADE_MS = 1200
+export const SCOPE_STILLNESS_TRANSITION: Transition = {
+  duration: SCOPE_STILLNESS_FADE_MS / 1000,
+  ease: "easeInOut",
+}

@@ -110,7 +110,24 @@ function Scope({
   resetSignal?: string | null
 }) {
   const ref = React.useRef<HTMLDivElement>(null)
-  const { animate, transition, glow, eyeScaleY } = useScopeMotion(mood)
+  const {
+    rotate: personalityRotate,
+    y: personalityY,
+    scale: personalityScale,
+    blinkScaleY,
+    eyeOffsetX,
+    eyeOffsetY,
+    eyeConverge,
+    antennaFlex,
+    isStill,
+    touch,
+  } = useScopePersonality(ref, attentionTarget, suspended, resetSignal)
+  // Living Moment 001 ("the Stillness Moment," LIVING_SCOPE.md): Personality
+  // decides *when* Scope goes still; Motion (here) is what actually owns
+  // the breathing loop and decides what that looks like — see
+  // useScopeMotion's own comment for why this crosses the two layers'
+  // usual independence deliberately, in one direction only.
+  const { animate, transition, glow, eyeScaleY } = useScopeMotion(mood, isStill)
   const {
     rotateX,
     rotateY,
@@ -124,17 +141,6 @@ function Scope({
     antennaRotate,
     interactionIntensity,
   } = useScopePresence(ref, suspended)
-  const {
-    rotate: personalityRotate,
-    y: personalityY,
-    scale: personalityScale,
-    blinkScaleY,
-    eyeOffsetX,
-    eyeOffsetY,
-    eyeConverge,
-    antennaFlex,
-    touch,
-  } = useScopePersonality(ref, attentionTarget, suspended, resetSignal)
 
   // Additive: presence's continuous gaze position + personality's
   // occasional look-up/down nudge. Both are real MotionValues — combined
