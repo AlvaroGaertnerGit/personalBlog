@@ -29,6 +29,17 @@ export interface Project {
 
 export const PROJECTS: readonly Project[] = [
   {
+    id: "sport-coach",
+    title: "Sport Coach",
+    description:
+      "Entrenamiento planificado por rotación, guiado con timers en vivo, y un Coach IA que propone — nunca decide por ti. SCOPE es su identidad.",
+    stack: ["Next.js", "TypeScript", "Supabase", "OpenAI"],
+    links: [
+      { label: "Live site", href: "#" },
+      { label: "GitHub", href: "https://github.com/AlvaroGaertnerGit/sport-app" },
+    ],
+  },
+  {
     id: "tournamently",
     title: "Tournamently",
     description:

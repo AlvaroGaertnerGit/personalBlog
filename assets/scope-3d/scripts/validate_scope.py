@@ -11,6 +11,9 @@ Checks:
   4. face       glass vertices move rigidly with the body (max deviation from the
                 body bone's own transform), in every frame
   5. eyes       eye bones stay seated on the glass surface in every frame
+  5b. outlines   the front-view outline of the eyes and the mouth stays in front
+                 of the (opaque) glass in every frame — if it dips under, the
+                 glass cuts the visible shape and the cut line crawls as Scope moves
   6. glTF       export exports/scope.glb (NLA tracks -> animations, shape keys ->
                 morph targets, skin), re-import into a clean scene, counts
 Writes reports/VALIDATION.md and exits non-zero if a check fails.
@@ -28,7 +31,7 @@ import bpy  # noqa: E402
 import numpy as np  # noqa: E402
 from mathutils import Matrix, Vector  # noqa: E402
 
-from scope3d import faceshell as F, geometry as G, spec as S  # noqa: E402
+from scope3d import faceshell as F, geometry as G, rig as R, spec as S  # noqa: E402
 from scope3d.export import export_glb  # noqa: E402
 
 ROOT = os.path.dirname(HERE)
@@ -96,9 +99,27 @@ def main():
     rest_glass = np.array([tuple(shell.data.vertices[i].co) for i in glass_verts])
     body_rest = arm.data.bones["body"].matrix_local
 
+    # outline rings (front-view silhouette, local depth 0): the eyes are laid on
+    # the glass at R.EYE_PROUD; the mouth is a flat part seated on it
+    def clearance(p):
+        return (p - F.glass_point(p.x, p.z)).dot(F.glass_normal(p.x, p.z))
+
+    mouth = bpy.data.objects["Scope_Mouth"]
+    eye_outline = [i for i, kv in enumerate(keys.key_blocks["Basis"].data)
+                   if abs(clearance(kv.co) - R.EYE_PROUD) < 0.005 * MM]
+    mc = arm.data.bones["mouth"].head_local
+    mn = F.glass_normal(mc.x, mc.z)
+    mouth_outline = [v.index for v in mouth.data.vertices if abs((v.co - mc).dot(mn)) < 0.01 * MM]
+    if not eye_outline or not mouth_outline:
+        record("face: eye/mouth outlines found", False,
+               f"{len(eye_outline)} eye / {len(mouth_outline)} mouth outline vertices: geometry changed?")
+        write_report()
+        sys.exit(1)
+
     actions = sorted(a.name for a in bpy.data.actions if not a.name.endswith("__eyes"))
     worst_ground, worst_face, worst_eye, rest_fail = 1.0, 0.0, 0.0, []
-    proud = G.EYE_THICKNESS * 0.18
+    worst_outline, worst_outline_at = 1.0, ""
+    proud = R.EYE_PROUD
     for name in actions:
         act = bpy.data.actions[name]
         assign(arm, act)
@@ -117,7 +138,7 @@ def main():
         a = pose_state()
         scene.frame_set(last)
         b = pose_state()
-        rest = np.array(sum(([0, 0, 0, 1, 0, 0, 0, 1, 1, 1] for _ in arm.pose.bones), []) + [0, 0], float)
+        rest = np.array(sum(([0, 0, 0, 1, 0, 0, 0, 1, 1, 1] for _ in arm.pose.bones), []) + [0] * (len(keys.key_blocks) - 1), float)
         if act.get("scope_loop"):
             dev = float(np.max(np.abs(a - b)))
             # quaternions: q and -q are the same rotation; loops are periodic by construction
@@ -143,6 +164,13 @@ def main():
                 n = F.glass_normal(head.x, head.z)
                 surface = F.glass_point(head.x, head.z)
                 worst_eye = max(worst_eye, abs((head - surface).dot(n) - proud))
+            body_inv = np.array(inv)
+            for obj, idx in ((eyes, eye_outline), (mouth, mouth_outline)):
+                pts = evaluated_coords(obj)[idx]
+                pts = (body_inv @ np.c_[pts, np.ones(len(pts))].T).T[:, :3]
+                low = min(clearance(Vector(p)) for p in pts)
+                if low < worst_outline:
+                    worst_outline, worst_outline_at = low, f"{name} frame {f}, {obj.name}"
     record("rest: clips start/end at rest", not rest_fail,
            f"{len(actions)} clips checked" + (f"; off: {', '.join(rest_fail)}" if rest_fail else ""))
     record("ground: no vertex below the floor", worst_ground > -0.3 * MM,
@@ -151,6 +179,9 @@ def main():
            f"max deviation {worst_face / MM:.4f} mm")
     record("eyes: seated on the glass", worst_eye < 0.35 * MM,
            f"max seat error {worst_eye / MM:.3f} mm")
+    record("face: eye/mouth outlines never under the glass", worst_outline > 0.1 * MM,
+           f"{len(eye_outline)} eye + {len(mouth_outline)} mouth outline vertices; lowest clearance "
+           f"{worst_outline / MM:+.3f} mm ({worst_outline_at}); v1 reached -1.565 mm")
 
     # 6. glTF export ----------------------------------------------------------------
     export_glb(GLB)
@@ -166,7 +197,7 @@ def main():
     expected = set(actions)
     record("glTF: one animation per clip", expected <= set(anims),
            f"{len(anims)} animations: {', '.join(sorted(anims))}")
-    record("glTF: morph targets + morph animation", morph >= 2 and morph_anims >= len(expected),
+    record("glTF: morph targets + morph animation", morph >= 3 and morph_anims >= len(expected),
            f"{morph} morph targets, {morph_anims} weight channels")
     record("glTF: skin", joints >= 10, f"{joints} joints, file {size_kb:.0f} KB (not web-optimised: no compression, no baked textures)")
 

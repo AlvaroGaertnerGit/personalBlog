@@ -51,8 +51,51 @@ def _bake_world(obj):
 
 
 # --- Eyes: one mesh, two halves, shape keys ------------------------------------
+# The glass is opaque, so whatever part of an eye sinks under it is cut away.
+# v1 seated a FLAT lens on the CURVED glass: its outline grazed the surface, so
+# the glass already cut ~6 % off the top and ~11 % off the bottom at rest, and
+# every gaze shift, squint, blink or laugh moved that cut line — the "pixels
+# crawling over the face" (outline up to 1.6 mm under the glass, measured;
+# reports/POLISH_REVIEW.md). v2 lays every eye shape ON the glass (wrapped, with
+# a constant clearance) and the eye bones turn with the glass normal, so the
+# glass never cuts an eye. Sizes keep the v1 look that was approved: the visible
+# height and centre measured at rest, not the uncut 26 mm capsule.
+EYE_PROUD = 0.5 * MM  # outline clearance over the glass (v1: 0.4 mm at the centre only)
+EYE_VISIBLE_H = 23.7 * MM            # v1 visible height at rest (12.2 up + 11.5 down)
+EYE_VISIBLE_DZ = 0.35 * MM           # v1 visible centre, above the seat point
+# Widening (eye_h > 1, e.g. Focus/observe 1.15) is the `Tall` shape key, laid on
+# the glass like the others: a bone scale stretches the eye in a straight line
+# and its tips leave the curved glass (measured: 0.35 mm under at 1.15).
+# Squinting (eye_h < 1) stays a bone scale — it pulls the tips inward, away
+# from the glass.
+EYE_TALL = 1.15
+
+
+def eye_seat(side):
+    """(x, z) where an eye's centre sits on the glass at rest."""
+    sign = 1 if side == "eye.L" else -1
+    return sign * P["eye_dx"], P["display_center_z"] + P["eye_dz"] + EYE_VISIBLE_DZ
+
+
+def glass_frame(x, z):
+    """Surface point, outward normal and in-plane axes (across, up) of the glass at (x, z)."""
+    n = F.glass_normal(x, z)
+    rot = Vector((0, -1, 0)).rotation_difference(n).to_matrix()
+    return F.glass_point(x, z), n, rot @ Vector((1, 0, 0)), rot @ Vector((0, 0, 1))
+
+
+def _wrap_on_glass(x0, z0, co):
+    """Eye-frame point (x across, z up, -y out of the glass) -> rest space, laid
+    on the curved glass: (x, z) walk along the surface from the seat, depth
+    stays along the local normal."""
+    p0, _n0, ex, ez = glass_frame(x0, z0)
+    q = p0 + ex * co.x + ez * co.z
+    s, n = F.glass_point(q.x, q.z), F.glass_normal(q.x, q.z)
+    return s + n * (EYE_PROUD - co.y)
+
+
 def _eye_shapes(local):
-    """Basis / Blink / Laugh positions for one eye, in the eye's own frame
+    """Basis / Blink / Laugh / Tall positions for one eye, in the eye's own frame
     (x across, y depth with -y toward the viewer, z up).
 
     Blink: the pill closes to a thin horizontal line — the same height-only
@@ -62,11 +105,11 @@ def _eye_shapes(local):
     softly tapered ends. Approved exception to the "no eye shape swap" canon
     (owner, 2026-10-13); used ONLY by the Laugh reaction.
     """
-    w, h = P["eye_w"], P["eye_h"]
+    w, h = P["eye_w"], EYE_VISIBLE_H
     half_w, half_h = w / 2, h / 2
-    blink, laugh = [], []
+    blink, laugh, tall = [], [], []
     arc_deg, band = 70.0, 3.2 * MM
-    radius = 0.62 * h / 2  # arc radius
+    radius = 0.62 * P["eye_h"] / 2  # arc radius (approved arc size)
     top = radius + band / 2
     low = (radius - band / 2) * math.cos(math.radians(arc_deg))
     zshift = (top + low) / 2
@@ -77,33 +120,30 @@ def _eye_shapes(local):
         a = math.radians(arc_deg) * u
         r = radius + v * band / 2
         laugh.append(Vector((r * math.sin(a), co.y * 0.8, r * math.cos(a) - zshift)))
-    return blink, laugh
+        tall.append(Vector((co.x, co.y, co.z * EYE_TALL)))
+    return blink, laugh, tall
 
 
 def build_eyes(collection, eye_mat):
     """Both eyes as one skinned mesh carrying the Blink / Laugh shape keys."""
-    w, h = P["eye_w"], P["eye_h"]
+    w, h = P["eye_w"], EYE_VISIBLE_H
     bm_local = G.capsule_bmesh(w / 2, G.EYE_THICKNESS / 2, w / 2, (h - w) / 2, "Z")
     local = [v.co.copy() for v in bm_local.verts]
     faces = [[v.index for v in f.verts] for f in bm_local.faces]
     bm_local.free()
-    blink, laugh = _eye_shapes(local)
+    shapes = dict(zip(("Blink", "Laugh", "Tall"), _eye_shapes(local)))
 
-    verts, shape_blink, shape_laugh, all_faces, groups, centres = [], [], [], [], {}, {}
-    for side, sign in (("eye.R", -1), ("eye.L", 1)):  # Scope's right eye is at -X
-        x = sign * P["eye_dx"]
-        z = P["display_center_z"] + P["eye_dz"]
-        n = F.glass_normal(x, z)
-        p = F.glass_point(x, z) + n * G.EYE_THICKNESS * 0.18
-        rot = Vector((0, -1, 0)).rotation_difference(n).to_matrix().to_4x4()
-        m = Matrix.Translation(p) @ rot
+    verts, all_faces, groups, centres = [], [], {}, {}
+    shape_verts = {name: [] for name in shapes}
+    for side in ("eye.R", "eye.L"):  # Scope's right eye is at -X
+        x, z = eye_seat(side)
         offset = len(verts)
-        verts += [m @ c for c in local]
-        shape_blink += [m @ c for c in blink]
-        shape_laugh += [m @ c for c in laugh]
+        verts += [_wrap_on_glass(x, z, c) for c in local]
+        for name, coords in shapes.items():
+            shape_verts[name] += [_wrap_on_glass(x, z, c) for c in coords]
         all_faces += [[i + offset for i in f] for f in faces]
         groups[side] = list(range(offset, offset + len(local)))
-        centres[side] = p
+        centres[side] = _wrap_on_glass(x, z, Vector())
 
     mesh = bpy.data.meshes.new("Scope_Eyes")
     mesh.from_pydata([tuple(v) for v in verts], [], all_faces)
@@ -113,7 +153,7 @@ def build_eyes(collection, eye_mat):
     obj = bpy.data.objects.new("Scope_Eyes", mesh)
     collection.objects.link(obj)
     obj.shape_key_add(name="Basis")
-    for name, coords in (("Blink", shape_blink), ("Laugh", shape_laugh)):
+    for name, coords in shape_verts.items():
         kb = obj.shape_key_add(name=name, from_mix=False)
         for i, c in enumerate(coords):
             kb.data[i].co = c

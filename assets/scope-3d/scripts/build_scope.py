@@ -62,7 +62,7 @@ def main():
     for clip in clips.all_clips():
         clips.bake(r, clip)
         meta["clips"][clip.name] = {
-            "duration": clip.duration,
+            "duration": round(clip.duration, 4),
             "loop": clip.loop,
             "markers": {m: round(t, 4) for m, t in clip.markers},
         }

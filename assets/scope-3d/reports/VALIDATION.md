@@ -11,7 +11,8 @@ Generado por `scripts/validate_scope.py` sobre `blender/scope-master.blend`. Tod
 | ground: no vertex below the floor | ✅ PASS | lowest shell vertex over all frames: -0.04 mm |
 | face: glass rigid with the body | ✅ PASS | max deviation 0.0000 mm |
 | eyes: seated on the glass | ✅ PASS | max seat error 0.000 mm |
+| face: eye/mouth outlines never under the glass | ✅ PASS | 96 eye + 24 mouth outline vertices; lowest clearance +0.134 mm (Focus.L frame 28, Scope_Eyes); v1 reached -1.565 mm |
 | glTF: one animation per clip | ✅ PASS | 12 animations: BlinkDouble, Bounce, ClickReaction, Focus.L, Focus.R, Idle, Laugh, LookAround.L, LookAround.R, Stretch, Tilt.L, Tilt.R |
-| glTF: morph targets + morph animation | ✅ PASS | 2 morph targets, 12 weight channels |
-| glTF: skin | ✅ PASS | 14 joints, file 2916 KB (not web-optimised: no compression, no baked textures) |
+| glTF: morph targets + morph animation | ✅ PASS | 3 morph targets, 12 weight channels |
+| glTF: skin | ✅ PASS | 14 joints, file 3012 KB (not web-optimised: no compression, no baked textures) |
 | glTF: re-import | ✅ PASS | 12 actions after import, 9 objects |

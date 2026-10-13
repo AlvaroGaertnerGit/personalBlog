@@ -52,6 +52,12 @@ export interface Scope3DBehavior {
   update(nowMs: number): Scope3DCommand[]
   /** The visitor clicked Scope. */
   click(nowMs: number): Scope3DCommand[]
+  /**
+   * Re-arm the autonomous timer: the next behaviour is due `delayMs` from now
+   * (a fresh random interval when omitted). Only acts while IDLE — a running
+   * behaviour or reaction re-arms the timer itself when it ends.
+   */
+  schedule(nowMs: number, delayMs?: number): void
   /** When the next autonomous behaviour is due (null while busy). */
   readonly nextAutonomousAt: number | null
   /** Autonomous behaviours played so far, oldest first. */
@@ -170,20 +176,24 @@ export function createScope3DBehavior({ config, random = Math.random, startMs = 
       }
       if (cfg.reducedMotion) {
         // A gentle acknowledgement only: no stretch, no laugh.
-        current = playCommand("BlinkDouble", cfg.interruptFadeMs)
+        current = playCommand("BlinkDouble", cfg.reactionFadeInMs)
         endsAt = now + cfg.durationsMs.BlinkDouble / current.timeScale
         state = "RANDOM_ANIMATION"
         nextAt = null
         commands.push(current)
         return commands
       }
-      current = playCommand(CLICK_REACTION, cfg.interruptFadeMs)
+      current = playCommand(CLICK_REACTION, cfg.reactionFadeInMs)
       laughAt = now + cfg.clickLaughAtMs
       endsAt = now + cfg.durationsMs.ClickReaction
       state = "CLICK_STRETCH"
       nextAt = null
       commands.push(current)
       return commands
+    },
+
+    schedule(now, delayMs) {
+      if (state === "IDLE") nextAt = now + (delayMs ?? interval())
     },
   }
 }

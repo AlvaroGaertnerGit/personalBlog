@@ -12,25 +12,35 @@ Channels (rest value in brackets):
   up / fwd [0] mm  small body translation (up, toward the viewer)
   eye_dx / eye_dz [0] mm       gaze on the glass (+x = Scope's left, +z = up)
   converge [0] mm  both eyes toward the centre
-  eye_h [1]        eye height (squint < 1 < widen) — the 2D eyeScaleY axis
+  eye_h [1]        eye height (squint < 1 < widen) — the 2D eyeScaleY axis;
+                   squint = eye bone scale, widen = `Tall` shape key (rig.EYE_TALL)
   blink [0] / laugh [0]        shape keys (closed line / luminous arc)
   mouth_w [1]      mouth width
   ant_pitch / ant_roll [0] deg authored antenna pose (+pitch = tip forward)
   ant_len [1]      antenna stretch (Stretch only)
-  feet [0] deg     feet swing (+ = tips tuck inward)
+  feet [0] deg     feet swing (+ = tips tuck inward); each foot follows it
+                   with its own delay and gain (FEET), never in unison
 
-Secondary motion: the antenna's follow-through is not hand-keyed. A
-two-segment damped spring is driven by the body's angular accelerations and
-the hop acceleration, then baked — the same physics on every clip, so the
-antenna always lags, overshoots and settles the same believable way.
+Motion principles (v2, owner brief 2026-10-13: "soft, tender, organic"):
+  - every key is eased (monotone cubic, zero slope at extremes): no linear
+    starts or instant stops;
+  - holds are MOVING holds (the value keeps drifting a little), never frozen;
+  - overlapping action: the eyes lead, the body turn follows ~0.1 s later,
+    the tilt/roll trails the turn, and the antenna's follow-through comes last;
+  - overshoot only where it is authored, small and settled.
+
+Secondary motion: the antenna's follow-through is NOT baked any more. It is
+simulated at runtime (src/components/scope-3d/engine/scope-3d-secondary.ts)
+from the real body motion, so it also reacts across crossfades, interruptions
+and the idle layer, and never doubles up with a baked copy.
 """
 
 import math
 
-from mathutils import Matrix, Quaternion, Vector
+from mathutils import Quaternion, Vector
 
-from . import faceshell as F
 from . import geometry as G
+from . import rig as R
 from . import spec as S
 
 P = S.P
@@ -43,12 +53,16 @@ REST = dict(hop=0.0, squash=1.0, yaw=0.0, pitch=0.0, roll=0.0, up=0.0, fwd=0.0, 
 MULTIPLICATIVE = {"squash", "eye_h", "mouth_w", "ant_len"}
 MIRRORED = {"yaw", "roll", "eye_dx", "ant_roll"}  # sign flips for the .R variant
 
+# Per-foot (delay s, gain) on the shared `feet` channel: front feet lead the
+# back ones, left leads right by a hair, and no two feet swing the same amount.
+FEET = {"foot.FL": (0.0, 1.0), "foot.FR": (0.02, 0.9), "foot.BL": (0.05, 0.82), "foot.BR": (0.065, 0.92)}
+
 
 # --- Curves -----------------------------------------------------------------------
 class Track:
     """Monotone cubic (Fritsch–Carlson) through (t, value) keys: smooth, no
-    overshoot between keys, zero slope at both ends. Repeating a value makes a
-    true hold; overshoot only happens where it is authored."""
+    overshoot between keys, zero slope at every local extreme and at both ends
+    (ease in / ease out). Overshoot only happens where it is authored."""
 
     def __init__(self, *keys):
         self.t = [k[0] for k in keys]
@@ -92,15 +106,17 @@ class Clip:
         self.markers, self.loop, self.mirror, self.parts = markers, loop, mirror, parts
 
     def value(self, ch, t):
+        if not (0 <= t <= self.duration):
+            return REST[ch]
+        if ch in self.channels:  # also overrides a composite's parts
+            return self.channels[ch](t)
         if self.parts:  # composite: combine sub-clips' deltas
             v = REST[ch]
             for clip, offset in self.parts:
                 pv = clip.value(ch, t - offset)
                 v = v * pv if ch in MULTIPLICATIVE else v + (pv - REST[ch])
             return v
-        if not (0 <= t <= self.duration) or ch not in self.channels:
-            return REST[ch]
-        return self.channels[ch](t)
+        return REST[ch]
 
     def mirrored(self, suffix_from, suffix_to):
         flipped = {}
@@ -113,7 +129,8 @@ class Clip:
 # --- The clips --------------------------------------------------------------------
 def idle():
     """Breathing (2D: y -3.8 px, rotate -0.78°, scale 1.019, 4.2 s each way,
-    mirrored). One full 8.4 s cycle, loopable."""
+    mirrored). One full 8.4 s cycle, loopable. The non-repeating life on top
+    (posture drift, single blinks) is procedural: scope-3d-secondary.ts."""
     period = 8.4
 
     def phase(t):
@@ -127,37 +144,47 @@ def idle():
 
 
 def look_around():
-    """Exploration (sheet: ~1.5 s). Eyes lead, the body follows and tilts a
-    little toward each side, a beat of observation, the other side, home.
+    """Curious, unhurried exploration (sheet: LOOK AROUND). The eyes find one
+    side first, the body follows them, the tilt trails the turn; a long,
+    still-alive look; a soft swing (with the half-blink creatures do on a big
+    gaze shift) to the other side; home with a whisper of overshoot.
     Authored toward Scope's left first; .R is the mirror."""
-    return Clip("LookAround.L", 1.5, {
-        "eye_dx": Track((0, 0), (0.1, 0), (0.26, 4.5), (0.6, 4.5), (0.8, -4.0), (1.1, -4.0), (1.36, 0), (1.5, 0)),
-        "eye_dz": Track((0, 0), (0.26, 0.8), (0.6, 0.6), (0.8, 0.9), (1.1, 0.6), (1.36, 0), (1.5, 0)),
-        "yaw": Track((0, 0), (0.16, 0), (0.38, 13), (0.64, 13.5), (0.9, -11), (1.14, -11.5), (1.42, 0), (1.5, 0)),
-        "roll": Track((0, 0), (0.18, 0), (0.4, 2.4), (0.64, 2.6), (0.9, -2.0), (1.14, -2.2), (1.42, 0), (1.5, 0)),
-        "pitch": Track((0, 0), (0.4, -1.5), (0.64, -1.5), (0.9, -1.0), (1.14, -1.0), (1.42, 0), (1.5, 0)),
-    }, [("start", 0), ("eyes lead", 0.2), ("look left", 0.5), ("swing", 0.78), ("look right", 1.06),
-        ("end", 1.5)], mirror=True)
+    return Clip("LookAround.L", 2.6, {
+        "eye_dx": Track((0, 0), (0.12, 0), (0.34, 4.4), (0.62, 4.6), (1.02, 4.9), (1.3, -4.2), (1.62, -4.5),
+                        (1.98, -4.7), (2.28, 0.3), (2.42, 0), (2.6, 0)),
+        "eye_dz": Track((0, 0), (0.34, 0.6), (1.02, 0.9), (1.2, 0.3), (1.62, 0.6), (1.98, 0.8), (2.3, 0), (2.6, 0)),
+        "yaw": Track((0, 0), (0.18, 0), (0.62, 11.5), (1.05, 13.2), (1.55, -10.5), (2.0, -11.8), (2.42, 0.6),
+                     (2.6, 0)),
+        "roll": Track((0, 0), (0.28, 0), (0.74, 2.0), (1.15, 2.4), (1.66, -1.7), (2.08, -2.0), (2.5, 0.2), (2.6, 0)),
+        "pitch": Track((0, 0), (0.3, 0), (0.7, -1.2), (1.05, -1.4), (1.3, -0.3), (1.6, -0.9), (2.0, -1.0),
+                       (2.45, 0), (2.6, 0)),
+        "eye_h": Track((0, 1), (0.3, 1.04), (1.05, 1.05), (1.3, 1.0), (1.6, 1.04), (2.0, 1.04), (2.4, 1), (2.6, 1)),
+        "blink": Track((0, 0), (1.1, 0), (1.18, 0.5), (1.32, 0), (2.6, 0)),
+    }, [("start", 0), ("eyes lead", 0.12), ("look left", 0.62), ("swing", 1.3), ("look right", 1.62),
+        ("home", 2.42), ("end", 2.6)], mirror=True)
 
 
 def tilt():
-    """Curious tilt (sheet: ~1.2 s): a hint of anticipation the other way, a
-    soft tilt, a short pause, a progressive recovery. Never off-balance."""
-    return Clip("Tilt.L", 1.2, {
-        "roll": Track((0, 0), (0.08, 0), (0.18, -1.1), (0.46, 7.0), (0.76, 7.2), (1.08, 0.3), (1.2, 0)),
-        "yaw": Track((0, 0), (0.18, -0.5), (0.46, 4.0), (0.76, 4.0), (1.1, 0), (1.2, 0)),
-        "up": Track((0, 0), (0.46, 1.0), (0.76, 1.0), (1.1, 0), (1.2, 0)),
-        "eye_dx": Track((0, 0), (0.18, 0), (0.4, 1.8), (0.78, 1.8), (1.08, 0), (1.2, 0)),
-        "eye_h": Track((0, 1), (0.18, 1), (0.42, 1.07), (0.78, 1.07), (1.08, 1), (1.2, 1)),
-    }, [("start", 0), ("anticipation", 0.18), ("tilting", 0.34), ("peak", 0.6), ("recovery", 0.95),
-        ("end", 1.2)], mirror=True)
+    """Curious tilt (sheet: TILT): a hint of anticipation the other way, a soft
+    tilt that overshoots a touch and settles, a moving hold, an elastic
+    recovery that crosses rest once. The eyes lead and widen."""
+    return Clip("Tilt.L", 1.9, {
+        "roll": Track((0, 0), (0.08, 0), (0.24, -1.3), (0.62, 7.0), (0.8, 7.8), (1.08, 7.3), (1.5, -0.5),
+                      (1.68, 0.15), (1.9, 0)),
+        "yaw": Track((0, 0), (0.24, -0.5), (0.7, 3.6), (1.08, 4.1), (1.55, 0), (1.9, 0)),
+        "up": Track((0, 0), (0.24, -0.3), (0.7, 0.9), (1.08, 1.0), (1.55, 0), (1.9, 0)),
+        "pitch": Track((0, 0), (0.3, 0), (0.72, -1.2), (1.08, -1.0), (1.55, 0), (1.9, 0)),
+        "eye_dx": Track((0, 0), (0.14, 0), (0.42, 1.9), (1.08, 2.1), (1.42, 0), (1.9, 0)),
+        "eye_h": Track((0, 1), (0.2, 0.96), (0.5, 1.09), (1.08, 1.07), (1.45, 1), (1.9, 1)),
+    }, [("start", 0), ("anticipation", 0.24), ("tilting", 0.45), ("peak", 0.8), ("recovery", 1.3),
+        ("end", 1.9)], mirror=True)
 
 
 def bounce():
-    """A small spontaneous hop (sheet: ~0.9 s): squash, push, a short flight
-    with the feet tucking, a soft landing, recovery. ~11 mm high on a 150 mm
-    body — endearing, not a game jump."""
-    t0, t1, height = 0.22, 0.64, 11.0
+    """A small spontaneous hop (sheet: BOUNCE): squash, push, a short flight
+    with the feet tucking one after another, a soft landing that the body
+    absorbs with a little forward nod, recovery. ~11 mm high on a 150 mm body."""
+    t0, t1, height = 0.27, 0.68, 11.0
     tm, half = (t0 + t1) / 2, (t1 - t0) / 2
 
     def hop(t):
@@ -165,103 +192,139 @@ def bounce():
             return height * (1 - ((t - tm) / half) ** 2)
         return 0.0
 
-    return Clip("Bounce", 0.9, {
+    return Clip("Bounce", 1.2, {
         "hop": hop,
-        "squash": Track((0, 1), (0.05, 1), (0.17, 0.9), (0.27, 1.065), (0.43, 1.01), (0.6, 1.04),
-                        (0.68, 0.925), (0.79, 1.015), (0.9, 1)),
-        "feet": Track((0, 0), (0.22, 0), (0.36, 11), (0.56, 7), (0.66, -3), (0.8, 0), (0.9, 0)),
-        "eye_h": Track((0, 1), (0.14, 0.92), (0.3, 1.08), (0.6, 1.02), (0.68, 0.85), (0.82, 1), (0.9, 1)),
-        "eye_dz": Track((0, 0), (0.17, -0.6), (0.3, 0.8), (0.66, -0.4), (0.85, 0), (0.9, 0)),
-    }, [("start", 0), ("squash", 0.17), ("push", 0.27), ("apex", 0.43), ("landing", 0.68), ("end", 0.9)])
+        "squash": Track((0, 1), (0.06, 1), (0.2, 0.91), (0.31, 1.07), (0.47, 1.01), (0.63, 1.035), (0.73, 0.925),
+                        (0.86, 1.02), (0.98, 0.996), (1.12, 1), (1.2, 1)),
+        "feet": Track((0, 0), (0.12, 0), (0.2, -2.2), (0.29, 0), (0.42, 11), (0.6, 6.5), (0.7, -3.5), (0.84, 0.8),
+                      (0.98, 0), (1.2, 0)),
+        "pitch": Track((0, 0), (0.08, 0), (0.2, 1.3), (0.34, -1.1), (0.55, -0.4), (0.74, 1.6), (0.9, -0.3),
+                       (1.04, 0), (1.2, 0)),
+        "roll": Track((0, 0), (0.3, 0), (0.5, 0.8), (0.74, -0.5), (0.95, 0.1), (1.1, 0), (1.2, 0)),
+        "eye_h": Track((0, 1), (0.18, 0.9), (0.33, 1.08), (0.62, 1.03), (0.73, 0.87), (0.88, 1.02), (1.0, 1),
+                       (1.2, 1)),
+        "eye_dz": Track((0, 0), (0.2, -0.6), (0.35, 0.8), (0.6, 0.3), (0.72, -0.4), (0.92, 0), (1.2, 0)),
+    }, [("start", 0), ("squash", 0.2), ("push", 0.29), ("apex", 0.47), ("landing", 0.73), ("end", 1.2)])
 
 
 def blink_double():
-    """Two warm blinks (sheet: ~1.0 s; 2D double-blink timing stretched).
-    The pill morphs to a closed line and back — a shape key, not a cut — with
-    a tiny body settle on each close."""
-    return Clip("BlinkDouble", 1.0, {
-        "blink": Track((0, 0), (0.1, 0), (0.19, 1), (0.23, 1), (0.34, 0), (0.48, 0), (0.57, 1), (0.61, 1),
-                       (0.74, 0), (1.0, 0)),
-        "squash": Track((0, 1), (0.1, 1), (0.2, 0.994), (0.34, 1), (0.48, 1), (0.58, 0.994), (0.74, 1), (1.0, 1)),
-        "eye_dz": Track((0, 0), (0.1, 0), (0.2, -0.4), (0.34, 0), (0.48, 0), (0.58, -0.4), (0.74, 0), (1.0, 0)),
-    }, [("start", 0), ("first close", 0.21), ("open", 0.4), ("second close", 0.59), ("open", 0.8),
-        ("end", 1.0)])
+    """Two warm blinks (sheet: BLINK DOUBLE). Lid-like rather than a scale:
+    a quick ease-in close, a beat, a slower ease-out open; the eye drops a
+    touch while closing so the upper lid travels further than the lower one;
+    the second blink is a little softer; a tiny nod on each."""
+    return Clip("BlinkDouble", 1.2, {
+        "blink": Track((0, 0), (0.12, 0), (0.2, 1.1), (0.24, 1.1), (0.38, 0), (0.52, 0), (0.6, 1.05), (0.64, 1.05),
+                       (0.8, 0), (1.2, 0)),
+        "eye_dz": Track((0, 0), (0.12, 0), (0.21, -1.0), (0.38, 0), (0.52, 0), (0.61, -0.9), (0.8, 0), (1.2, 0)),
+        "pitch": Track((0, 0), (0.12, 0), (0.22, 0.6), (0.4, 0.1), (0.62, 0.6), (0.84, 0), (1.2, 0)),
+        "squash": Track((0, 1), (0.12, 1), (0.21, 0.995), (0.38, 1), (0.52, 1), (0.61, 0.995), (0.8, 1), (1.2, 1)),
+    }, [("start", 0), ("first close", 0.2), ("open", 0.38), ("second close", 0.6), ("open", 0.8),
+        ("end", 1.2)])
 
 
 def focus():
-    """Concentrated attention (sheet: ~1.3 s). One direction, held: the body
-    orients and leans in, eyes go first and converge a touch, widen (2D
-    observe: eyeScaleY 1.15), the antenna perks forward. Not exploration."""
-    return Clip("Focus.L", 1.3, {
-        "eye_dx": Track((0, 0), (0.08, 0), (0.24, 3.2), (1.0, 3.2), (1.22, 0), (1.3, 0)),
-        "eye_dz": Track((0, 0), (0.24, -0.8), (1.0, -0.8), (1.22, 0), (1.3, 0)),
-        "converge": Track((0, 0), (0.3, 1.3), (1.0, 1.3), (1.2, 0), (1.3, 0)),
-        "eye_h": Track((0, 1), (0.12, 1), (0.34, 1.13), (1.0, 1.13), (1.2, 1), (1.3, 1)),
-        "yaw": Track((0, 0), (0.14, 0), (0.42, 8.5), (1.0, 8.5), (1.26, 0), (1.3, 0)),
-        "pitch": Track((0, 0), (0.14, 0), (0.42, 3.2), (1.0, 3.2), (1.26, 0), (1.3, 0)),
-        "fwd": Track((0, 0), (0.14, 0), (0.42, 2.2), (1.0, 2.2), (1.26, 0), (1.3, 0)),
-        "ant_pitch": Track((0, 0), (0.2, 0), (0.45, 7.0), (1.0, 6.0), (1.24, 0), (1.3, 0)),
-    }, [("start", 0), ("eyes find it", 0.24), ("orient", 0.42), ("hold", 0.75), ("release", 1.1),
-        ("end", 1.3)], mirror=True)
+    """Concentrated attention (sheet: FOCUS; 2D observe). NOT exploration:
+    one direction, small turn, the body leans in and comes closer and then
+    stays STILL; the eyes narrow for a beat, then widen (2D observe:
+    eyeScaleY 1.15) and converge, tracking with tiny drifts; the antenna perks
+    forward and holds. Long hold, slow release."""
+    return Clip("Focus.L", 2.4, {
+        "eye_dx": Track((0, 0), (0.1, 0), (0.28, 2.8), (0.9, 3.0), (1.4, 2.8), (1.85, 3.0), (2.12, 0), (2.4, 0)),
+        "eye_dz": Track((0, 0), (0.28, -0.7), (1.85, -0.8), (2.12, 0), (2.4, 0)),
+        "converge": Track((0, 0), (0.36, 1.5), (1.85, 1.6), (2.1, 0), (2.4, 0)),
+        "eye_h": Track((0, 1), (0.16, 0.97), (0.42, 1.15), (1.85, 1.14), (2.1, 1), (2.4, 1)),
+        "yaw": Track((0, 0), (0.2, 0), (0.6, 5.2), (1.85, 5.6), (2.25, 0), (2.4, 0)),
+        "pitch": Track((0, 0), (0.22, 0), (0.66, 4.6), (1.3, 5.0), (1.85, 5.0), (2.25, 0), (2.4, 0)),
+        "fwd": Track((0, 0), (0.22, 0), (0.7, 3.4), (1.85, 3.6), (2.25, 0), (2.4, 0)),
+        "squash": Track((0, 1), (0.6, 0.99), (1.85, 0.99), (2.2, 1), (2.4, 1)),
+        "ant_pitch": Track((0, 0), (0.3, 0), (0.62, 9.0), (1.85, 8.5), (2.22, 0), (2.4, 0)),
+    }, [("start", 0), ("eyes find it", 0.28), ("lean in", 0.66), ("hold", 1.2), ("release", 1.85),
+        ("end", 2.4)], mirror=True)
 
 
 def stretch():
-    """CLICK ONLY. An organic stretch (2D touch stage 2, sheet: ~1.6 s):
-    anticipation, a little squash, a long vertical stretch with the antenna
-    rising and eyes shut contentedly, then an elastic recovery."""
-    return Clip("Stretch", 1.6, {
-        "squash": Track((0, 1), (0.06, 1), (0.24, 0.93), (0.32, 0.935), (0.74, 1.11), (0.94, 1.115),
-                        (1.18, 0.965), (1.36, 1.02), (1.5, 0.997), (1.6, 1)),
-        "pitch": Track((0, 0), (0.24, 1.5), (0.74, -4.5), (0.94, -4.8), (1.2, 0.8), (1.42, 0), (1.6, 0)),
-        "eye_h": Track((0, 1), (0.2, 0.9), (0.6, 0.35), (0.98, 0.3), (1.2, 1.04), (1.4, 1), (1.6, 1)),
-        "eye_dz": Track((0, 0), (0.24, -0.5), (0.74, 1.4), (0.94, 1.4), (1.2, 0), (1.6, 0)),
-        "ant_pitch": Track((0, 0), (0.24, 4.0), (0.7, -9.0), (0.94, -10.0), (1.2, 2.0), (1.42, 0), (1.6, 0)),
-        "ant_len": Track((0, 1), (0.24, 0.96), (0.74, 1.12), (0.94, 1.12), (1.2, 0.98), (1.4, 1), (1.6, 1)),
-        "feet": Track((0, 0), (0.24, -5.0), (0.6, 2.0), (0.94, 2.5), (1.2, -1.5), (1.4, 0), (1.6, 0)),
-        "mouth_w": Track((0, 1), (0.74, 0.85), (0.94, 0.85), (1.2, 1), (1.6, 1)),
-    }, [("start", 0), ("anticipation", 0.24), ("stretching", 0.52), ("peak", 0.9), ("recoil", 1.2),
-        ("end", 1.6)])
+    """CLICK ONLY. A progressive, elastic stretch (2D touch stage 2): a little
+    squash, a long slow rise to the top with the eyes closing contentedly
+    (the Blink shape, not a squashed capsule) and the antenna reaching up,
+    then a springy recovery that settles in two small, shrinking beats."""
+    return Clip("Stretch", 1.8, {
+        "squash": Track((0, 1), (0.06, 1), (0.28, 0.94), (0.36, 0.942), (0.82, 1.105), (1.02, 1.112), (1.24, 0.965),
+                        (1.42, 1.018), (1.58, 0.996), (1.8, 1)),
+        "pitch": Track((0, 0), (0.28, 1.4), (0.84, -4.6), (1.02, -4.8), (1.26, 0.9), (1.48, -0.2), (1.62, 0),
+                       (1.8, 0)),
+        "blink": Track((0, 0), (0.24, 0.12), (0.66, 0.74), (1.02, 0.78), (1.28, 0), (1.8, 0)),
+        "eye_h": Track((0, 1), (1.1, 1), (1.3, 1.04), (1.48, 1), (1.8, 1)),
+        "eye_dz": Track((0, 0), (0.28, -0.5), (0.84, 1.4), (1.02, 1.4), (1.28, 0), (1.8, 0)),
+        "ant_pitch": Track((0, 0), (0.28, 4.0), (0.8, -9.0), (1.02, -10.0), (1.26, 2.0), (1.46, 0), (1.8, 0)),
+        "ant_len": Track((0, 1), (0.28, 0.96), (0.84, 1.12), (1.02, 1.12), (1.26, 0.98), (1.44, 1), (1.8, 1)),
+        "feet": Track((0, 0), (0.28, -5.0), (0.66, 2.0), (1.02, 2.5), (1.26, -1.5), (1.46, 0), (1.8, 0)),
+        "mouth_w": Track((0, 1), (0.84, 0.85), (1.02, 0.85), (1.26, 1), (1.8, 1)),
+    }, [("start", 0), ("anticipation", 0.28), ("stretching", 0.6), ("peak", 1.02), ("recoil", 1.24),
+        ("end", 1.8)])
+
+
+# Chuckle rhythm shared by every Laugh channel (Hz): squash/eyes ride CHUCKLE,
+# the side-to-side wobble is half of it, the turn a quarter.
+CHUCKLE = 3.0
+LAUGH_START = 0.28  # chuckles begin once the arcs have formed
+
+
+def _laugh_env(t):
+    """Chuckles fade in, decay a little, then settle."""
+    return envelope(t, LAUGH_START, 0.5, 1.2, 1.5) * (1 - 0.3 * G.smoothstep((t - 0.5) / 0.8))
 
 
 def laugh():
-    """CLICK ONLY, right after Stretch. Joy through eyes, body and antenna:
-    the eyes melt into two luminous arcs, small rhythmic chuckles (squash +
-    a soft side-to-side wobble), the antenna rides along, then everything
-    settles. No teeth, no mouth shape — only a slightly wider mouth line.
-    Approved exception to the eye-shape canon (owner, 2026-10-13)."""
-    dur = 1.5
+    """CLICK ONLY, right after Stretch. Endearing joy through eyes, body and
+    antenna: the eyes squeeze into a line that bends into two luminous arcs,
+    small rhythmic chuckles that soften as they go (squash + a gentle side
+    wobble, the eyes riding along), the antenna answers (runtime spring),
+    then everything settles with a last soft blink. No teeth, no mouth shape
+    — only a slightly wider mouth line. Approved exception to the eye-shape
+    canon (owner, 2026-10-13)."""
+    dur = 1.8
+    env = _laugh_env
 
-    def env(t):
-        return envelope(t, 0.08, 0.26, 1.08, 1.38)
+    def phase(t, hz):
+        return 2 * math.pi * hz * (t - LAUGH_START)
 
     return Clip("Laugh", dur, {
-        "laugh": Track((0, 0), (0.05, 0), (0.22, 1), (1.18, 1), (1.42, 0), (dur, 0)),
-        "squash": lambda t: 1 + 0.024 * math.sin(2 * math.pi * 3.3 * (t - 0.08)) * env(t),
-        "up": lambda t: 1.0 * abs(math.sin(2 * math.pi * 1.65 * (t - 0.08))) * env(t),
-        "roll": lambda t: 2.4 * math.sin(2 * math.pi * 1.65 * (t - 0.08)) * env(t),
-        "yaw": lambda t: 1.5 * math.sin(2 * math.pi * 0.82 * (t - 0.08)) * env(t),
-        "eye_dz": Track((0, 0), (0.22, 1.2), (1.18, 1.2), (1.42, 0), (dur, 0)),
-        "mouth_w": Track((0, 1), (0.2, 1.22), (1.2, 1.22), (1.42, 1), (dur, 1)),
-    }, [("start", 0), ("eyes melt", 0.18), ("chuckle", 0.45), ("chuckle", 0.75), ("settling", 1.25),
-        ("end", dur)])
+        "blink": Track((0, 0), (0.04, 0), (0.14, 1), (0.34, 0), (1.34, 0), (1.52, 1), (1.68, 0), (dur, 0)),
+        "laugh": Track((0, 0), (0.14, 0), (0.34, 1), (1.34, 1), (1.52, 0), (dur, 0)),
+        "squash": lambda t: 1 + 0.02 * math.sin(phase(t, CHUCKLE)) * env(t),
+        "up": lambda t: 0.9 * math.sin(phase(t, CHUCKLE) / 2) ** 2 * env(t),
+        "roll": lambda t: 2.0 * math.sin(phase(t, CHUCKLE / 2)) * env(t),
+        "yaw": lambda t: 1.3 * math.sin(phase(t, CHUCKLE / 4)) * env(t),
+        "pitch": Track((0, 0), (0.34, -1.5), (1.3, -1.2), (1.62, 0), (dur, 0)),
+        "eye_dz": lambda t: Track((0, 0), (0.34, 1.1), (1.34, 1.1), (1.6, 0), (dur, 0))(t)
+        + 0.25 * math.sin(phase(t, CHUCKLE)) * env(t),
+        "mouth_w": Track((0, 1), (0.3, 1.22), (1.34, 1.22), (1.6, 1), (dur, 1)),
+    }, [("start", 0), ("squeeze", 0.14), ("arcs", 0.34), ("chuckle", 0.6), ("settling", 1.3), ("end", dur)])
 
 
-# Laugh starts during Stretch's recoil, while the eyes are still shut from the
-# stretch: they melt from the contented squint straight into the arcs. A later
-# start (first try: 1.42 s) let the eyes reopen to neutral for ~0.4 s between
-# the two, which read as two separate clips.
+# Laugh starts at the top of Stretch, while the eyes are still closed
+# contentedly: they shut fully and the closed line bends straight into the
+# arcs. No neutral beat in between, and no squashed in-between shape.
 CLICK_OVERLAP_START = 1.0
 
 
 def click_reaction(stretch_clip, laugh_clip):
     """CLICK -> STRETCH -> LAUGH as ONE continuous clip: the laugh begins
-    during the stretch's elastic recovery, so there is no neutral beat
-    between them. Marker `laugh` tells the state machine where it starts."""
-    total = CLICK_OVERLAP_START + laugh_clip.duration
-    markers = [("start", 0), ("stretch peak", 0.9), ("laugh", CLICK_OVERLAP_START), ("recoil", 1.2),
-               ("chuckle", CLICK_OVERLAP_START + 0.6), ("end", total)]
-    return Clip("ClickReaction", total, {}, markers,
-                parts=[(stretch_clip, 0.0), (laugh_clip, CLICK_OVERLAP_START)])
+    during the stretch's elastic recovery. Body channels add the two clips'
+    deltas; the eyes get their own continuous path (stretch squint -> fully
+    closed line -> arc, with blink + laugh = 1 through the bend). Marker
+    `laugh` tells the state machine where it starts."""
+    o = CLICK_OVERLAP_START
+    total = o + laugh_clip.duration
+    eyes = {
+        "blink": Track((0, 0), (0.24, 0.12), (0.66, 0.74), (o, 0.78), (o + 0.14, 1), (o + 0.34, 0), (o + 1.34, 0),
+                       (o + 1.52, 1), (o + 1.68, 0), (total, 0)),
+        "laugh": Track((0, 0), (o + 0.14, 0), (o + 0.34, 1), (o + 1.34, 1), (o + 1.52, 0), (total, 0)),
+        "eye_h": lambda t: 1.0,
+    }
+    markers = [("start", 0), ("stretch peak", 1.02), ("laugh", o), ("arcs", o + 0.34), ("chuckle", o + 0.6),
+               ("end", total)]
+    return Clip("ClickReaction", total, eyes, markers, parts=[(stretch_clip, 0.0), (laugh_clip, o)])
 
 
 def all_clips():
@@ -269,61 +332,6 @@ def all_clips():
     st, lg = stretch(), laugh()
     return [idle(), la, la.mirrored(".L", ".R"), ti, ti.mirrored(".L", ".R"), bounce(), blink_double(),
             fo, fo.mirrored(".L", ".R"), st, lg, click_reaction(st, lg)]
-
-
-# --- Antenna spring ---------------------------------------------------------------
-SUB = 8  # simulation substeps per frame
-
-
-def _spring_series(clip):
-    """Two-segment damped spring, per frame: [(a1_pitch, a1_roll, a2_pitch, a2_roll)] in degrees."""
-    k1, z1 = (2 * math.pi * 2.6) ** 2, 0.32
-    k2, z2 = (2 * math.pi * 3.8) ** 2, 0.30
-    c1, c2 = 2 * z1 * math.sqrt(k1), 2 * z2 * math.sqrt(k2)
-    dt = 1 / (FPS * SUB)
-    n_frames = round(clip.duration * FPS)
-    warm = 2 if clip.loop else 0
-
-    def drive(t):
-        tt = t % clip.duration if clip.loop else t
-        return (clip.value("pitch", tt), clip.value("roll", tt), clip.value("yaw", tt),
-                clip.value("hop", tt) + clip.value("up", tt))
-
-    def accel(t):
-        h = 1 / 240
-        a, b, c = drive(t - h), drive(t), drive(t + h)
-        return [(a[i] - 2 * b[i] + c[i]) / (h * h) for i in range(4)]
-
-    s = [0.0] * 8  # p1, v_p1, r1, v_r1, p2, v_p2, r2, v_r2
-    out = []
-    total_steps = (warm * n_frames + n_frames) * SUB
-    for step in range(total_steps + 1):
-        t = step * dt
-        if step % SUB == 0 and step >= warm * n_frames * SUB:
-            out.append((s[0], s[2], s[4], s[6]))
-        ap, ar, ay, az = accel(t)
-        # inertia: the antenna lags the body's rotation; a hop's vertical
-        # acceleration makes it nod; a turn (yaw) swings it a little sideways
-        f_p1 = -k1 * s[0] - c1 * s[1] - ap - 0.010 * az
-        f_r1 = -k1 * s[2] - c1 * s[3] - ar - 0.30 * ay
-        s[1] += f_p1 * dt
-        s[0] += s[1] * dt
-        s[3] += f_r1 * dt
-        s[2] += s[3] * dt
-        f_p2 = -k2 * s[4] - c2 * s[5] - 0.8 * f_p1
-        f_r2 = -k2 * s[6] - c2 * s[7] - 0.8 * f_r1
-        s[5] += f_p2 * dt
-        s[4] += s[5] * dt
-        s[7] += f_r2 * dt
-        s[6] += s[7] * dt
-    out = out[:n_frames + 1]
-    if not clip.loop:  # fade the last 0.25 s so the clip ends exactly at rest
-        fade_frames = int(0.25 * FPS)
-        for f in range(max(0, n_frames - fade_frames), n_frames + 1):
-            k = 1 - G.smoothstep((f - (n_frames - fade_frames)) / fade_frames)
-            out[f] = tuple(x * k for x in out[f])
-    clamp = 22.0
-    return [tuple(max(-clamp, min(clamp, x)) for x in fr) for fr in out]
 
 
 # --- Pose application -------------------------------------------------------------
@@ -337,35 +345,34 @@ def _quat_euler(pitch, yaw, roll):
     return q_yaw @ q_pitch @ q_roll
 
 
-_EYE_REST = {}
+def _to_bone(v):
+    """Rest-space vector -> bone-local axes (x = X, y = Z, z = -Y)."""
+    return Vector((v.x, v.z, -v.y))
 
 
-def _eye_rest(side):
-    if side not in _EYE_REST:
-        sign = 1 if side == "eye.L" else -1
-        x, z = sign * P["eye_dx"], P["display_center_z"] + P["eye_dz"]
-        _EYE_REST[side] = (x, z, F.glass_point(x, z) + F.glass_normal(x, z) * G.EYE_THICKNESS * 0.18)
-    return _EYE_REST[side]
+def _seat(x, z, proud):
+    p, n, _ex, _ez = R.glass_frame(x, z)
+    return p + n * proud, n
 
 
-def _gaze_local(side, dx_mm, dz_mm):
-    """Bone-local translation that slides an eye along the curved glass."""
-    x, z, rest = _eye_rest(side)
-    nx, nz = x + dx_mm * MM, z + dz_mm * MM
-    p = F.glass_point(nx, nz) + F.glass_normal(nx, nz) * G.EYE_THICKNESS * 0.18
-    d = p - rest
-    return Vector((d.x, d.z, -d.y))
+def _slide_on_glass(x, z, dx_mm, dz_mm, proud):
+    """Bone-local (translation, rotation) that slides a part seated at (x, z)
+    along the curved glass AND turns it with the glass normal, so it stays
+    flush with the surface instead of sinking on one side."""
+    rest, n_rest = _seat(x, z, proud)
+    moved, n_moved = _seat(x + dx_mm * MM, z + dz_mm * MM, proud)
+    q = n_rest.rotation_difference(n_moved)
+    return _to_bone(moved - rest), Quaternion((q.w, *_to_bone(Vector((q.x, q.y, q.z)))))
 
 
 def _feet_rotation(bone_head, deg):
     r = Vector((bone_head.x, bone_head.y, 0)).normalized()
     axis_world = Vector((0, 0, 1)).cross(r)
-    axis_local = Vector((axis_world.x, axis_world.z, -axis_world.y))
-    return Quaternion(axis_local, math.radians(deg))
+    return Quaternion(_to_bone(axis_world), math.radians(deg))
 
 
-def apply(rig, clip, t, spring):
-    """Pose the rig for clip time t. `spring` = this frame's antenna spring angles."""
+def apply(rig, clip, t):
+    """Pose the rig for clip time t."""
     arm = rig["arm"]
     pb = arm.pose.bones
     v = {ch: clip.value(ch, t) for ch in REST}
@@ -378,31 +385,42 @@ def apply(rig, clip, t, spring):
     pb["body"].location = (0, v["up"] * MM, v["fwd"] * MM)
 
     for side, sign in (("eye.L", 1), ("eye.R", -1)):
-        dx = v["eye_dx"] - sign * v["converge"]
-        pb[side].location = _gaze_local(side, dx, v["eye_dz"])
-        pb[side].scale = (1, v["eye_h"], 1)
-    pb["mouth"].location = (v["eye_dx"] * 0.3 * MM, v["eye_dz"] * 0.25 * MM, 0)
+        x, z = R.eye_seat(side)
+        loc, rot = _slide_on_glass(x, z, v["eye_dx"] - sign * v["converge"], v["eye_dz"], R.EYE_PROUD)
+        pb[side].location, pb[side].rotation_quaternion = loc, rot
+        pb[side].scale = (1, min(v["eye_h"], 1.0), 1)
+    mx, mz = 0.0, P["display_center_z"] + P["mouth_dz"]
+    loc, rot = _slide_on_glass(mx, mz, v["eye_dx"] * 0.3, v["eye_dz"] * 0.25, MOUTH_PROUD)
+    pb["mouth"].location, pb["mouth"].rotation_quaternion = loc, rot
     pb["mouth"].scale = (v["mouth_w"], 1, 1)
 
-    p1, r1, p2, r2 = spring
-    pb["antenna.1"].rotation_quaternion = _quat_euler(v["ant_pitch"] + p1, 0, v["ant_roll"] + r1)
+    pb["antenna.1"].rotation_quaternion = _quat_euler(v["ant_pitch"], 0, v["ant_roll"])
     pb["antenna.1"].scale = (1, v["ant_len"], 1)
-    pb["antenna.2"].rotation_quaternion = _quat_euler(0.4 * v["ant_pitch"] + p2, 0, 0.4 * v["ant_roll"] + r2)
+    pb["antenna.2"].rotation_quaternion = _quat_euler(0.4 * v["ant_pitch"], 0, 0.4 * v["ant_roll"])
 
     for b in pb:
-        if b.name.startswith("foot."):
-            b.rotation_quaternion = _feet_rotation(b.bone.head_local, v["feet"])
+        if b.name in FEET:
+            delay, gain = FEET[b.name]
+            b.rotation_quaternion = _feet_rotation(b.bone.head_local, gain * clip.value("feet", t - delay))
 
     keys = rig["eyes"].data.shape_keys.key_blocks
     keys["Blink"].value = max(0.0, min(1.0, v["blink"]))
     keys["Laugh"].value = max(0.0, min(1.0, v["laugh"]))
+    keys["Tall"].value = max(0.0, min(1.0, (v["eye_h"] - 1) / (R.EYE_TALL - 1)))
 
+
+# character.build seats the mouth this far out of the glass.
+MOUTH_PROUD = 0.3 * MM
 
 KEYED = {
     "hop": ("location",), "squash": ("scale",), "body": ("location", "rotation_quaternion"),
-    "eye.L": ("location", "scale"), "eye.R": ("location", "scale"), "mouth": ("location", "scale"),
+    "eye.L": ("location", "rotation_quaternion", "scale"), "eye.R": ("location", "rotation_quaternion", "scale"),
+    "mouth": ("location", "rotation_quaternion", "scale"),
     "antenna.1": ("rotation_quaternion", "scale"), "antenna.2": ("rotation_quaternion",),
 }
+
+
+EYE_KEYS = ("Blink", "Laugh", "Tall")
 
 
 def bake(rig, clip):
@@ -416,17 +434,15 @@ def bake(rig, clip):
     kad = eyes.data.shape_keys.animation_data_create()
     ad.action = None
     kad.action = None
-    spring = _spring_series(clip)
     n = round(clip.duration * FPS)
-    feet = [b.name for b in arm.pose.bones if b.name.startswith("foot.")]
     for f in range(n + 1):
-        apply(rig, clip, f / FPS, spring[f])
+        apply(rig, clip, f / FPS)
         for bone, props in KEYED.items():
             for prop in props:
                 arm.pose.bones[bone].keyframe_insert(prop, frame=f, group=bone)
-        for bone in feet:
+        for bone in FEET:
             arm.pose.bones[bone].keyframe_insert("rotation_quaternion", frame=f, group=bone)
-        for kb in ("Blink", "Laugh"):
+        for kb in EYE_KEYS:
             eyes.data.shape_keys.key_blocks[kb].keyframe_insert("value", frame=f)
     act, kact = ad.action, kad.action
     act.name, kact.name = clip.name, clip.name + "__eyes"

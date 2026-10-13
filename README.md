@@ -5,9 +5,13 @@
 ## Getting started
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
+
+The project uses **pnpm** (version pinned in `package.json` → `packageManager`; enable it with
+`corepack enable`). `pnpm-lock.yaml` is the lockfile of record. `package-lock.json` is a
+leftover from the create-next-app scaffold and is pending removal — don't install with npm.
 
 Open [http://localhost:3000](http://localhost:3000).
 

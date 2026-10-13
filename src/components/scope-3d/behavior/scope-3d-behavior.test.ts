@@ -55,7 +55,8 @@ test("no behaviour plays three times in a row — even with an adversarial RNG",
 
 test("selection follows the configured weights (±3%)", () => {
   const n = 20_000
-  const seq = runAutonomous(n, mulberry32(42)).map((p) => p.behavior)
+  // Autonomous plays only (the first test asserts this), so the narrowing is safe.
+  const seq = runAutonomous(n, mulberry32(42)).map((p) => p.behavior as AutonomousBehavior)
   const counts = Object.fromEntries(AUTONOMOUS_BEHAVIORS.map((b) => [b, 0])) as Record<AutonomousBehavior, number>
   for (const b of seq) counts[b]++
   for (const b of AUTONOMOUS_BEHAVIORS) {
@@ -140,6 +141,25 @@ test("click while idle plays the reaction without a stop command", () => {
   assert.equal(cmds.length, 1)
   assert.equal(plays(cmds)[0].behavior, "ClickReaction")
   assert.equal(plays(cmds)[0].timeScale, 1)
+  // Short fade-in: the reaction starts at rest; a long fade would flatten its anticipation.
+  assert.equal(plays(cmds)[0].fadeInMs, DEFAULT_SCOPE_3D_BEHAVIOR.reactionFadeInMs)
+  assert.ok(DEFAULT_SCOPE_3D_BEHAVIOR.reactionFadeInMs < DEFAULT_SCOPE_3D_BEHAVIOR.interruptFadeMs)
+})
+
+test("schedule re-arms the timer while idle and is ignored while busy", () => {
+  const b = createScope3DBehavior({ random: mulberry32(6) })
+  b.schedule(5_000, 0)
+  assert.equal(b.nextAutonomousAt, 5_000)
+  assert.equal(plays(b.update(5_000)).length, 1)
+
+  b.schedule(5_100, 0) // busy: no effect, no second clip
+  assert.equal(b.state, "RANDOM_ANIMATION")
+  assert.deepEqual(b.update(5_100), [])
+
+  const idle = createScope3DBehavior({ random: mulberry32(6) })
+  idle.schedule(40_000)
+  const gap = idle.nextAutonomousAt! - 40_000
+  assert.ok(gap >= 8_000 && gap <= 20_000, `gap ${gap}`)
 })
 
 test("reduced motion: only blinks, and a click answers with a blink", () => {

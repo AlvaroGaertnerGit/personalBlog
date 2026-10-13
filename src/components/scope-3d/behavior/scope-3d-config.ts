@@ -34,8 +34,14 @@ export interface Scope3DBehaviorConfig {
   /** Where Laugh begins inside ClickReaction (state CLICK_STRETCH -> CLICK_LAUGH). */
   clickLaughAtMs: number
   fadeInMs: number
-  /** Fade used to cut an autonomous behaviour short when the visitor clicks. */
+  /** Fade used to cut an autonomous behaviour short when the visitor clicks (eased). */
   interruptFadeMs: number
+  /**
+   * Fade-in of the click reaction. Short: every clip starts at rest with zero
+   * velocity, so the fade only covers the handover — a long one would flatten
+   * the stretch's anticipation.
+   */
+  reactionFadeInMs: number
   /** Settling time after a clip before the next timer starts. */
   returnMs: number
   /** prefers-reduced-motion: only blinks, and a click answers with a blink. */
@@ -46,19 +52,21 @@ export const DEFAULT_SCOPE_3D_BEHAVIOR: Scope3DBehaviorConfig = {
   intervalMs: { min: 8_000, max: 20_000 },
   weights: { LookAround: 0.3, Tilt: 0.2, Bounce: 0.15, BlinkDouble: 0.2, Focus: 0.15 },
   maxConsecutive: 2,
-  variation: { timeScale: [0.9, 1.1], weight: [0.85, 1.1] },
+  // Amplitude ≥ 0.9: the blink peaks are authored at 1.05–1.1, so every blink still closes.
+  variation: { timeScale: [0.9, 1.1], weight: [0.9, 1.1] },
   mirrorable: ["LookAround", "Tilt", "Focus"],
   durationsMs: {
-    LookAround: 1_500,
-    Tilt: 1_200,
-    Bounce: 900,
-    BlinkDouble: 1_000,
-    Focus: 1_300,
-    ClickReaction: 2_500,
+    LookAround: 2_600,
+    Tilt: 1_900,
+    Bounce: 1_200,
+    BlinkDouble: 1_200,
+    Focus: 2_400,
+    ClickReaction: 2_800,
   },
   clickLaughAtMs: 1_000,
   fadeInMs: 250,
-  interruptFadeMs: 180,
-  returnMs: 300,
+  interruptFadeMs: 350,
+  reactionFadeInMs: 120,
+  returnMs: 400,
   reducedMotion: false,
 }

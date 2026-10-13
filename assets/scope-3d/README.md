@@ -15,8 +15,11 @@ blender/scope-master.blend   modelo + rig + 12 clips (fuente editable; se regene
 exports/scope.glb            glTF 2.0 con skin, morph targets Blink/Laugh y 12 animaciones (aún no optimizado para web)
 exports/scope-clips.json     duraciones y marcadores de los clips (los lee la máquina de estados y sus pruebas)
 renders/model/<luz>/         vistas del modelo en reposo (luz cálida, como la hoja, y fría)
-renders/animation/           hojas de contacto de cada clip y de la secuencia del clic
-reports/                     ENVIRONMENT.md (entorno headless), VALIDATION.md (comprobaciones medidas)
+renders/animation/           hojas de contacto de cada clip y de la secuencia del clic (Blender)
+renders/web/                 comparativas antes/después en el navegador y vídeos (videos/*.webm)
+reports/                     VALIDATION.md (comprobaciones medidas), POLISH_REVIEW.md (nitidez, ojos,
+                             movimiento, rendimiento), web-metrics.json, revisiones anteriores
+approved/2026-10-13-v1/      copia recuperable del modelo v1 aprobado (.blend, .glb, clips, scripts, hojas)
 scripts/                     pipeline (ver abajo)
 ```
 
@@ -38,7 +41,8 @@ S=assets/scope-3d/scripts
 "$B" --background --factory-startup --python $S/validate_scope.py # comprobaciones + export + reimport -> reports/VALIDATION.md
 "$B" --background --factory-startup --python $S/render_clips.py   # hojas de contacto -> renders/animation/
 "$B" --background --factory-startup --python $S/render_views.py   # vistas del modelo -> renders/model/
-node --test src/components/scope-3d/behavior/scope-3d-behavior.test.ts   # máquina de estados
+node --test src/components/scope-3d/behavior/scope-3d-behavior.test.ts src/components/scope-3d/engine/scope-3d-animator.test.ts
+node assets/scope-3d/scripts/web/measure-web.mjs http://localhost:3000   # mediciones en Chrome real (con pnpm dev)
 ```
 
 `build_scope.py` se niega a añadir el rig si la carcasa generada deja de coincidir con
@@ -56,6 +60,7 @@ propósito, actualiza esa firma conscientemente.
 | `render_clips.py` | Hojas de contacto por clip y de la secuencia del clic |
 | `render_views.py` | Vistas estáticas con el estudio estándar |
 | `approved-geometry.json` | Firma de la geometría aprobada |
+| `web/measure-web.mjs` | Mediciones reproducibles en el navegador (Playwright + Chrome): nitidez, continuidad, antena, patas, rendimiento |
 
 | Módulo (`scripts/scope3d/`) | Responsabilidad |
 |---|---|
@@ -64,8 +69,8 @@ propósito, actualiza esa firma conscientemente.
 | `geometry.py` | Superficie analítica de la carcasa, patas, boca, antena, acento |
 | `materials.py` | Cerámica mineral, cristal, ojos y acento (Principled BSDF) |
 | `character.py` | Monta las piezas en la pose de reposo |
-| `rig.py` | Armature, pesos y malla de ojos con shape keys `Blink` / `Laugh` |
-| `clips.py` | Clips como curvas de tiempo, muelle de la antena, horneado a acciones y pistas NLA |
+| `rig.py` | Armature, pesos y malla de ojos envuelta sobre el cristal con shape keys `Blink` / `Laugh` / `Tall` |
+| `clips.py` | Clips como curvas de tiempo (patas desfasadas, ojos que giran con el cristal), horneado a acciones y pistas NLA. El muelle de la antena es de runtime |
 | `export.py` | Exportación glTF (compartida por export y validación) |
 | `studio.py` | Estudio de render: mundo, luces cálida/fría, cámaras, Cycles CPU, bloom |
 | `sheets.py` | Hojas de contacto con numpy |

@@ -1,0 +1,193 @@
+{
+  "baseUrl": "http://localhost:3100",
+  "date": "2026-10-13T20:29:01.854Z",
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 Ti (0x00002182) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "load": {
+    "readyMs": 3995,
+    "glbMB": 2.94,
+    "fetchMs": 866,
+    "parseMs": 28,
+    "envelopeMs": 378,
+    "triangles": 97212,
+    "vertices": 48955,
+    "joints": 14,
+    "morphTargets": [
+      "Blink",
+      "Laugh",
+      "Tall"
+    ]
+  },
+  "sharpness160": {
+    "1x (MSAA only, previous renderer)": {
+      "meanError": 6.88,
+      "crawlingPxPerFrame": 119.1
+    },
+    "auto (3x, resolved after tone mapping)": {
+      "meanError": 3.53,
+      "crawlingPxPerFrame": 8.2
+    }
+  },
+  "continuity": {
+    "autonomous, click at 0.9 s, back to idle": {
+      "states": "IDLE > RANDOM_ANIMATION > CLICK_STRETCH > CLICK_LAUGH > RETURN_TO_IDLE",
+      "maxSpeedMmPerFrame": 2.6,
+      "maxAccelMmPerFrame2": 1.159,
+      "at": "antenna2 during CLICK_LAUGH"
+    },
+    "click from idle (full reaction)": {
+      "states": "IDLE > CLICK_STRETCH > CLICK_LAUGH > RETURN_TO_IDLE",
+      "maxSpeedMmPerFrame": 2.57,
+      "maxAccelMmPerFrame2": 1.162,
+      "at": "antenna2 during CLICK_LAUGH"
+    },
+    "six autonomous behaviours back to back": {
+      "states": "RANDOM_ANIMATION > RETURN_TO_IDLE > IDLE",
+      "maxSpeedMmPerFrame": 1.68,
+      "maxAccelMmPerFrame2": 0.367,
+      "at": "eyeL during RANDOM_ANIMATION"
+    }
+  },
+  "antenna": {
+    "Idle": {
+      "peakDeg": [
+        0,
+        0
+      ],
+      "settledAfterClipS": 0
+    },
+    "LookAround.L": {
+      "peakDeg": [
+        1.4,
+        0.9
+      ],
+      "settledAfterClipS": 0
+    },
+    "Tilt.L": {
+      "peakDeg": [
+        3.1,
+        2.1
+      ],
+      "settledAfterClipS": 0
+    },
+    "Bounce": {
+      "peakDeg": [
+        9.5,
+        6.8
+      ],
+      "settledAfterClipS": 0.05
+    },
+    "BlinkDouble": {
+      "peakDeg": [
+        1.2,
+        1.1
+      ],
+      "settledAfterClipS": 0
+    },
+    "Focus.L": {
+      "peakDeg": [
+        3,
+        1.5
+      ],
+      "settledAfterClipS": 0.13
+    },
+    "Stretch": {
+      "peakDeg": [
+        6.4,
+        4.3
+      ],
+      "settledAfterClipS": 0
+    },
+    "Laugh": {
+      "peakDeg": [
+        4.4,
+        2.8
+      ],
+      "settledAfterClipS": 0
+    },
+    "ClickReaction": {
+      "peakDeg": [
+        5.7,
+        4
+      ],
+      "settledAfterClipS": 0
+    }
+  },
+  "feet": {
+    "footFL": {
+      "liftS": 0.167,
+      "peakS": 0.433,
+      "peakDeg": 11
+    },
+    "footFR": {
+      "liftS": 0.183,
+      "peakS": 0.467,
+      "peakDeg": 9.8
+    },
+    "footBL": {
+      "liftS": 0.217,
+      "peakS": 0.467,
+      "peakDeg": 9
+    },
+    "footBR": {
+      "liftS": 0.233,
+      "peakS": 0.5,
+      "peakDeg": 10.1
+    }
+  },
+  "frameCost160": {
+    "ssaa 1": {
+      "ms": 2.72,
+      "internalPx": "160x160",
+      "drawCalls": 30,
+      "triangles": 194444
+    },
+    "ssaa 2": {
+      "ms": 2.86,
+      "internalPx": "320x320",
+      "drawCalls": 30,
+      "triangles": 194444
+    },
+    "ssaa 3": {
+      "ms": 3.44,
+      "internalPx": "480x480",
+      "drawCalls": 30,
+      "triangles": 194444
+    }
+  },
+  "live": {
+    "fps": 143,
+    "mainThreadMs": 0.67,
+    "quality": {
+      "pixelRatio": 1,
+      "ssaa": 3
+    },
+    "governed": false
+  },
+  "offscreen": {
+    "sleepingWhenScrolledAway": true,
+    "clockAdvancedWhileAwayMs": 0,
+    "awakeAgain": true
+  },
+  "cpuThrottled4x": {
+    "fps": 143,
+    "mainThreadMs": 2.13,
+    "quality": {
+      "pixelRatio": 1,
+      "ssaa": 3
+    },
+    "governed": false
+  },
+  "cpuThrottled6x": {
+    "fps": 118,
+    "mainThreadMs": 2.67,
+    "quality": {
+      "pixelRatio": 1,
+      "ssaa": 3
+    },
+    "governed": false
+  },
+  "reducedMotion": {
+    "director": true,
+    "secondary": true
+  }
+}

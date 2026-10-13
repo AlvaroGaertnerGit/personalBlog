@@ -6,12 +6,14 @@ import { Reveal } from "@/components/motion/reveal"
 import { ProjectCard } from "./project-card"
 import { PROJECTS, PROJECTS_INTRO } from "./projects-content"
 import { MathViewWorld } from "./worlds/mathview-world"
+import { SportCoachWorld } from "./worlds/sport-coach-world"
 import { TournamentlyWorld } from "./worlds/tournamently-world"
 
 // Each project's world is its own client leaf (src/components/sections/worlds/)
 // — mapped by id here rather than stored as a component reference in
 // projects-content.ts, which stays plain data (no JSX/component values).
 const PROJECT_WORLDS: Record<string, ComponentType> = {
+  "sport-coach": SportCoachWorld,
   tournamently: TournamentlyWorld,
   mathview: MathViewWorld,
 }
