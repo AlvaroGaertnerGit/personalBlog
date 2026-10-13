@@ -1,0 +1,4 @@
+{
+  "note": "Signature of the approved v3 shell (vertex count + positional checksum, see build_scope.py). Captured from the approved v3 model on 2026-10-13. If a code change alters it, build_scope.py refuses to rig: the approved geometry has changed.",
+  "Scope_Shell": {"verts": 44802, "checksum": 91.070362}
+}

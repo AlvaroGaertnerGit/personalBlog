@@ -1,0 +1,146 @@
+{
+  "fps": 30,
+  "clips": {
+    "Idle": {
+      "duration": 8.4,
+      "loop": true,
+      "markers": {
+        "start": 0,
+        "inhale": 2.1,
+        "full": 4.2,
+        "exhale": 6.3,
+        "end": 8.4
+      }
+    },
+    "LookAround.L": {
+      "duration": 1.5,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "eyes lead": 0.2,
+        "look left": 0.5,
+        "swing": 0.78,
+        "look right": 1.06,
+        "end": 1.5
+      }
+    },
+    "LookAround.R": {
+      "duration": 1.5,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "eyes lead": 0.2,
+        "look left": 0.5,
+        "swing": 0.78,
+        "look right": 1.06,
+        "end": 1.5
+      }
+    },
+    "Tilt.L": {
+      "duration": 1.2,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "anticipation": 0.18,
+        "tilting": 0.34,
+        "peak": 0.6,
+        "recovery": 0.95,
+        "end": 1.2
+      }
+    },
+    "Tilt.R": {
+      "duration": 1.2,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "anticipation": 0.18,
+        "tilting": 0.34,
+        "peak": 0.6,
+        "recovery": 0.95,
+        "end": 1.2
+      }
+    },
+    "Bounce": {
+      "duration": 0.9,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "squash": 0.17,
+        "push": 0.27,
+        "apex": 0.43,
+        "landing": 0.68,
+        "end": 0.9
+      }
+    },
+    "BlinkDouble": {
+      "duration": 1.0,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "first close": 0.21,
+        "open": 0.8,
+        "second close": 0.59,
+        "end": 1.0
+      }
+    },
+    "Focus.L": {
+      "duration": 1.3,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "eyes find it": 0.24,
+        "orient": 0.42,
+        "hold": 0.75,
+        "release": 1.1,
+        "end": 1.3
+      }
+    },
+    "Focus.R": {
+      "duration": 1.3,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "eyes find it": 0.24,
+        "orient": 0.42,
+        "hold": 0.75,
+        "release": 1.1,
+        "end": 1.3
+      }
+    },
+    "Stretch": {
+      "duration": 1.6,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "anticipation": 0.24,
+        "stretching": 0.52,
+        "peak": 0.9,
+        "recoil": 1.2,
+        "end": 1.6
+      }
+    },
+    "Laugh": {
+      "duration": 1.5,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "eyes melt": 0.18,
+        "chuckle": 0.75,
+        "settling": 1.25,
+        "end": 1.5
+      }
+    },
+    "ClickReaction": {
+      "duration": 2.5,
+      "loop": false,
+      "markers": {
+        "start": 0,
+        "stretch peak": 0.9,
+        "laugh": 1.0,
+        "recoil": 1.2,
+        "chuckle": 1.6,
+        "end": 2.5
+      }
+    }
+  }
+}
