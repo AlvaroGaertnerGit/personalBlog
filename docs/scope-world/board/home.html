@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pliego · home (desktop)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  /* A composition, not production code: the Blender render is the world; everything
+     typographic here is real HTML so type and content can be judged as they would ship. */
+  :root { --ink: #1c1b21; --ink-soft: #4a4853; --paper: #ede6d8; --margin: #9a3b2a; --amber: #f2b65a; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0b1220; }
+  body { font-family: Geist, system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .world { position: absolute; inset: 0; background: url(../renders/home.jpg) center / cover no-repeat; }
+  /* the lower-left is open, ruled paper: the type sits on the sheet like print */
+  .wash { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(237,230,216,.55) 0%, rgba(237,230,216,.22) 34%, transparent 52%),
+                linear-gradient(0deg, rgba(237,230,216,.5) 0%, transparent 30%); }
+  header { position: absolute; inset: 0 0 auto; height: 88px; padding: 0 64px; display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(180deg, rgba(237,230,216,.78), rgba(237,230,216,0)); }
+  .mark { font-weight: 600; font-size: 17px; letter-spacing: -0.01em; display: flex; gap: 12px; align-items: center; }
+  .mark i { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 12px 2px rgba(242,182,90,.7); }
+  nav { display: flex; gap: 34px; font-size: 15px; font-weight: 500; }
+  nav a { color: var(--ink); text-decoration: none; }
+  nav a span { display: block; font: 400 11px "Geist Mono", monospace; color: var(--ink-soft); margin-top: 2px; letter-spacing: .02em; }
+  .copy { position: absolute; left: 64px; bottom: 150px; width: 1000px; }
+  .kicker { font: 500 14px "Geist Mono", monospace; letter-spacing: .02em; color: var(--ink-soft); display: flex; gap: 14px; align-items: center; }
+  .kicker b { width: 34px; height: 1.5px; background: var(--margin); display: inline-block; }
+  h1 { font-weight: 600; font-size: 132px; line-height: .9; letter-spacing: -0.052em; margin-top: 22px; }
+  .lede { font-size: 30px; line-height: 1.28; letter-spacing: -0.015em; margin-top: 30px; max-width: 900px; }
+  .lede em { display: block; margin-top: 6px; }
+  .lede em { font-family: Newsreader, serif; font-style: italic; font-size: 33px; }
+  .actions { position: absolute; left: 64px; bottom: 64px; display: flex; gap: 26px; align-items: center; font-size: 16px; font-weight: 500; }
+  .walk { background: var(--ink); color: var(--paper); padding: 15px 24px; border-radius: 999px; display: inline-flex; gap: 12px; align-items: center; }
+  .walk kbd { font: 400 12px "Geist Mono", monospace; opacity: .6; }
+  .direct { color: var(--ink); border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; }
+  /* the route: the map is also the navigation; the current place is lit */
+  .route { position: absolute; right: 64px; bottom: 64px; display: flex; align-items: center; gap: 0; font: 400 12px "Geist Mono", monospace; color: var(--ink-soft); }
+  .route li { list-style: none; display: flex; align-items: center; gap: 10px; }
+  .route li + li::before { content: ""; width: 46px; height: 1px; background: currentColor; opacity: .5; margin: 0 14px; }
+  .route i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; }
+  .route .on { color: var(--ink); }
+  .route .on i { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 10px rgba(242,182,90,.9); }
+  .route-box { background: rgba(237,230,216,.72); backdrop-filter: blur(6px); padding: 14px 20px; border-radius: 999px; }
+</style>
+</head>
+<body>
+  <div class="world" role="img" aria-label="Scope at the margin of the sheet at dawn; the field of questions behind, the lamp lit in the distance"></div>
+  <div class="wash"></div>
+  <header>
+    <div class="mark"><i aria-hidden="true"></i>Álvaro Gaertner</div>
+    <nav aria-label="Primary">
+      <a href="#">Work<span>the light</span></a>
+      <a href="#">Notebook<span>the questions</span></a>
+      <a href="#">Teaching<span>the class</span></a>
+      <a href="#">About<span>the margin</span></a>
+      <a href="#">Contact<span>the lamp</span></a>
+    </nav>
+  </header>
+  <section class="copy">
+    <p class="kicker"><b></b>Software Development teacher · Gredos San Diego Guadarrama, Spain</p>
+    <h1>Álvaro Gaertner</h1>
+    <p class="lede">I teach how to build with AI. Then I go build it myself. <em>Everything I learn turns into something I build or something I teach.</em></p>
+  </section>
+  <div class="actions">
+    <span class="walk">Walk in <kbd>scroll ↓</kbd></span>
+    <span class="direct">Go straight to the work</span>
+  </div>
+  <ol class="route route-box" aria-label="Where you are">
+    <li class="on"><i></i>Margin</li><li><i></i>Questions</li><li><i></i>The light</li><li><i></i>Class</li><li><i></i>Lamp</li>
+  </ol>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A · Margen — composición esquemática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  body { background:
+    radial-gradient(ellipse 70% 60% at 8% 0%, oklch(0.99 0.012 80), transparent 70%), var(--paper); }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .sig { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+  nav { display: flex; gap: 28px; font: 400 12px var(--mono); color: var(--ink-soft); }
+  nav span b { color: var(--ink); font-weight: 500; }
+  .toggle { width: 40px; height: 22px; border-radius: 11px; border: 1px solid var(--rule); position: relative; }
+  .toggle::after { content: ""; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--amber); }
+
+  .hero { padding-top: 9vh; }
+  .kicker { grid-column: 3 / span 8; font: 400 12px var(--mono); color: var(--ink-soft); letter-spacing: 0.02em; }
+  h1 { grid-column: 1 / -1; font-weight: 600; font-size: clamp(64px, 12.4vw, 184px); line-height: 0.86; letter-spacing: -0.055em; margin-top: 18px; }
+  h1 .l2 { display: block; padding-left: 16.6%; }
+  .rule-row { grid-column: 1 / -1; position: relative; margin-top: 4vh; border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
+  .rule-row .scope-seat { grid-column: 1 / span 2; width: 150px; margin-bottom: -1px; }
+  .rule-row .scope-seat img { width: 150px; }
+  .lede { grid-column: 3 / span 6; font-size: 26px; line-height: 1.3; letter-spacing: -0.015em; padding-bottom: 22px; }
+  .lede em { font-family: var(--serif); font-style: italic; font-size: 1.08em; }
+  .meta { grid-column: 10 / span 3; font: 400 12px/1.7 var(--mono); color: var(--ink-soft); padding-bottom: 22px; }
+  .meta b { color: var(--ink); font-weight: 500; }
+
+  .chapter { margin-top: 18vh; }
+  .chap-no { grid-column: 1 / span 2; font: 400 12px var(--mono); color: var(--ink-soft); padding-top: 14px; border-top: 1px solid var(--ink); }
+  .chap-title { grid-column: 3 / -1; font-weight: 600; font-size: clamp(44px, 6.4vw, 96px); line-height: 0.95; letter-spacing: -0.045em; padding-top: 10px; border-top: 1px solid var(--ink); }
+  .project { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; margin-top: 64px; }
+  .p-no { grid-column: 1 / span 2; font: 400 12px var(--mono); color: var(--ink-soft); }
+  .p-body { grid-column: 3 / span 4; }
+  .p-body h3 { font-size: 40px; letter-spacing: -0.035em; font-weight: 600; line-height: 1; }
+  .p-body p { margin-top: 14px; font-size: 17px; line-height: 1.5; color: var(--ink-soft); max-width: 34ch; }
+  .p-body .stack { margin-top: 18px; font: 400 12px var(--mono); color: var(--ink-soft); }
+  .p-body a { display: inline-block; margin-top: 22px; font-weight: 500; font-size: 15px; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+  .shot { grid-column: 7 / span 6; margin-right: -48px; aspect-ratio: 16 / 10; border-radius: 4px 0 0 4px; position: relative;
+    background: linear-gradient(135deg, oklch(0.9 0.02 70), oklch(0.82 0.03 60)); overflow: visible; }
+  .shot .ph { position: absolute; inset: 0; display: grid; place-items: center; font: 400 12px var(--mono); color: oklch(0.4 0.02 60); }
+  .shot .ui { position: absolute; inset: 9% 8%; border-radius: 6px; background: oklch(0.99 0.005 80); box-shadow: 18px 22px 40px oklch(0.3 0.03 60 / 0.18); }
+  .shot .ui::before { content: ""; position: absolute; left: 6%; right: 40%; top: 12%; height: 10%; background: oklch(0.9 0.01 80); border-radius: 3px; }
+  .shot .ui::after { content: ""; position: absolute; left: 6%; right: 6%; top: 34%; bottom: 10%; background: repeating-linear-gradient(0deg, oklch(0.93 0.01 80) 0 10px, transparent 10px 26px); }
+  .shot .scope-seat { position: absolute; top: -127px; left: 8%; width: 110px; }
+  .note { grid-column: 1 / span 2; grid-row: 2; align-self: start; margin-top: 18px; max-width: 18ch; font: italic 400 15px/1.45 var(--serif); color: var(--ink-soft); }
+  .annot { position: absolute; font: 500 11px/1.4 var(--mono); color: var(--amber-deep); max-width: 220px; }
+  .annot::before { content: "↳ "; }
+  @media (max-width: 760px) {
+    .wrap { padding: 0 18px; }
+    nav { display: none; }
+    .grid, .rule-row, .project { grid-template-columns: repeat(4, 1fr); column-gap: 12px; }
+    .kicker { grid-column: 1 / -1; }
+    h1 { font-size: 21vw; } h1 .l2 { padding-left: 0; }
+    .rule-row .scope-seat { grid-column: 1 / span 2; width: 120px; } .rule-row .scope-seat img { width: 120px; }
+    .lede { grid-column: 1 / -1; font-size: 21px; order: -1; padding-bottom: 28px; }
+    .meta { grid-column: 3 / span 2; align-self: end; }
+    .chap-no { grid-column: 1 / -1; } .chap-title { grid-column: 1 / -1; border-top: 0; }
+    .p-no, .p-body, .shot, .note { grid-column: 1 / -1; }
+    .shot { margin: 120px -18px 0 0; order: -1; }
+    .annot { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="sig">Álvaro Gaertner</span>
+    <nav><span><b>01</b> Who</span><span><b>02</b> Work</span><span><b>03</b> Notebook</span><span><b>04</b> Write</span></nav>
+    <span class="toggle" aria-hidden="true"></span>
+  </header>
+
+  <section class="hero grid">
+    <p class="kicker">Software Development teacher · builder · Spain</p>
+    <h1>Álvaro<span class="l2">Gaertner</span></h1>
+    <div class="rule-row">
+      <span class="scope-seat"><img src="assets/scope-looking.webp" alt="Scope"></span>
+      <p class="lede">I teach developers the AI-native workflows I use to ship real software — <em>and then I go build it myself.</em></p>
+      <p class="meta"><b>Now</b> teaching at Gredos San Diego<br><b>Building</b> Tournamently, Sport Coach<br><b>GitHub</b> · <b>LinkedIn</b></p>
+    </div>
+  </section>
+
+  <section class="chapter grid">
+    <span class="chap-no">02 — Work</span>
+    <h2 class="chap-title">Where the philosophy turns into software.</h2>
+    <article class="project">
+      <span class="p-no">02.1</span>
+      <div class="p-body">
+        <h3>Tournamently</h3>
+        <p>Padel tournaments, organised end to end: brackets, scheduling and live results.</p>
+        <p class="stack">Next.js · TypeScript · Supabase</p>
+        <a href="#">Case study →</a>
+      </div>
+      <div class="shot">
+        <div class="ui"></div>
+        <span class="ph" style="align-items:end;padding-bottom:8px">[ captura real del producto, a sangre ]</span>
+        <span class="scope-seat"><img src="assets/scope-front.webp" alt="" style="width:110px"></span>
+      </div>
+      <p class="note">Scope rests on the edge of the work — the screenshot is a surface, not a frame.</p>
+    </article>
+  </section>
+  <div style="height:12vh"></div>
+</div>
+<span class="annot" style="left:230px;top:712px">la línea de la entrada aterriza aquí: es la regla del hero</span>
+<p class="schematic"><b>A · Margen</b> — composición esquemática, no diseño final · Scope = render real</p>
+</body>
+</html>

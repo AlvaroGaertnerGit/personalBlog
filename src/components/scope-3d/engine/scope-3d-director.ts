@@ -101,6 +101,15 @@ export class Scope3DDirector {
     this.execute(commands, "click")
   }
 
+  /**
+   * The page asks for a behaviour (a mood on the site). Goes through the state
+   * machine: honoured only from IDLE, so it never cuts anything short.
+   */
+  request(behavior: AutonomousBehavior) {
+    if (!this.autonomousOn) return
+    this.execute(this.behavior.request(this.clock, behavior), "page")
+  }
+
   /** Lab: play one clip by hand (autonomous mode switches off). */
   playManual(clip: string, options: Scope3DPlayOptions = {}) {
     if (clip === IDLE_CLIP) return this.returnToIdle()
@@ -171,7 +180,7 @@ export class Scope3DDirector {
     }
   }
 
-  private execute(commands: Scope3DCommand[], source: "auto" | "click") {
+  private execute(commands: Scope3DCommand[], source: "auto" | "click" | "page") {
     for (const cmd of commands) {
       if (cmd.type === "stop") {
         this.animator.stop(cmd.clip, cmd.fadeOutMs)

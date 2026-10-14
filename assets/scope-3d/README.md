@@ -3,8 +3,9 @@
 Versión 3D definitiva de Scope: modelo aprobado, rig y 12 animaciones. Todo se genera
 mediante scripts (`bpy`) en Blender en modo headless.
 
-**Estado:** base definitiva aprobada. **No integrado en la web**: el Scope 2D
-(`src/components/scope/`) sigue siendo el de producción.
+**Estado:** integrado en la web (2026-10-14) como el compañero del sitio
+(`src/components/scope-3d/scope-live.tsx`), con la pantalla de entrada «Scope está
+explorando» (`src/components/scope-3d/entry/`). Ver «Web» más abajo.
 
 Documentación:
 - `docs/scope-docs/SCOPE_3D_MODEL.md`: modelo y decisiones de diseño.
@@ -74,3 +75,46 @@ propósito, actualiza esa firma conscientemente.
 | `export.py` | Exportación glTF (compartida por export y validación) |
 | `studio.py` | Estudio de render: mundo, luces cálida/fría, cámaras, Cycles CPU, bloom |
 | `sheets.py` | Hojas de contacto con numpy |
+
+## Web (producción)
+
+Recursos en `public/scope/` (todos regenerables; nunca editar a mano):
+
+| Archivo | Tamaño | Origen |
+|---|---|---|
+| `scope.glb` | 698 KB (359 KB gzip) | `exports/scope.glb` + gltf-transform: `resample` y `meshopt` (posición 16 bits, normales 12) |
+| `scope-still.webp` | 7 KB | Scope en reposo desde la cámara exacta del sitio: sustituye al 3D (sin WebGL, error, timeout) en su mismo sitio |
+| `loader/still.webp` | 9 KB | primer fotograma del loader (primer pintado, movimiento reducido) |
+| `loader/loop.avif` / `.webp` | 362 / 598 KB | bucle de espera, 78 fotogramas a 24 fps (hoja de sprites) |
+| `loader/exit.avif` / `.webp` | 169 / 294 KB | salida (Bounce + ojos de Laugh), 36 fotogramas |
+| `loader/manifest.json` | — | tamaño, rejilla, fotogramas «quiet» y ventana «hold» |
+
+```sh
+# 1. GLB web (NODE_OPTIONS=--use-system-ca si la red intercepta TLS)
+npx @gltf-transform/cli@4 resample assets/scope-3d/exports/scope.glb /tmp/r.glb
+npx @gltf-transform/cli@4 meshopt /tmp/r.glb public/scope/scope.glb --level medium \
+    --quantize-position 16 --quantize-normal 12 --quantize-texcoord 14
+node assets/scope-3d/scripts/web/web-envelope.ts --write   # encuadre precalculado (scope-3d-web-envelope.ts)
+
+# 2. Fotogramas del loader (Cycles CPU, ~10 min) y fondo del compañero
+"$B" --background --factory-startup --python $S/render_loader.py -- --out /tmp/loader --res 800 --samples 48
+"$B" --background --factory-startup --python $S/render_loader.py -- --out /tmp/loader --res 384 --samples 64 \
+    --only dock --camera 0.09252,0.15516,0.41733,-0.00029,0.08766,-0.00456   # cámara del sitio (fitCameraToEnvelope)
+node assets/scope-3d/scripts/web/encode-loader.mjs /tmp/loader                # -> public/scope/loader + scope-still.webp
+
+# 3. Pruebas (incluye que el encuadre guardado coincide con el GLB)
+node --test src/components/scope-3d/**/*.test.ts
+```
+
+`render_loader.py` no crea movimiento nuevo: compone canales de los clips aprobados
+(bucle = Idle acelerado a 3,25 s + Focus.R + parpadeo simple del runtime; salida = Idle +
+Bounce + trayectoria de ojos de Laugh), comprueba que `apply()` reproduce las acciones
+horneadas (desviación 0) y simula el muelle de la antena con las constantes de
+`scope-3d-secondary.ts`. Cámara = dirección y FOV de la web. El `.blend` no se guarda.
+
+**Formato del loader:** hojas de sprites AVIF (WebP si el navegador no tiene AVIF) en un
+canvas 2D. Se descartaron: GIF (calidad/tamaño), WebP animado en `<img>` (sin control
+de fotograma: la salida no puede esperar a un fotograma «quiet») y vídeo con alfa (VP9
+alfa no funciona en Safari; HEVC alfa no se puede codificar aquí). A densidad 2× las hojas
+pesaban 1,27 MB y 73 MB decodificadas; a 1,6× (≥ 2× en móvil) 531 KB y 46 MB, que se
+liberan al terminar la entrada.

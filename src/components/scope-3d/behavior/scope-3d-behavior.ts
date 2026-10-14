@@ -53,6 +53,12 @@ export interface Scope3DBehavior {
   /** The visitor clicked Scope. */
   click(nowMs: number): Scope3DCommand[]
   /**
+   * The page asks for one autonomous behaviour now (a mood on the site, e.g.
+   * acknowledging a hover). Only from IDLE — it never interrupts a behaviour
+   * or the click reaction — and it counts in the repeat rule like any other.
+   */
+  request(nowMs: number, behavior: AutonomousBehavior): Scope3DCommand[]
+  /**
    * Re-arm the autonomous timer: the next behaviour is due `delayMs` from now
    * (a fresh random interval when omitted). Only acts while IDLE — a running
    * behaviour or reaction re-arms the timer itself when it ends.
@@ -122,6 +128,15 @@ export function createScope3DBehavior({ config, random = Math.random, startMs = 
     return { type: "play", behavior, clip, timeScale, weight, fadeInMs }
   }
 
+  function start(now: number, behavior: AutonomousBehavior): Scope3DPlayCommand {
+    history.push(behavior)
+    current = playCommand(behavior, cfg.fadeInMs)
+    endsAt = now + cfg.durationsMs[behavior] / current.timeScale
+    state = "RANDOM_ANIMATION"
+    nextAt = null
+    return current
+  }
+
   function startReturn(now: number) {
     state = "RETURN_TO_IDLE"
     current = null
@@ -143,13 +158,7 @@ export function createScope3DBehavior({ config, random = Math.random, startMs = 
       switch (state) {
         case "IDLE": {
           if (nextAt === null || now < nextAt) return []
-          const behavior = pick()
-          history.push(behavior)
-          current = playCommand(behavior, cfg.fadeInMs)
-          endsAt = now + cfg.durationsMs[behavior] / current.timeScale
-          state = "RANDOM_ANIMATION"
-          nextAt = null
-          return [current]
+          return [start(now, pick())]
         }
         case "RANDOM_ANIMATION":
         case "CLICK_LAUGH":
@@ -190,6 +199,15 @@ export function createScope3DBehavior({ config, random = Math.random, startMs = 
       nextAt = null
       commands.push(current)
       return commands
+    },
+
+    request(now, behavior) {
+      if (state !== "IDLE") return []
+      // Reduced motion keeps its blink-only pool, whatever the page asks for.
+      const wanted = cfg.reducedMotion ? "BlinkDouble" : behavior
+      // Same repeat rule as the random pick (reduced motion's pool of one is exempt there too).
+      if (!cfg.reducedMotion && !pool().includes(wanted)) return []
+      return [start(now, wanted)]
     },
 
     schedule(now, delayMs) {

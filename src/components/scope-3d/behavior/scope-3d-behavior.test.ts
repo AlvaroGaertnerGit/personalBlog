@@ -162,6 +162,33 @@ test("schedule re-arms the timer while idle and is ignored while busy", () => {
   assert.ok(gap >= 8_000 && gap <= 20_000, `gap ${gap}`)
 })
 
+test("request plays the asked behaviour from IDLE only, and keeps the repeat rule", () => {
+  const b = createScope3DBehavior({ random: mulberry32(8) })
+  const first = plays(b.request(1_000, "Bounce"))
+  assert.equal(first.length, 1)
+  assert.equal(first[0].behavior, "Bounce")
+  assert.equal(b.state, "RANDOM_ANIMATION")
+  assert.deepEqual(b.request(1_100, "Tilt"), [], "busy: ignored, nothing interrupted")
+
+  // A click reaction is never interrupted by a request either.
+  const c = createScope3DBehavior({ random: mulberry32(8) })
+  c.click(0)
+  assert.deepEqual(c.request(100, "Focus"), [])
+
+  // Third Bounce in a row is refused, a different behaviour is not.
+  let now = 0
+  const r = createScope3DBehavior({ random: mulberry32(8) })
+  const settle = () => {
+    for (let i = 0; i < 200 && r.state !== "IDLE"; i++) r.update((now += 50))
+  }
+  for (const expected of [1, 1, 0]) {
+    assert.equal(plays(r.request(now, "Bounce")).length, expected)
+    settle()
+  }
+  assert.equal(plays(r.request(now, "Tilt")).length, 1)
+  assert.deepEqual(r.history, ["Bounce", "Bounce", "Tilt"])
+})
+
 test("reduced motion: only blinks, and a click answers with a blink", () => {
   const seq = runAutonomous(50, mulberry32(4), { reducedMotion: true }).map((p) => p.behavior)
   assert.deepEqual(new Set(seq), new Set(["BlinkDouble"]))

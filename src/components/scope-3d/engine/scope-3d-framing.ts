@@ -22,6 +22,13 @@ const SETTLE_S = 0.5
 /** The shell is ~45 k vertices; every 8th still traces the silhouette within ~1.5 mm (inside the margin). */
 const VERTEX_STRIDE = 8
 
+/**
+ * The site's view of Scope: nearly frontal, a touch from above and from
+ * Scope's left, like the 2D companion. The loader frames are rendered from
+ * this same direction (assets/scope-3d/scripts/render_loader.py VIEW_DIR).
+ */
+export const SCOPE_3D_WEB_VIEW_DIRECTION = new THREE.Vector3(0.22, 0.16, 1)
+
 /** Silhouette-extreme points of every sampled pose, plus their 3D bounds. */
 export interface Scope3DMotionEnvelope {
   points: THREE.Vector3[]
@@ -103,4 +110,96 @@ export function measureMotionEnvelope(
   animator.idle.time = 0
   animator.update(0)
   return { points, box }
+}
+
+/**
+ * Places `camera` on `direction` from the envelope so every point is inside
+ * the view with `margin` (fraction of the half-frame) to spare, and the
+ * silhouette is centred. Returns the point the camera looks at.
+ */
+export function fitCameraToEnvelope(
+  camera: THREE.PerspectiveCamera,
+  { points, box }: Scope3DMotionEnvelope,
+  direction: THREE.Vector3,
+  margin = 0.06,
+): THREE.Vector3 {
+  const dir = direction.clone().normalize()
+  const target = box.getCenter(new THREE.Vector3())
+  const limit = 1 - margin
+  const place = (distance: number) => {
+    camera.position.copy(target).addScaledVector(dir, distance)
+    camera.lookAt(target)
+    camera.updateMatrixWorld()
+  }
+  const extents = () => {
+    const ndc = new THREE.Box2()
+    for (const p of points) {
+      const q = p.clone().project(camera)
+      ndc.expandByPoint(new THREE.Vector2(q.x, q.y))
+    }
+    return ndc
+  }
+  const fitDistance = () => {
+    let lo = 0.05
+    let hi = 5
+    for (let i = 0; i < 40; i++) {
+      const mid = (lo + hi) / 2
+      place(mid)
+      const e = extents()
+      const fits = Math.max(-e.min.x, e.max.x, -e.min.y, e.max.y) <= limit
+      if (fits) hi = mid
+      else lo = mid
+    }
+    place(hi)
+    return hi
+  }
+  // Two passes: fit, recentre the silhouette on screen, fit again.
+  for (let pass = 0; pass < 2; pass++) {
+    const distance = fitDistance()
+    const c = extents().getCenter(new THREE.Vector2())
+    const halfHeight = distance * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
+    const camRight = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 0)
+    const camUp = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 1)
+    target.addScaledVector(camRight, c.x * halfHeight * camera.aspect).addScaledVector(camUp, c.y * halfHeight)
+  }
+  fitDistance()
+  return target
+}
+
+/** Screen directions kept by reduceEnvelope, and how many points per direction. */
+const REDUCED_DIRECTIONS = 48
+const REDUCED_PER_DIRECTION = 3
+
+/**
+ * The few points of a measured envelope that can ever touch the frame: the
+ * most extreme ones along evenly spread screen directions (a few per
+ * direction, because perspective can promote a runner-up). The site ships
+ * these instead of measuring at load; scope-3d-framing.test.ts checks they
+ * frame Scope exactly like the full measurement.
+ */
+export function reduceEnvelope(envelope: Scope3DMotionEnvelope, viewDirection: THREE.Vector3): Scope3DMotionEnvelope {
+  const forward = viewDirection.clone().normalize().negate()
+  const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0, 1, 0)).normalize()
+  const up = new THREE.Vector3().crossVectors(right, forward)
+  const kept = new Set<THREE.Vector3>()
+  for (let k = 0; k < REDUCED_DIRECTIONS; k++) {
+    const a = (2 * Math.PI * k) / REDUCED_DIRECTIONS
+    const axis = right.clone().multiplyScalar(Math.cos(a)).addScaledVector(up, Math.sin(a))
+    const ranked = [...envelope.points].sort((p, q) => q.dot(axis) - p.dot(axis))
+    ranked.slice(0, REDUCED_PER_DIRECTION).forEach((p) => kept.add(p))
+  }
+  return { points: [...kept], box: envelope.box.clone() }
+}
+
+/** Compact form for source code: [x, y, z] in metres, box as [min, max]. */
+export interface Scope3DEnvelopeData {
+  points: readonly (readonly [number, number, number])[]
+  box: readonly [readonly [number, number, number], readonly [number, number, number]]
+}
+
+export function envelopeFromData({ points, box }: Scope3DEnvelopeData): Scope3DMotionEnvelope {
+  return {
+    points: points.map((p) => new THREE.Vector3(...p)),
+    box: new THREE.Box3(new THREE.Vector3(...box[0]), new THREE.Vector3(...box[1])),
+  }
 }

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rediseño — tablero comparativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  body { padding: 48px 40px 80px; }
+  h1 { font-size: 56px; letter-spacing: -0.045em; font-weight: 600; line-height: 1; }
+  .intro { margin-top: 14px; max-width: 72ch; color: var(--ink-soft); line-height: 1.55; }
+  .intro code { font: 400 13px var(--mono); }
+  .board { margin-top: 40px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .col { border-top: 1px solid var(--ink); padding-top: 14px; display: flex; flex-direction: column; gap: 16px; }
+  .col.rec { border-top: 3px solid var(--amber-deep); }
+  .k { font: 400 11px var(--mono); color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+  .col h2 { font-size: 26px; letter-spacing: -0.03em; font-weight: 600; line-height: 1.05; }
+  .col h2 small { display: block; font: 400 12px var(--mono); color: var(--ink-soft); letter-spacing: 0; margin-top: 6px; }
+  .concept { font: italic 400 17px/1.4 var(--serif); }
+  .shot { border-radius: 6px; overflow: hidden; border: 1px solid var(--rule); aspect-ratio: 16 / 10; background: #fff; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .pair { display: grid; grid-template-columns: 1fr 0.42fr; gap: 10px; align-items: start; }
+  .pair .m { aspect-ratio: 390 / 844; }
+  .swatches { display: flex; gap: 6px; }
+  .swatches span { flex: 1; height: 34px; border-radius: 4px; border: 1px solid var(--rule); }
+  .type { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+  .type b { color: var(--ink); }
+  svg.schema { width: 100%; height: auto; background: oklch(0.99 0.005 80); border: 1px solid var(--rule); border-radius: 6px; }
+  ul { padding-left: 18px; font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+  .score { font: 500 28px var(--mono); letter-spacing: -0.03em; }
+  .score small { font-size: 12px; color: var(--ink-soft); font-weight: 400; }
+  a { color: var(--ink); }
+  .badge { align-self: start; font: 500 11px var(--mono); background: var(--amber); color: var(--night); padding: 4px 8px; border-radius: 4px; }
+  .schematic { position: static; display: inline-block; margin-top: 18px; }
+  @media (max-width: 1100px) { .board { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { body { padding: 24px 16px; } .board { grid-template-columns: 1fr; } h1 { font-size: 40px; } }
+</style>
+</head>
+<body>
+<h1>Tres direcciones para alvarogaertner.com</h1>
+<p class="intro">Tablero comparativo de la fase de diseño. Las direcciones son <b>composiciones esquemáticas en HTML</b> (no diseño final ni código de producción); Scope aparece siempre con renders reales del modelo aprobado, hechos en Blender headless con la cámara del sitio. Los documentos que lo explican están en <code>docs/redesign/01–06</code>.</p>
+<p class="schematic"><b>Esquemas</b> — los textos de producto y las capturas son marcadores de posición</p>
+
+<div class="board">
+  <!-- ACTUAL -->
+  <section class="col">
+    <span class="k">Punto de partida</span>
+    <h2>Estado actual<small>media 5,1 en la matriz</small></h2>
+    <p class="concept">Una plantilla sólida con un personaje excelente metido en cajas.</p>
+    <div class="pair">
+      <div class="shot"><img src="../evidence/laptop-light-hero.jpg" alt="Hero actual, escritorio"></div>
+      <div class="shot m"><img src="../evidence/mobile-light-hero.jpg" alt="Hero actual, móvil"></div>
+    </div>
+    <div class="shot"><img src="../evidence/laptop-light-card-mathview.jpg" alt="Tarjeta MathView actual" style="object-fit:contain;background:#fafafa"></div>
+    <div class="swatches" title="paleta actual: grises de croma 0 + acentos de Scope en puntos"><span style="background:#fff"></span><span style="background:#f5f5f5"></span><span style="background:#e5e5e5"></span><span style="background:#737373"></span><span style="background:#0a0a0a"></span><span style="background:var(--amber);flex:.3"></span></div>
+    <p class="type"><b>Geist</b> en todo · Newsreader solo en el Notebook · Geist Mono sin uso · 11 tamaños</p>
+    <ul><li>Sin nombre visible, enlaces «#», sin pie</li><li>Scope en un marco vacío; en móvil, bajo el pliegue</li><li>Cerámica PBR + cristal neutro + vector: tres lenguajes</li></ul>
+  </section>
+
+  <!-- A -->
+  <section class="col">
+    <span class="k">Dirección A</span>
+    <h2>Margen<small>evolución editorial · media 7,4</small></h2>
+    <p class="concept">Una monografía técnica; Scope es el lector del margen, sentado sobre la regla.</p>
+    <div class="pair">
+      <div class="shot"><img src="renders/a-margen-desktop.jpg" alt="A, escritorio"></div>
+      <div class="shot m"><img src="renders/a-margen-mobile.jpg" alt="A, móvil"></div>
+    </div>
+    <svg class="schema" viewBox="0 0 320 180" aria-label="Esquema de composición A">
+      <g font-family="Geist Mono" font-size="8" fill="#8a8178">
+        <rect x="16" y="14" width="288" height="1" fill="#1d1a17"/><text x="16" y="10">firma · índice 01–04</text>
+        <rect x="16" y="28" width="210" height="44" fill="#1d1a17" opacity=".9"/><text x="232" y="52">nombre a</text><text x="232" y="62">escala cartel</text>
+        <rect x="16" y="98" width="288" height="1" fill="#1d1a17"/><circle cx="34" cy="88" r="10" fill="#c9a77f"/><text x="52" y="92">Scope sobre la regla · lede · meta</text>
+        <rect x="16" y="118" width="40" height="1" fill="#1d1a17"/><rect x="66" y="118" width="238" height="1" fill="#1d1a17"/><text x="16" y="130">02</text>
+        <rect x="66" y="136" width="90" height="30" fill="#e6dccf"/><rect x="170" y="136" width="150" height="40" fill="#d9c7b1"/><circle cx="190" cy="128" r="8" fill="#c9a77f"/>
+        <text x="66" y="176">texto 4 col · captura a sangre 6 col</text>
+      </g>
+    </svg>
+    <div class="swatches"><span style="background:var(--paper)"></span><span style="background:var(--paper-2)"></span><span style="background:var(--ink-soft)"></span><span style="background:var(--ink)"></span><span style="background:var(--amber);flex:.4"></span><span style="background:var(--night);flex:.6"></span></div>
+    <p class="type"><b>Geist 600</b> 56–184 px, tracking −5 % · <b>Geist Mono</b> índices y metadatos · <b>Newsreader</b> cursiva en citas</p>
+    <ul><li>+ Corrige todo con poco riesgo; legible y rápida</li><li>+ La línea de la entrada se convierte en la regla del hero</li><li>− Sin un momento memorable propio</li></ul>
+    <p><a href="a-margen.html">Abrir composición →</a> · 2–3 semanas</p>
+  </section>
+
+  <!-- B -->
+  <section class="col">
+    <span class="k">Dirección B</span>
+    <h2>Estudio nocturno<small>experiencia espacial · media 7,0</small></h2>
+    <p class="concept">Toda la web es un estudio de noche; la luz de Scope ilumina lo que hay cerca.</p>
+    <div class="pair">
+      <div class="shot"><img src="renders/b-estudio-desktop.jpg" alt="B, escritorio"></div>
+      <div class="shot m"><img src="renders/b-estudio-mobile.jpg" alt="B, móvil"></div>
+    </div>
+    <div class="shot"><img src="renders/b-estudio-desktop-full.jpg" alt="B, diorama MathView" style="object-position:bottom"></div>
+    <svg class="schema" viewBox="0 0 320 180" aria-label="Esquema de composición B">
+      <rect width="320" height="180" fill="#0d1220"/><g font-family="Geist Mono" font-size="8" fill="#a9a196">
+        <rect x="0" y="0" width="320" height="90" fill="#141a2b"/><text x="10" y="14">fondo: pared desenfocada</text>
+        <text x="110" y="44" font-size="14" fill="#efe6d8" font-family="Geist">Álvaro Gaertner</text>
+        <path d="M0 90 L320 90 L360 180 L-40 180Z" fill="#2b2620"/><text x="10" y="104">medio: mesa en perspectiva</text>
+        <ellipse cx="160" cy="118" rx="60" ry="14" fill="#7a5a33" opacity=".5"/><circle cx="160" cy="104" r="16" fill="#c9a77f"/>
+        <circle cx="290" cy="170" r="28" fill="#6b5a46" opacity=".5"/><text x="214" y="150">1.er plano desenfocado</text>
+      </g>
+    </svg>
+    <div class="swatches"><span style="background:var(--night)"></span><span style="background:var(--night-2)"></span><span style="background:oklch(0.3 0.02 60)"></span><span style="background:var(--night-ink)"></span><span style="background:var(--amber);flex:.4"></span></div>
+    <p class="type"><b>Geist</b> como rótulo iluminado · <b>Geist Mono</b> en el minimapa de estaciones</p>
+    <ul><li>+ La mejor integración 3D y la mayor continuidad con la entrada</li><li>− WebGL a pantalla completa, legibilidad en penumbra, scroll guiado</li><li>− No se puede validar aquí sin GPU; terreno de agencias</li></ul>
+    <p><a href="b-estudio.html">Abrir composición →</a> · 6–8 semanas + props</p>
+  </section>
+
+  <!-- C -->
+  <section class="col rec">
+    <span class="badge">Recomendada</span>
+    <span class="k">Dirección C</span>
+    <h2>A través de Scope<small>concepto experimental · media 8,3</small></h2>
+    <p class="concept">Toda página tiene un reverso. Scope es la lente que deja ver cómo se construyó con IA.</p>
+    <div class="pair">
+      <div class="shot"><img src="renders/c-lente-desktop.jpg" alt="C, lente sobre el titular"></div>
+      <div class="shot m"><img src="renders/c-lente-mobile.jpg" alt="C, escáner móvil"></div>
+    </div>
+    <div class="shot"><img src="renders/c-lente-desktop-scope.jpg" alt="C, lente sobre Scope: su rig"></div>
+    <svg class="schema" viewBox="0 0 320 180" aria-label="Esquema de composición C">
+      <rect width="320" height="180" fill="#f6f1e9"/><g font-family="Geist Mono" font-size="8" fill="#8a8178">
+        <text x="12" y="16">anverso: sistema A (papel)</text>
+        <rect x="12" y="26" width="200" height="40" fill="#1d1a17" opacity=".85"/><rect x="12" y="96" width="296" height="1" fill="#1d1a17"/><circle cx="30" cy="86" r="10" fill="#c9a77f"/>
+        <circle cx="150" cy="70" r="46" fill="#0d1220"/><circle cx="150" cy="70" r="46" fill="none" stroke="#e0a64a" stroke-width="1.5"/>
+        <text x="118" y="62" fill="#e0a64a">reverso:</text><text x="118" y="72" fill="#e0a64a">notas reales</text><text x="118" y="82" fill="#e0a64a">(docs, git)</text>
+        <path d="M38 80 Q 90 60 104 66" fill="none" stroke="#c9a77f" stroke-dasharray="2 2"/><text x="40" y="118">Scope mira la lente (Presence)</text>
+        <rect x="12" y="140" width="296" height="22" fill="#0d1220"/><text x="18" y="154" fill="#e0a64a">móvil: escáner que se arrastra · teclado: «Look underneath» + notas en foco</text>
+      </g>
+    </svg>
+    <div class="swatches"><span style="background:var(--paper)"></span><span style="background:var(--ink)"></span><span style="background:var(--night)"></span><span style="background:var(--night-ink)"></span><span style="background:var(--amber);flex:.5"></span></div>
+    <p class="type">Anverso con la tipografía de A · reverso en <b>Geist Mono</b> ámbar sobre noche</p>
+    <ul><li>+ Una idea que solo puede ser de esta web (Scope = lente × enseñar workflows × repo real)</li><li>+ La fase 1 es la dirección A: el riesgo queda acotado</li><li>− Exige curar reversos de calidad y solo con hechos reales</li></ul>
+    <p><a href="c-lente.html">Abrir prototipo (interactivo) →</a> · 4–6 semanas</p>
+  </section>
+</div>
+</body>
+</html>

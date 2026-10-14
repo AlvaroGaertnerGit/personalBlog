@@ -2,6 +2,7 @@
 // its proportions, rig or clips.
 
 import * as THREE from "three"
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js"
 import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js"
 
 import { applyScopeCeramic } from "./scope-3d-ceramic.ts"
@@ -61,7 +62,9 @@ export async function loadScope3DModel(
   const t0 = performance.now()
   const data = await download(url, onProgress, signal)
   const t1 = performance.now()
-  const gltf = await new GLTFLoader().parseAsync(data, "")
+  // The site GLB (public/scope/scope.glb) is meshopt-compressed and quantized;
+  // the raw Blender export the lab serves is not. The decoder handles both.
+  const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(data, "")
   const t2 = performance.now()
 
   const meshes: THREE.Mesh[] = []

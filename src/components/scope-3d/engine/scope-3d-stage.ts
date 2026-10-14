@@ -12,6 +12,7 @@ import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js"
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js"
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 
+import { fitCameraToEnvelope, type Scope3DMotionEnvelope } from "./scope-3d-framing.ts"
 import { Scope3DOutputPass, type Scope3DQuality } from "./scope-3d-resolution.ts"
 
 export type Scope3DLightRig = "warm" | "cool"
@@ -154,6 +155,12 @@ export class Scope3DStage {
     this.controls.maxPolarAngle = THREE.MathUtils.degToRad(88) // never below the floor
     this.controls.enabled = orbit
     this.controls.update()
+    if (!orbit) {
+      // Even disabled, OrbitControls keeps its listeners and sets
+      // touch-action: none, which stops a phone scrolling the page over Scope.
+      this.controls.disconnect()
+      canvas.style.touchAction = ""
+    }
 
     this.lights = {} as Record<LightName, THREE.DirectionalLight>
     for (const name of Object.keys(LIGHTS) as LightName[]) {
@@ -292,48 +299,9 @@ export class Scope3DStage {
    * Fixed framing: every `points` fully inside the view from `direction`,
    * centred, with `margin` (fraction of the half-frame) to spare.
    */
-  frame({ points, box }: { points: THREE.Vector3[]; box: THREE.Box3 }, direction: THREE.Vector3, margin = 0.06) {
-    const dir = direction.clone().normalize()
-    const target = box.getCenter(new THREE.Vector3())
-    const limit = 1 - margin
-    const place = (distance: number) => {
-      this.camera.position.copy(target).addScaledVector(dir, distance)
-      this.camera.lookAt(target)
-      this.camera.updateMatrixWorld()
-    }
-    const extents = () => {
-      const ndc = new THREE.Box2()
-      for (const p of points) {
-        const q = p.clone().project(this.camera)
-        ndc.expandByPoint(new THREE.Vector2(q.x, q.y))
-      }
-      return ndc
-    }
-    const fitDistance = () => {
-      let lo = 0.05
-      let hi = 5
-      for (let i = 0; i < 40; i++) {
-        const mid = (lo + hi) / 2
-        place(mid)
-        const e = extents()
-        const fits = Math.max(-e.min.x, e.max.x, -e.min.y, e.max.y) <= limit
-        if (fits) hi = mid
-        else lo = mid
-      }
-      place(hi)
-      return hi
-    }
-    // Two passes: fit, recentre the silhouette on screen, fit again.
-    for (let pass = 0; pass < 2; pass++) {
-      const distance = fitDistance()
-      const c = extents().getCenter(new THREE.Vector2())
-      const halfHeight = distance * Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2))
-      const camRight = new THREE.Vector3().setFromMatrixColumn(this.camera.matrixWorld, 0)
-      const camUp = new THREE.Vector3().setFromMatrixColumn(this.camera.matrixWorld, 1)
-      target.addScaledVector(camRight, c.x * halfHeight * this.camera.aspect).addScaledVector(camUp, c.y * halfHeight)
-    }
-    fitDistance()
-    this.controls.target.copy(target)
+  frame(envelope: Scope3DMotionEnvelope, direction: THREE.Vector3, margin = 0.06) {
+    const { box } = envelope
+    this.controls.target.copy(fitCameraToEnvelope(this.camera, envelope, direction, margin))
     // The shadow must fade out inside the canvas, never hard-clip at its edge.
     const reach = Math.max(box.max.x - box.min.x, box.max.z - box.min.z) / 2
     // Measured: an outer radius of 1.1 × reach still left a 5 % hard edge on the canvas border.

@@ -3,6 +3,7 @@
 import * as React from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
+import { useScopeEntry } from "@/components/scope-3d/entry/scope-entry-provider"
 import { transitions } from "@/lib/motion"
 import { cn } from "@/lib/utils"
 
@@ -27,9 +28,12 @@ const HOLD_MS = 2000
 // the page itself reads as a cinematic caption, not UI trapped in a panel.
 function ScopeGreeting({ className }: { className?: string }) {
   const [visible, setVisible] = React.useState(false)
+  // Counted from the moment the site is uncovered, not from mount: behind
+  // the entry screen nobody would see it.
+  const { revealed } = useScopeEntry()
 
   React.useEffect(() => {
-    if (sessionStorage.getItem(GREETING_STORAGE_KEY)) return
+    if (!revealed || sessionStorage.getItem(GREETING_STORAGE_KEY)) return
 
     const showTimer = window.setTimeout(() => {
       setVisible(true)
@@ -37,7 +41,7 @@ function ScopeGreeting({ className }: { className?: string }) {
     }, SHOW_DELAY_MS)
 
     return () => window.clearTimeout(showTimer)
-  }, [])
+  }, [revealed])
 
   React.useEffect(() => {
     if (!visible) return

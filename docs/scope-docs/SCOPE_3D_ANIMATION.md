@@ -1,7 +1,7 @@
 # Scope 3D — Rig, animación y personalidad
 
-Estado: **rig, 12 clips y máquina de estados aprobados como base definitiva. NO integrado
-en la web**: el Scope 2D sigue siendo el de producción.
+Estado: **rig, 12 clips y máquina de estados aprobados. Integrado en la web el 2026-10-14**
+(`scope-live.tsx`, entrada en `src/components/scope-3d/entry/`; recursos: `assets/scope-3d/README.md` → Web).
 
 Archivo maestro: `assets/scope-3d/blender/scope-master.blend`, regenerable con
 `scripts/build_scope.py`. El script reconstruye la geometría aprobada (descrita en

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scope World · Pliego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root { --paper: #ede6d8; --paper-2: #e4dccb; --ink: #1c1b21; --soft: #5b5865; --rule: rgba(142,155,176,.35);
+    --margin: #9a3b2a; --amber: #f2b65a; --night: #0b1220; --toast: #6b4423; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 16px/1.55 Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+    background-image: repeating-linear-gradient(180deg, transparent 0 31px, var(--rule) 31px 32px); }
+  main { max-width: 1320px; margin: 0 auto; padding: 0 32px 120px; border-left: 1.5px solid rgba(154,59,42,.55); }
+  a { color: inherit; }
+  header.top { padding: 72px 0 40px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: end; }
+  .eyebrow { font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--margin); text-transform: uppercase; }
+  h1 { font-size: clamp(56px, 9vw, 120px); line-height: .88; letter-spacing: -0.055em; font-weight: 600; margin-top: 14px; }
+  h1 em { font-family: Newsreader, serif; font-weight: 400; letter-spacing: -0.03em; }
+  .premise { font-size: 21px; line-height: 1.4; letter-spacing: -0.01em; }
+  .premise b { font-weight: 600; }
+  .status { margin-top: 16px; font: 400 13px/1.6 "Geist Mono", monospace; color: var(--soft); }
+  .status mark { background: var(--amber); color: var(--ink); padding: 1px 6px; border-radius: 4px; }
+  nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(237,230,216,.92); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(28,27,33,.12);
+    display: flex; gap: 22px; flex-wrap: wrap; padding: 12px 0; font: 500 13px "Geist Mono", monospace; }
+  nav.toc a { text-decoration: none; color: var(--soft); } nav.toc a:hover { color: var(--ink); }
+  section { padding-top: 72px; scroll-margin-top: 50px; }
+  h2 { font-size: 40px; letter-spacing: -0.035em; font-weight: 600; display: flex; gap: 16px; align-items: baseline; }
+  h2 small { font: 500 13px "Geist Mono", monospace; color: var(--margin); }
+  .why { max-width: 760px; color: var(--soft); margin-top: 10px; font-size: 17px; }
+  figure { margin-top: 24px; }
+  figure img { width: 100%; display: block; border-radius: 6px; box-shadow: 0 30px 60px -30px rgba(11,18,32,.55); background: var(--night); }
+  figcaption { font: 400 13px/1.6 "Geist Mono", monospace; color: var(--soft); margin-top: 10px; }
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(28,27,33,.12); margin-top: 24px; border-radius: 8px; overflow: hidden; }
+  .rules div { background: var(--paper); padding: 18px 20px; }
+  .rules b { display: block; font-size: 17px; letter-spacing: -0.01em; }
+  .rules span { color: var(--soft); font-size: 14px; }
+  .pair { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+  .phone img { border-radius: 26px; border: 8px solid #111; }
+  .sb { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 18px; margin-top: 24px; counter-reset: f; }
+  .sb figure { margin: 0; }
+  .sb img { border-radius: 4px; }
+  .sb h3 { font-size: 16px; font-weight: 600; margin-top: 10px; letter-spacing: -0.01em; display: flex; gap: 8px; align-items: baseline; }
+  .sb h3 em { font: 500 11px "Geist Mono", monospace; font-style: normal; color: var(--margin); }
+  .sb p { font-size: 14px; color: var(--soft); line-height: 1.45; margin-top: 3px; }
+  .tag { display: inline-block; font: 400 11px "Geist Mono", monospace; padding: 1px 7px; border-radius: 99px; border: 1px solid rgba(28,27,33,.25); color: var(--soft); margin-top: 6px; }
+  .tag.new { border-color: var(--margin); color: var(--margin); }
+  .swatches { display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px; margin-top: 20px; }
+  .swatches div { font: 400 11px/1.4 "Geist Mono", monospace; color: var(--soft); }
+  .swatches i { display: block; height: 64px; border-radius: 6px; margin-bottom: 6px; box-shadow: inset 0 0 0 1px rgba(28,27,33,.12); }
+  .next { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 22px; }
+  .next div { border: 1px dashed rgba(28,27,33,.3); border-radius: 8px; padding: 16px; background: rgba(237,230,216,.7); }
+  .next b { display: block; } .next span { font-size: 14px; color: var(--soft); }
+  .notes { margin-top: 18px; display: grid; gap: 8px; font-size: 14px; color: var(--soft); max-width: 900px; }
+  .notes li { margin-left: 18px; }
+  @media (max-width: 860px) {
+    main { padding: 0 16px 80px; border-left: 0; } header.top, .pair { grid-template-columns: 1fr; }
+    .rules, .sb, .next { grid-template-columns: 1fr; } .swatches { grid-template-columns: repeat(3, 1fr); }
+    .phone { max-width: 300px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <p class="eyebrow">Scope World · Entrega 1 · el universo</p>
+      <h1>Pliego<em>.</em></h1>
+    </div>
+    <div>
+      <p class="premise"><b>Un pliego de papel sobre la mesa de Álvaro, bajo su lámpara.</b> Lo que aún no existe es de papel. La luz sostenida lo cuece en porcelana. Scope, la primera pieza cocida, vive allí.</p>
+      <p class="status"><mark>pendiente de aprobación</mark> · renders de Blender con el modelo aprobado de Scope, sin modificar · interfaz en HTML real · sin cambios en producción</p>
+    </div>
+  </header>
+  <nav class="toc" aria-label="Contenido">
+    <a href="#reglas">Reglas</a><a href="#mundo">1 · El mundo</a><a href="#home">2 · Home</a><a href="#mapa">3 · Mapa</a>
+    <a href="#storyboard">4 · Storyboard</a><a href="#material">Paleta</a><a href="#siguiente">Entrega 2</a><a href="#notas">Notas</a>
+  </nav>
+
+  <section id="reglas">
+    <h2>Las leyes del mundo <small>02-biblia.md §1</small></h2>
+    <div class="rules">
+      <div><b>Una sola hoja</b><span>Todo está cortado y plegado del pliego. Lo que se levanta deja su hueco.</span></div>
+      <div><b>Papel = todavía no</b><span>Preguntas, bocetos y notas: translúcidos, a lápiz.</span></div>
+      <div><b>Luz sostenida = construido</b><span>Bajo la lámpara el papel se cuece en porcelana. El borde se tuesta.</span></div>
+      <div><b>Lo escrito se lee a contraluz</b><span>La luz de la lámpara, de la ventana o de los ojos de Scope.</span></div>
+      <div><b>La lámpara es la atención de Álvaro</b><span>Encendida, es de día de trabajo. Apagada, solo quedan los ojos de Scope.</span></div>
+      <div><b>Scope no tiene manos</b><span>Actúa con la mirada (ilumina), el cuerpo y la antena. Nunca habla.</span></div>
+    </div>
+  </section>
+
+  <section id="mundo">
+    <h2>El mundo <small>12.1 · render principal</small></h2>
+    <p class="why">Amanecer en el margen. Scope observa cómo empieza a levantarse una hoja nueva, la pregunta que aún no está escrita. Detrás está el campo de preguntas de Álvaro, a lápiz y unidas por su hilo rojo. Al fondo, la lámpara (el sol de este mundo) y el resplandor de lo que ya se ha cocido.</p>
+    <figure><a href="renders/main.jpg"><img src="renders/main.jpg" alt="Render principal: Scope en el margen del pliego al amanecer, el campo de preguntas y la lámpara"></a>
+      <figcaption>Pendiente de una última repetición: el canto de la hoja «· · ·» apunta a la cara de Scope; ya está corregido en la escena (<a href="renders/preview/main.jpg">vista previa corregida</a>) · Blender 5.2 · Cycles CPU · 1920×1080 · modelo aprobado (solo colocado y posado) · <a href="renders/raw/main.png">PNG original</a></figcaption></figure>
+  </section>
+
+  <section id="home">
+    <h2>La primera pantalla <small>12.2 · home · 12.8 · móvil</small></h2>
+    <p class="why">El mundo lo da Blender y la interfaz es HTML real, con las tipografías del sitio (Geist, Geist Mono y Newsreader) y textos verdaderos. El nombre se apoya en el papel pautado, como impreso en la hoja. La navegación es a la vez el mapa: cada sección nombra su lugar y la ruta marca dónde estás. En móvil la cámara es otra: Scope más abajo, el texto en el cielo y la navegación al alcance del pulgar.</p>
+    <div class="pair">
+      <figure><a href="board/home.html"><img src="renders/home-ui.jpg" alt="Home de escritorio: Álvaro Gaertner sobre el papel, Scope a la derecha, navegación por lugares"></a>
+        <figcaption>1920×1080 · <a href="board/home.html">composición HTML</a> · <a href="renders/home.jpg">render sin interfaz</a></figcaption></figure>
+      <figure class="phone"><a href="board/home-mobile.html"><img src="renders/home-mobile-ui.jpg" alt="Home móvil vertical"></a>
+        <figcaption>390×844 · cámara vertical propia · <a href="renders/home-m.jpg">render</a></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="mapa">
+    <h2>Un solo mundo <small>12.3 · mapa</small></h2>
+    <p class="why">El mapa es el propio mundo visto desde arriba (render ortográfico), sin dibujo aparte. Hay seis lugares en una hoja y un camino en S desde el margen hasta la luz. El círculo cocido se reconoce incluso sin Scope.</p>
+    <figure><a href="board/map.html"><img src="renders/map-ui.jpg" alt="Mapa: el pliego desde arriba con los seis lugares y el recorrido"></a>
+      <figcaption>Render final 1920×1200 · etiquetas colocadas con puntos proyectados por la cámara del render (<code>pliego.py --project 1</code>) · <a href="renders/map.jpg">render sin etiquetas</a></figcaption></figure>
+  </section>
+
+  <section id="storyboard">
+    <h2>Un día en el pliego <small>12.4 · storyboard · 03-storyboard.md</small></h2>
+    <p class="status"><mark>01 final · 02–09 vista previa 640 px</mark> el render final (1280 px · 64 muestras) de 02–09 quedó interrumpido: el sistema detuvo la cola por falta de memoria. Las composiciones son las definitivas; falta la resolución.</p>
+    <p class="why">Nueve fotogramas: un mismo día y una misma hoja, cada uno consecuencia del anterior. La luz cuenta la hora; el contenido avanza de pregunta a pieza, a patrón y a conversación.</p>
+    <div class="sb">
+      <figure><img src="renders/sb1-night.jpg" alt=""><h3><em>01 · noche</em>Antes de que llegues</h3><p>Scope recorre el margen y lee la pauta con la luz de sus ojos. Es el loader.</p><span class="tag">clip Focus.L</span></figure>
+      <figure><img src="renders/preview/sb2-lamp.jpg" alt=""><h3><em>02 · amanecer</em>Se enciende la lámpara</h3><p>Llegas tú. La lámpara se enciende al fondo y Scope levanta la mirada. Home.</p><span class="tag new">pose nueva (LookUp)</span></figure>
+      <figure><img src="renders/preview/sb3-question.jpg" alt=""><h3><em>03 · mañana</em>Una pregunta</h3><p>Bajo el arco, ante «How much context is actually enough?». Cuaderno.</p><span class="tag">clip Focus.L</span></figure>
+      <figure><img src="renders/preview/sb4-folding.jpg" alt=""><h3><em>04 · día</em>Algo madura</h3><p>Una hoja se ha plegado en una forma con la tapa abierta. Scope ladea la cabeza.</p><span class="tag">clip Tilt.L</span></figure>
+      <figure><img src="renders/preview/sb5-firing.jpg" alt=""><h3><em>05 · día</em>El borde</h3><p>La forma llega a la luz: la línea tostada la cruza y una mitad empieza a cocerse.</p><span class="tag">clip Focus.R</span></figure>
+      <figure><img src="renders/preview/sb6-pieces.jpg" alt=""><h3><em>06 · día</em>Lo construido</h3><p>Scope sobre la porcelana de MathView, mirando el bracket de Tournamently. Proyectos.</p><span class="tag">pose sostenida</span></figure>
+      <figure><img src="renders/preview/sb7-class.jpg" alt=""><h3><em>07 · atardecer</em>El aula</h3><p>Piezas plegadas por otros desde un mismo patrón. Scope ladea la cabeza ante una torcida.</p><span class="tag">clip Tilt.R</span></figure>
+      <figure><img src="renders/preview/sb8-note.jpg" alt=""><h3><em>08 · lámpara</em>Una nota en blanco</h3><p>Al pie de la lámpara, una nota plegada y el lápiz. Escribes tú. Contacto.</p><span class="tag">clip Focus.R</span></figure>
+      <figure><img src="renders/preview/sb9-planted.jpg" alt=""><h3><em>09 · noche</em>Una pregunta nueva</h3><p>Scope ha plantado tu nota en el campo. La lámpara se apaga y él sigue con sus ojos.</p><span class="tag new">plantar: clip nuevo</span></figure>
+    </div>
+  </section>
+
+  <section id="material">
+    <h2>Paleta y materiales <small>02-biblia.md §1</small></h2>
+    <div class="swatches">
+      <div><i style="background:#ede6d8"></i>papel</div>
+      <div><i style="background:repeating-linear-gradient(180deg,#ede6d8 0 9px,#8e9bb0 9px 10px)"></i>pauta</div>
+      <div><i style="background:#9a3b2a"></i>margen / hilo</div>
+      <div><i style="background:#2b2a2e"></i>grafito</div>
+      <div><i style="background:linear-gradient(135deg,#fbf7ef,#e8e0d2)"></i>porcelana</div>
+      <div><i style="background:#6b4423"></i>tostado</div>
+      <div><i style="background:#f2b65a"></i>ámbar (luz)</div>
+      <div><i style="background:#5e5a73"></i>aire de amanecer</div>
+      <div><i style="background:#0b1220"></i>noche (loader)</div>
+    </div>
+  </section>
+
+  <section id="siguiente">
+    <h2>Entrega 2: el mundo vivo <small>tras tu aprobación</small></h2>
+    <p class="why">Estos apartados del tablero quedan pendientes a propósito (§19 del brief). El storyboard ya los anticipa.</p>
+    <div class="next">
+      <div><b>Transformaciones</b><span>Tres renders con la misma cámara: una pregunta cruza el borde y se cuece. Anticipo: fotogramas 04 → 05.</span></div>
+      <div><b>Scope y un objeto</b><span>Descubrir, interesarse, acercarse, iluminar y su consecuencia. Candidata: leer una hoja a contraluz hasta que se pliega.</span></div>
+      <div><b>Proyecto integrado</b><span>MathView: una gráfica cocida que se pisa y se abre en una vista editorial con datos reales. Anticipo: fotograma 06.</span></div>
+      <div><b>Vida autónoma y técnica</b><span>Estados, rutinas, atención contextual; WebGL frente a prerender, móvil, sin GPU y accesibilidad.</span></div>
+    </div>
+  </section>
+
+  <section id="notas">
+    <h2>Notas honestas</h2>
+    <ul class="notes">
+      <li>Los renders usan el <b>modelo aprobado de Scope sin modificar</b>, abierto en solo lectura desde <code>assets/scope-3d/blender/scope-master.blend</code>. Solo se colocó y se posó con los canales de <code>clips.py</code>: fotogramas de clips existentes o poses sostenidas dentro de los rangos de la capa Presence diseñada.</li>
+      <li>Las poses marcadas en rojo no existen como animación (detalle en <code>03-storyboard.md</code> §2). Son imágenes fijas, no animación.</li>
+      <li>Luces auxiliares: un foco ámbar delante de la cara en las escenas nocturnas, que representa el alcance de sus ojos y no ilumina a Scope (light linking), y un rebote suave del papel.</li>
+      <li>Sin GPU en este equipo: todo es Cycles por CPU en modo headless. No se ha probado nada de esto en tiempo real.</li>
+      <li>La letra manuscrita de las hojas usa Ink Free (fuente del sistema, solo para el render). En producción haría falta una manuscrita con licencia web.</li>
+      <li>Textos reales: preguntas de <code>notebook-content.ts</code>, frases de <code>about-content.ts</code>; proyectos de <code>projects-content.ts</code>. No se ha inventado ningún dato sobre Álvaro.</li>
+      <li>Documentos: <a href="01-concepto.md">01-concepto.md</a> · <a href="02-biblia.md">02-biblia.md</a> · <a href="03-storyboard.md">03-storyboard.md</a> · <a href="blender/pliego.py">blender/pliego.py</a></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

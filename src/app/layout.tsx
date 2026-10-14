@@ -7,6 +7,11 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { ThemeTransitionProvider } from "@/components/theme/theme-transition-controller";
 import { ScopeDockProvider } from "@/components/scope/companion";
+import { ScopeEntryProvider } from "@/components/scope-3d/entry/scope-entry-provider";
+
+// Routes whose first visit waits for Scope 3D behind the entry screen: the
+// ones with Scope docks. Labs and other routes never show it.
+const SCOPE_ENTRY_ROUTES = ["/"];
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -104,12 +109,18 @@ export default function RootLayout({
                 sequence. ThemeToggle moves inside it too (it's
                 position:fixed, so this doesn't affect layout) since it now
                 triggers that sequence instead of switching themes itself. */}
-            <ScopeDockProvider>
-              <ThemeTransitionProvider>
-                <ThemeToggle className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6" />
-                {children}
-              </ThemeTransitionProvider>
-            </ScopeDockProvider>
+            {/* The entry ("Scope está explorando") covers the home page
+                until the companion's Scope 3D has really rendered, and
+                keeps everything inside it inert meanwhile — so it wraps the
+                whole site, companion included (it reports readiness). */}
+            <ScopeEntryProvider entryRoutes={SCOPE_ENTRY_ROUTES}>
+              <ScopeDockProvider>
+                <ThemeTransitionProvider>
+                  <ThemeToggle className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6" />
+                  {children}
+                </ThemeTransitionProvider>
+              </ScopeDockProvider>
+            </ScopeEntryProvider>
           </MotionProvider>
         </ThemeProvider>
       </body>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C · A través de Scope — prototipo esquemático</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Two faces of the same page, stacked in one grid cell. The back face is
+     revealed through a circular lens (desktop) or a scanner band (mobile). */
+  .stage { display: grid; position: relative; min-height: 100vh; }
+  .face { grid-area: 1 / 1; padding: 0 48px; min-height: 100vh; }
+  .front { background: radial-gradient(ellipse 70% 60% at 8% 0%, oklch(0.99 0.012 80), transparent 70%), var(--paper); }
+  .back { background: var(--night); color: var(--night-ink);
+    background-image: linear-gradient(oklch(0.3 0.03 266 / 0.5) 1px, transparent 1px), linear-gradient(90deg, oklch(0.3 0.03 266 / 0.5) 1px, transparent 1px);
+    background-size: 24px 24px;
+    clip-path: circle(var(--r, 170px) at var(--x, 40%) var(--y, 34%)); }
+  .lens-ring { position: absolute; pointer-events: none; width: calc(var(--r, 170px) * 2); height: calc(var(--r, 170px) * 2);
+    left: var(--x, 40%); top: var(--y, 34%); transform: translate(-50%, -50%); border-radius: 50%;
+    box-shadow: 0 0 0 1.5px var(--amber), 0 0 30px 4px oklch(0.85 0.128 74.5 / 0.45), inset 0 0 30px oklch(0.85 0.128 74.5 / 0.25); z-index: 5; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; font-size: 15px; font-weight: 600; }
+  header nav { display: flex; gap: 26px; font: 400 12px var(--mono); color: var(--ink-soft); }
+  .btn-lens { font: 500 12px var(--mono); padding: 7px 12px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); }
+  .btn-lens kbd { font: inherit; opacity: 0.6; margin-left: 6px; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; }
+  .kicker { grid-column: 3 / span 8; margin-top: 9vh; font: 400 12px var(--mono); color: var(--ink-soft); }
+  h1 { grid-column: 1 / -1; font-weight: 600; font-size: clamp(64px, 12.4vw, 184px); line-height: 0.86; letter-spacing: -0.055em; margin-top: 18px; }
+  h1 .l2 { display: block; padding-left: 16.6%; }
+  .rule-row { grid-column: 1 / -1; margin-top: 4vh; border-bottom: 1px solid currentColor; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: end; }
+  .seat { grid-column: 1 / span 2; width: 150px; position: relative; }
+  .lede { grid-column: 3 / span 6; font-size: 26px; line-height: 1.3; letter-spacing: -0.015em; padding-bottom: 22px; }
+  .lede em { font-family: var(--serif); font-style: italic; }
+  .meta { grid-column: 10 / span 3; font: 400 12px/1.7 var(--mono); padding-bottom: 22px; color: var(--ink-soft); }
+  /* back face typography: same boxes, blueprint voice */
+  .back h1 { color: transparent; -webkit-text-stroke: 1px oklch(0.85 0.128 74.5 / 0.75); }
+  .back .kicker, .back .meta { color: oklch(0.75 0.03 80); }
+  .back .lede { font: 400 15px/1.6 var(--mono); color: oklch(0.85 0.04 80); }
+  .note { position: absolute; font: 400 12px/1.55 var(--mono); color: var(--amber); max-width: 300px; }
+  .note b { color: var(--night-ink); font-weight: 500; }
+  .note::before { content: "◇ "; }
+  .rig { position: absolute; left: 0; bottom: 0; width: 150px; height: 177px; }
+  .ghost { width: 150px; opacity: 0.18; filter: grayscale(1) brightness(1.6); }
+  .tag { position: absolute; left: 48px; bottom: 28px; font: 500 11px var(--mono); color: oklch(0.2 0.02 266); background: var(--amber); padding: 4px 8px; border-radius: 4px; z-index: 6; white-space: nowrap; }
+  .schematic { top: 70px; }
+  @media (max-width: 760px) {
+    .face { padding: 0 18px; } header nav { display: none; }
+    .grid, .rule-row { grid-template-columns: repeat(4, 1fr); column-gap: 12px; }
+    .kicker { grid-column: 1 / -1; } h1 { font-size: 21vw; } h1 .l2 { padding-left: 0; }
+    .lede { grid-column: 1 / -1; order: -1; font-size: 21px; padding-bottom: 28px; }
+    .back .lede { font-size: 13px; }
+    .seat { width: 120px; } .ghost { width: 120px; } .rig { width: 120px; height: 142px; }
+    .meta { grid-column: 3 / span 2; align-self: end; }
+    /* mobile: a scanner band dragged with the thumb instead of a lens */
+    .back { clip-path: inset(var(--band-top, 40%) 0 calc(100% - var(--band-top, 40%) - 190px) 0); }
+    .lens-ring { left: 0; right: 0; width: auto; height: 190px; top: var(--band-top, 40%); transform: none; border-radius: 0;
+      box-shadow: 0 -1.5px 0 var(--amber), 0 1.5px 0 var(--amber), 0 0 26px oklch(0.85 0.128 74.5 / 0.4); }
+    .lens-ring::after { content: "⇕"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--amber); color: var(--night); font-size: 16px; }
+    .note.hide-m, .tag { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <!-- FRONT: what shipped -->
+  <section class="face front">
+    <header><span>Álvaro Gaertner</span><nav><span>01 Who</span><span>02 Work</span><span>03 Notebook</span><span>04 Write</span></nav><span class="btn-lens">Look underneath<kbd>L</kbd></span></header>
+    <div class="grid">
+      <p class="kicker">Software Development teacher · builder · Spain</p>
+      <h1>Álvaro<span class="l2">Gaertner</span></h1>
+      <div class="rule-row">
+        <span class="seat scope-seat"><img src="assets/scope-looking.webp" alt="Scope" style="width:100%"></span>
+        <p class="lede">I teach developers the AI-native workflows I use to ship real software — <em>and then I go build it myself.</em></p>
+        <p class="meta">Now teaching at Gredos San Diego<br>Building Tournamently, Sport Coach<br>GitHub · LinkedIn</p>
+      </div>
+    </div>
+  </section>
+  <!-- BACK: how it was built (real facts from this repository) -->
+  <section class="face back" aria-label="How this page was built">
+    <header style="color:var(--night-ink)"><span>Álvaro Gaertner <span style="font:400 12px var(--mono);color:var(--amber)">/ underneath</span></span></header>
+    <div class="grid" style="position:relative">
+      <p class="kicker">&lt;h1&gt; · Geist 600 · tracking −5.5% · Server Component</p>
+      <h1>Álvaro<span class="l2">Gaertner</span></h1>
+      <span class="note" style="left:18%;top:120px"><b>Every feature, same loop</b><br>plan agent → skills → worker → observer → verify → code review<br><span style="opacity:.7">.claude/CLAUDE.md</span></span>
+      <span class="note hide-m" style="left:52%;top:300px"><b>39 commits</b> · 15 sprint notes (SPR-003.3 → SPR-010.1)<br>the contact scene alone was redirected 4 times<br><span style="opacity:.7">docs/CONTEXT.md §10</span></span>
+      <div class="rule-row" style="color:var(--amber)">
+        <span class="seat">
+          <img class="ghost" src="assets/scope-front.webp" alt="">
+          <svg class="rig" viewBox="0 0 150 177" aria-hidden="true" fill="none" stroke="oklch(0.85 0.128 74.5)" stroke-width="1.4">
+            <circle cx="75" cy="172" r="3" fill="oklch(0.85 0.128 74.5)"/><path d="M75 172 V150"/><circle cx="75" cy="150" r="3"/>
+            <path d="M75 150 V112"/><circle cx="75" cy="112" r="4"/><path d="M75 112 L54 108 M75 112 L96 108"/>
+            <circle cx="54" cy="108" r="2.5"/><circle cx="96" cy="108" r="2.5"/><path d="M75 112 L80 60 L92 22"/><circle cx="80" cy="60" r="2.5"/><circle cx="92" cy="22" r="3"/>
+            <path d="M75 150 L40 168 M75 150 L110 168" stroke-dasharray="3 3"/>
+          </svg>
+        </span>
+        <p class="lede">scope.glb · 12 clips · bones: root › hop › squash › look › body › eyes, antenna.1–2<br>face deviation in every frame of every clip: 0.0000 mm<br>3.08 MB → 698 KB (meshopt) · the entry screen waits for the first real frame</p>
+        <p class="meta">source: assets/scope-3d/reports/VALIDATION.md · git ba07094</p>
+      </div>
+    </div>
+  </section>
+  <span class="lens-ring" aria-hidden="true"></span>
+  <span class="tag" id="tag">lente: el reverso es la noche de la entrada</span>
+</div>
+<p class="schematic"><b>C · A través de Scope</b> — prototipo esquemático · mueve el ratón · datos reales del repo</p>
+<script>
+  // Isolated prototype only: the lens follows the pointer (desktop).
+  const stage = document.getElementById("stage")
+  const params = new URLSearchParams(location.search)
+  if (params.has("x")) { stage.style.setProperty("--x", params.get("x")); stage.style.setProperty("--y", params.get("y")) }
+  if (params.has("r")) stage.style.setProperty("--r", params.get("r"))
+  if (params.has("band")) stage.style.setProperty("--band-top", params.get("band"))
+  if (!params.has("x")) stage.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return
+    stage.style.setProperty("--x", e.clientX + "px"); stage.style.setProperty("--y", e.clientY + scrollY + "px")
+  })
+</script>
+</body>
+</html>

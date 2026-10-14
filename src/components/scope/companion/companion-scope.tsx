@@ -3,7 +3,7 @@
 import * as React from "react"
 import { animate, motion, useMotionValue, useReducedMotion } from "framer-motion"
 
-import { Scope } from "@/components/scope/scope"
+import { ScopeLive } from "@/components/scope-3d/scope-live"
 import { springs } from "@/lib/motion"
 import { DEFAULT_SCOPE_DOCK_CONFIG } from "./scope-docks"
 import { useScopeDockContext } from "./scope-dock-context"
@@ -12,7 +12,8 @@ interface CompanionScopeProps {
   stageRef: React.RefObject<HTMLDivElement | null>
 }
 
-// The one shared <Scope> instance for the whole portfolio. <ScopeDock>
+// The one shared Scope instance for the whole portfolio (Scope 3D,
+// src/components/scope-3d/scope-live.tsx). <ScopeDock>
 // leaves (scope-dock.tsx) only render placeholder slots inside sections —
 // this component measures whichever dock is currently active
 // (scope-dock-context.tsx) and travels there.
@@ -126,20 +127,18 @@ function CompanionScope({ stageRef }: CompanionScopeProps) {
     return () => window.removeEventListener("resize", onResize)
   }, [activeDockId, getDockElement, stageRef, x, y, isSceneTransitioning])
 
+  // Scope 3D (the definitive model) is the companion. Travelling between docks
+  // never re-mounts it, so its WebGL scene initialises once per visit; a page
+  // without any dock (the labs) doesn't load it at all. Coming back to one
+  // after that shows the same-framed still until the scene is up again.
+  const hasDock = activeDockId !== null
   return (
     <motion.div
-      aria-hidden="true"
       data-slot="companion-scope"
       className="pointer-events-none absolute top-0 left-0 z-30 origin-top-left"
       style={{ x, y, scale, rotate }}
     >
-      <Scope
-        mood={mood}
-        attentionTarget={dockConfig.attentionTarget}
-        suspended={isSceneTransitioning}
-        resetSignal={activeDockId}
-        className="size-40 sm:size-48"
-      />
+      {hasDock ? <ScopeLive mood={mood} className="size-40 sm:size-48" /> : null}
     </motion.div>
   )
 }

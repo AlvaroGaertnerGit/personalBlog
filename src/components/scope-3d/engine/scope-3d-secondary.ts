@@ -154,11 +154,12 @@ export class Scope3DSecondary {
   private readonly q1 = new THREE.Quaternion()
   private readonly q2 = new THREE.Quaternion()
 
-  constructor(
-    root: THREE.Object3D,
-    private readonly random: () => number = Math.random,
-  ) {
+  private readonly random: () => number
+
+  // No parameter properties: Node's type stripping (the node:test runs) can't erase them.
+  constructor(root: THREE.Object3D, random: () => number = Math.random) {
     this.root = root
+    this.random = random
     root.updateMatrixWorld(true)
     const a1 = root.getObjectByName("antenna1")
     const a2 = root.getObjectByName("antenna2")

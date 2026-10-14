@@ -1,0 +1,38 @@
+/* Shared tokens for the isolated concept mockups (docs/redesign/mockups).
+   Not production code: nothing here is imported by src/. */
+:root {
+  --paper: oklch(0.965 0.012 78);
+  --paper-2: oklch(0.935 0.016 76);
+  --ink: oklch(0.2 0.012 60);
+  --ink-soft: oklch(0.45 0.012 60);
+  --rule: oklch(0.2 0.012 60 / 0.18);
+  --night: oklch(0.16 0.02 266);
+  --night-2: oklch(0.205 0.026 266);
+  --night-ink: oklch(0.93 0.015 80);
+  --amber: oklch(0.85 0.128 74.5);
+  --amber-deep: oklch(0.7 0.14 65);
+  --violet: oklch(0.709 0.159 293.5);
+  --sans: "Geist", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+  --serif: "Newsreader", Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+
+/* "Esquema" badge: every mockup says what it is. */
+.schematic {
+  position: absolute; z-index: 999; right: 16px; top: 64px;
+  font: 500 11px/1 var(--mono); letter-spacing: 0.04em;
+  padding: 8px 10px; border-radius: 6px;
+  background: oklch(0.2 0.02 266 / 0.88); color: oklch(0.95 0.01 80);
+}
+.schematic b { color: var(--amber); font-weight: 500; }
+
+/* Scope sitting on a surface: contact shadow drawn by the page, not baked. */
+.scope-seat { position: relative; display: inline-block; }
+.scope-seat::after {
+  content: ""; position: absolute; left: 12%; right: 12%; bottom: -5px; height: 12px;
+  background: radial-gradient(closest-side, oklch(0.2 0.02 60 / 0.38), transparent);
+  filter: blur(2px); z-index: -1;
+}

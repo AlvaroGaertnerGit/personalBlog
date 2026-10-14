@@ -57,6 +57,8 @@
   --color-scope-details: var(--scope-details);
   --color-scope-accent: var(--scope-accent);
   --color-scope-warm: var(--scope-warm);
+  --color-scope-night: var(--scope-night);
+  --color-scope-night-glow: var(--scope-night-glow);
 }
 
 :root {
@@ -111,6 +113,11 @@
   --scope-details: oklch(0.29 0.005 286.059);
   --scope-accent: oklch(0.709 0.159 293.541);
   --scope-warm: oklch(0.85 0.128 74.502);
+  /* The design sheet's deep navy (#090d16, Scope's studio backdrop in
+     Blender) — the entry screen's night — and a breath lighter for the
+     faint lift behind Scope there. Theme-independent, like the shell. */
+  --scope-night: oklch(0.16 0.02 266);
+  --scope-night-glow: oklch(0.205 0.026 266);
 }
 
 .dark {
@@ -234,6 +241,53 @@
     .animate-notebook-line-draw {
       animation: notebook-line-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+
+    /* The entry screen's exploration dot (scope-entry-screen.tsx): end to
+       end of the line and back — `alternate`, so it never jumps when the
+       cycle restarts; easing in/out, so it slows into each end like a
+       glance. With reduced motion it simply rests at the centre (below). */
+    .animate-scope-explore {
+      animation: scope-explore 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scope-explore {
+      transform: translateX(50%);
+    }
+  }
+}
+
+/* Entry screen (src/components/scope-3d/entry/). While it covers the site
+   the page behind can't scroll (it would be revealed scrolled); the gutter
+   stays reserved so nothing shifts when the scrollbar comes back. Only once
+   hydrated: before that the screen may still be dismissed by the safety
+   fade below. */
+html:has([data-scope-entry][data-hydrated]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* Last-resort safety: if the page never hydrates (JS failed to load), the
+   entry screen fades itself away instead of covering the site forever.
+   JavaScript marks it data-hydrated and takes over well before this. */
+[data-scope-entry]:not([data-hydrated]) {
+  animation: scope-entry-safety 0.6s ease-out 20s forwards;
+}
+
+@keyframes scope-entry-safety {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes scope-explore {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
   }
 }
 

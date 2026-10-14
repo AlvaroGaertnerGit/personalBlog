@@ -8,13 +8,16 @@
 // per frame, so React never re-renders at 60 fps.
 
 import * as React from "react"
-import * as THREE from "three"
 
 import { cn } from "@/lib/utils"
 
 import { Scope3DAnimator } from "./engine/scope-3d-animator.ts"
 import { Scope3DDirector } from "./engine/scope-3d-director.ts"
-import { measureMotionEnvelope, type Scope3DMotionEnvelope } from "./engine/scope-3d-framing.ts"
+import {
+  measureMotionEnvelope,
+  SCOPE_3D_WEB_VIEW_DIRECTION,
+  type Scope3DMotionEnvelope,
+} from "./engine/scope-3d-framing.ts"
 import { disposeScope3DModel, loadScope3DModel, type Scope3DModel } from "./engine/scope-3d-model.ts"
 import {
   chooseQuality,
@@ -73,17 +76,38 @@ interface Scope3DViewerProps {
   lighting: Scope3DLighting
   /** Default: follow the OS `prefers-reduced-motion` setting, live. */
   reducedMotion?: boolean
+  /**
+   * Preview mode: the precomputed motion envelope (SCOPE_3D_WEB_ENVELOPE),
+   * so the site never pays the measurement at load. Measured when omitted.
+   */
+  envelope?: Scope3DMotionEnvelope
+  /** Preview mode accepts software WebGL too (testing on GPU-less machines only). */
+  allowSoftwareRenderer?: boolean
+  /**
+   * Hold the render loop (e.g. while covered by the entry screen, which only
+   * needs the first frame): the GPU and main thread stay free for whatever
+   * is on screen. The first frame is rendered regardless.
+   */
+  paused?: boolean
   onReady?: (handle: Scope3DViewerHandle) => void
+  /**
+   * Once: the first frame WITH Scope in it has been rendered at the canvas's
+   * real size and handed to the compositor (shaders compiled, framed, posed).
+   * Rendered even if the canvas is off screen, so a page restored mid-scroll
+   * still gets its signal.
+   */
+  onFirstFrame?: () => void
   onStatus?: (status: Scope3DViewerStatus) => void
   className?: string
 }
 
 /** Pointer travel (px) above which a press is an orbit drag, not a click. */
 const CLICK_SLOP_PX = 5
+/** Site hover cursor: one raycast per this many ms at most. */
+const HOVER_MS = 80
 /** Long frame gaps (tab switch, breakpoint) shouldn't fast-forward animations. */
 const MAX_DT_S = 0.1
-/** Site view: nearly frontal, a touch from above and from Scope's left, like the 2D companion. */
-const PREVIEW_DIRECTION = new THREE.Vector3(0.22, 0.16, 1)
+const PREVIEW_DIRECTION = SCOPE_3D_WEB_VIEW_DIRECTION
 /**
  * Governor: when the MEDIAN frame of two windows in a row is slower than this,
  * drop one quality step. The median ignores one-off main-thread stalls
@@ -131,7 +155,11 @@ function Scope3DViewer({
   ssaa,
   lighting,
   reducedMotion,
+  envelope: knownEnvelope,
+  allowSoftwareRenderer = false,
+  paused = false,
   onReady,
+  onFirstFrame,
   onStatus,
   className,
 }: Scope3DViewerProps) {
@@ -140,13 +168,14 @@ function Scope3DViewer({
   const modelRef = React.useRef<Scope3DModel | null>(null)
   const directorRef = React.useRef<Scope3DDirector | null>(null)
   const applyQualityRef = React.useRef<() => void>(() => {})
+  const setRunningRef = React.useRef<() => void>(() => {})
   const osReducedMotion = useOsReducedMotion()
   const reduced = reducedMotion ?? osReducedMotion
   // Callbacks and initial values are read through refs so the heavy effect
   // below only re-runs when the model URL changes.
-  const latest = React.useRef({ lighting, reduced, pixelRatio, ssaa, onReady, onStatus })
+  const latest = React.useRef({ lighting, reduced, pixelRatio, ssaa, knownEnvelope, paused, onReady, onFirstFrame, onStatus })
   React.useEffect(() => {
-    latest.current = { lighting, reduced, pixelRatio, ssaa, onReady, onStatus }
+    latest.current = { lighting, reduced, pixelRatio, ssaa, knownEnvelope, paused, onReady, onFirstFrame, onStatus }
   })
 
   React.useEffect(() => {
@@ -157,7 +186,11 @@ function Scope3DViewer({
     let stage: Scope3DStage
     try {
       // Site conditions refuse software WebGL; the studio still opens anywhere.
-      stage = new Scope3DStage(canvas, { transparent: preview, orbit: !preview, requireGpu: preview })
+      stage = new Scope3DStage(canvas, {
+        transparent: preview,
+        orbit: !preview,
+        requireGpu: preview && !allowSoftwareRenderer,
+      })
     } catch {
       latest.current.onStatus?.({
         phase: "error",
@@ -197,10 +230,26 @@ function Scope3DViewer({
     }
     applyQualityRef.current = applyQuality
 
+    // Readiness: the first frame with Scope in it, at the canvas's real size.
+    let firstFrame: "waiting" | "rendered" = "waiting"
+    const presentFirstFrame = () => {
+      if (firstFrame !== "waiting" || !director || canvas.clientWidth === 0 || canvas.clientHeight === 0) return
+      firstFrame = "rendered"
+      director.tick(0)
+      stage.render()
+      // Double rAF: the first callback runs before that frame is composited, the second after.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (!abort.signal.aborted) latest.current.onFirstFrame?.()
+        }),
+      )
+    }
+
     const resize = () => {
       stage.resize(canvas.clientWidth, canvas.clientHeight)
       applyQuality()
       if (envelope) stage.frame(envelope, PREVIEW_DIRECTION)
+      presentFirstFrame()
     }
     const observer = new ResizeObserver(resize)
     observer.observe(canvas)
@@ -249,10 +298,10 @@ function Scope3DViewer({
       }
     }
 
-    // Render only while Scope is on screen and the tab is visible.
+    // Render only while Scope is on screen, the tab is visible and nothing holds it.
     let onScreen = true
     const setRunning = () => {
-      const run = onScreen && document.visibilityState === "visible"
+      const run = onScreen && document.visibilityState === "visible" && !latest.current.paused
       frame.sleeping = !run
       if (run) {
         last = fpsSince = windowStart = performance.now()
@@ -268,6 +317,7 @@ function Scope3DViewer({
     visibility.observe(canvas)
     document.addEventListener("visibilitychange", setRunning)
     setRunning()
+    setRunningRef.current = setRunning
 
     latest.current.onStatus?.({ phase: "loading", loaded: 0, total: null })
     loadScope3DModel(
@@ -275,7 +325,7 @@ function Scope3DViewer({
       (loaded, total) => latest.current.onStatus?.({ phase: "loading", loaded, total }),
       abort.signal,
     )
-      .then((model) => {
+      .then(async (model) => {
         if (abort.signal.aborted) return disposeScope3DModel(model)
         modelRef.current = model
         model.setGrain(latest.current.lighting.grain)
@@ -284,14 +334,21 @@ function Scope3DViewer({
         const secondary = new Scope3DSecondary(model.root)
         if (preview) {
           const t0 = performance.now()
-          envelope = measureMotionEnvelope(model.root, animator, secondary, PREVIEW_DIRECTION)
+          envelope =
+            latest.current.knownEnvelope ?? measureMotionEnvelope(model.root, animator, secondary, PREVIEW_DIRECTION)
           frame.envelopeMs = performance.now() - t0
           stage.frame(envelope, PREVIEW_DIRECTION)
         }
-        director = new Scope3DDirector(animator, { reducedMotion: latest.current.reduced }, secondary)
+        const newDirector = new Scope3DDirector(animator, { reducedMotion: latest.current.reduced }, secondary)
+        // Every shader before the first frame: in parallel where the browser
+        // supports it, instead of one long main-thread stall on frame one.
+        await stage.renderer.compileAsync(stage.scene, stage.camera)
+        if (abort.signal.aborted) return
+        director = newDirector
         directorRef.current = director
         latest.current.onStatus?.({ phase: "ready" })
         latest.current.onReady?.({ stage, model, animator, secondary, director, frame: () => ({ ...frame }) })
+        presentFirstFrame()
       })
       .catch((error: unknown) => {
         if (abort.signal.aborted) return
@@ -314,10 +371,30 @@ function Scope3DViewer({
     canvas.addEventListener("pointerdown", onPointerDown)
     canvas.addEventListener("pointerup", onPointerUp)
 
+    // Site: a pointer cursor over Scope only — the rest of the canvas is empty
+    // space. Raycasting the skinned shell isn't free: at most every HOVER_MS.
+    let hoverAt = 0
+    const onPointerMove = (e: PointerEvent) => {
+      if (!preview || !director || e.pointerType !== "mouse" || e.timeStamp - hoverAt < HOVER_MS) return
+      hoverAt = e.timeStamp
+      const rect = canvas.getBoundingClientRect()
+      canvas.style.cursor = stage.hit(e.clientX - rect.left, e.clientY - rect.top) ? "pointer" : ""
+    }
+    canvas.addEventListener("pointermove", onPointerMove)
+
+    const onContextLost = (e: Event) => {
+      e.preventDefault()
+      stage.renderer.setAnimationLoop(null)
+      latest.current.onStatus?.({ phase: "error", message: "The WebGL context was lost." })
+    }
+    canvas.addEventListener("webglcontextlost", onContextLost)
+
     return () => {
       abort.abort()
       canvas.removeEventListener("pointerdown", onPointerDown)
       canvas.removeEventListener("pointerup", onPointerUp)
+      canvas.removeEventListener("pointermove", onPointerMove)
+      canvas.removeEventListener("webglcontextlost", onContextLost)
       observer.disconnect()
       visibility.disconnect()
       document.removeEventListener("visibilitychange", setRunning)
@@ -327,14 +404,20 @@ function Scope3DViewer({
       modelRef.current = null
       directorRef.current = null
       applyQualityRef.current = () => {}
+      setRunningRef.current = () => {}
       stage.dispose()
       stageRef.current = null
     }
-  }, [modelUrl, mode])
+  }, [modelUrl, mode, allowSoftwareRenderer])
 
   React.useEffect(() => {
     applyQualityRef.current()
   }, [pixelRatio, ssaa])
+
+  // `latest` (synced by the first effect, which runs before this one) already holds it.
+  React.useEffect(() => {
+    setRunningRef.current()
+  }, [paused])
 
   React.useEffect(() => {
     const director = directorRef.current
