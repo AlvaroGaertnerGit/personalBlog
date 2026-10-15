@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>Scope · laboratorio de comportamiento</title>
+  <meta name="description" content="Laboratorio interactivo de la Entrega 3 de Scope World 2.0: acompañamiento, locomoción, refugio, empujar con la cara y activar mecanismos con su luz. No es la experiencia final.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper: #ede6d8; --card: rgba(243, 238, 227, 0.93); --ink: #1c1b21; --soft: #5b5865; --margin: #9a3b2a; --line: rgba(28, 27, 33, 0.22); }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; overflow: hidden; background: #0b1220; font: 14px/1.4 Geist, system-ui, sans-serif; color: var(--ink); }
+    #view { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .card { background: var(--card); border-radius: 10px; padding: 10px 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); }
+    .intro { position: fixed; left: 16px; top: 16px; max-width: min(420px, calc(100% - 32px)); }
+    .intro h1 { font-size: 15px; font-weight: 600; }
+    .intro p { font-size: 12.5px; color: var(--soft); margin-top: 3px; }
+    .intro summary { cursor: pointer; font-weight: 600; font-size: 15px; list-style: none; }
+    .intro summary::-webkit-details-marker { display: none; }
+    .hud { position: fixed; left: 16px; right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); display: grid; gap: 8px; justify-items: start; pointer-events: none; }
+    .hud .card { pointer-events: auto; max-width: 100%; }
+    .row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .row b { font: 500 11px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; margin-right: 2px; }
+    button { font: 500 12.5px Geist, sans-serif; padding: 6px 11px; min-height: 32px; border-radius: 99px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+    button:hover { background: #fff; }
+    button[aria-pressed="true"], button[aria-current="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    button:focus-visible { outline: 2px solid var(--margin); outline-offset: 2px; }
+    #note { position: fixed; right: 16px; top: 16px; width: min(320px, calc(100% - 32px)); }
+    #note p { font-size: 13.5px; line-height: 1.5; margin: 6px 0 8px; }
+    #note h2 { font: 500 11px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; }
+    #debug { position: fixed; right: 16px; top: 16px; width: min(400px, calc(100% - 32px)); max-height: calc(100% - 150px); overflow: auto; font: 12px/1.45 "Geist Mono", monospace; }
+    #note:not([hidden]) ~ #debug { top: 170px; max-height: calc(100% - 300px); }
+    #debug h2 { font: 600 14px Geist, sans-serif; }
+    #debug h2 small { font: 400 11px "Geist Mono", monospace; color: var(--soft); margin-left: 4px; }
+    #debug .why { color: var(--margin); margin: 3px 0 6px; font-family: Geist, sans-serif; font-size: 13px; }
+    #debug .kv { display: grid; grid-template-columns: 76px 1fr; gap: 6px; border-top: 1px solid rgba(28, 27, 33, 0.08); padding: 2px 0; }
+    #debug .kv span { color: var(--soft); }
+    #debug .kv b { font-weight: 500; overflow-wrap: anywhere; }
+    #debug details { margin-top: 6px; }
+    #debug summary { cursor: pointer; color: var(--soft); }
+    #debug ol { padding-left: 0; list-style: none; }
+    #debug li { border-top: 1px solid rgba(28, 27, 33, 0.08); padding: 2px 0; }
+    #debug time { color: var(--soft); }
+    #debug .perf { color: var(--soft); margin-top: 6px; font-size: 11px; }
+    #status { position: fixed; inset: 0; display: grid; place-items: center; color: #e9e4da; font: 500 13px "Geist Mono", monospace; text-align: center; padding: 24px; pointer-events: none; }
+    body:not(.loading):not(.no-webgl) #status { display: none; }
+    body.no-webgl .hud, body.no-webgl .intro, body.no-webgl #view { display: none; }
+    .fallback { max-width: 640px; text-align: left; font: 15px/1.55 Geist, system-ui, sans-serif; color: #e9e4da; overflow: auto; max-height: 100%; }
+    .fallback h1 { font-size: 22px; margin-bottom: 6px; }
+    .fallback h2 { font-size: 16px; margin-top: 14px; }
+    .fallback ol { padding-left: 20px; }
+    .bench-only { display: none; }
+    body.bench .bench-only { display: grid; }
+    body.bench .lab-only { display: none !important; }
+    @media (max-width: 640px) {
+      .intro p { display: none; }
+      .intro[open] p { display: block; }
+      button { padding: 6px 9px; font-size: 12px; }
+      #debug { top: auto; bottom: 150px; max-height: 38vh; }
+      #note { top: auto; bottom: 150px; }
+      #note:not([hidden]) ~ #debug { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+  </style>
+</head>
+<body class="loading">
+  <canvas id="view" aria-label="El mundo de Scope en 3D. Scope te acompaña por cinco lugares; puedes tocarle a él y a los objetos."></canvas>
+  <div id="status" role="status">Cargando el mundo de papel…</div>
+  <p id="live" class="sr" aria-live="polite"></p>
+
+  <details class="card intro lab-only" open>
+    <summary>Laboratorio de Scope · Entrega 3</summary>
+    <p>Recorre su rincón con la rueda, deslizando, con ← → o con los lugares. Tócale a él o a la bola, la flor, el radiómetro, la linterna o el gabinete. Quédate quieto un rato o abre la nota para leer. <b>D</b>: depuración.</p>
+  </details>
+  <div class="card intro bench-only">
+    <h1>Banco de pasos</h1>
+    <p>Izquierda: Entrega 3 (pasitos, tres marchas). Derecha: el prototipo 1.0 (saltitos con Bounce). La misma distancia y a la vez.</p>
+  </div>
+
+  <aside id="note" class="card lab-only" hidden aria-label="Nota del lugar">
+    <h2>Nota</h2>
+    <p id="note-text"></p>
+    <button type="button" id="note-close">Cerrar</button>
+  </aside>
+  <aside id="debug" class="card lab-only" hidden aria-label="Depuración"></aside>
+
+  <div class="hud">
+    <nav class="card lab-only" aria-label="Lugares"><div class="row"><b>Lugar</b><span id="places" class="row"></span></div></nav>
+    <div class="card row lab-only" role="group" aria-label="Opciones">
+      <button type="button" id="read" aria-pressed="false">Leer la nota (L)</button>
+      <button type="button" id="mood">Luz</button>
+      <button type="button" id="speed" aria-pressed="false">Tiempo ×1</button>
+      <button type="button" id="debug-toggle" aria-pressed="false">Depuración (D)</button>
+      <a href="?banco" style="font-size:12.5px;color:var(--ink)">Banco de pasos</a>
+      <button type="button" id="reset">Reiniciar</button>
+    </div>
+    <div class="card bench-only">
+      <div class="row" id="bench-gaits" role="group" aria-label="Marcha"><b>Marcha 2.0</b>
+        <button type="button" data-gait="walk" aria-pressed="true">Paseo</button>
+        <button type="button" data-gait="trot" aria-pressed="false">Trote</button>
+        <button type="button" data-gait="bound" aria-pressed="false">Prisa</button>
+        <a href="./" style="font-size:12.5px;color:var(--ink)">Volver al laboratorio</a>
+      </div>
+      <p id="bench-readout" style="font:11.5px 'Geist Mono',monospace;color:var(--soft);margin-top:6px"></p>
+    </div>
+  </div>
+  <script type="module" src="/dist/lab.js"></script>
+</body>
+</html>

@@ -45,7 +45,7 @@ node docs/redesign/scope-world/entrega-2-entorno/visor/tools/serve.mjs --port 31
 # → http://localhost:3110/   (?camara=general|horizonte|margen|escala|linterna  ?hora=amanecer|dia|atardecer|noche)
 ```
 
-- **Qué carga.** Reutiliza en solo lectura los módulos del prototipo 1.0: el mundo aprobado, sus materiales y Scope. Encima pone el relieve exportado, el cielo con halo, la niebla, cuatro ambientes de luz y las cinco cámaras de los renders. Las líneas pautadas y el margen que se disuelven están reescritos como *shader*.
+- **Qué carga.** Reutiliza en solo lectura los módulos del prototipo 1.0: el mundo aprobado, sus materiales y Scope. Desde la Entrega 4, el entorno (relieve, cielo, niebla y ambientes) se monta en el módulo común `core/env/stage.ts`, el mismo que usan el laboratorio y el mundo; el visor conserva su cámara, sus planos y su HUD. Encima pone el relieve exportado, el cielo con halo, la niebla, cuatro ambientes de luz y las cinco cámaras de los renders. Las líneas pautadas y el margen que se disuelven están reescritos como *shader*.
 - **Optimizaciones aplicadas.**
   - El entorno estático se fusiona en una malla por material (unas 95 piezas pasan a 3).
   - Solo un sol proyecta sombras.

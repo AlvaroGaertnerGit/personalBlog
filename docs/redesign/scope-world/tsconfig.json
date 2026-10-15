@@ -1,0 +1,23 @@
+{
+  // Scope World's own, isolated type check (experimental code only; production
+  // keeps the root tsconfig, untouched). The production modules the experiments
+  // import read-only (src/components/scope-3d/engine) are checked through them.
+  //   npx tsc -p docs/redesign/scope-world/tsconfig.json
+  // or everything at once: node docs/redesign/scope-world/core/tools/check.mjs
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node"]
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["**/dist/**"]
+}
