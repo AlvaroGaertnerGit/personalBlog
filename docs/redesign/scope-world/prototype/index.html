@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>Scope World · prototipo interactivo</title>
+  <meta name="description" content="Prototipo, no la web final: el Pliego, el mundo de Scope, como un lugar en 3D que puedes recorrer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="/scope/loader/still.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body class="is-loading">
+  <a class="skip" href="#reading" data-action="reading">Saltar al contenido</a>
+
+  <!-- the world: decorative for assistive tech; everything in it is reachable from the HTML below -->
+  <div id="stage" aria-hidden="true"><canvas id="world"></canvas></div>
+  <div id="veil" aria-hidden="true"></div>
+
+  <header class="bar">
+    <a class="mark" href="#" data-action="home"><i aria-hidden="true"></i>Álvaro Gaertner</a>
+    <p class="crumb" aria-live="polite"><span>El Pliego</span> › <b id="crumb-place">El margen</b></p>
+    <button class="bar-btn" type="button" data-action="reading" aria-controls="reading">Vista de lectura</button>
+  </header>
+
+  <nav class="route" aria-label="Lugares de la ruta">
+    <ol id="route-list"></ol>
+  </nav>
+
+  <div id="hotspots" role="group" aria-label="Cosas que hay en este lugar"></div>
+
+  <aside id="note" class="note" role="region" aria-live="polite" hidden></aside>
+
+  <section id="project" class="project" role="dialog" aria-modal="true" aria-labelledby="project-title" hidden>
+    <div class="sheet" id="project-sheet" tabindex="-1"></div>
+  </section>
+
+  <p id="hint" class="hint" aria-hidden="true"></p>
+
+  <!-- only without a GPU: the world still runs, at a lower resolution -->
+  <aside id="notice" class="notice" role="status" hidden>
+    <p>Este equipo dibuja el 3D sin tarjeta gráfica, así que el mundo se ve con menos resolución y puede ir a tirones.</p>
+    <button class="bar-btn" type="button" data-action="reading" aria-controls="reading">Vista de lectura</button>
+    <button class="close" type="button" aria-label="Cerrar el aviso">×</button>
+  </aside>
+
+  <!-- the loader: the production one (prerendered Scope + exploring line) -->
+  <div id="loader" class="loader" role="status">
+    <div class="loader-inner">
+      <div class="loader-scope">
+        <img id="loader-still" src="/scope/loader/still.webp" alt="" width="293" height="364" fetchpriority="high">
+        <canvas id="loader-canvas" aria-hidden="true"></canvas>
+      </div>
+      <p>Scope está explorando…</p>
+      <div class="line" aria-hidden="true"><div class="line-glow" id="line-glow"></div><div class="line-dot" id="line-dot"><span></span></div></div>
+    </div>
+  </div>
+
+  <!-- the same content without the canvas (no WebGL, or by choice) -->
+  <main id="reading" class="reading" tabindex="-1" hidden>
+    <div class="reading-inner" id="reading-content"></div>
+  </main>
+
+  <div id="debug" class="debug" hidden></div>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+
+  <script type="module" src="/dist/app.js"></script>
+</body>
+</html>

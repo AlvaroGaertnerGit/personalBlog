@@ -1,0 +1,242 @@
+/* Scope World prototype. The interface is paper laid on the Pliego: cream
+   sheets, ruled lines, the vermilion margin, graphite type, and one warm point
+   of light (Scope's eye colour) for "this is alive / this is here". No glass,
+   no blur panels. Production tokens (globals.css) are mirrored, not imported. */
+
+:root {
+  --ink: #1c1b21;
+  --soft: #55525e;
+  --paper: #f3eee3;
+  --paper-2: #ede6d8;
+  --rule: rgba(142, 155, 176, 0.28);
+  --margin: #9a3b2a;
+  --amber: #f2b65a; /* --scope-warm */
+  --celadon: #5f7a6d;
+  --night: #0b1220; /* --scope-night */
+  --night-glow: #121a2c;
+  --shell: #f2ece2; /* --scope-shell */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --gutter: clamp(16px, 3.5vw, 56px);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; }
+body {
+  overflow: hidden;
+  background: var(--night);
+  color: var(--ink);
+  font: 400 15px/1.5 Geist, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.skip { position: fixed; left: var(--gutter); top: 10px; z-index: 200; padding: 10px 14px; background: var(--paper); border-radius: 99px; transform: translateY(-160%); transition: transform .2s; }
+.skip:focus { transform: none; }
+
+/* --- the world -------------------------------------------------------------------------- */
+#stage { position: fixed; inset: 0; touch-action: none; }
+#world { display: block; width: 100%; height: 100%; }
+body.pointer-on-thing #stage { cursor: pointer; }
+#veil { position: fixed; inset: 0; background: var(--night); opacity: 0; pointer-events: none; z-index: 5; transition: opacity .22s linear; }
+#veil.on { opacity: 1; }
+
+/* --- bar -------------------------------------------------------------------------------- */
+.bar {
+  position: fixed; inset: 0 0 auto; z-index: 20; height: 72px; padding: 0 var(--gutter);
+  padding-top: env(safe-area-inset-top);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: linear-gradient(180deg, rgba(243, 238, 227, .82), rgba(243, 238, 227, 0));
+}
+.mark { display: flex; align-items: center; gap: 11px; font-weight: 600; font-size: 16px; text-decoration: none; white-space: nowrap; }
+.mark i { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 12px 2px rgba(242, 182, 90, .7); }
+.crumb { font: 400 12.5px "Geist Mono", ui-monospace, monospace; color: var(--soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.crumb b { color: var(--ink); font-weight: 500; }
+.bar-btn { font: 500 13px Geist, sans-serif; padding: 9px 14px; border-radius: 99px; border: 1px solid rgba(28, 27, 33, .25); background: rgba(243, 238, 227, .7); white-space: nowrap; }
+.bar-btn:hover { background: var(--paper); }
+
+/* --- route: a strip of paper with the places -------------------------------------------- */
+.route {
+  position: fixed; z-index: 20; left: 50%; bottom: max(22px, env(safe-area-inset-bottom));
+  transform: translateX(-50%); max-width: calc(100vw - 2 * var(--gutter));
+}
+.route ol {
+  list-style: none; padding: 7px; display: flex; gap: 2px; align-items: center;
+  background: rgba(243, 238, 227, .9); border-radius: 99px;
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .45);
+}
+.route li { display: flex; align-items: center; }
+.route li + li::before { content: ""; width: 18px; height: 1px; background: rgba(28, 27, 33, .3); }
+.route button {
+  display: flex; align-items: center; gap: 8px; padding: 8px 13px; border-radius: 99px;
+  font: 400 12.5px "Geist Mono", ui-monospace, monospace; color: var(--soft); white-space: nowrap;
+}
+.route button i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; transition: background .3s, box-shadow .3s; }
+.route button[aria-current="step"] { color: var(--ink); background: rgba(28, 27, 33, .06); }
+.route button[aria-current="step"] i { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 10px rgba(242, 182, 90, .9); }
+.route button:hover { color: var(--ink); }
+
+/* --- hotspots: real buttons over the objects -------------------------------------------- */
+#hotspots { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
+.hotspot {
+  position: absolute; left: 0; top: 0; pointer-events: auto;
+  width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%;
+  display: grid; place-items: center;
+  transition: opacity .35s var(--ease-out);
+  will-change: transform;
+}
+.hotspot::before { /* a pencil ring around a warm point */
+  content: ""; width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid rgba(243, 238, 227, .85); box-shadow: 0 0 0 1px rgba(28, 27, 33, .18), 0 2px 8px rgba(0, 0, 0, .25);
+  transition: transform .3s var(--ease-out);
+}
+.hotspot::after { content: ""; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px 1px rgba(242, 182, 90, .9); }
+.hotspot .label {
+  position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translate(-50%, 4px);
+  background: var(--paper); color: var(--ink); padding: 7px 11px 8px; border-radius: 3px;
+  font: 500 12.5px/1.3 Geist, sans-serif; white-space: nowrap; max-width: 280px;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .4);
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .25s var(--ease-out);
+}
+.hotspot .label small { display: block; font: 400 11px "Geist Mono", monospace; color: var(--soft); margin-top: 2px; }
+.hotspot:hover .label, .hotspot:focus-visible .label, .hotspot.hot .label { opacity: 1; transform: translate(-50%, 0); }
+.hotspot:hover::before, .hotspot:focus-visible::before, .hotspot.hot::before { transform: scale(1.25); }
+.hotspot.off { opacity: 0; pointer-events: none; }
+.hotspot.is-scope::after { background: #b8c8ff; box-shadow: 0 0 8px 1px rgba(184, 200, 255, .9); }
+
+/* --- a question's note (non-modal) ------------------------------------------------------ */
+.note {
+  position: fixed; z-index: 15; left: 0; top: 0; width: min(340px, calc(100vw - 32px));
+  background: var(--paper); border-radius: 3px; padding: 18px 20px 16px 34px;
+  background-image: repeating-linear-gradient(180deg, transparent 0 23px, var(--rule) 23px 24px);
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .6);
+  transform-origin: 0 100%;
+}
+.note::after { content: ""; position: absolute; top: 0; bottom: 0; left: 22px; width: 1.5px; background: rgba(154, 59, 42, .55); }
+.note .status { font: 500 11px "Geist Mono", monospace; letter-spacing: .05em; text-transform: uppercase; color: var(--celadon); }
+.note h2 { font: italic 400 21px/1.25 Newsreader, Georgia, serif; margin-top: 6px; }
+.note dl { margin-top: 10px; font-size: 13.5px; }
+.note dt { font: 500 11px "Geist Mono", monospace; color: var(--soft); margin-top: 8px; }
+.note dd { margin: 2px 0 0; }
+.note .close { position: absolute; right: 8px; top: 8px; width: 28px; height: 28px; border-radius: 50%; font-size: 18px; line-height: 1; color: var(--soft); }
+.note .close:hover { background: rgba(28, 27, 33, .07); color: var(--ink); }
+
+/* --- the project's sheet: unfolds from the card on the tile ----------------------------- */
+.project { position: fixed; inset: 0; z-index: 30; pointer-events: none; }
+.project .sheet {
+  pointer-events: auto; position: absolute; left: var(--gutter); top: 96px;
+  width: min(560px, calc(100vw - 2 * var(--gutter))); max-height: calc(100svh - 190px); overflow: auto;
+  background: #f3eee3; border-radius: 3px; padding: 40px 46px 34px 58px;
+  background-image: repeating-linear-gradient(180deg, transparent 0 31px, var(--rule) 31px 32px);
+  box-shadow: 0 40px 80px -30px rgba(11, 18, 32, .65), 0 2px 0 rgba(0, 0, 0, .04);
+  transform-origin: 0 0; outline: none;
+}
+.project .sheet::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(28, 27, 33, .07); box-shadow: 0 1px 0 rgba(255, 255, 255, .6); pointer-events: none; }
+.project .sheet::after { content: ""; position: absolute; top: 0; bottom: 0; left: 34px; width: 1.5px; background: rgba(154, 59, 42, .55); pointer-events: none; }
+.eyebrow { font: 500 12px "Geist Mono", monospace; letter-spacing: .05em; text-transform: uppercase; color: var(--celadon); display: flex; gap: 10px; align-items: center; }
+.eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px rgba(242, 182, 90, .9); }
+.project h1 { font-size: clamp(44px, 7vw, 68px); letter-spacing: -0.05em; line-height: .95; font-weight: 600; margin-top: 12px; }
+.project .desc { font-size: clamp(17px, 2vw, 21px); line-height: 1.42; letter-spacing: -0.01em; margin-top: 18px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; padding: 0; list-style: none; }
+.chips li { font: 400 12.5px "Geist Mono", monospace; border: 1px solid rgba(28, 27, 33, .25); border-radius: 99px; padding: 5px 11px; }
+.how { margin-top: 20px; padding-top: 14px; border-top: 1px dashed rgba(28, 27, 33, .25); font: 400 12.5px/1.6 "Geist Mono", monospace; color: var(--soft); }
+.how b { color: var(--ink); font-weight: 500; }
+.actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; align-items: center; }
+.btn { padding: 11px 16px; border-radius: 99px; font-weight: 500; font-size: 14px; white-space: nowrap; text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.pending { border: 1px dashed rgba(28, 27, 33, .4); color: var(--soft); }
+.btn kbd { font: 400 11px "Geist Mono", monospace; border: 1px solid currentColor; border-radius: 5px; padding: 1px 5px; opacity: .7; }
+.provisional { margin-top: 12px; font: 400 11.5px "Geist Mono", monospace; color: var(--soft); }
+
+/* --- hint ------------------------------------------------------------------------------- */
+.hint {
+  position: fixed; z-index: 12; left: 50%; bottom: calc(max(22px, env(safe-area-inset-bottom)) + 66px); transform: translateX(-50%);
+  font: 400 12px "Geist Mono", monospace; color: rgba(243, 238, 227, .82); text-shadow: 0 1px 8px rgba(0, 0, 0, .6);
+  white-space: nowrap; transition: opacity .6s; pointer-events: none;
+}
+.hint.gone { opacity: 0; }
+
+/* --- no-GPU notice: a slip of paper under the bar, once ------------------------------------ */
+.notice {
+  position: fixed; z-index: 25; left: 16px; top: 84px; max-width: 360px; padding: 14px 44px 14px 16px; border-radius: 6px;
+  background: rgba(243, 238, 227, .94); color: var(--ink); box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+  font: 400 13px/1.5 Geist, sans-serif;
+}
+.notice[hidden] { display: none; }
+.notice p { margin: 0 0 10px; }
+.notice .close { position: absolute; right: 8px; top: 8px; width: 28px; height: 28px; border-radius: 50%; font-size: 18px; line-height: 1; color: var(--soft); }
+.notice .close:hover { background: rgba(28, 27, 33, .07); color: var(--ink); }
+body.fallback .notice { display: none; }
+
+/* --- loader (mirrors scope-entry-screen.tsx) -------------------------------------------- */
+.loader {
+  position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+  background: var(--night) radial-gradient(ellipse 55% 45% at 50% 44%, var(--night-glow), transparent 70%);
+}
+.loader-inner { display: flex; flex-direction: column; align-items: center; --scope-h: min(clamp(136px, 34vw, 200px), 30svh); }
+.loader-scope { position: relative; height: calc(var(--scope-h) / 0.8791); aspect-ratio: 293 / 364; }
+.loader-scope img, .loader-scope canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.loader-scope canvas { opacity: 0; }
+.loader p { margin-top: 28px; color: rgba(242, 236, 226, .8); font-size: 13px; font-weight: 500; letter-spacing: .04em; }
+.line { position: relative; margin-top: 20px; height: 1px; width: clamp(168px, 52vw, 248px); background: linear-gradient(90deg, transparent, rgba(242, 236, 226, .22) 20%, rgba(242, 236, 226, .22) 80%, transparent); }
+.line-glow { position: absolute; inset: 0; opacity: 0; background: linear-gradient(90deg, transparent, var(--amber) 30%, var(--amber) 70%, transparent); box-shadow: 0 0 10px 0 rgba(242, 182, 90, .6); }
+.line-dot { position: absolute; inset: 0; animation: explore 3.2s var(--ease-in-out) infinite alternate; }
+.line-dot span { position: absolute; top: 50%; left: 0; width: 6px; height: 6px; border-radius: 50%; transform: translate(-50%, -50%); background: var(--amber); box-shadow: 0 0 8px 2px rgba(242, 182, 90, .55); }
+@keyframes explore { from { transform: translateX(8%); } to { transform: translateX(92%); } }
+
+/* --- reading view: the same content as a page ------------------------------------------- */
+.reading { position: fixed; inset: 0; z-index: 40; overflow: auto; background: var(--paper-2); outline: none; }
+.reading-inner { max-width: 980px; margin: 0 auto; padding: 96px var(--gutter) 120px; }
+.reading .intro { display: flex; flex-direction: column; gap: 14px; }
+.reading .intro p { color: var(--soft); max-width: 60ch; }
+.reading h1 { font-size: clamp(36px, 6vw, 60px); letter-spacing: -0.04em; line-height: 1; font-weight: 600; }
+.reading h2 { font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -0.03em; font-weight: 600; margin: 56px 0 6px; }
+.reading .place-img { margin-top: 18px; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 3px; background: var(--night); }
+.reading figcaption { font: 400 12px "Geist Mono", monospace; color: var(--soft); margin-top: 8px; }
+.reading .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 18px; padding: 0; list-style: none; }
+.reading .card {
+  background: var(--paper); border-radius: 3px; padding: 18px 20px 18px 34px; position: relative;
+  background-image: repeating-linear-gradient(180deg, transparent 0 23px, var(--rule) 23px 24px);
+}
+.reading .card::after { content: ""; position: absolute; top: 0; bottom: 0; left: 22px; width: 1.5px; background: rgba(154, 59, 42, .5); }
+.reading .card h3 { font: italic 400 19px/1.3 Newsreader, Georgia, serif; margin-top: 6px; }
+.reading .card .status { font: 500 11px "Geist Mono", monospace; letter-spacing: .05em; text-transform: uppercase; color: var(--celadon); }
+.reading .card p, .reading .card dd { font-size: 13.5px; margin-top: 6px; }
+.reading .card dt { font: 500 11px "Geist Mono", monospace; color: var(--soft); margin-top: 8px; }
+.reading .card dd { margin-left: 0; }
+.reading .card .btn { margin-top: 12px; }
+.reading .back-to-world { position: fixed; right: var(--gutter); top: 18px; z-index: 41; }
+.reading .why { margin-top: 10px; font: 400 12.5px "Geist Mono", monospace; color: var(--soft); }
+body.fallback .bar { background: linear-gradient(180deg, rgba(237, 230, 216, .96), rgba(237, 230, 216, 0)); }
+body.fallback .route, body.fallback #hotspots, body.fallback .hint { display: none; }
+
+/* --- debug (?debug or the D key) -------------------------------------------------------- */
+.debug {
+  position: fixed; right: 12px; top: 84px; z-index: 50; width: 300px; padding: 12px 14px; border-radius: 6px;
+  background: rgba(11, 18, 32, .86); color: #e9e4da; font: 400 11.5px/1.55 "Geist Mono", monospace; white-space: pre-wrap;
+}
+
+/* --- small screens ---------------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .bar { height: 60px; }
+  .crumb { display: none; }
+  .route button { padding: 8px 9px; font-size: 0; gap: 0; }
+  .route button i { width: 10px; height: 10px; }
+  .route button[aria-current="step"] { font-size: 12px; gap: 7px; }
+  .route li + li::before { width: 10px; }
+  .project .sheet { left: 12px; right: 12px; width: auto; top: auto; bottom: 12px; max-height: 62svh; padding: 26px 22px 24px 40px; }
+  .project .sheet::after { left: 24px; }
+  .hint { font-size: 11px; white-space: normal; text-align: center; width: calc(100% - 32px); }
+  .notice { top: 72px; right: 16px; max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line-dot { animation: none; transform: translateX(50%); }
+  .hotspot, .hotspot .label, #veil { transition: none; }
+}

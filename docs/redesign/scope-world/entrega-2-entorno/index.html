@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Scope World · Entrega 2</title>
+<meta name="description" content="Pase de arte del entorno de Scope World: el pliego sin bordes, cordilleras de papel, integración del escenario central y luz por zonas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root { --paper: #ede6d8; --ink: #1c1b21; --soft: #5b5865; --rule: rgba(142,155,176,.35); --margin: #9a3b2a; --amber: #f2b65a; --night: #0b1220; --ok: #2f6b4a; --warn: #8a5a12; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 16px/1.55 Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+    background-image: repeating-linear-gradient(180deg, transparent 0 31px, var(--rule) 31px 32px); }
+  main { max-width: 1360px; margin: 0 auto; padding: 0 32px 120px; border-left: 1.5px solid rgba(154,59,42,.55); }
+  .top { padding: 60px 0 28px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 44px; align-items: end; }
+  .eyebrow { font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--margin); text-transform: uppercase; }
+  h1 { font-size: clamp(48px, 7.5vw, 96px); line-height: .9; letter-spacing: -0.055em; font-weight: 600; margin-top: 12px; }
+  h1 em, h2 em { font-family: Newsreader, serif; font-weight: 400; }
+  .lead { font-size: 19px; line-height: 1.45; } .lead b { font-weight: 600; }
+  .status { margin-top: 12px; font: 400 13px/1.6 "Geist Mono", monospace; color: var(--soft); }
+  .status mark { background: var(--amber); color: var(--ink); padding: 1px 6px; border-radius: 4px; }
+  nav { position: sticky; top: 0; z-index: 5; background: rgba(237,230,216,.94); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(28,27,33,.12); display: flex; gap: 18px; flex-wrap: wrap; padding: 12px 0; font: 500 13px "Geist Mono", monospace; }
+  nav a { color: var(--soft); text-decoration: none; } nav a:hover { color: var(--ink); }
+  section { padding-top: 64px; scroll-margin-top: 50px; }
+  h2 { font-size: 36px; letter-spacing: -0.035em; font-weight: 600; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; line-height: 1.1; }
+  h2 small { font: 500 13px "Geist Mono", monospace; color: var(--margin); letter-spacing: 0; }
+  .why { max-width: 880px; color: var(--soft); margin-top: 10px; font-size: 17px; } .why b { color: var(--ink); font-weight: 500; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+  figure { margin: 0; }
+  img { width: 100%; height: auto; display: block; border-radius: 8px; background: var(--night); box-shadow: 0 24px 46px -28px rgba(11,18,32,.55); }
+  .lbl { font: 500 12px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; color: var(--soft); }
+  .after .lbl { color: var(--margin); }
+  figcaption { font: 400 13px/1.55 "Geist Mono", monospace; color: var(--soft); margin-top: 8px; } figcaption b { color: var(--ink); font-weight: 500; }
+  .wide { margin-top: 22px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+  table { border-collapse: collapse; width: 100%; margin-top: 18px; font-size: 14px; background: rgba(243,238,227,.8); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(28,27,33,.12); vertical-align: top; }
+  th { font: 500 12px "Geist Mono", monospace; color: var(--soft); text-transform: uppercase; letter-spacing: .04em; }
+  td.y { color: var(--ok); font-weight: 500; } td.p { color: var(--warn); font-weight: 500; }
+  .tablewrap { overflow-x: auto; }
+  ul.plain { margin: 14px 0 0 18px; display: grid; gap: 6px; color: var(--soft); max-width: 980px; } ul.plain b { color: var(--ink); font-weight: 500; }
+  code { font-family: "Geist Mono", monospace; font-size: .9em; background: rgba(28,27,33,.06); padding: 1px 5px; border-radius: 4px; }
+  .card { background: rgba(243,238,227,.9); border: 1px solid rgba(28,27,33,.14); border-radius: 10px; padding: 18px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+  .card .t { font: 500 11px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; }
+  .card b.h { display: block; font-size: 18px; margin-top: 4px; }
+  .card p, .card li { font-size: 14.5px; color: var(--soft); } .card ul { margin: 8px 0 0 18px; display: grid; gap: 4px; }
+  @media (max-width: 900px) { main { padding: 0 16px 80px; border-left: 0; } .top, .pair, .grid3, .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div><p class="eyebrow">Scope World 2.0 · Entrega 2 · pase de arte del entorno</p><h1>Una sola <em>hoja,</em> hasta el horizonte.</h1></div>
+    <div>
+      <p class="lead"><b>Las cordilleras ya no son montañas de videojuego:</b> son la misma hoja plegada a varias escalas, sin facetas, que se funde en el aire. <b>El pliego deja de verse como un rectángulo:</b> sus líneas pautadas salen, se curvan y se disuelven; el margen sigue como un camino. Cada lugar tiene su luz.</p>
+      <p class="status"><mark>pendiente de tu aprobación</mark> · renders de Cycles con el mundo aprobado sin modificar y el modelo de Scope intacto · mismas cámaras que la Fase A · sin las siete zonas</p>
+    </div>
+  </header>
+  <nav aria-label="Contenido"><a href="#comparativas">Comparativas</a><a href="#nuevas">Nuevas vistas</a><a href="#visor">Tiempo real</a><a href="#mathview">MathView en el mundo</a><a href="#limites">Límites</a><a href="#decidir">Decidir</a></nav>
+
+  <section id="comparativas">
+    <h2>Fase A → Entrega 2 <small>mismas cámaras, mismo mundo aprobado</small></h2>
+    <div class="pair">
+      <figure><p class="lbl">Fase A</p><img src="../v2-fase-a/renders/v-despues.jpg" alt="Estudio de la Fase A: cordilleras facetadas y un tono gris uniforme."><figcaption>Cordilleras facetadas; el pliego, un rectángulo sobre el terreno.</figcaption></figure>
+      <figure class="after"><p class="lbl">Entrega 2</p><img src="renders/e2-wide.jpg" alt="El mismo encuadre: relieve continuo de papel plegado, arboledas de hojas curvadas, la lámpara y el margen como camino que se aleja."><figcaption>Relieve continuo; el pliego, del mismo papel; <b>el margen sigue como camino</b> a la izquierda.</figcaption></figure>
+    </div>
+    <div class="pair">
+      <figure><p class="lbl">Fase A</p><img src="../v2-fase-a/renders/v-horizonte.jpg" alt="Atalaya de la Fase A: cielo gris plano."></figure>
+      <figure class="after"><p class="lbl">Entrega 2</p><img src="renders/e2-horizonte.jpg" alt="Scope de espaldas mirando cordilleras de papel bajo un amanecer con halo; no se ve el borde del pliego."><figcaption><b>No se ve el borde del pliego:</b> la página escrita se funde con el papel en blanco. Contraluz de amanecer.</figcaption></figure>
+    </div>
+    <div class="pair">
+      <figure><p class="lbl">Fase A</p><img src="../v2-fase-a/renders/v-home.jpg" alt=""></figure>
+      <figure class="after"><p class="lbl">Entrega 2</p><img src="renders/e2-home.jpg" alt="El margen a la altura de Scope con el horizonte de papel al fondo."></figure>
+    </div>
+    <div class="pair">
+      <figure><p class="lbl">Fase A</p><img src="../v2-fase-a/renders/v-linterna.jpg" alt=""></figure>
+      <figure class="after"><p class="lbl">Entrega 2</p><img src="renders/e2-linterna.jpg" alt="De noche, la linterna de Scope encendida desde dentro y Scope a contraluz."><figcaption>La noche se reserva para Scope: su linterna es la única luz.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="nuevas">
+    <h2>Luz con intención <small>tres vistas nuevas</small></h2>
+    <p class="why">No todo el mundo es oscuro: <b>cada zona tiene su hora</b> y su luz. Amanecer en el margen, día claro y construido en el círculo, atardecer cálido hacia el aula, noche de Scope.</p>
+    <figure class="wide"><img src="renders/e2-escala.jpg" alt="A la altura de Scope desde el margen: el pliego en primer plano, arboledas y torres en el plano medio, cordilleras al fondo y halo del amanecer."><figcaption><b>A la altura de Scope.</b> Planos con contenido: el campo cerca, arboledas y torres en medio, cordilleras al fondo.</figcaption></figure>
+    <div class="pair">
+      <figure><img src="renders/e2-dia.jpg" alt="El círculo de la lámpara de día con cielo azul y sombras definidas." loading="lazy"><figcaption><b>Día:</b> cielo azul, sombras nítidas; lo construido.</figcaption></figure>
+      <figure><img src="renders/e2-atardecer.jpg" alt="Atardecer rosado y cálido sobre el círculo, con una torre de acordeón al fondo." loading="lazy"><figcaption><b>Atardecer:</b> cálido, hacia el aula.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="visor">
+    <h2>El estudio en tiempo real <small>navegable · puerto 3110</small></h2>
+    <p class="why">El mismo entorno, exportado de Blender, sobre el mundo y el Scope del prototipo 1.0 (reutilizados en solo lectura): cielo con halo, niebla solo sobre la geometría, las líneas pautadas que se disuelven como <i>shader</i>, cuatro ambientes de luz y las cinco cámaras de los renders. <b>Sin zonas ni comportamientos.</b></p>
+    <div class="pair">
+      <figure><img src="renders/visor/visor-general.jpg" alt="Captura del visor en tiempo real: vista general." loading="lazy"><figcaption>Vista general, en tiempo real. Sin GPU no hay sombras: más plano que el render.</figcaption></figure>
+      <figure><img src="renders/visor/visor-atalaya.jpg" alt="Captura del visor en tiempo real: la atalaya." loading="lazy"><figcaption>La atalaya: el relieve hasta el horizonte. El lago aún sale demasiado oscuro.</figcaption></figure>
+    </div>
+    <div class="tablewrap"><table>
+      <tr><th>Medida</th><th>Valor</th><th>Fiabilidad</th></tr>
+      <tr><td>Carga local (mundo + entorno + Scope)</td><td>0,5–1,4 s</td><td class="y">medido</td></tr>
+      <tr><td>Entorno exportado</td><td>1,13 MB · 52 657 triángulos</td><td class="y">medido · <b>por encima</b> del objetivo de 20 000</td></tr>
+      <tr><td>Llamadas de dibujo</td><td>328 (vista general) · 16 (atalaya)</td><td class="y">medido</td></tr>
+      <tr><td>Optimización aplicada</td><td>entorno estático fusionado (~95 piezas → 3), un solo sol con sombras</td><td class="y">hecho</td></tr>
+      <tr><td>FPS</td><td>≈ 1 aquí, igual que el prototipo 1.0 en las mismas condiciones</td><td class="p">no representativo: sin GPU y pestaña automatizada</td></tr>
+    </table></div>
+    <p class="why" style="font-size:15px"><code>node docs/redesign/scope-world/entrega-2-entorno/visor/tools/serve.mjs --port 3110</code> → <code>http://localhost:3110/?camara=horizonte&amp;hora=amanecer</code></p>
+  </section>
+
+  <section id="mathview">
+    <h2>MathView en el mundo, <em>sin servidor</em> <small>propuesta</small></h2>
+    <p class="why">No se despliega MathView ni su API. La instalación transmite <b>lo que MathView hace de verdad</b> —|f(z)| en altura y la fase en color, ceros y polos— con cálculo propio en el navegador y material real del frontend rediseñado.</p>
+    <div class="cols">
+      <div class="card"><p class="t">La pieza</p><b class="h">La función que se pisa</b>
+        <ul>
+          <li>La superficie de celadón es <b>|f(z)|</b> de unas pocas funciones de ejemplo (z, 1/z, (z²−1)/(z²+1), z³−1, sen z), calculada en JavaScript con aritmética compleja estándar: sin código de MathView, sin dependencias.</li>
+          <li>El vidriado cambia de tono con la fase (esmaltes celadón, ámbar y lavanda, no el arcoíris de Plotly). Ceros = hoyos; polos = picos.</li>
+          <li>Scope se asoma a un cero; su luz enciende la curva de nivel que pisa.</li>
+        </ul></div>
+      <div class="card"><p class="t">La ficha</p><b class="h">Contenido profesional, accesible</b>
+        <ul>
+          <li>Qué problema resuelve, qué construí, tecnologías (Angular, Plotly, Django, NumPy, SymPy), funciones reales.</li>
+          <li><b>Capturas reales</b> del frontend rediseñado (<code>MathView-Frontend/docs/rediseno/recursos/</code>): racional, z³−1, zeta, Mandelbrot.</li>
+          <li>Sellos: «Representación del método» para la pieza; «Producto real · repositorio» para los dos repos. Sin demo en vivo, y dicho.</li>
+        </ul></div>
+    </div>
+  </section>
+
+  <section id="limites">
+    <h2>Lo que aún no está bien</h2>
+    <ul class="plain">
+      <li><b>Pliegues suaves:</b> las cordilleras ya se leen como papel plegado, pero sus crestas son redondeadas. Si las quieres más vivas, el siguiente paso es partir las normales en las crestas.</li>
+      <li><b>Arboledas:</b> a contraluz, alguna hoja aún puede leerse como losa.</li>
+      <li><b>Peso en tiempo real:</b> 52 657 triángulos de entorno; hay que instanciar hojas y decimar el relieve lejano.</li>
+      <li><b>Rendimiento con GPU:</b> sin medir; este equipo no tiene GPU.</li>
+    </ul>
+  </section>
+
+  <section id="decidir">
+    <h2>Lo que necesito de ti</h2>
+    <ul class="plain">
+      <li><b>¿Apruebas el resultado artístico del entorno?</b> Relieve continuo, integración del pliego, luz por zonas.</li>
+      <li><b>¿Sigo con la entrega 3</b> (prototipo de comportamiento) según <code>../entrega-3-comportamiento/DISEÑO.md</code>?</li>
+      <li><b>La entrega 4</b> (integración y expansión) no empieza sin tu aprobación.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

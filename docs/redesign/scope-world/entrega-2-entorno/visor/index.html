@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>Scope World · estudio de entorno</title>
+  <meta name="description" content="Estudio navegable del entorno de Scope World: el pliego sin bordes, el horizonte de papel y cuatro momentos de luz. No es la experiencia final.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper: #ede6d8; --ink: #1c1b21; --soft: #5b5865; --amber: #f2b65a; --margin: #9a3b2a; }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; overflow: hidden; background: #0b1220; font: 14px/1.4 Geist, system-ui, sans-serif; color: var(--ink); }
+    #view { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+    .hud { position: fixed; left: 16px; right: 16px; bottom: 16px; display: grid; gap: 10px; justify-items: start; pointer-events: none; }
+    .card { pointer-events: auto; background: rgba(243, 238, 227, 0.92); border-radius: 10px; padding: 10px 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); max-width: 100%; }
+    .card h1 { font-size: 15px; font-weight: 600; }
+    .card p { font-size: 12.5px; color: var(--soft); margin-top: 2px; }
+    .row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; align-items: center; }
+    .row b { font: 500 11px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; margin-right: 4px; }
+    button { font: 500 12.5px Geist, sans-serif; padding: 6px 11px; border-radius: 99px; border: 1px solid rgba(28, 27, 33, 0.25); background: transparent; color: var(--ink); cursor: pointer; }
+    button:hover { background: #fff; }
+    button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    button:focus-visible { outline: 2px solid var(--margin); outline-offset: 2px; }
+    #perf { font: 400 11.5px "Geist Mono", monospace; color: var(--soft); margin-top: 8px; }
+    #status { position: fixed; inset: 0; display: grid; place-items: center; color: #e9e4da; font: 500 13px "Geist Mono", monospace; text-align: center; padding: 24px; pointer-events: none; }
+    body:not(.loading) #status { display: none; }
+    @media (max-width: 640px) { .card p { display: none; } }
+  </style>
+</head>
+<body class="loading">
+  <canvas id="view" aria-label="Vista 3D del entorno de Scope World"></canvas>
+  <p id="status" role="status">Cargando el mundo de papel…</p>
+  <div class="hud">
+    <div class="card">
+      <h1>Estudio de entorno · Entrega 2</h1>
+      <p>El pliego sin bordes en tiempo real. Arrastra para girar, rueda para acercarte. Sin zonas ni comportamientos: eso llega en las entregas 3 y 4.</p>
+      <div class="row" role="group" aria-label="Cámaras"><b>Cámara</b><span id="shots" class="row" style="margin:0"></span></div>
+      <div class="row" role="group" aria-label="Hora del día"><b>Luz</b><span id="moods" class="row" style="margin:0"></span></div>
+      <p id="perf" aria-live="off"></p>
+    </div>
+  </div>
+  <script type="module" src="/dist/visor.js"></script>
+</body>
+</html>

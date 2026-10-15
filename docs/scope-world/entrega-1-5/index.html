@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pliego · Entrega 1.5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root { --paper: #ede6d8; --ink: #1c1b21; --soft: #5b5865; --rule: rgba(142,155,176,.35); --margin: #9a3b2a; --amber: #f2b65a; --night: #0b1220; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font: 16px/1.55 Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+    background-image: repeating-linear-gradient(180deg, transparent 0 31px, var(--rule) 31px 32px); }
+  main { max-width: 1360px; margin: 0 auto; padding: 0 32px 120px; border-left: 1.5px solid rgba(154,59,42,.55); }
+  a { color: inherit; }
+  .top { padding: 64px 0 34px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; }
+  .eyebrow { font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--margin); text-transform: uppercase; }
+  h1 { font-size: clamp(52px, 8vw, 104px); line-height: .9; letter-spacing: -0.055em; font-weight: 600; margin-top: 14px; }
+  h1 em { font-family: Newsreader, serif; font-weight: 400; }
+  .lead { font-size: 20px; line-height: 1.42; }
+  .lead b { font-weight: 600; }
+  .status { margin-top: 14px; font: 400 13px/1.6 "Geist Mono", monospace; color: var(--soft); }
+  .status mark { background: var(--amber); color: var(--ink); padding: 1px 6px; border-radius: 4px; }
+  nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(237,230,216,.93); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(28,27,33,.12);
+    display: flex; gap: 20px; flex-wrap: wrap; padding: 12px 0; font: 500 13px "Geist Mono", monospace; }
+  nav.toc a { text-decoration: none; color: var(--soft); } nav.toc a:hover { color: var(--ink); }
+  section { padding-top: 64px; scroll-margin-top: 50px; }
+  h2 { font-size: 38px; letter-spacing: -0.035em; font-weight: 600; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+  h2 small { font: 500 13px "Geist Mono", monospace; color: var(--margin); }
+  .why { max-width: 820px; color: var(--soft); margin-top: 10px; font-size: 17px; }
+  .why b { color: var(--ink); font-weight: 500; }
+  figure { margin: 0; }
+  img { width: 100%; display: block; border-radius: 5px; background: var(--night); box-shadow: 0 26px 50px -28px rgba(11,18,32,.55); }
+  figcaption { font: 400 13px/1.55 "Geist Mono", monospace; color: var(--soft); margin-top: 8px; }
+  figcaption b { color: var(--ink); font-weight: 500; }
+  .grid { display: grid; gap: 22px 18px; margin-top: 22px; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); }
+  .big { grid-column: 1 / -1; }
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+  .ba .label { font: 500 12px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; color: var(--soft); }
+  .ba .after .label { color: var(--margin); }
+  .pairs { display: grid; gap: 30px; }
+  .tag { display: inline-block; font: 400 11px "Geist Mono", monospace; padding: 1px 7px; border-radius: 99px; border: 1px solid rgba(28,27,33,.3); color: var(--soft); margin-top: 6px; }
+  .tag.exp { border-color: var(--margin); color: var(--margin); }
+  h3 { font-size: 16px; font-weight: 600; margin-top: 10px; letter-spacing: -0.01em; display: flex; gap: 8px; align-items: baseline; }
+  h3 em { font: 500 11px "Geist Mono", monospace; font-style: normal; color: var(--margin); }
+  .grid p { font-size: 14px; color: var(--soft); line-height: 1.45; margin-top: 3px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+  .cards div { border: 1px solid rgba(28,27,33,.18); border-radius: 8px; padding: 18px; background: rgba(243,238,227,.8); }
+  .cards b { display: block; font-size: 18px; letter-spacing: -0.01em; }
+  .cards small { font: 500 11px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; }
+  .cards p { font-size: 14px; color: var(--soft); margin-top: 6px; }
+  table { border-collapse: collapse; width: 100%; margin-top: 18px; font-size: 14px; background: rgba(243,238,227,.7); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(28,27,33,.12); vertical-align: top; }
+  th { font: 500 12px "Geist Mono", monospace; color: var(--soft); text-transform: uppercase; letter-spacing: .04em; }
+  td.y { color: #2f6b4a; font-weight: 500; } td.p { color: #8a5a12; font-weight: 500; } td.n { color: var(--margin); font-weight: 500; }
+  ul.notes { margin-top: 16px; display: grid; gap: 8px; font-size: 15px; color: var(--soft); max-width: 960px; }
+  ul.notes li { margin-left: 18px; } ul.notes b { color: var(--ink); font-weight: 500; }
+  .cta { display: inline-block; margin-top: 14px; background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 99px; text-decoration: none; font-weight: 500; font-size: 14px; }
+  @media (max-width: 900px) { main { padding: 0 16px 80px; border-left: 0; } .top, .g2, .g3, .ba, .cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div><p class="eyebrow">Scope World · Pliego · Entrega 1.5</p><h1>Ahora, <em>desde dentro.</em></h1></div>
+    <div>
+      <p class="lead"><b>Las hojas de la Entrega 1 eran preguntas cerradas.</b> Cada una es un libro desplegable de pie sobre su lomo: cerrado se ve igual que antes; abierto, del lomo se levantan sus notas reales. Así el mundo gana interior sin dejar de ser una sola hoja.</p>
+      <p class="status"><mark>pendiente de aprobación</mark> · 15 renders nuevos en Blender (Cycles por CPU) con el modelo aprobado sin modificar · interfaz en HTML real · sin cambios en producción · la Entrega 1 queda intacta</p>
+    </div>
+  </header>
+  <nav class="toc" aria-label="Contenido">
+    <a href="#antes">Antes / después</a><a href="#a">A · Profundidad</a><a href="#b">B · Scope actúa</a><a href="#c">C · MathView</a>
+    <a href="#d">D · Primeros segundos</a><a href="#e">E · Comportamiento</a><a href="#f">F · Viabilidad</a><a href="#limites">Límites</a>
+  </nav>
+
+  <section id="antes">
+    <h2>Antes y después <small>misma hoja, mismo mapa, misma escala</small></h2>
+    <div class="pairs">
+      <div class="ba"><figure><p class="label">Entrega 1 · el campo desde fuera</p><img src="../renders/main.jpg" alt=""></figure>
+        <figure class="after"><p class="label">1.5 · el campo desde dentro</p><img src="renders/a2-inside.jpg" alt=""></figure></div>
+      <div class="ba"><figure><p class="label">Entrega 1 · piezas geométricas (vista previa)</p><img src="../renders/preview/sb6-pieces.jpg" alt=""></figure>
+        <figure class="after"><p class="label">1.5 · MathView activado</p><img src="renders/c3-active.jpg" alt=""></figure></div>
+      <div class="ba"><figure><p class="label">Entrega 1 · home: imagen + interfaz</p><img src="../renders/home-ui.jpg" alt=""></figure>
+        <figure class="after"><p class="label">1.5 · el loader es la home de noche</p><img src="renders/d-frame0-ui.jpg" alt=""></figure></div>
+    </div>
+  </section>
+
+  <section id="a">
+    <h2>A · El campo de preguntas, explorable <small>01-evolucion.md</small></h2>
+    <p class="why">Tres vistas del mismo lugar. Hay <b>libros-pregunta</b>, <b>etiquetas colgadas del hilo rojo</b> con notas reales, <b>«Local Models» tumbada</b> (su estado real es <i>Paused</i>) como banco, y <b>un mirador plegado</b> con escalera en acordeón que da alturas y un sitio desde el que mirar la lámpara.</p>
+    <div class="grid g2">
+      <figure class="big"><img src="renders/a1-wide.jpg" alt="Vista amplia del campo con Scope en el mirador"><figcaption><b>1 · Amplia.</b> El campo dentro de Pliego: Scope en el mirador, la pregunta de contexto abierta, el círculo y la lámpara al fondo.</figcaption></figure>
+      <figure><img src="renders/a2-inside.jpg" alt=""><figcaption><b>2 · A la altura de Scope.</b> Bajo el arco del pliegue largo, entre las capas de «How much context is actually enough?».</figcaption></figure>
+      <figure><img src="renders/a3-discovery.jpg" alt=""><figcaption><b>3 · Descubrimiento.</b> Desde fuera era una hoja; dentro, sus notas reales: «Context scales better than prompting.»</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="b">
+    <h2>B · Scope abre una pregunta <small>02-interaccion.md</small></h2>
+    <p class="why">Sin manos, Scope usa la cara. <b>Motivo:</b> la tapa de «When should one AI agent become two?» se curva con la luz. <b>Acción:</b> mete la cara entre las páginas. <b>Consecuencia:</b> se levantan las capas (hipótesis, suposición fallida tachada, siguiente experimento) y el hilo rojo tira de la pregunta relacionada. Si el visitante la abre antes, Scope solo llega a mirar.</p>
+    <div class="grid g3">
+      <figure><img src="renders/b1-rest.jpg" alt=""><h3><em>01</em>Descansa</h3><p>Sobre «Local Models», en pausa como ella.</p><span class="tag">pose sostenida (rangos aprobados)</span></figure>
+      <figure><img src="renders/b2-notice.jpg" alt=""><h3><em>02</em>Algo cambia</h3><p>La tapa se curva. Scope gira la mirada.</p><span class="tag">clip Focus.L</span></figure>
+      <figure><img src="renders/b3-approach.jpg" alt=""><h3><em>03</em>Se acerca</h3><p>Junto a la tapa, la antena por delante. Plano de inserto.</p><span class="tag">clip Focus.R · desplazamiento: clip nuevo</span></figure>
+      <figure><img src="renders/b4-push.jpg" alt=""><h3><em>04</em>Empuja</h3><p>Desde dentro del libro: la cara entre las páginas, que ceden a 45°.</p><span class="tag exp">pose experimental · clip nuevo «Nudge»</span></figure>
+      <figure><img src="renders/b5-open.jpg" alt=""><h3><em>05</em>Se abre</h3><p>Las capas pop-up de pie, con texto real. Un pequeño salto.</p><span class="tag">clip Bounce · apertura: animación del objeto</span></figure>
+      <figure><img src="renders/b6-follow.jpg" alt=""><h3><em>06</em>Lee y sigue</h3><p>Se asoma a leer y luego mira hacia la pregunta relacionada.</p><span class="tag">pose sostenida</span></figure>
+    </div>
+  </section>
+
+  <section id="c">
+    <h2>C · MathView: una gráfica que se pisa <small>03-proyecto-y-llegada.md</small></h2>
+    <p class="why">El texto real del proyecto es «a place to actually see the math». En Pliego es <b>una función cocida en porcelana celadón</b>, con ejes y su tarjeta. Al abrirla, la luz de la lámpara <b>enciende sus curvas de nivel</b> y del borde se despliega una hoja del pliego con el contenido real.</p>
+    <div class="grid g2">
+      <figure class="big"><img src="renders/c1-place.jpg" alt=""><figcaption><b>Ubicación.</b> Dentro del círculo cocido, junto a Tournamently (bracket) y Sport Coach (esfera).</figcaption></figure>
+      <figure><img src="renders/c2-close.jpg" alt=""><figcaption><b>De cerca.</b> Scope de pie sobre la función.</figcaption></figure>
+      <figure><img src="renders/c3-active.jpg" alt=""><figcaption><b>Activación.</b> Misma cámara: las curvas de nivel encendidas.</figcaption></figure>
+      <figure><a href="board/mathview.html?state=content"><img src="renders/c4-content-ui.jpg" alt=""></a><figcaption><b>Contenido.</b> Una hoja del pliego con el texto real; los enlaces están marcados como pendientes porque en el código siguen siendo <code>#</code>.</figcaption></figure>
+      <figure><a href="board/mathview.html?state=return"><img src="renders/c5-return-ui.jpg" alt=""></a><figcaption><b>Regreso.</b> <code>Esc</code>: la hoja se pliega y la cámara sube al círculo. Queda la marca «you were here».</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="d">
+    <h2>D · Los primeros segundos <small>animatic</small></h2>
+    <p class="why"><b>El loader es la home de noche</b>: la misma cámara y la misma interfaz, disponible desde el primer instante. Cuando la escena está lista se enciende la lámpara y Scope levanta la mirada hacia ti. Luego, lo único que se mueve es la pregunta sin escribir; «Walk in» late una sola vez. Con scroll, la cámara entra por el pliegue largo.</p>
+    <a class="cta" href="board/animatic.html">▶ Ver el animatic (bucle con tiempos reales)</a>
+    <div class="grid g2" style="margin-top:20px">
+      <figure><img src="renders/d-frame0-ui.jpg" alt=""><figcaption><b>0,0 s</b> · noche (carga): Scope lee el margen.</figcaption></figure>
+      <figure><img src="renders/d-frame1-ui.jpg" alt=""><figcaption><b>≈ 0,9 s</b> · se enciende la lámpara y te mira.</figcaption></figure>
+      <figure><img src="renders/d-frame2-ui.jpg" alt=""><figcaption><b>≈ 3 s</b> · la hoja «· · ·» se levanta y Scope la mira de reojo.</figcaption></figure>
+      <figure><img src="renders/d-frame3-ui.jpg" alt=""><figcaption><b>Scroll</b> · dentro del campo: «Open notebook.»</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="e">
+    <h2>E · Vida autónoma, sin ruido <small>04-comportamiento.md</small></h2>
+    <p class="why">Scope pasa la mayor parte del tiempo en pausa. No inicia nada mientras lees. Mira al visitante, pero no lo persigue.</p>
+    <div class="cards">
+      <div><small>Frecuente</small><b>Leer la pauta</b><p>Se inclina sobre las líneas, parpadea y avanza unos centímetros. Solo clips existentes.</p></div>
+      <div><small>Exploración</small><b>Seguir el hilo</b><p>De una pregunta a su relacionada, parándose bajo las etiquetas. Necesita locomoción a saltitos (nueva).</p></div>
+      <div><small>Especial, con consecuencia</small><b>Abrir una pregunta</b><p>El Entregable B. La pregunta queda abierta durante la visita. Necesita el clip «Nudge» y la animación del libro.</p></div>
+    </div>
+  </section>
+
+  <section id="f">
+    <h2>F · Viabilidad <small>05-viabilidad.md · estimaciones, sin medir en GPU</small></h2>
+    <table>
+      <tr><th>Elemento</th><th>Tiempo real</th><th>Cómo</th></tr>
+      <tr><td>Pliego, hojas, libros, capas, hilo</td><td class="y">Sí</td><td>Pocos polígonos; huecos y pliegues cortados en Blender; letra en un atlas KTX2</td></tr>
+      <tr><td>Ley papel → porcelana y anillo tostado</td><td class="y">Sí</td><td>Un uniform de centro y radio en el shader</td></tr>
+      <tr><td>Curvas de nivel de MathView</td><td class="y">Sí</td><td>Calculadas en el shader a partir de la altura</td></tr>
+      <tr><td>Contraluz del papel</td><td class="p">Aproximado</td><td>Transmisión falsa con un mapa de espesor; sin subsurface</td></tr>
+      <tr><td>Luz y sombras</td><td class="p">Horneado + 1 luz</td><td>Lightmaps; una sola luz con sombra (lámpara u ojos)</td></tr>
+      <tr><td>Calidad de los renders de Cycles</td><td class="n">No</td><td>Son el techo visual; sin GPU se sirven como planos prerenderizados</td></tr>
+      <tr><td>Locomoción de Scope</td><td class="p">A validar</td><td>Saltitos encadenados; requiere un clip y una prueba con GPU</td></tr>
+    </table>
+  </section>
+
+  <section id="limites">
+    <h2>Límites reales</h2>
+    <ul class="notes">
+      <li><b>Imágenes fijas, no animación.</b> Ninguna interacción está implementada. El animatic encadena fotogramas fijos.</li>
+      <li><b>Poses:</b> clips existentes, poses sostenidas dentro de los rangos ya diseñados y <b>una pose experimental</b> (el empujón: cabeceo de 8°, más que los 5° de Focus). Existe solo en memoria en <code>blender/mundo.py</code>; el <code>.blend</code> aprobado no se ha modificado ni guardado.</li>
+      <li><b>Cámaras:</b> la interacción usa una cámara amplia fija y dos insertos (fotogramas 3 y 4), con los mismos objetos y posiciones. Con una sola cámara, la tapa tapaba a Scope en el momento clave.</li>
+      <li><b>Luces auxiliares:</b> el alcance de la luz de los ojos en la escena nocturna y un rebote suave del papel, como en la Entrega 1.</li>
+      <li><b>Contenido real:</b> notas de <code>notebook-content.ts</code> y texto de <code>projects-content.ts</code>. El stack de MathView está marcado como provisional en el propio código y sus enlaces siguen siendo <code>#</code>.</li>
+      <li><b>Sin GPU</b> en este equipo: nada se ha probado en tiempo real y las cifras de viabilidad son estimaciones.</li>
+      <li>No se ha relanzado <code>render-all.sh</code> de la Entrega 1: los fotogramas 2–9 de su storyboard siguen como vistas previas.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

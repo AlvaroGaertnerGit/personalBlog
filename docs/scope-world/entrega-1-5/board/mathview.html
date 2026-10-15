@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pliego · MathView</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  /* Composition (not production): ?state=content shows the project opened in place over the
+     activated tile; ?state=return shows the camera back up over the circle. Content is the
+     real copy from src/components/sections/projects-content.ts. */
+  :root { --ink: #1c1b21; --soft: #55525e; --paper: #ede6d8; --amber: #f2b65a; --margin: #9a3b2a; --celadon: #5f7a6d; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0b1220; font-family: Geist, system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .world { position: absolute; inset: 0; background: center / cover no-repeat; }
+  header { position: absolute; inset: 0 0 auto; height: 84px; padding: 0 56px; display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(180deg, rgba(237,230,216,.8), rgba(237,230,216,0)); }
+  .mark { font-weight: 600; font-size: 17px; display: flex; gap: 12px; align-items: center; }
+  .mark i { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 12px 2px rgba(242,182,90,.7); }
+  .crumb { font: 400 13px "Geist Mono", monospace; color: var(--soft); }
+  .crumb b { color: var(--ink); font-weight: 500; }
+  /* the project's sheet: unfolds from the tile's card, paper with a fold line */
+  .sheet { position: absolute; left: 64px; top: 120px; width: 600px; background: #f3eee3; border-radius: 3px;
+    box-shadow: 0 40px 80px -30px rgba(11,18,32,.55), 0 2px 0 rgba(0,0,0,.04);
+    background-image: repeating-linear-gradient(180deg, transparent 0 31px, rgba(142,155,176,.28) 31px 32px);
+    padding: 44px 52px 40px; transform: perspective(1600px) rotateY(4deg); transform-origin: left center; }
+  .sheet::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(28,27,33,.08); box-shadow: 0 1px 0 rgba(255,255,255,.6); }
+  .sheet::after { content: ""; position: absolute; top: 0; bottom: 0; left: 30px; width: 1.5px; background: rgba(154,59,42,.55); }
+  .eyebrow { font: 500 12px "Geist Mono", monospace; letter-spacing: .05em; text-transform: uppercase; color: var(--celadon); display: flex; gap: 10px; align-items: center; }
+  .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px rgba(242,182,90,.9); }
+  h1 { font-size: 76px; letter-spacing: -0.05em; line-height: .95; font-weight: 600; margin-top: 14px; }
+  .desc { font-size: 23px; line-height: 1.42; letter-spacing: -0.01em; margin-top: 22px; }
+  .desc em { font-family: Newsreader, serif; font-size: 25px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .chip { font: 400 13px "Geist Mono", monospace; border: 1px solid rgba(28,27,33,.25); border-radius: 99px; padding: 6px 12px; }
+  .how { margin-top: 26px; padding-top: 18px; border-top: 1px dashed rgba(28,27,33,.25); font: 400 13px/1.6 "Geist Mono", monospace; color: var(--soft); }
+  .how b { color: var(--ink); font-weight: 500; }
+  .actions { display: flex; gap: 14px; margin-top: 26px; align-items: center; }
+  .btn { padding: 12px 16px; border-radius: 99px; font-weight: 500; font-size: 14px; white-space: nowrap; }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn.pending { border: 1px dashed rgba(28,27,33,.4); color: var(--soft); }
+  .back { position: absolute; left: 64px; bottom: 56px; display: flex; gap: 14px; align-items: center; font-weight: 500; font-size: 15px;
+    background: rgba(237,230,216,.9); padding: 12px 18px 12px 14px; border-radius: 99px; box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+  .back kbd { font: 400 12px "Geist Mono", monospace; border: 1px solid rgba(28,27,33,.3); border-radius: 6px; padding: 2px 6px; }
+  .route { position: absolute; right: 56px; bottom: 56px; display: flex; align-items: center; font: 400 12px "Geist Mono", monospace; color: var(--soft);
+    background: rgba(237,230,216,.85); padding: 13px 20px; border-radius: 99px; }
+  .route span { display: flex; align-items: center; gap: 9px; }
+  .route span + span::before { content: ""; width: 34px; height: 1px; background: currentColor; opacity: .5; margin: 0 12px; }
+  .route i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; }
+  .route .on { color: var(--ink); } .route .on i { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 10px rgba(242,182,90,.9); }
+  .pin { position: absolute; transform: translate(-50%, -100%); text-align: center; font: 500 13px "Geist Mono", monospace; color: var(--ink); }
+  .pin span { display: block; background: rgba(243,238,227,.95); padding: 8px 12px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+  .pin span small { display: block; font-weight: 400; color: var(--soft); }
+  .pin::after { content: ""; display: block; width: 1.5px; height: 40px; background: var(--ink); margin: 0 auto; opacity: .6; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+  <div class="world" id="world" role="img" aria-label="MathView: a celadon porcelain graph inside the lamp's circle; its level curves glow"></div>
+  <header>
+    <div class="mark"><i aria-hidden="true"></i>Álvaro Gaertner</div>
+    <div class="crumb" id="crumb">Work · the light › <b>MathView</b></div>
+  </header>
+
+  <section class="sheet" id="content" aria-labelledby="mv">
+    <p class="eyebrow"><i></i>Built · fired in the light</p>
+    <h1 id="mv">MathView</h1>
+    <p class="desc">A place to actually see the math, not just read it. <em>Built for the students I teach, who'd rather explore a graph than stare at a textbook.</em></p>
+    <div class="row"><span class="chip">Angular</span><span class="chip">Python</span><span class="chip">Matlab</span></div>
+    <p class="how"><b>In the world:</b> the tile is a function you can stand on. Its level curves light up when you open it.</p>
+    <div class="actions"><span class="btn primary">Explore the graph</span><span class="btn pending">Live site · link pending</span><span class="btn pending">GitHub · link pending</span></div>
+  </section>
+
+  <div class="pin" id="pin" hidden><span>MathView<small>you were here</small></span></div>
+  <div class="back" id="back"><kbd>Esc</kbd>Back to the light</div>
+  <div class="route"><span><i></i>Margin</span><span><i></i>Questions</span><span class="on"><i></i>The light</span><span><i></i>Class</span><span><i></i>Lamp</span></div>
+<script>
+  const state = new URLSearchParams(location.search).get("state") || "content"
+  const world = document.getElementById("world")
+  if (state === "return") {
+    world.style.backgroundImage = "url(../renders/c1-place.jpg)"
+    document.getElementById("content").hidden = true
+    document.getElementById("back").hidden = true
+    document.getElementById("crumb").innerHTML = "Work · <b>the light</b>"
+    const pin = document.getElementById("pin")
+    pin.hidden = false
+    pin.style.left = "55%"; pin.style.top = "34%"
+  } else {
+    world.style.backgroundImage = "url(../renders/c3-active.jpg)"
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Scope World 2.0 · Fase A</title>
+<meta name="description" content="Propuesta de expansión de Scope World: el mundo ampliado, los proyectos como experiencias, Scope como compañero, el contacto y la hoja de ruta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ede6d8; --paper-2: #f3eee3; --ink: #1c1b21; --soft: #5b5865; --rule: rgba(142,155,176,.35);
+    --margin: #9a3b2a; --amber: #f2b65a; --night: #0b1220; --toast: #6b4423; --celadon: #9fbfae;
+    --terracotta: #b0643f; --lamp: #1f2c4a; --lavender: #5e5a73; --porcelain: #f1ebdf;
+    --ok: #2f6b4a; --warn: #8a5a12;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { background: var(--paper); color: var(--ink); font: 16px/1.55 Geist, system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+    background-image: repeating-linear-gradient(180deg, transparent 0 31px, var(--rule) 31px 32px); }
+  main { max-width: 1360px; margin: 0 auto; padding: 0 32px 120px; border-left: 1.5px solid rgba(154,59,42,.55); }
+  a { color: inherit; }
+  .top { padding: 64px 0 30px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: end; }
+  .eyebrow { font: 500 12px "Geist Mono", monospace; letter-spacing: .04em; color: var(--margin); text-transform: uppercase; }
+  h1 { font-size: clamp(50px, 8vw, 104px); line-height: .9; letter-spacing: -0.055em; font-weight: 600; margin-top: 14px; }
+  h1 em, h2 em { font-family: Newsreader, serif; font-weight: 400; }
+  .lead { font-size: 20px; line-height: 1.42; }
+  .lead b { font-weight: 600; }
+  .status { margin-top: 14px; font: 400 13px/1.6 "Geist Mono", monospace; color: var(--soft); }
+  .status mark { background: var(--amber); color: var(--ink); padding: 1px 6px; border-radius: 4px; }
+  nav.toc { position: sticky; top: 0; z-index: 5; background: rgba(237,230,216,.94); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(28,27,33,.12);
+    display: flex; gap: 18px; flex-wrap: wrap; padding: 12px 0; font: 500 13px "Geist Mono", monospace; }
+  nav.toc a { text-decoration: none; color: var(--soft); } nav.toc a:hover, nav.toc a:focus-visible { color: var(--ink); }
+  section { padding-top: 72px; scroll-margin-top: 50px; }
+  h2 { font-size: 38px; letter-spacing: -0.035em; font-weight: 600; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; line-height: 1.1; }
+  h2 small { font: 500 13px "Geist Mono", monospace; color: var(--margin); letter-spacing: 0; }
+  h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-top: 12px; }
+  .why { max-width: 860px; color: var(--soft); margin-top: 10px; font-size: 17px; }
+  .why b { color: var(--ink); font-weight: 500; }
+  .panel { background: rgba(243,238,227,.86); border: 1px solid rgba(28,27,33,.14); border-radius: 10px; padding: 18px; margin-top: 22px; }
+  svg { display: block; width: 100%; height: auto; }
+  .figcap { font: 400 13px/1.55 "Geist Mono", monospace; color: var(--soft); margin-top: 10px; }
+  .figcap b { color: var(--ink); font-weight: 500; }
+  .metrics { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 26px; }
+  .metric { background: rgba(243,238,227,.86); border: 1px solid rgba(28,27,33,.14); border-radius: 10px; padding: 14px 14px 12px; }
+  .metric .k { font: 500 11px "Geist Mono", monospace; color: var(--soft); text-transform: uppercase; letter-spacing: .05em; }
+  .metric .v { font-size: 30px; font-weight: 600; letter-spacing: -0.03em; margin-top: 4px; }
+  .metric .v s { color: var(--soft); font-weight: 400; font-size: 18px; text-decoration-thickness: 1px; margin-right: 6px; }
+  .metric .n { font-size: 12px; color: var(--soft); }
+  .zones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 24px; }
+  .zone { background: rgba(243,238,227,.9); border: 1px solid rgba(28,27,33,.14); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+  .zone svg { aspect-ratio: 16 / 9; background: var(--night); }
+  .zone .body { padding: 14px 16px 18px; }
+  .zone .num { font: 500 12px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; }
+  .zone h3 { margin-top: 2px; font-size: 21px; letter-spacing: -0.02em; }
+  .zone h3 em { font-family: Newsreader, serif; font-weight: 400; color: var(--soft); }
+  .zone dl { display: grid; grid-template-columns: 112px 1fr; gap: 4px 12px; margin-top: 10px; font-size: 14px; }
+  .zone dt { font: 500 11px/1.9 "Geist Mono", monospace; color: var(--soft); text-transform: uppercase; letter-spacing: .04em; }
+  .zone dd { color: var(--ink); }
+  .zone.on { outline: 2px solid var(--amber); }
+  table { border-collapse: collapse; width: 100%; margin-top: 18px; font-size: 14px; background: rgba(243,238,227,.8); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(28,27,33,.12); vertical-align: top; }
+  th { font: 500 12px "Geist Mono", monospace; color: var(--soft); text-transform: uppercase; letter-spacing: .04em; }
+  td.y { color: var(--ok); font-weight: 500; } td.p { color: var(--warn); font-weight: 500; } td.n { color: var(--margin); font-weight: 500; }
+  .tablewrap { overflow-x: auto; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .chip { font: 500 11.5px "Geist Mono", monospace; padding: 3px 9px; border-radius: 99px; border: 1px solid; }
+  .chip.real { color: var(--ok); border-color: var(--ok); background: rgba(47,107,74,.07); }
+  .chip.engine { color: var(--warn); border-color: var(--warn); background: rgba(138,90,18,.07); }
+  .chip.concept { color: var(--lavender); border-color: var(--lavender); background: rgba(94,90,115,.08); }
+  .chip.pending { color: var(--margin); border-color: var(--margin); border-style: dashed; }
+  .cols { display: grid; gap: 18px; margin-top: 22px; }
+  .c2 { grid-template-columns: 1fr 1fr; } .c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); } .c5 { grid-template-columns: repeat(5, 1fr); }
+  .card { background: rgba(243,238,227,.9); border: 1px solid rgba(28,27,33,.14); border-radius: 10px; padding: 16px; }
+  .card svg { border-radius: 6px; }
+  .card .t { font: 500 11px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; }
+  .card b.h { display: block; font-size: 18px; letter-spacing: -0.015em; margin-top: 4px; }
+  .card p { font-size: 14px; color: var(--soft); margin-top: 6px; }
+  .card ul { font-size: 14px; color: var(--soft); margin: 8px 0 0 18px; display: grid; gap: 4px; }
+  .frame svg { aspect-ratio: 16 / 10; background: var(--night); }
+  .frame .cap { font-size: 13px; color: var(--soft); margin-top: 8px; line-height: 1.45; }
+  .frame .cap b { color: var(--ink); font-weight: 500; display: block; font-size: 14px; }
+  .stack { display: grid; gap: 6px; margin-top: 8px; }
+  .stack div { display: grid; grid-template-columns: 34px 150px 1fr; gap: 12px; align-items: center; padding: 10px 14px; border-radius: 8px; font-size: 14px; }
+  .stack b { font: 500 13px "Geist Mono", monospace; }
+  .stack span { color: inherit; opacity: .85; }
+  .road { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 22px; }
+  .step { background: rgba(243,238,227,.92); border: 1px solid rgba(28,27,33,.14); border-top: 4px solid var(--amber); border-radius: 8px; padding: 14px; font-size: 13.5px; }
+  .step .id { font: 600 20px Geist, sans-serif; letter-spacing: -0.02em; }
+  .step .nm { font-weight: 600; margin-top: 2px; }
+  .step p { color: var(--soft); margin-top: 8px; }
+  .step .chk { margin-top: 10px; font: 400 12px/1.5 "Geist Mono", monospace; color: var(--ok); }
+  ol.decide { margin-top: 18px; display: grid; gap: 10px; counter-reset: d; list-style: none; padding: 0; }
+  ol.decide li { counter-increment: d; display: grid; grid-template-columns: 38px 1fr; gap: 10px; background: rgba(243,238,227,.9); border: 1px solid rgba(28,27,33,.14); border-radius: 8px; padding: 12px 14px; font-size: 15px; }
+  ol.decide li::before { content: counter(d); font: 600 22px Geist, sans-serif; color: var(--margin); }
+  ol.decide b { font-weight: 600; }
+  ol.decide small { display: block; color: var(--soft); font-size: 13.5px; margin-top: 2px; }
+  .refs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
+  .refs img { width: 100%; display: block; border-radius: 6px; aspect-ratio: 16/10; object-fit: cover; background: var(--night); box-shadow: 0 20px 40px -26px rgba(11,18,32,.6); }
+  .refs figcaption { font: 400 12.5px/1.5 "Geist Mono", monospace; color: var(--soft); margin-top: 6px; }
+  .contact-mock { background: var(--night); color: #efe8da; border-radius: 10px; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+  .contact-mock .paper { background: var(--paper-2); color: var(--ink); border-radius: 6px; padding: 22px 24px 20px 44px; position: relative;
+    background-image: repeating-linear-gradient(180deg, transparent 0 25px, var(--rule) 25px 26px); }
+  .contact-mock .paper::before { content: ""; position: absolute; left: 26px; top: 0; bottom: 0; width: 1.5px; background: rgba(154,59,42,.55); }
+  .contact-mock .ey { font: 500 11.5px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .06em; }
+  .contact-mock h4 { font-size: 34px; letter-spacing: -0.035em; font-weight: 600; margin-top: 6px; }
+  .contact-mock p { color: var(--soft); margin-top: 6px; font-size: 15px; }
+  .contact-mock .mail { margin-top: 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font: 500 15px "Geist Mono", monospace; }
+  .contact-mock .btn { display: inline-block; font: 500 13px Geist, sans-serif; padding: 8px 14px; border-radius: 99px; border: 1px solid rgba(28,27,33,.3); background: transparent; color: var(--ink); text-decoration: none; }
+  .contact-mock .btn.p { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .contact-mock .row { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .contact-mock .note { font: 400 12px/1.5 "Geist Mono", monospace; color: rgba(239,232,218,.7); }
+  .contact-mock .note b { color: var(--amber); font-weight: 500; }
+  .contact-mock .note p { color: rgba(239,232,218,.82); font-size: 12.5px; }
+  ul.plain { margin: 12px 0 0 18px; display: grid; gap: 6px; font-size: 15px; color: var(--soft); max-width: 980px; }
+  ul.plain b { color: var(--ink); font-weight: 500; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font: 400 12.5px "Geist Mono", monospace; color: var(--soft); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+  figure.shot { margin: 0; }
+  figure.shot img { width: 100%; height: auto; display: block; border-radius: 8px; background: var(--night); box-shadow: 0 26px 50px -28px rgba(11,18,32,.55); }
+  figure.shot figcaption { font: 400 13px/1.55 "Geist Mono", monospace; color: var(--soft); margin-top: 8px; }
+  figure.shot figcaption b { color: var(--ink); font-weight: 500; }
+  figure.shot .lbl { font: 500 12px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; color: var(--soft); }
+  figure.shot.after .lbl { color: var(--margin); }
+  .place { display: grid; grid-template-columns: 1.35fr 1fr; gap: 22px; align-items: center; margin-top: 26px; }
+  .place.flip { grid-template-columns: 1fr 1.35fr; }
+  .place.flip figure { order: 2; }
+  .place .t { font: 500 12px "Geist Mono", monospace; color: var(--margin); text-transform: uppercase; letter-spacing: .05em; }
+  .place h3 { font-size: 26px; letter-spacing: -0.025em; margin-top: 4px; }
+  .place h3 em { font-family: Newsreader, serif; font-weight: 400; color: var(--soft); }
+  .place p { color: var(--soft); margin-top: 8px; font-size: 15.5px; }
+  .place ul { color: var(--soft); margin: 8px 0 0 18px; font-size: 15px; display: grid; gap: 4px; }
+  .place b { color: var(--ink); font-weight: 500; }
+  ol.decide.resolved li::before { content: "✓"; color: var(--ok); }
+  @media (max-width: 1100px) { .metrics { grid-template-columns: repeat(3, 1fr); } .road { grid-template-columns: repeat(3, 1fr); } .c5 { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 900px) {
+    main { padding: 0 16px 80px; border-left: 0; }
+    .top, .zones, .c2, .c3, .c4, .contact-mock, .compare, .place, .place.flip { grid-template-columns: 1fr; }
+    .place.flip figure { order: 0; }
+    .metrics, .c5, .refs { grid-template-columns: repeat(2, 1fr); }
+    .road { grid-template-columns: 1fr; }
+    .zone dl { grid-template-columns: 1fr; } .zone dt { line-height: 1.4; margin-top: 4px; }
+    .stack div { grid-template-columns: 28px 1fr; } .stack span { grid-column: 2; }
+    h2 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <p class="eyebrow">Scope World 2.0 · Fase A · revisión</p>
+      <h1>El mundo <em>de Scope.</em></h1>
+    </div>
+    <div>
+      <p class="lead"><b>No es un portfolio con un personaje: es el lugar donde vive Scope.</b> El pliego pautado es solo la parte del mundo que ya se ha escrito; alrededor, la misma hoja sigue en blanco hasta el horizonte. Allí están su casa, lo que guarda, lo que investiga y los caminos que recorre cada día, haya alguien o no.</p>
+      <p class="status"><mark>pendiente de tu aprobación</mark> · solo diseño: el prototipo no se ha tocado · sin cambios en producción · el modelo de Scope intacto · imágenes: estudios de volumen y atmósfera en Blender (Cycles, CPU) con el mundo aprobado sin modificar; el resto del tablero, bocetos esquemáticos</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Contenido">
+    <a href="#mundo">El mundo de Scope</a><a href="#mapa">Mapa</a><a href="#ritmo">Recorrido</a><a href="#zonas">Zonas</a><a href="#proyectos">Proyectos</a>
+    <a href="#scope">Scope</a><a href="#contacto">Contacto</a><a href="#tecnica">Técnica</a><a href="#ruta">Hoja de ruta</a><a href="#decisiones">Decisiones</a><a href="#referencias">Referencias</a>
+  </nav>
+
+  <!-- ======================================================================= EL MUNDO DE SCOPE -->
+  <section id="mundo" style="padding-top:40px">
+    <h2>No un tablero: <em>un lugar</em> <small>la revisión de la Fase A</small></h2>
+    <p class="why">El pliego descansaba sobre una mesa negra que se perdía en la oscuridad: en tiempo real se leía como <b>una maqueta suspendida en el vacío</b>. Ahora el mundo entero es papel. Lo escrito es el centro habitado; alrededor, el papel en blanco sigue hasta el horizonte: <b>lo que aún no existe</b> (regla 2 de la biblia, a escala de paisaje). Las cordilleras son pliegues de esa misma hoja (regla 1), y la mesa lacada se ha remansado en <b>un lago de tinta</b>. Es la única desviación del lenguaje aprobado: cambia la premisa de escala, no los materiales, ni la paleta, ni el modelo.</p>
+    <div class="compare">
+      <figure class="shot"><p class="lbl">Antes · el pliego en el vacío</p><img src="renders/v-antes.jpg" alt="El pliego al amanecer sobre una mesa negra; más allá de sus bordes no hay nada." width="1600" height="900"><figcaption>La misma cámara y el mismo mundo aprobado, sin entorno.</figcaption></figure>
+      <figure class="shot after"><p class="lbl">Después · el pliego sin bordes</p><img src="renders/v-despues.jpg" alt="El mismo pliego rodeado de papel en blanco hasta el horizonte: hojas en blanco de pie, colinas plegadas, un lago de tinta y cordilleras de papel en la neblina; la lámpara recortada contra el cielo y la linterna de Scope en primer plano." width="1600" height="900"><figcaption>Horizonte, perspectiva aérea a 30 m, el lago de tinta y, abajo a la izquierda, <b>la linterna y el gabinete de Scope</b>.</figcaption></figure>
+    </div>
+    <div class="compare">
+      <figure class="shot"><img src="renders/v-horizonte.jpg" alt="Scope de espaldas, solo sobre el papel en blanco detrás del pliego, mirando hacia las cordilleras plegadas que se funden en la neblina del amanecer." width="1600" height="900" loading="lazy"><figcaption><b>La atalaya.</b> El único sitio donde no le interesas tú, sino el mundo.</figcaption></figure>
+      <figure class="shot"><img src="renders/v-home.jpg" alt="El margen a la altura de Scope, con las hojas de preguntas y, al fondo, el horizonte de papel en blanco." width="1600" height="900" loading="lazy"><figcaption><b>El margen</b>, desde la cámara aprobada de la home: el fondo ya no es negro, es mundo (compárala con <code>d3-home</code> de la Entrega 1.5).</figcaption></figure>
+    </div>
+
+    <h3 style="margin-top:40px;font-size:22px">Los lugares de Scope</h3>
+    <p class="why" style="font-size:15.5px">Están <b>fuera de lo escrito</b>, en el papel en blanco junto al margen: Scope vive justo donde termina el trabajo de Álvaro y empieza lo que aún no existe. Responden con el propio escenario dónde vive, qué guarda, qué investiga y qué hace cuando no hay nadie.</p>
+
+    <div class="place"><figure class="shot"><img src="renders/v-linterna.jpg" alt="De noche, una linterna de papel plisado encendida desde dentro; Scope ante la puerta, a contraluz, con los ojos ámbar; al fondo, las cordilleras azules." width="1600" height="900" loading="lazy"></figure>
+      <div><p class="t">1 · dónde vive y descansa</p><h3>La linterna <em>· su casa</em></h3>
+        <p>Un farol de papel plisado de unos 30 cm, con la puerta hacia el pliego y, dentro, el plato de porcelana donde se asienta. De noche, su propia luz atraviesa el papel (regla 4).</p>
+        <ul><li><b>Es el nuevo loader:</b> antes de que llegues, solo se ve su linterna encendida en el horizonte nocturno. Cuando el mundo carga, sale por la puerta.</li><li>Si te quedas mucho rato quieto en el margen, entra a descansar. Su luz sigue encendida y <b>se asoma en cuanto te mueves</b>.</li></ul></div></div>
+
+    <div class="place flip"><figure class="shot"><img src="renders/v-gabinete.jpg" alt="Escalones de papel con objetos diminutos: una gota de tinta seca, una viruta de lápiz, una grapa y una esquirla de porcelana; Scope detrás, mirándolos." width="1600" height="900" loading="lazy"></figure>
+      <div><p class="t">2 · lo que guarda</p><h3>El gabinete <em>· lo que ha encontrado</em></h3>
+        <p>Escalones plegados con lo que ha recogido de la mesa de Álvaro: una gota de tinta seca, una viruta de lápiz, una grapa, una esquirla de una pieza que se rompió al cocerse y una miga de grafito. Sin ningún texto, el mundo cuenta que es una mesa de trabajo.</p>
+        <ul><li>Cuando no hay nadie, <b>lo ordena</b>: empuja con la cara la pieza que se ha movido.</li><li><b>La visita se convierte en objeto:</b> tras jugar el cuadro aparece la pelota de Tournamently; tras abrir MathView, un trocito de celadón.</li></ul></div></div>
+
+    <div class="place"><figure class="shot"><img src="renders/v-radiometro.jpg" alt="Un radiómetro de vidrio sobre una peana de porcelana, con aspas blancas y negras, en el borde del círculo de la lámpara; Scope a su lado, ladeando la cabeza." width="1600" height="900" loading="lazy"></figure>
+      <div><p class="t">3 · lo que investiga y ha construido</p><h3>El radiómetro <em>· su experimento</em></h3>
+        <p>Un molinete de luz: aspas blancas y negras dentro de una ampolla de vidrio. Es un radiómetro de Crookes, física real. Está en el borde del círculo, rodeado de tres esquirlas de porcelana que Scope ha colocado como espejos. Quiere entender la luz que convierte el papel en porcelana.</p>
+        <ul><li>Con la lámpara gira despacio; <b>cuando Scope lo mira, su luz lo acelera</b>. Es el mismo canal con el que activa todo lo demás: nunca otro poder.</li></ul></div></div>
+
+    <div class="cols c2">
+      <div class="card"><p class="t">4 · el lugar que considera especial</p><b class="h">La atalaya</b><p>Detrás del borde norte del pliego, sobre el papel en blanco, desde donde se ven el horizonte y el lago. Va al atardecer, y también cuando llevas un rato quieto lejos de él. Mira las cordilleras.</p></div>
+      <div class="card"><p class="t">5 · lo que hace cuando no hay visitantes</p><b class="h">Las huellas</b><p>Rastros suaves de grafito gastados en el papel: de la linterna a su sitio del margen, del margen al mirador, de la linterna al gabinete. Existen porque los recorre cada día. Son una textura, así que no cuestan nada.</p></div>
+    </div>
+
+    <h3 style="margin-top:40px;font-size:22px">Lo que da vida al mundo, sin relación con el portfolio</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Lugar o acontecimiento</th><th>Qué ocurre</th><th>Causa (nada va por temporizador)</th></tr>
+      <tr><td>Las hojas en blanco</td><td>Unas 45 de pie en el anillo medio: un bosque de preguntas sin escribir. Si Scope ilumina una, no aparece nada; ladea la cabeza y sigue</td><td>Su luz; que no haya nada escrito también es información</td></tr>
+      <tr><td>El lago de tinta</td><td>Refleja la lámpara; de noche, su orilla es lo más oscuro del mundo</td><td>La mesa, hecha paisaje</td></tr>
+      <tr><td>El polvo en el cono de la lámpara</td><td>Motas que suben despacio, solo dentro de la luz</td><td>El calor de la bombilla</td></tr>
+      <tr><td>La linterna encendida a lo lejos</td><td>De noche, desde cualquier zona se ve dónde está su casa</td><td>Él está dentro</td></tr>
+      <tr><td>Las cordilleras al atardecer</td><td>La luz rasante dibuja sus pliegues</td><td>El sol bajo de cada zona</td></tr>
+    </table></div>
+
+    <h3 style="margin-top:40px;font-size:22px">Cómo se consigue la amplitud sin pagarla</h3>
+    <div class="cols c2">
+      <div class="panel" style="margin-top:0"><svg id="rings" viewBox="0 0 560 420" role="img" aria-label="Tres anillos alrededor del pliego: el cercano, de 0 a 2 metros, con todo el detalle; el medio, de 2 a 10 metros, con dunas, hojas en blanco instanciadas, colinas y el lago; el lejano, de 12 a 33 metros, con dos capas de cordilleras; y el cielo con su franja de horizonte."></svg></div>
+      <div class="tablewrap"><table>
+        <tr><th>Anillo</th><th>Cómo</th><th>Coste previsto</th></tr>
+        <tr><td><b>Cercano</b> · 0–2 m</td><td>Geometría completa, caminable, con luz horneada (lo de la Fase A)</td><td>Lo ya presupuestado</td></tr>
+        <tr><td><b>Medio</b> · 2–10 m</td><td>Terreno de unos 6 000 triángulos; las hojas en blanco, <b>una sola geometría instanciada</b>; colinas con oclusión en los vértices; sin sombras</td><td>≈ 12 000 tri · 4 llamadas · ≈ 150 KB</td></tr>
+        <tr><td><b>Lejano</b> · 12–33 m</td><td>Mallas muy simples con niebla. Más allá de 25 m, opcional: un panorama prerenderizado por hora</td><td>≈ 4 000 tri o ≈ 150 KB</td></tr>
+        <tr><td><b>Cielo y aire</b></td><td>Gradiente por hora, franja de horizonte y niebla con la misma curva</td><td>Despreciable</td></tr>
+        <tr><td colspan="3"><b>Entorno total:</b> ≤ 20 000 triángulos, ≤ 8 llamadas y ≤ 400 KB. Es un objetivo y se mide en 2.0-A. El presupuesto global de la Fase A no cambia.</td></tr>
+      </table></div>
+    </div>
+    <ul class="plain">
+      <li><b>El horizonte, siempre a la vista</b> en las paradas del recorrido: en el tercio superior (en el cuarto superior en el móvil).</li>
+      <li><b>Ninguna cámara mira hacia abajo más de 30°</b>, salvo las vistas generales.</li>
+      <li><b>El borde del pliego nunca se ve recto y solo:</b> siempre lo cruza algo (una hoja, una huella, la linterna).</li>
+      <li><b>El lago, sin reflejos planares:</b> un material muy brillante que refleja el cielo y un brillo falso de la lámpara.</li>
+    </ul>
+
+    <h3 style="margin-top:40px;font-size:22px">Scope y su mundo: interacciones físicas</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Acción</th><th>Dónde</th><th>Cómo</th></tr>
+      <tr><td>Sale de la linterna cuando llegas, entra a descansar y se asoma si te mueves</td><td>Linterna</td><td>Paso, Fit y Peek (capa procedural)</td></tr>
+      <tr><td>Ordena una pieza del gabinete</td><td>Gabinete</td><td>Nudge (aprobado)</td></tr>
+      <tr><td>Acelera el radiómetro con la mirada</td><td>Radiómetro</td><td>Su luz</td></tr>
+      <tr><td>Ilumina una hoja en blanco y no encuentra nada</td><td>Anillo medio</td><td>Luz + Tilt</td></tr>
+      <tr><td>Mira el horizonte al atardecer</td><td>Atalaya</td><td>Settle + mirada larga</td></tr>
+      <tr><td>Se sube a MathView, a las gradas o al dial, y empuja la pelota</td><td>Distrito</td><td>Paso y Nudge</td></tr>
+      <tr><td>Te espera en la puerta de un lugar importante y te enseña algo que no has visto</td><td>Entradas de zona</td><td>Compañía (una vez por zona)</td></tr>
+    </table></div>
+    <p class="why" style="font-size:15px">Todo esto pertenece a <b>«Vida propia» y «Curiosidad»</b>, por debajo de la compañía: nunca interrumpe tu navegación ni tu lectura. Cada lugar suyo tiene reacciones propias: en su linterna descansa más hondo; en el gabinete le llama la atención lo nuevo; en la atalaya atiende al horizonte, y no a ti.</p>
+
+    <div class="cols c2" style="margin-top:30px">
+      <div class="card"><p class="t">Proyectos y contacto</p><b class="h">Se conservan, y ganan sentido</b>
+        <ul><li>Las instalaciones siguen en el círculo, en el centro del pliego. Ahora son <b>los lugares más especiales de un mundo que ya existe</b>.</li><li>El contacto, al pie de la lámpara, queda sobre el papel en blanco: fuera de lo escrito, en el sitio de Álvaro, mirando al lago de noche.</li><li>Las peanas libres siguen en el anillo tostado. Y si el círculo se queda pequeño, el papel en blanco es, literalmente, espacio para lo que vendrá.</li><li>Navegación accesible, URLs, historial, vista de lectura y contacto inmediato: sin cambios.</li></ul></div>
+      <div class="card"><p class="t">Hoja de ruta</p><b class="h">Lo que cambia en la Fase B</b>
+        <ul><li><b>2.0-A</b> incluye el entorno en bloque (los tres anillos, el cielo por hora, la niebla y las reglas de composición). Es lo primero que se juzga.</li><li><b>2.0-B</b> añade los lugares de Scope a su memoria y a su vida propia. El loader pasa a ser «Scope dentro de su linterna».</li><li><b>2.0-C</b> añade el pase de arte del entorno: cordilleras de papel plegado de verdad, el lago y el etalonaje por hora.</li><li>2.0-D, E y F no cambian de alcance.</li></ul></div>
+    </div>
+
+    <h3 style="margin-top:40px;font-size:22px">Lo que todavía no está bien en estos estudios</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Pieza</th><th>Problema</th><th>En la Fase B</th></tr>
+      <tr><td>Cordilleras</td><td class="p">El facetado del bloqueo puede recordar a un paisaje «low poly» de videojuego</td><td>Tiras de papel plegadas en acordeón con bordes limpios, translucidez a contraluz y menos picos, pero más grandes (2.0-C)</td></tr>
+      <tr><td>Terreno</td><td class="p">Demasiado uniforme de cerca</td><td>Grano, huellas y un poco más de tono en las dunas</td></tr>
+      <tr><td>Lago</td><td class="p">Apenas se lee en el plano general</td><td>Más superficie a la vista desde las paradas, y el reflejo de la lámpara</td></tr>
+      <tr><td>Color</td><td class="p">Demasiado gris al amanecer</td><td>Etalonaje por hora hacia la paleta de la biblia</td></tr>
+      <tr><td>Scope de noche</td><td>Casi en silueta (el contraluz es intencionado)</td><td>En tiempo real, la capa de presencia le da un rebote cálido</td></tr>
+    </table></div>
+  </section>
+
+  <h2 style="margin-top:80px">La propuesta de la Fase A <small>se mantiene, con tus respuestas incorporadas</small></h2>
+  <div class="metrics" aria-label="1.0 frente a 2.0">
+    <div class="metric"><div class="k">Zonas</div><div class="v"><s>4</s>7</div><div class="n">21 paradas (antes, 4 encuadres)</div></div>
+    <div class="metric"><div class="k">Recorrido</div><div class="v"><s>2,0</s>5,6 m</div><div class="n">entre paradas, en línea recta; 1.0 medido en <code>world.json</code></div></div>
+    <div class="metric"><div class="k">Suelo de Scope</div><div class="v"><s>1,18</s>≈2,0 m²</div><div class="n">en 3 niveles y una bóveda</div></div>
+    <div class="metric"><div class="k">Rincones</div><div class="v"><s>0</s>8</div><div class="n">cada uno con su causa</div></div>
+    <div class="metric"><div class="k">Proyectos vivos</div><div class="v"><s>0</s>3</div><div class="n">+ 3 peanas para los próximos</div></div>
+    <div class="metric"><div class="k">Visita</div><div class="v"><s>30 s</s>8–12′</div><div class="n">≈ 2,5 min de punta a punta</div></div>
+  </div>
+
+  <!-- ======================================================================= MAPA -->
+  <section id="mapa">
+    <h2>El mapa <small>vista cenital · metros reales del mundo aprobado</small></h2>
+    <p class="why">Un solo mundo continuo. <b>Se camina bajo la galería y bajo el rizo, nunca por encima</b>: así basta con ampliar el mapa caminable 2D actual a la mesa, sin navegación por capas. Pasa el puntero o el foco por una zona para ver su ficha.</p>
+    <div class="panel">
+      <svg id="plan" viewBox="0 0 1102 722" role="img" aria-labelledby="plan-t plan-d">
+        <title id="plan-t">Plano del mundo ampliado</title>
+        <desc id="plan-d">Vista cenital de la mesa y del pliego con las siete zonas, la ruta en S con sus 21 paradas, los ocho rincones escondidos y la lámpara. El margen está delante a la izquierda; la galería sube por el borde izquierdo; el campo de preguntas y el taller ocupan el centro izquierda; el círculo de la lámpara está a la derecha; el rizo, detrás; el aula, al fondo a la derecha; y el pie de la lámpara, sobre la mesa, fuera del pliego.</desc>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#d9d2c5;border:1px solid var(--soft)"></i>papel en blanco (el mundo)</span>
+        <span><i style="background:#fbf1dc;border:1.5px solid var(--margin)"></i>lugares de Scope</span>
+        <span><i style="background:var(--amber)"></i>ruta y paradas</span>
+        <span><i style="background:transparent;border:1.5px dashed var(--soft)"></i>cubierto (se camina debajo)</span>
+        <span>✦ rincón escondido</span>
+        <span><i style="background:var(--celadon)"></i>MathView</span>
+        <span><i style="background:var(--terracotta)"></i>Tournamently</span>
+        <span><i style="background:#1c1b21"></i>Sport Coach</span>
+        <span><i style="background:transparent;border:1.5px dashed var(--toast)"></i>peana libre</span>
+        <span><i style="background:var(--lamp)"></i>lámpara y lápiz</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= RITMO -->
+  <section id="ritmo">
+    <h2>El recorrido, desplegado <small>altura, hora y apertura a lo largo de la ruta</small></h2>
+    <p class="why">El corte «estira» la S en una línea, con la misma escala en horizontal y en vertical. Arriba se ve cómo cambia la hora del día de una zona a otra, y en medio, la arquitectura con Scope a escala (15 cm). Abajo, la <b>apertura</b>: el recorrido alterna espacios abiertos e íntimos para que nunca sea un pasillo uniforme.</p>
+    <div class="panel"><svg id="unrolled" viewBox="0 0 1100 470" role="img" aria-labelledby="un-t un-d">
+      <title id="un-t">Corte desplegado del recorrido</title>
+      <desc id="un-d">De izquierda a derecha: el margen de noche, la galería al amanecer, el campo y el taller por la mañana, el círculo de día con la lámpara encima, la bóveda del rizo a contraluz, el aula al atardecer y el pie de la lámpara de noche. La curva inferior muestra que el recorrido alterna lo abierto (el campo, el círculo) con lo íntimo (la galería, el rizo).</desc>
+    </svg></div>
+  </section>
+
+  <!-- ======================================================================= ZONAS -->
+  <section id="zonas">
+    <h2>Las siete zonas <small>una función, una escala y una hora cada una</small></h2>
+    <p class="why">Ninguna es una pantalla: cada una se ve desde las vecinas y termina en arquitectura, no en un corte. <b>Todo lo que reacciona tiene una causa visible</b> (te acercas, Scope lo mira o lo abres); nada se mueve por temporizador, como exige el canon (<code>BEHAVIOUR.md</code>).</p>
+    <div class="zones" id="zone-cards"></div>
+  </section>
+
+  <!-- ======================================================================= PROYECTOS -->
+  <section id="proyectos">
+    <h2>Proyectos: <em>experiencias,</em> no folios <small>sistema común, arte propio</small></h2>
+    <p class="why">He comprobado qué existe de cada proyecto antes de diseñar. <b>Tournamently se puede probar de verdad desde ya</b>: su web en vivo responde y hoy se deja incrustar, y su motor de cuadros es un módulo puro y probado. <b>De MathView no he encontrado código ni demo</b>, así que su instalación será una representación señalada como tal hasta que me los pases.</p>
+
+    <div class="cols c3" id="installations"></div>
+
+    <h3 style="margin-top:34px">Tres sellos, siempre visibles</h3>
+    <div class="chips">
+      <span class="chip real">Producto real</span><span class="chip engine">Motor real · datos de ejemplo</span><span class="chip concept">Representación</span><span class="chip pending">Pendiente de material</span>
+    </div>
+    <p class="why" style="font-size:15px">Los calcula el sistema a partir del manifiesto, nunca se escriben a mano. Así una escultura no puede hacerse pasar por demo.</p>
+
+    <h3 style="margin-top:34px">Tournamently, jugado de verdad</h3>
+    <div class="cols c4" id="tm-board"></div>
+
+    <h3 style="margin-top:34px">El sistema: un manifiesto por proyecto</h3>
+    <div class="panel"><svg id="system" viewBox="0 0 1100 330" role="img" aria-labelledby="sy-t sy-d">
+      <title id="sy-t">Arquitectura del sistema de proyectos</title>
+      <desc id="sy-d">Un manifiesto por proyecto alimenta cinco salidas: la ficha HTML con sus sellos; la instalación, que puede ser el arquetipo genérico de pieza cocida o un módulo propio; la peana del círculo; el comportamiento de Scope; y la vista de lectura y el móvil. Añadir un proyecto es añadir un manifiesto: no hace falta Blender.</desc>
+    </svg></div>
+    <ul class="plain">
+      <li><b>Añadir un proyecto:</b> un archivo de manifiesto y sus recursos reales. Con el arquetipo, la pieza se genera en el navegador (forma + esmalte + emblema) y se cuece en una peana libre. <b>Sin Blender ni volver a exportar el mundo.</b></li>
+      <li><b>Proyectos principales:</b> un módulo de instalación propio con el mismo contrato (<code>load · approach · open · close · scopeSpots · dispose</code>).</li>
+      <li><b>Comprobación automática:</b> peana libre, textos alternativos, enlaces que responden, sitios de Scope sobre suelo caminable y sellos coherentes.</li>
+    </ul>
+  </section>
+
+  <!-- ======================================================================= SCOPE -->
+  <section id="scope">
+    <h2>Scope, <em>compañero</em> <small>independiente y cerca, nunca pegado</small></h2>
+    <p class="why"><b>Hoy llega siempre tarde:</b> solo reacciona cuando la cámara ya ha llegado a la parada, y avanza a 13 cm/s. Tampoco sabe si se le ve ni a qué distancia estás. La 2.0 le da un <b>modelo de compañía explícito</b>, memoria de la sesión y un paso propio. Todo pasa por el canon: sin manos, sin hablar, sin pedir atención, y con el reposo como estado dominante.</p>
+
+    <div class="cols c2">
+      <div class="card">
+        <p class="t">Prioridades</p><b class="h">Qué manda cuando dos cosas chocan</b>
+        <div class="stack" id="prio"></div>
+        <p>Nunca se corta un salto en el aire ni un clip a medias: se termina y luego se cambia. <b>Leer manda</b>: con una ficha o nota abierta, no se desplaza ni hace gestos.</p>
+      </div>
+      <div class="card">
+        <p class="t">Distancia</p><b class="h">Bandas de compañía</b>
+        <svg id="bands" viewBox="0 0 640 330" role="img" aria-label="Bandas de distancia alrededor del ancla del visitante: demasiado cerca, menos de 12 centímetros, se aparta; cómoda, hasta 45, libre; tensa, hasta 90, vuelve sin prisa; más allá, o más de 3 segundos fuera de cuadro, reagrupa con prisa."></svg>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <p class="t">Un cambio de zona</p><b class="h">Se pone en marcha con la cámara, no detrás de ella</b>
+      <svg id="timeline" viewBox="0 0 1100 250" role="img" aria-label="Línea de tiempo de un cambio de zona. El visitante pulsa una flecha en el segundo cero. Los ojos de Scope siguen el movimiento al instante. Entre 0,25 y 0,6 segundos se impulsa y arranca mientras la cámara vuela. Si conoce la zona se adelanta; si es nueva va detrás mirando a los lados. Al asentarse la cámara, mira alrededor la primera vez o te mira si vuelve."></svg>
+    </div>
+
+    <div class="cols c2">
+      <div class="card">
+        <p class="t">Memoria de la sesión</p><b class="h">Lo que recuerda, y para qué</b>
+        <ul>
+          <li><b>Zonas visitadas</b> → la primera vez descubre (LookAround); al volver va directo a su sitio y mira lo que abriste allí.</li>
+          <li><b>Lo que has abierto</b> → se adelanta para enseñarte lo que no has visto, una vez por zona.</li>
+          <li><b>Últimos 4 clips</b> → nunca dos gestos seguidos de la misma familia; pesos ×0,25 y ×0,6 para el último y el penúltimo.</li>
+          <li><b>Tus clics</b> → al tercero seguido, solo un parpadeo. El canon no premia la insistencia.</li>
+          <li><b>Si ya te ha mirado por inactividad</b> → una sola vez por zona, sin ir a más.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="t">Clic sobre Scope</p><b class="h">La misma reacción, leída en su contexto</b>
+        <div class="tablewrap"><table>
+          <tr><th>Contexto</th><th>Reacción</th></tr>
+          <tr><td>Normal</td><td>Se gira hacia ti → ClickReaction → vuelve a lo que miraba</td></tr>
+          <tr><td>Estás leyendo</td><td>Solo BlinkDouble, sin moverse</td></tr>
+          <tr><td>Va de camino</td><td>Se para, se gira, Bounce corto y sigue</td></tr>
+          <tr><td>Sobre el dial</td><td>ClickReaction y un Bounce en el centro: está en casa</td></tr>
+          <tr><td>Mientras escribes</td><td>Mira la nota y a ti; ningún clip largo</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <p class="t">Locomoción · propuesta para aprobar</p><b class="h">«Pasito con balanceo»: dos pasos de la marcha de trote (13 cm/s)</b>
+      <svg id="gait" viewBox="0 0 1100 300" role="img" aria-label="Curvas de dos pasos: el hueso hop sube unos 5 milímetros en cada paso; squash se comprime antes del despegue y al aterrizar; el balanceo alterna 3,5 grados a cada lado; las patas delanteras se levantan antes que las traseras; la antena va con retraso por inercia."></svg>
+      <div class="cols c2" style="margin-top:12px">
+        <div><b>A · Capa procedural en el navegador</b> <span class="chip real" style="margin-left:6px">recomendada</span>
+          <p style="font-size:14px;color:var(--soft);margin-top:6px">Mueve solo huesos aprobados (<code>root</code>, <code>hop</code>, <code>squash</code>, <code>body</code>, patas). <b>El modelo, el rig y el GLB quedan intactos.</b> Se juzga en una página de laboratorio, junto al Bounce actual.</p></div>
+        <div><b>B · Clips horneados en Blender</b> <span class="chip pending" style="margin-left:6px">solo con aprobación expresa</span>
+          <p style="font-size:14px;color:var(--soft);margin-top:6px">Mejores arcos, pero cambia el GLB de producción (+30–60 KB). Solo si la A no convence. Lo mismo para Nudge (empujar con la cara, pose ya explorada en la Entrega 1.5) y Settle.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= CONTACTO -->
+  <section id="contacto">
+    <h2>El lugar de encuentro <small>al pie de la lámpara, sobre la mesa de Álvaro</small></h2>
+    <p class="why">Se baja del pliego por la esquina doblada. En el círculo de luz de la mesa hay una nota en blanco y el lápiz. Escribir aquí es <b>dejar una pregunta nueva</b>: la nota acaba de pie en el campo, como cerraba la biblia. <b>Contactar sigue siendo inmediato</b>: el correo está en el HTML desde el primer fotograma y «Contacto» siempre está en la barra.</p>
+    <div class="cols c5" id="contact-board"></div>
+    <div class="contact-mock" style="margin-top:22px">
+      <div class="paper">
+        <p class="ey">Al pie de la lámpara</p>
+        <h4>Escríbeme.</h4>
+        <p>Si tienes un proyecto, una clase o una pregunta que no te deja tranquilo, cuéntamela.</p>
+        <div class="mail">contact@alvarogaertner.com <span class="btn">Copiar</span></div>
+        <div class="row"><span class="btn">LinkedIn ↗</span><span class="btn">GitHub ↗</span></div>
+        <div class="row"><span class="btn p">Escribir la nota</span><span class="btn">Seguir explorando →</span></div>
+      </div>
+      <div class="note">
+        <p><b>Maqueta del panel HTML</b> (borrador de texto para revisar contigo).</p>
+        <p style="margin-top:10px">Correo tomado de <code>.env.example</code> → <b>confírmame que es el público</b>. LinkedIn y GitHub: los enlaces que ya están en producción.</p>
+        <p style="margin-top:10px"><b>Prototipo:</b> «Enviar desde mi correo» abre tu cliente de correo (<code>mailto:</code>). Es real y no simula nada. <b>Producción:</b> el <code>/api/contact</code> que ya existe (Resend).</p>
+        <p style="margin-top:10px">El cierre de la nota solo se ve con un botón «Ver el cierre (demostración)». Nunca aparece un «Enviado» falso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= TECNICA -->
+  <section id="tecnica">
+    <h2>Técnica y presupuestos <small>objetivos frente a lo verificado</small></h2>
+    <p class="why">Solo las técnicas que hacen falta. <b>Lo más importante es hornear la luz</b>: acerca la imagen a los renders y permite quitar una de las dos sombras en tiempo real. Como cada zona tiene su hora fija, se hornea por zona sin conflictos. Este equipo no tiene GPU, así que <b>el rendimiento real se mide en tu ordenador</b> en cada entrega.</p>
+    <div class="panel"><svg id="stream" viewBox="0 0 1100 200" role="img" aria-label="Carga por zonas: el visitante está en el círculo. El núcleo, con el margen, la galería y las siluetas lejanas de todas las zonas, está siempre cargado. La zona actual y sus vecinas, el taller y el rizo, están cargadas o precargándose; las demás se ven como siluetas hasta que te acercas."></svg></div>
+    <div class="cols c2">
+      <div class="tablewrap"><table>
+        <tr><th>Medida</th><th>Objetivo 2.0</th><th>Verificado 1.0</th></tr>
+        <tr><td>Hasta interactuar (gzip)</td><td>≤ 2,0 MB</td><td class="y">≈ 1,7 MB</td></tr>
+        <tr><td>Por zona (gzip)</td><td>≤ 350 KB</td><td>—</td></tr>
+        <tr><td>Mundo completo (gzip)</td><td>≤ 4,5 MB</td><td class="y">1,07 MB</td></tr>
+        <tr><td>Triángulos visibles</td><td>≤ 200 000</td><td class="y">66 000 + Scope</td></tr>
+        <tr><td>Llamadas de dibujo, escritorio / móvil</td><td>≤ 120 / 80</td><td class="y">93–116</td></tr>
+        <tr><td>Memoria GPU, escritorio / móvil</td><td>≤ 200 / 120 MB</td><td class="p">sin medir</td></tr>
+        <tr><td>p95 gráfica integrada</td><td>≤ 16,7 ms</td><td class="n">sin medir (sin GPU aquí)</td></tr>
+        <tr><td>p95 Android medio</td><td>≤ 33 ms</td><td class="n">sin medir</td></tr>
+      </table></div>
+      <div class="tablewrap"><table>
+        <tr><th>Técnica</th><th>¿Sí?</th><th>Por qué</th></tr>
+        <tr><td>Carga por zonas</td><td class="y">Sí</td><td>Núcleo primero; vecinas cuando el navegador está libre; destino al saltar</td></tr>
+        <tr><td>Siluetas lejanas</td><td class="y">Sí</td><td>El único LOD que aporta: el mundo se ve más allá del encuadre (unos 5 000 triángulos)</td></tr>
+        <tr><td>Instancias</td><td class="y">Sí</td><td>Aula, gradas, galería y peanas: menos llamadas de dibujo</td></tr>
+        <tr><td>Luz horneada</td><td class="y">Sí</td><td>Más parecido a los renders y una sombra menos</td></tr>
+        <tr><td>meshopt</td><td class="p">Al final</td><td>Decoder ya en three; compresión solo al compilar, si se pasa de 3 MB</td></tr>
+        <tr><td>KTX2</td><td class="n">Aún no</td><td>Solo si las texturas pasan de unos 8 MB</td></tr>
+        <tr><td>Descargar zonas</td><td class="p">Móvil</td><td>En escritorio cabe todo</td></tr>
+        <tr><td>Prerenders</td><td class="y">Pocos</td><td>Vista de lectura, Open Graph y sin WebGL; nunca en lugar del mundo</td></tr>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= RUTA -->
+  <section id="ruta">
+    <h2>Hoja de ruta · Fase B <small>seis entregas, cada una se aprueba en el navegador</small></h2>
+    <p class="why">Primero el esqueleto y el comportamiento, después el arte. <b>La 2.0-A es una maqueta gris caminable</b>: podrás juzgar el tamaño, el ritmo y las transiciones del mundo, y medir el rendimiento en tu GPU, antes de invertir en arte.</p>
+    <div class="road">
+      <div class="step"><div class="id">2.0-A</div><div class="nm">Maqueta caminable</div><p>Mapa completo en volúmenes grises; 7 zonas y 21 paradas; índice, URL e historial; carga por zonas y siluetas.</p><p class="chk">✓ recorrido y saltos · ✓ teclado · ✓ p95 en tu GPU</p></div>
+      <div class="step"><div class="id">2.0-B</div><div class="nm">Scope compañero</div><p>Estados nuevos, compañía, espera, memoria y atajos; paso procedural; laboratorio de marchas.</p><p class="chk">✓ tests §4.10 · ✓ sesión de 10 min · ✓ cara 0 mm</p></div>
+      <div class="step"><div class="id">2.0-C</div><div class="nm">Arte I</div><p>Despertar, galería, campo, taller, libro por dentro y mirilla, con luz horneada.</p><p class="chk">✓ frente a los renders · ✓ presupuesto por zona</p></div>
+      <div class="step"><div class="id">2.0-D</div><div class="nm">Proyectos</div><p>Manifiestos, arquetipo, peanas, gradas con el motor real, Tournamently incrustado, MathView y el dial.</p><p class="chk">✓ manifiestos · ✓ tests del motor · ✓ sellos</p></div>
+      <div class="step"><div class="id">2.0-E</div><div class="nm">Cuaderno y aula</div><p>El rizo con las seis líneas completas; el aula y plegar tu pieza.</p><p class="chk">✓ sin WebGL · ✓ Scope espera mientras lees</p></div>
+      <div class="step"><div class="id">2.0-F</div><div class="nm">Encuentro y cierre</div><p>Contacto, <code>mailto:</code>, cierre de demostración, vista de lectura completa y plan de integración en Next.</p><p class="chk">✓ contacto &lt; 1,2 s · ✓ lector de pantalla · ✓ móvil real</p></div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= DECISIONES -->
+  <section id="decisiones">
+    <h2>Decisiones <small>tus respuestas, y lo que queda</small></h2>
+    <ol class="decide resolved">
+      <li><div><b>Mundo ampliado:</b> aprobado.</div></li>
+      <li><div><b>MathView:</b> dos repositorios públicos, ya inspeccionados. Es un visualizador de funciones complejas: |f(z)| y fase, ceros y polos, Mandelbrot y la función zeta.<small>Su API apunta a un servidor de Azure que hoy no resuelve, así que no hay demo en vivo. Y el código no usa Matlab, aunque producción lo diga.</small></div></li>
+      <li><div><b>Tournamently:</b> el repositorio es público. Se copia <code>bracket.ts</code> con su procedencia y se incrusta la web.</div></li>
+      <li><div><b>Contacto:</b> correo, LinkedIn y GitHub confirmados.</div></li>
+      <li><div><b>Docencia:</b> FP de SMR y ASIR en GSD Guadarrama.<small>En el aula, las piezas se unen con hilos, como una red. Producción dice «Software Development» y habrá que corregirlo.</small></div></li>
+      <li><div><b>Locomoción:</b> lo dejas a mi criterio, así que empiezo por la capa procedural.</div></li>
+      <li><div><b>Acciones de Scope:</b> aprobadas (Fit, Nudge y su luz).</div></li>
+      <li><div><b>Configuración:</b> aprobado excluir <code>docs/</code> del <code>tsconfig</code> y de ESLint. Se hará al empezar la Fase B.</div></li>
+    </ol>
+    <h3 style="margin-top:28px;font-size:20px">Lo que queda por decidir</h3>
+    <ol class="decide">
+      <li><div><b>¿Apruebas esta revisión?</b> El pliego sin bordes, los lugares de Scope y los cambios en la hoja de ruta.<small>Es la única desviación del lenguaje aprobado: la escala pasa de una mesa a un mundo de papel.</small></div></li>
+      <li><div><b>MathView:</b> ¿quieres volver a desplegar su API para que la instalación pueda abrir la aplicación de verdad?<small>Si no, se queda con la representación de su método y los enlaces a los dos repositorios.</small></div></li>
+    </ol>
+  </section>
+
+  <!-- ======================================================================= REFERENCIAS -->
+  <section id="referencias">
+    <h2>Referencias: lo que se conserva <small>la dirección artística no cambia</small></h2>
+    <p class="why">Las zonas nuevas se construyen con el mismo lenguaje que ya aprobaste. Estas imágenes son el patrón: renders de Blender de las entregas 1.5 y fotogramas del prototipo 1.0.</p>
+    <div class="refs">
+      <figure><img src="../../../scope-world/entrega-1-5/renders/d3-home.jpg" alt="Scope en el margen al amanecer" loading="lazy"><figcaption>Margen · render 1.5 → zona 1</figcaption></figure>
+      <figure><img src="../../../scope-world/entrega-1-5/renders/a2-inside.jpg" alt="Entre los libros de preguntas a la altura de Scope" loading="lazy"><figcaption>Campo · render 1.5 → zona 3</figcaption></figure>
+      <figure><img src="../../../scope-world/entrega-1-5/renders/c1-place.jpg" alt="El círculo de la lámpara con MathView" loading="lazy"><figcaption>Círculo · render 1.5 → zona 4</figcaption></figure>
+      <figure><img src="../../../scope-world/entrega-1-5/renders/b4-push.jpg" alt="Scope empuja una página con la cara" loading="lazy"><figcaption>Pose «empujar» (experimental, 1.5) → Nudge</figcaption></figure>
+      <figure><img src="../../../scope-world/entrega-1-5/renders/a1-wide.jpg" alt="El campo de preguntas desde arriba" loading="lazy"><figcaption>Vista general · render 1.5</figcaption></figure>
+      <figure><img src="../captures/06-la-luz.jpg" alt="Fotograma del prototipo en el círculo de la lámpara" loading="lazy"><figcaption>Prototipo 1.0 · «La luz»</figcaption></figure>
+      <figure><img src="../captures/08-mathview-abierto.jpg" alt="Fotograma del prototipo con MathView abierto" loading="lazy"><figcaption>Prototipo 1.0 · MathView abierto (el «folio»)</figcaption></figure>
+      <figure><img src="../../../scope-world/entrega-1-5/renders/d4-invite.jpg" alt="Render de la invitación final" loading="lazy"><figcaption>Invitación · render 1.5</figcaption></figure>
+    </div>
+    <p class="figcap" style="margin-top:22px">Documentos de esta fase: <a href="README.md">README</a> · <a href="01-auditoria.md">01 auditoría</a> · <a href="02-mundo.md">02 mundo</a> · <a href="03-proyectos.md">03 proyectos</a> · <a href="04-scope.md">04 Scope</a> · <a href="05-contacto.md">05 contacto</a> · <a href="06-tecnica.md">06 técnica</a> · <a href="07-blender-y-hoja-de-ruta.md">07 Blender y hoja de ruta</a></p>
+  </section>
+</main>
+
+<script>
+// Every drawing on this board is generated from the world's real coordinates
+// (metres, Blender axes: x right, y away; origin at the sheet's centre).
+const NS = "http://www.w3.org/2000/svg"
+const C = { paper: "#ede6d8", paper2: "#f3eee3", ink: "#1c1b21", soft: "#5b5865", rule: "rgba(142,155,176,.45)", margin: "#9a3b2a", amber: "#f2b65a",
+  night: "#0b1220", toast: "#6b4423", celadon: "#9fbfae", terracotta: "#b0643f", lamp: "#1f2c4a", lavender: "#5e5a73", porcelain: "#f1ebdf" }
+const el = (tag, attrs = {}, parent) => {
+  const n = document.createElementNS(NS, tag)
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v)
+  if (parent) parent.appendChild(n)
+  return n
+}
+const txt = (parent, x, y, s, attrs = {}) => { const t = el("text", { x, y, ...attrs }, parent); t.textContent = s; return t }
+const g = (parent, attrs = {}) => el("g", attrs, parent)
+const mono = { "font-family": "Geist Mono, monospace" }
+const sans = { "font-family": "Geist, sans-serif" }
+
+/** Catmull-Rom through points -> smooth path */
+function smooth(pts) {
+  let d = `M${pts[0][0]},${pts[0][1]}`
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6]
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6]
+    d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`
+  }
+  return d
+}
+
+/** Scope, front view: feet at (x, y), h = height in px. look: -1..1 turns the face. */
+function scope(parent, x, y, h, { look = 0, eyes = "open", glow = true } = {}) {
+  const w = h * 0.9
+  const s = g(parent)
+  el("ellipse", { cx: x, cy: y, rx: w * 0.55, ry: h * 0.06, fill: "rgba(0,0,0,.25)" }, s)
+  for (const fx of [-0.26, 0.26]) el("ellipse", { cx: x + fx * w, cy: y - h * 0.04, rx: w * 0.12, ry: h * 0.06, fill: "#e4dccb" }, s)
+  el("rect", { x: x - w / 2, y: y - h * 0.86, width: w, height: h * 0.82, rx: w * 0.46, fill: C.porcelain, stroke: "rgba(28,27,33,.25)", "stroke-width": Math.max(0.6, h * 0.012) }, s)
+  const fx = x + look * w * 0.1
+  el("rect", { x: fx - w * 0.33, y: y - h * 0.72, width: w * 0.66, height: h * 0.4, rx: h * 0.15, fill: C.night }, s)
+  const ew = w * 0.085, eh = eyes === "laugh" ? h * 0.05 : eyes === "up" ? h * 0.19 : h * 0.16
+  for (const ex of [-0.13, 0.13]) {
+    if (eyes === "laugh") el("path", { d: `M${fx + ex * w - ew},${y - h * 0.5} q${ew},${-h * 0.1} ${ew * 2},0`, stroke: C.amber, "stroke-width": h * 0.035, fill: "none", "stroke-linecap": "round" }, s)
+    else el("rect", { x: fx + ex * w - ew / 2, y: y - h * 0.52 - eh / 2, width: ew, height: eh, rx: ew / 2, fill: C.amber, filter: glow ? "url(#glow)" : "" }, s)
+  }
+  el("path", { d: `M${x},${y - h * 0.86} q${w * 0.04},${-h * 0.14} ${w * 0.16},${-h * 0.2}`, stroke: "#d9d0bf", "stroke-width": Math.max(1, h * 0.025), fill: "none", "stroke-linecap": "round" }, s)
+  el("circle", { cx: x + w * 0.16, cy: y - h * 1.06, r: h * 0.04, fill: C.porcelain, stroke: "rgba(28,27,33,.3)", "stroke-width": 0.6 }, s)
+  return s
+}
+
+function defs(svg) {
+  const d = el("defs", {}, svg)
+  const f = el("filter", { id: "glow", x: "-200%", y: "-200%", width: "500%", height: "500%" }, d)
+  el("feGaussianBlur", { stdDeviation: "1.6", result: "b" }, f)
+  const m = el("feMerge", {}, f); el("feMergeNode", { in: "b" }, m); el("feMergeNode", { in: "SourceGraphic" }, m)
+  const soft = el("filter", { id: "soft", x: "-50%", y: "-50%", width: "200%", height: "200%" }, d)
+  el("feGaussianBlur", { stdDeviation: "8" }, soft)
+  return d
+}
+function grad(d, id, stops, vertical = true) {
+  const lg = el("linearGradient", { id, x1: 0, y1: 0, x2: vertical ? 0 : 1, y2: vertical ? 1 : 0 }, d)
+  stops.forEach(([o, c]) => el("stop", { offset: o, "stop-color": c }, lg))
+  return `url(#${id})`
+}
+function radial(d, id, stops) {
+  const rg = el("radialGradient", { id }, d)
+  stops.forEach(([o, c, a = 1]) => el("stop", { offset: o, "stop-color": c, "stop-opacity": a }, rg))
+  return `url(#${id})`
+}
+
+// ------------------------------------------------------------------------- data
+const ZONES = [
+  { id: 1, name: "El despertar", place: "El margen", tint: "#5e5a73", time: "noche → amanecer", scale: "abierta, baja",
+    does: "Llegada de noche con el loader de producción; se enciende la lámpara y Scope te mira. Nombre y frase en HTML.",
+    react: "Nada se mueve solo: solo Scope y la lámpara.", corner: "El hueco de Scope: se mete en la silueta que dejó su recorte y encaja.",
+    content: "Llegada · Scope", label: [-0.78, -0.64] },
+  { id: 2, name: "El umbral", place: "La galería del margen", tint: "#8a6f8f", time: "amanecer", scale: "pasillo cubierto → mirador",
+    does: "Una tira del margen se levanta en arcos sucesivos a lo largo de 70 cm. Debajo, cuatro hojas: «Ahora enseño», «Ahora construyo», «Ahora exploro», «Cómo pienso». Termina en el mirador que ya existe.",
+    react: "Las hojas, tumbadas, se levantan al pasar tú; la luz de Scope hace legible su letra.", corner: "El dorso: bocetos a lápiz de Scope (si apruebas usar sus referencias).",
+    content: "Quién soy (about-content.ts)", label: [-0.93, 0.58] },
+  { id: 3, name: "El territorio de las ideas", place: "Campo, pliegue largo y taller", tint: "#6f8aa8", time: "mañana", scale: "la más abierta → camino",
+    does: "Las preguntas, libros de pie unidos por el hilo rojo, muestran pregunta y estado. El taller de pliegues: cinco formas, cada una un paso más plegada, que representan el método real con el que hago esta web.",
+    react: "Cada forma del taller se pliega un paso al pasar a su lado.", corner: "Dentro del libro abierto · La mirilla: debajo, tachadas, las suposiciones que fallaron.",
+    content: "Cómo pienso y construyo", label: [-0.36, 0.52] },
+  { id: 4, name: "El distrito de proyectos", place: "El círculo de la lámpara", tint: "#c08a3e", time: "día", scale: "plaza",
+    does: "Tres instalaciones de porcelana con su esmalte: MathView (celadón), las gradas de Tournamently (terracota) y el dial de Sport Coach (negro tinta). Tres peanas de papel crudo esperan a los próximos.",
+    react: "Las peanas vacías se calientan; la instalación más cercana se despierta.", corner: "La pelota: con campeón, Scope la empuja y el cuadro vuelve a empezar.",
+    content: "MathView · Tournamently · Sport Coach", label: [0.36, -0.24] },
+  { id: 5, name: "El cuaderno", place: "Bajo el rizo", tint: "#b07a2e", time: "mediodía, a contraluz", scale: "íntima, cubierta", labelDark: true,
+    does: "El borde trasero del pliego se riza hacia atrás sobre la mesa: una bóveda de unos 25 cm. El dorso, iluminado desde fuera, se lee a contraluz, y de él cuelgan las notas de cada línea.",
+    react: "Al mirar Scope hacia arriba, la nota que tiene encima se vuelve legible.", corner: "La pregunta sin escribir: «· · ·» se levanta un poco más con cada zona visitada.",
+    content: "Las seis líneas completas; artículos cuando existan", label: [-0.42, 0.93] },
+  { id: 6, name: "El espacio de enseñanza", place: "El aula", tint: "#c0603a", time: "atardecer", scale: "pequeña, ordenada",
+    does: "Filas de piezas pequeñas e imperfectas plegadas desde un mismo patrón y unidas por hilos, como una red (son ciclos de sistemas y redes). Puedes plegar la tuya y conectarla.",
+    react: "Scope ladea la cabeza ante la pieza torcida y su luz la endereza un poco.", corner: "La pieza torcida.",
+    content: "Docencia en FP: SMR y ASIR, en GSD Guadarrama", label: [0.7, 0.78] },
+  { id: 7, name: "El lugar de encuentro", place: "El pie de la lámpara", tint: "#2a3a63", time: "noche de lámpara", scale: "abierta, oscura y cálida",
+    does: "Se baja por la esquina doblada a la mesa. Al pie de la lámpara, una nota en blanco y el lápiz. Escribir es dejar una pregunta nueva.",
+    react: "La lámpara ya ilumina la nota; Scope se pone al otro lado, de cara a ti.", corner: "Las virutas del lápiz, detrás del pie.",
+    content: "Contacto", label: [1.06, 0.6] },
+]
+
+const STOPS = [
+  ["1a", -0.72, -0.52, 1], ["1b", -0.84, -0.34, 1],
+  ["2a", -0.88, -0.2, 2], ["2b", -0.84, 0.05, 2], ["2c", -0.68, 0.15, 2],
+  ["3a", -0.52, 0.32, 3], ["3b", -0.28, 0.14, 3], ["3c", -0.46, -0.12, 3], ["3d", -0.2, -0.3, 3], ["3e", 0.1, -0.12, 3],
+  ["4a", 0.22, 0.0, 4], ["4b", 0.42, -0.1, 4], ["4c", 0.68, 0.14, 4], ["4d", 0.3, 0.4, 4],
+  ["5a", 0.05, 0.6, 5], ["5b", 0.22, 0.8, 5], ["5c", 0.52, 0.78, 5],
+  ["6a", 0.7, 0.58, 6], ["6b", 0.9, 0.5, 6],
+  ["7a", 1.12, 0.72, 7], ["7b", 1.24, 0.36, 7],
+]
+const CORNERS = [
+  [-0.76, -0.47, "El hueco de Scope"], [-0.82, 0.36, "El dorso"], [-0.46, -0.08, "Dentro del libro"], [-0.02, 0.32, "La mirilla"],
+  [0.64, 0.03, "La pelota"], [-0.8, -0.36, "· · ·"], [0.85, 0.62, "La pieza torcida"], [1.5, 0.04, "Las virutas"],
+]
+
+// ------------------------------------------------------------------------- the plan
+;(function plan() {
+  const svg = document.getElementById("plan")
+  const S = 360, X = (x) => (x + 1.42) * S, Y = (y) => (1.05 - y) * S
+  const d = defs(svg)
+  const pat = el("pattern", { id: "rules", width: 8, height: 0.03 * S, patternUnits: "userSpaceOnUse" }, d)
+  el("rect", { width: 8, height: 0.03 * S, fill: C.paper }, pat)
+  el("line", { x1: 0, y1: 0.5, x2: 8, y2: 0.5, stroke: C.rule, "stroke-width": 0.8 }, pat)
+  const lampPool = radial(d, "lamppool", [[0, "#f6d497", 0.55], [0.6, "#f2b65a", 0.12], [1, "#f2b65a", 0]])
+  const deskPool = radial(d, "deskpool", [[0, "#f2b65a", 0.35], [1, "#f2b65a", 0]])
+
+  el("rect", { x: 0, y: 0, width: 1102, height: 722, rx: 8, fill: "#d9d2c5" }, svg) // the blank paper all around
+  el("ellipse", { cx: X(1.28), cy: Y(0.3), rx: 0.42 * S, ry: 0.5 * S, fill: deskPool }, svg)
+  // the curl: the back edge rolls up and back over the desk (drawn first, under the sheet edge)
+  const curl = g(svg)
+  el("path", { d: `M${X(-0.15)},${Y(0.7)} L${X(-0.15)},${Y(0.97)} Q${X(0.25)},${Y(1.02)} ${X(0.65)},${Y(0.97)} L${X(0.65)},${Y(0.7)} Z`, fill: "#e6dccb", stroke: C.soft, "stroke-dasharray": "5 4", "stroke-width": 1.2 }, curl)
+  for (let i = 1; i < 6; i++) { const yy = 0.7 + i * 0.05; el("path", { d: `M${X(-0.15)},${Y(yy)} Q${X(0.25)},${Y(yy + 0.03)} ${X(0.65)},${Y(yy)}`, stroke: "rgba(107,68,35,.22)", fill: "none" }, curl) }
+  // the sheet
+  el("rect", { x: X(-1), y: Y(0.7), width: 2 * S, height: 1.4 * S, fill: "url(#rules)" }, svg)
+  el("line", { x1: X(-0.8), y1: Y(0.7), x2: X(-0.8), y2: Y(-0.7), stroke: C.margin, "stroke-width": 1.6, opacity: 0.75 }, svg)
+  // under-curl region on the sheet (where it lifts)
+  el("rect", { x: X(-0.15), y: Y(0.7), width: 0.8 * S, height: 0.15 * S, fill: "rgba(107,68,35,.08)", stroke: C.soft, "stroke-dasharray": "5 4" }, svg)
+  // kirigami holes (what lifted leaves its hole)
+  for (const [x, y, w, h] of [[-0.5, -0.02, 0.1, 0.03], [-0.18, -0.44, 0.09, 0.03], [-0.17, 0.08, 0.1, 0.03], [-0.02, 0.32, 0.05, 0.05], [-0.4, 0.24, 0.1, 0.03]])
+    el("rect", { x: X(x - w / 2), y: Y(y + h / 2), width: w * S, height: h * S, fill: "#c9bfae", stroke: "rgba(28,27,33,.25)" }, svg)
+  // the lamp's circle
+  el("circle", { cx: X(0.45), cy: Y(0.18), r: 0.36 * S, fill: lampPool }, svg)
+  el("circle", { cx: X(0.45), cy: Y(0.18), r: 0.34 * S, fill: "rgba(241,235,223,.55)" }, svg)
+  el("circle", { cx: X(0.45), cy: Y(0.18), r: 0.36 * S, fill: "none", stroke: C.toast, "stroke-width": 0.035 * S, opacity: 0.55 }, svg)
+
+  // zone areas (hover targets)
+  const zl = g(svg)
+  const zoneShapes = {
+    1: `M${X(-1)},${Y(-0.7)} H${X(-0.55)} V${Y(-0.28)} H${X(-1)} Z`,
+    2: `M${X(-1)},${Y(-0.28)} H${X(-0.64)} V${Y(0.56)} H${X(-1)} Z`,
+    3: `M${X(-0.64)},${Y(-0.28)} L${X(-0.55)},${Y(-0.28)} L${X(-0.55)},${Y(-0.5)} L${X(0.1)},${Y(-0.5)} L${X(0.14)},${Y(-0.12)} L${X(0.0)},${Y(0.3)} L${X(-0.15)},${Y(0.56)} L${X(-0.64)},${Y(0.56)} Z`,
+    4: null,
+    5: `M${X(-0.15)},${Y(0.56)} H${X(0.6)} V${Y(0.99)} H${X(-0.15)} Z`,
+    6: `M${X(0.6)},${Y(0.4)} H${X(1)} V${Y(0.7)} H${X(0.6)} Z`,
+    7: `M${X(1.0)},${Y(-0.3)} H${X(1.7)} V${Y(0.86)} H${X(1.0)} Z`,
+  }
+  for (const z of ZONES) {
+    const shape = z.id === 4
+      ? el("circle", { cx: X(0.45), cy: Y(0.18), r: 0.38 * S }, zl)
+      : el("path", { d: zoneShapes[z.id] }, zl)
+    shape.setAttribute("fill", z.tint)
+    shape.setAttribute("fill-opacity", "0.1")
+    shape.setAttribute("stroke", z.tint)
+    shape.setAttribute("stroke-opacity", "0.5")
+    shape.setAttribute("tabindex", "0")
+    shape.setAttribute("role", "button")
+    shape.setAttribute("aria-label", `Zona ${z.id}: ${z.name}, ${z.place}`)
+    shape.dataset.zone = z.id
+    shape.style.cursor = "pointer"
+  }
+
+  // objects
+  const ob = g(svg, { "pointer-events": "none" })
+  // gallery arches along the left edge
+  for (let i = 0; i < 6; i++) {
+    const y = -0.24 + i * 0.13
+    el("path", { d: `M${X(-0.96)},${Y(y)} Q${X(-0.81)},${Y(y + 0.035)} ${X(-0.66)},${Y(y)}`, stroke: C.paper2, "stroke-width": 7, fill: "none", "stroke-linecap": "round" }, ob)
+    el("path", { d: `M${X(-0.96)},${Y(y)} Q${X(-0.81)},${Y(y + 0.035)} ${X(-0.66)},${Y(y)}`, stroke: "rgba(154,59,42,.45)", "stroke-width": 1, fill: "none" }, ob)
+  }
+  for (let i = 0; i < 4; i++) el("rect", { x: X(-0.9), y: Y(-0.12 + i * 0.13), width: 0.12 * S, height: 6, fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)" }, ob)
+  // lookout
+  el("rect", { x: X(-0.73), y: Y(0.2), width: 0.1 * S, height: 0.1 * S, fill: "#e8dfcf", stroke: "rgba(28,27,33,.35)" }, ob)
+  // books (questions)
+  const books = [["q-context", -0.46, -0.08, 0.24, -125, true], ["q-agents", -0.14, -0.38, 0.22, -90], ["q-mcp", -0.12, 0.15, 0.25, -60], ["q-ux", 0.12, 0.06, 0.22, -40], ["q-arch", -0.36, 0.3, 0.26, 90]]
+  for (const [, x, y, w, rot, open] of books) {
+    const b = g(ob, { transform: `translate(${X(x)},${Y(y)}) rotate(${-rot - 90})` })
+    if (open) { el("path", { d: `M0,0 L${-w * S * 0.5},${-12} M0,0 L${w * S * 0.5},${-12}`, stroke: "#fbf7ee", "stroke-width": 7, "stroke-linecap": "round" }, b) }
+    el("rect", { x: -w * S / 2, y: -4, width: w * S, height: 8, rx: 1.5, fill: "#fbf7ee", stroke: "rgba(28,27,33,.35)" }, b)
+  }
+  // red threads
+  el("path", { d: `M${X(-0.46)},${Y(-0.08)} Q${X(-0.42)},${Y(0.16)} ${X(-0.36)},${Y(0.3)}`, stroke: C.margin, fill: "none", "stroke-width": 1.2 }, ob)
+  el("path", { d: `M${X(-0.14)},${Y(-0.38)} Q${X(-0.2)},${Y(-0.1)} ${X(-0.12)},${Y(0.15)}`, stroke: C.margin, fill: "none", "stroke-width": 1.2 }, ob)
+  el("path", { d: `M${X(-0.36)},${Y(0.3)} Q${X(-0.1)},${Y(0.6)} ${X(0.1)},${Y(0.74)}`, stroke: C.margin, fill: "none", "stroke-width": 1, "stroke-dasharray": "3 3" }, ob)
+  // the long fold (valley)
+  el("path", { d: `M${X(-0.64)},${Y(-0.46)} L${X(0.4)},${Y(0.14)}`, stroke: "rgba(91,88,101,.35)", "stroke-width": 1.2, "stroke-dasharray": "10 5" }, ob)
+  // workshop: five forms, paper -> porcelain
+  const shop = [[-0.25, -0.33], [-0.17, -0.29], [-0.09, -0.25], [-0.01, -0.21], [0.07, -0.17]]
+  shop.forEach(([x, y], i) => {
+    const t = i / 4
+    el("rect", { x: X(x) - 7, y: Y(y) - 7, width: 14, height: 14, rx: 2 + i, fill: i < 4 ? "#fbf7ee" : C.porcelain, stroke: i < 3 ? "rgba(28,27,33,.35)" : C.toast, transform: `rotate(${i * 18} ${X(x)} ${Y(y)})`, opacity: 0.85 + t * 0.15 }, ob)
+  })
+  // bench (local models, paused)
+  el("rect", { x: X(0.155) - 10, y: Y(-0.26) - 4, width: 20, height: 8, fill: "#e8dfcf", stroke: "rgba(28,27,33,.3)" }, ob)
+  // MathView
+  const mv = g(ob, { transform: `translate(${X(0.4)},${Y(0.31)}) rotate(18)` })
+  el("rect", { x: -0.15 * S, y: -0.13 * S, width: 0.3 * S, height: 0.26 * S, rx: 6, fill: C.celadon, stroke: "#5f8a76" }, mv)
+  for (let i = 1; i < 5; i++) el("ellipse", { cx: 6, cy: -4, rx: i * 10, ry: i * 7, fill: "none", stroke: "rgba(242,182,90,.8)", "stroke-width": 1 }, mv)
+  el("rect", { x: X(0.54) - 9, y: Y(0.09) - 4, width: 18, height: 8, fill: "#fbf7ee", stroke: "rgba(28,27,33,.35)" }, ob) // the card
+  // Tournamently bracket: 8 -> 4 -> 2 -> 1, rotated 18°
+  const br = g(ob, { transform: `translate(${X(0.5)},${Y(-0.02)}) rotate(-18)` })
+  ;[8, 4, 2, 1].forEach((n, r) => {
+    for (let k = 0; k < n; k++) {
+      const spread = 0.036 * 2 ** r
+      const yy = (k - (n - 1) / 2) * spread
+      const s = (r < 3 ? 0.026 : 0.034) * S
+      el("rect", { x: r * 0.05 * S - 0.013 * S, y: yy * S - s / 2, width: 0.026 * S, height: s, rx: 1.5, fill: C.terracotta, stroke: "#7d4128", opacity: 0.7 + r * 0.1 }, br)
+    }
+  })
+  el("circle", { cx: 0.15 * S, cy: 0, r: 3.2, fill: "#e6e1a0", stroke: "#8a8650" }, br)
+  // Sport Coach dial
+  el("circle", { cx: X(0.66), cy: Y(0.24), r: 0.07 * S, fill: C.ink }, ob)
+  for (let i = 0; i < 12; i++) { const a = (i / 12) * Math.PI * 2; el("line", { x1: X(0.66) + Math.cos(a) * 17, y1: Y(0.24) + Math.sin(a) * 17, x2: X(0.66) + Math.cos(a) * 23, y2: Y(0.24) + Math.sin(a) * 23, stroke: C.porcelain, "stroke-width": 1.4 }, ob) }
+  // free slots on the toasted ring
+  for (const th of [-62, -104, 22]) { const a = (th * Math.PI) / 180; el("circle", { cx: X(0.45 + 0.36 * Math.cos(a)), cy: Y(0.18 + 0.36 * Math.sin(a)), r: 9, fill: "rgba(251,247,238,.85)", stroke: C.toast, "stroke-dasharray": "3 2", "stroke-width": 1.4 }, ob) }
+  // classroom: rows of small pieces + the pattern sheet
+  el("rect", { x: X(0.64), y: Y(0.69), width: 0.1 * S, height: 0.05 * S, fill: "#fbf7ee", stroke: "rgba(28,27,33,.35)" }, ob)
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) {
+    const x = 0.66 + c * 0.055, y = 0.6 - r * 0.045, crooked = r === 0 && c === 3
+    el("path", { d: `M${X(x) - 5},${Y(y) + 4} L${X(x)},${Y(y) - 5} L${X(x) + 5},${Y(y) + 4} Z`, fill: C.paper2, stroke: crooked ? C.margin : "rgba(28,27,33,.4)", transform: crooked ? `rotate(24 ${X(x)} ${Y(y)})` : "" }, ob)
+  }
+  // dog-ear ramp
+  el("path", { d: `M${X(0.86)},${Y(0.7)} L${X(1.0)},${Y(0.56)} L${X(1.13)},${Y(0.69)} L${X(0.99)},${Y(0.83)} Z`, fill: "#e2d8c6", stroke: "rgba(28,27,33,.4)" }, ob)
+  el("path", { d: `M${X(0.86)},${Y(0.7)} L${X(1.0)},${Y(0.56)}`, stroke: C.soft, "stroke-dasharray": "4 3" }, ob)
+  // the note and the pencil on the desk
+  const note = g(ob, { transform: `translate(${X(1.24)},${Y(0.36)}) rotate(-8)` })
+  el("rect", { x: -22, y: -30, width: 44, height: 60, rx: 2, fill: C.paper2 }, note)
+  for (let i = 0; i < 6; i++) el("line", { x1: -18, y1: -20 + i * 9, x2: 18, y2: -20 + i * 9, stroke: C.rule }, note)
+  el("line", { x1: -14, y1: -30, x2: -14, y2: 30, stroke: "rgba(154,59,42,.6)" }, note)
+  el("line", { x1: X(1.33), y1: Y(0.5), x2: X(1.58), y2: Y(0.42), stroke: C.lamp, "stroke-width": 6, "stroke-linecap": "round" }, ob)
+  el("line", { x1: X(1.33), y1: Y(0.5), x2: X(1.355), y2: Y(0.492), stroke: "#c9a27a", "stroke-width": 6 }, ob)
+  // the lamp: foot on the desk, arm in the air, head over the circle
+  el("path", { d: `M${X(1.38)},${Y(0.14)} L${X(1.3)},${Y(0.34)} L${X(0.47)},${Y(0.2)}`, stroke: "rgba(31,44,74,.55)", "stroke-width": 3, fill: "none", "stroke-dasharray": "8 5" }, ob)
+  el("circle", { cx: X(1.38), cy: Y(0.14), r: 0.11 * S, fill: C.lamp, stroke: "#33456e", "stroke-width": 2 }, ob)
+  el("circle", { cx: X(0.47), cy: Y(0.2), r: 13, fill: "none", stroke: "rgba(31,44,74,.6)", "stroke-width": 3 }, ob)
+  el("circle", { cx: X(0.47), cy: Y(0.2), r: 5, fill: "#fff3d6", filter: "url(#glow)" }, ob)
+
+  // Scope's places, on the blank paper beyond the margin
+  const sp = g(svg, { "pointer-events": "none" })
+  for (const pts of [[[-1.04, -0.4], [-0.98, -0.42], [-0.86, -0.4], [-0.72, -0.37], [-0.6, -0.35], [-0.53, -0.34]], [[-0.78, -0.39], [-0.76, -0.22], [-0.73, -0.02], [-0.7, 0.1]], [[-1.06, -0.5], [-1.08, -0.57], [-1.1, -0.62]]])
+    el("path", { d: smooth(pts.map(([x, y]) => [X(x), Y(y)])), stroke: "rgba(43,42,46,.45)", "stroke-width": 4, fill: "none", "stroke-dasharray": "1 5", "stroke-linecap": "round" }, sp)
+  const lp = []
+  for (let j = 0; j < 20; j++) { const a = (j / 20) * Math.PI * 2, r = j % 2 ? 0.122 : 0.14; lp.push(`${X(-1.2 + r * Math.cos(a)).toFixed(1)},${Y(-0.4 + r * Math.sin(a)).toFixed(1)}`) }
+  el("polygon", { points: lp.join(" "), fill: "#fbf1dc", stroke: "#c9a46a", "stroke-width": 1.4 }, sp)
+  el("circle", { cx: X(-1.2), cy: Y(-0.4), r: 0.08 * S, fill: "rgba(242,182,90,.35)" }, sp)
+  el("path", { d: `M${X(-1.065)},${Y(-0.36)} L${X(-1.065)},${Y(-0.44)}`, stroke: C.paper, "stroke-width": 5 }, sp)
+  ;[0, 1, 2, 3].forEach((k) => el("rect", { x: X(-1.234 + k * 0.055), y: Y(-0.632), width: 0.052 * S, height: 0.056 * S, fill: k % 2 ? "#efe8da" : "#e6dece", stroke: "rgba(28,27,33,.45)" }, sp))
+  el("circle", { cx: X(0.1), cy: Y(0.3), r: 0.036 * S, fill: "rgba(220,235,240,.6)", stroke: "#7d8a92" }, sp)
+  ;[[-0.07, -0.02], [-0.05, 0.06], [0.03, 0.075]].forEach(([dx, dy]) => el("rect", { x: X(0.1 + dx) - 5, y: Y(0.3 + dy) - 1.5, width: 10, height: 3, fill: "#c9c3b8", transform: `rotate(${dx * 600} ${X(0.1 + dx)} ${Y(0.3 + dy)})` }, sp))
+  const lab = (x, y, t, anchor = "start") => txt(sp, X(x), Y(y), t, { "font-size": 11.5, "font-weight": 600, fill: C.margin, "text-anchor": anchor, ...sans })
+  lab(-1.39, -0.18, "linterna")
+  lab(-1.39, -0.76, "gabinete")
+  lab(0.02, 0.4, "radiómetro", "middle")
+  txt(sp, X(0.47), 18, "↑ atalaya (0,47 · 1,12)", { "font-size": 11, fill: C.margin, "text-anchor": "middle", ...mono })
+  txt(sp, 1090, 18, "lago de tinta ↗ a 6 m", { "font-size": 11, fill: C.soft, "text-anchor": "end", ...mono })
+  txt(sp, X(-1.06), Y(-0.86), "huellas ┄", { "font-size": 10.5, fill: C.soft, ...mono })
+
+  // route
+  const pts = STOPS.map(([, x, y]) => [X(x), Y(y)])
+  el("path", { d: smooth(pts), stroke: C.amber, "stroke-width": 3, fill: "none", "stroke-dasharray": "2 6", "stroke-linecap": "round", "pointer-events": "none" }, svg)
+  const st = g(svg, { "pointer-events": "none" })
+  STOPS.forEach(([id, x, y]) => {
+    el("circle", { cx: X(x), cy: Y(y), r: 9.5, fill: C.night, stroke: C.amber, "stroke-width": 1.6 }, st)
+    txt(st, X(x), Y(y) + 3.4, id, { "text-anchor": "middle", "font-size": 9.5, fill: C.amber, ...mono })
+  })
+  // hidden corners
+  CORNERS.forEach(([x, y, name]) => {
+    txt(st, X(x) + 11, Y(y) - 8, "✦", { "font-size": 15, fill: C.margin })
+  })
+  // zone labels
+  ZONES.forEach((z) => {
+    const [lx, ly] = z.label
+    const lg = g(st)
+    const dark = false
+    txt(lg, X(lx), Y(ly), `${z.id} · ${z.place}`, { "font-size": 13, "font-weight": 600, fill: dark ? "#efe8da" : C.ink, ...sans })
+  })
+  // scale bar
+  const sb = g(svg, { "pointer-events": "none" })
+  el("line", { x1: 24, y1: 698, x2: 24 + 0.5 * S, y2: 698, stroke: C.ink, "stroke-width": 2 }, sb)
+  txt(sb, 24, 690, "0,5 m", { "font-size": 11, fill: C.ink, ...mono })
+  scope(sb, 24 + 0.5 * S + 30, 704, 0.15 * S * 0.9)
+  txt(sb, 24 + 0.5 * S + 66, 698, "Scope, 15 cm", { "font-size": 11, fill: C.ink, ...mono })
+  txt(sb, 1090, 36, "fondo ↑", { "font-size": 11, fill: C.soft, "text-anchor": "end", ...mono })
+  txt(sb, X(0.25), Y(0.74), "rizo: se camina debajo", { "font-size": 10.5, fill: C.soft, "text-anchor": "middle", ...mono })
+  txt(sb, X(1.38), Y(0.14) + 4, "pie", { "font-size": 10.5, fill: "#cfd7ea", "text-anchor": "middle", ...mono })
+  txt(sb, X(1.0), Y(0.88), "esquina doblada", { "font-size": 10.5, fill: C.soft, ...mono })
+
+  // hover/focus -> highlight the zone card
+  const on = (id) => document.querySelectorAll(".zone").forEach((c) => c.classList.toggle("on", c.dataset.zone === String(id)))
+  zl.addEventListener("pointerover", (e) => e.target.dataset.zone && on(e.target.dataset.zone))
+  zl.addEventListener("focusin", (e) => e.target.dataset.zone && on(e.target.dataset.zone))
+  zl.addEventListener("pointerout", () => on(null))
+  zl.addEventListener("click", (e) => { const z = e.target.dataset.zone; if (z) document.getElementById(`zone-${z}`).scrollIntoView({ block: "center" }) })
+  zl.addEventListener("keydown", (e) => { const z = e.target.dataset.zone; if (z && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); document.getElementById(`zone-${z}`).scrollIntoView({ block: "center" }) } })
+})()
+
+// ------------------------------------------------------------------------- unrolled section
+;(function rings() {
+  const svg = document.getElementById("rings")
+  if (!svg) return
+  const d = defs(svg)
+  const cx = 280, cy = 230, R = (m) => 26 + 168 * Math.sqrt(m / 33)
+  el("rect", { width: 560, height: 420, rx: 8, fill: grad(d, "ringsky", [[0, "#3a3550"], [0.35, "#8a7f95"], [0.5, "#d9cbc0"], [1, "#e9e1d1"]]) }, svg)
+  el("circle", { cx, cy, r: R(33), fill: "rgba(222,214,201,.85)" }, svg)
+  // far ranges: two folded rings
+  for (const [m, h, n] of [[28, 10, 26], [15, 7, 22]]) {
+    let dd = ""
+    for (let i = 0; i <= n * 2; i++) { const a = (i / (n * 2)) * Math.PI * 2, rr = R(m) + (i % 2 ? h : -h * 0.3); dd += `${i ? "L" : "M"}${(cx + rr * Math.cos(a)).toFixed(1)},${(cy + rr * Math.sin(a)).toFixed(1)}` }
+    el("path", { d: dd + "Z", fill: "none", stroke: m > 20 ? "#8d8396" : "#a99f9a", "stroke-width": 1.5 }, svg)
+  }
+  el("circle", { cx, cy, r: R(10), fill: "rgba(239,232,218,.85)", stroke: "rgba(28,27,33,.2)", "stroke-dasharray": "4 4" }, svg)
+  el("circle", { cx, cy, r: R(2), fill: "#f3eee3", stroke: "rgba(28,27,33,.3)" }, svg)
+  // scattered blank sheets (instanced)
+  const rnd = (() => { let t = 7; return () => ((t = (t * 9301 + 49297) % 233280) / 233280) })()
+  for (let i = 0; i < 40; i++) { const a = rnd() * Math.PI * 2, m = 2.2 + rnd() * 7, r = R(m); el("rect", { x: cx + r * Math.cos(a) - 1.5, y: cy + r * Math.sin(a) - 4, width: 3, height: 8, fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)", "stroke-width": 0.6 }, svg) }
+  // the lake to the north-east (y up = away)
+  const la = -Math.atan2(5.6, 3.4), lr = R(6.6)
+  el("ellipse", { cx: cx + lr * Math.cos(la), cy: cy + lr * Math.sin(la), rx: 22, ry: 15, fill: "#16203a" }, svg)
+  // the sheet, the lamp and the lantern
+  el("rect", { x: cx - 11, y: cy - 8, width: 22, height: 16, fill: "#fbf7ee", stroke: C.margin, "stroke-width": 1 }, svg)
+  el("circle", { cx: cx + 6, cy: cy - 2, r: 5, fill: "rgba(242,182,90,.7)" }, svg)
+  el("circle", { cx: cx - 14, cy: cy + 4, r: 2.6, fill: "#f2b65a", filter: "url(#glow)" }, svg)
+  const lab = (x, y, t, s = 12, col = C.ink, w = 600) => txt(svg, x, y, t, { "font-size": s, "font-weight": w, fill: col, ...sans })
+  lab(cx - 28, cy + 36, "cercano · 0–2 m", 11.5)
+  lab(cx + R(5), cy + 12, "medio · 2–10 m", 11.5)
+  lab(cx + R(15) - 4, cy + R(15) * 0.55, "lejano · 12–33 m", 11.5)
+  lab(16, 26, "cielo por hora + franja de horizonte", 11.5, "#efe8da")
+  lab(cx + lr * Math.cos(la) + 26, cy + lr * Math.sin(la) + 4, "lago de tinta", 11, C.ink, 500)
+  txt(svg, 16, 404, "radio en raíz cuadrada: lo cercano, ampliado", { "font-size": 10.5, fill: C.soft, ...mono })
+})()
+
+;(function unrolled() {
+  const svg = document.getElementById("unrolled")
+  const d = defs(svg)
+  // cumulative distance along the route
+  const cum = [0]
+  for (let i = 1; i < STOPS.length; i++) cum.push(cum[i - 1] + Math.hypot(STOPS[i][1] - STOPS[i - 1][1], STOPS[i][2] - STOPS[i - 1][2]))
+  const total = cum[cum.length - 1] + 0.35
+  const L = 30, Wd = 1040, H = 175, ground = 330
+  const X = (m) => L + (m / total) * Wd
+  const span = {}
+  STOPS.forEach(([, , , z], i) => { span[z] = span[z] || [cum[i], cum[i]]; span[z][1] = cum[i] })
+  const bounds = ZONES.map((z, i) => {
+    const a = i === 0 ? 0 : (span[z.id][0] + span[ZONES[i - 1].id][1]) / 2
+    const b = i === ZONES.length - 1 ? total : (span[z.id][1] + span[ZONES[i + 1].id][0]) / 2
+    return [a, b]
+  })
+  const skies = [["#0b1220", "#3a3b58"], ["#4b4a66", "#d9b9a6"], ["#b9c8d8", "#ece5d6"], ["#f4dfb4", "#f6ead2"], ["#3b2a16", "#7a5428"], ["#d77a4a", "#f1c08f"], ["#0b1220", "#1b2540"]]
+  ZONES.forEach((z, i) => {
+    const [a, b] = bounds[i]
+    el("rect", { x: X(a), y: 44, width: X(b) - X(a), height: ground - 44, fill: grad(d, `sky${i}`, [[0, skies[i][0]], [1, skies[i][1]]]) }, svg)
+    const ly = i % 2 ? 32 : 15, darkSky = [0, 1, 4, 6].includes(i)
+    txt(svg, X(a) + 3, ly, `${z.id} · ${z.place}`, { "font-size": 11.5, "font-weight": 600, fill: C.ink, ...sans })
+    el("line", { x1: X(a) + 1, y1: ly - 10, x2: X(a) + 1, y2: 44, stroke: "rgba(28,27,33,.3)" }, svg)
+    if (X(b) - X(a) > 140) txt(svg, X(a) + 8, 62, z.time, { "font-size": 10.5, fill: darkSky ? "rgba(239,232,218,.8)" : C.soft, ...mono })
+  })
+  // ground: paper on the sheet, lacquer on the desk (zone 5 floor and zone 7)
+  ZONES.forEach((z, i) => {
+    const [a, b] = bounds[i]
+    el("rect", { x: X(a), y: ground, width: X(b) - X(a), height: 10, fill: z.id === 5 || z.id === 7 ? "#16203a" : "#e3d9c6" }, svg)
+  })
+  const at = (zid, f) => { const [a, b] = bounds[zid - 1]; return X(a + (b - a) * f) }
+  const h = (m) => m * H
+  const art = g(svg)
+  // 1: the margin — the unwritten question and the cut-out hole
+  el("rect", { x: at(1, 0.55), y: ground - h(0.12), width: 12, height: h(0.12), fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)" }, art)
+  // 2: the gallery arches, then the lookout
+  for (let k = 0; k < 6; k++) { const x = at(2, 0.08 + k * 0.12); el("path", { d: `M${x},${ground} q${14},${-h(0.24)} ${28},0`, stroke: "#fbf7ee", "stroke-width": 4, fill: "none" }, art) }
+  el("rect", { x: at(2, 0.84), y: ground - h(0.09), width: 34, height: h(0.09), fill: "#e8dfcf", stroke: "rgba(28,27,33,.3)" }, art)
+  // 3: the field (tall books) and the workshop (folding forms)
+  ;[[0.08, 0.52], [0.2, 0.48], [0.33, 0.54], [0.45, 0.44]].forEach(([f, m]) => el("rect", { x: at(3, f), y: ground - h(m), width: 16, height: h(m), fill: "#fbf7ee", stroke: "rgba(28,27,33,.35)" }, art))
+  for (let k = 0; k < 5; k++) { const x = at(3, 0.62 + k * 0.075); el("path", { d: `M${x},${ground} l8,${-h(0.05 + k * 0.012)} l8,${h(0.05 + k * 0.012)} Z`, fill: k < 4 ? "#fbf7ee" : C.porcelain, stroke: k < 3 ? "rgba(28,27,33,.35)" : C.toast }, art) }
+  // 4: the circle — the lamp head above like a sun, bracket steps, dial, MathView wave
+  const lx = at(4, 0.5)
+  el("circle", { cx: lx, cy: ground - h(1.25) + 8, r: 26, fill: "#fff3d6", filter: "url(#soft)", opacity: 0.9 }, art)
+  el("circle", { cx: lx, cy: ground - h(1.25) + 8, r: 9, fill: "#fff8e6" }, art)
+  el("path", { d: `M${lx - 9},${ground - h(1.25) + 14} L${lx - 120},${ground} L${lx + 120},${ground} L${lx + 9},${ground - h(1.25) + 14} Z`, fill: "rgba(242,182,90,.13)" }, art)
+  ;[0.012, 0.028, 0.044, 0.06].forEach((m, k) => el("rect", { x: at(4, 0.12 + k * 0.06), y: ground - h(m), width: 14, height: h(m), fill: C.terracotta }, art))
+  el("rect", { x: at(4, 0.42), y: ground - 5, width: 34, height: 5, rx: 2, fill: C.ink }, art)
+  el("path", { d: `M${at(4, 0.62)},${ground} q20,-16 40,-6 t40,-2 l0,8 Z`, fill: C.celadon, stroke: "#5f8a76" }, art)
+  // 5: the curl vault
+  const c0 = at(5, 0.05), c1 = at(5, 0.95)
+  el("path", { d: `M${c0},${ground} C${c0 + 10},${ground - h(0.36)} ${c1 - 20},${ground - h(0.36)} ${c1},${ground - h(0.22)} q14,${-h(0.08)} 4,${-h(0.12)} q-12,0 -10,${h(0.08)}`, stroke: "#f0e2c4", "stroke-width": 4, fill: "none" }, art)
+  el("path", { d: `M${c0},${ground} C${c0 + 10},${ground - h(0.36)} ${c1 - 20},${ground - h(0.36)} ${c1},${ground - h(0.22)} L${c1},${ground} Z`, fill: "rgba(242,182,90,.18)" }, art)
+  for (let k = 0; k < 4; k++) { const x = at(5, 0.25 + k * 0.16); el("line", { x1: x, y1: ground - h(0.3), x2: x, y2: ground - h(0.18), stroke: C.margin }, art); el("rect", { x: x - 6, y: ground - h(0.18), width: 12, height: 15, fill: "#fbf7ee" }, art) }
+  // 6: the classroom
+  for (let k = 0; k < 7; k++) { const x = at(6, 0.12 + k * 0.11); el("path", { d: `M${x},${ground} l5,-9 l5,9 Z`, fill: C.paper2, stroke: k === 3 ? C.margin : "rgba(28,27,33,.4)", transform: k === 3 ? `rotate(20 ${x + 5} ${ground - 4})` : "" }, art) }
+  el("rect", { x: at(6, 0.02), y: ground - h(0.3), width: 22, height: h(0.3), fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)" }, art)
+  // 7: the ramp down, the lamp foot and its arm, the note
+  el("path", { d: `M${at(7, 0.02)},${ground - 3} L${at(7, 0.18)},${ground + 6}`, stroke: "#e2d8c6", "stroke-width": 4 }, art)
+  const fx = at(7, 0.7)
+  el("path", { d: `M${fx - 30},${ground} q30,${-h(0.14)} 60,0 Z`, fill: "#2b3d66", stroke: "#6d82b5" }, art)
+  el("line", { x1: fx, y1: ground - h(0.1), x2: fx - 30, y2: 46, stroke: "#2b3d66", "stroke-width": 7 }, art)
+  el("rect", { x: at(7, 0.36), y: ground - 2, width: 30, height: 3, fill: C.paper2 }, art)
+  el("ellipse", { cx: at(7, 0.42), cy: ground - 2, rx: 70, ry: 12, fill: "rgba(242,182,90,.2)" }, art)
+  // Scope for scale
+  ;[[1, 0.3], [2, 0.5], [3, 0.55], [4, 0.84], [5, 0.5], [6, 0.6], [7, 0.3]].forEach(([z, f]) => scope(art, at(z, f), ground, h(0.15) * 0.92))
+  // openness curve
+  const open = { 1: 0.6, 2: 0.25, 3: 1.0, 4: 0.85, 5: 0.2, 6: 0.4, 7: 0.7 }
+  const top = 372, bot = 452
+  const ptsO = []
+  ZONES.forEach((z, i) => { const [a, b] = bounds[i]; ptsO.push([X(a + (b - a) * 0.15), bot - open[z.id] * (bot - top)], [X(a + (b - a) * 0.85), bot - open[z.id] * (bot - top)]) })
+  el("path", { d: smooth([[X(0), bot], ...ptsO, [X(total), bot]]) + ` L${X(total)},${bot} L${X(0)},${bot} Z`, fill: "rgba(242,182,90,.25)", stroke: C.amber, "stroke-width": 1.5 }, svg)
+  txt(svg, L, top - 8, "abierto", { "font-size": 10.5, fill: C.soft, ...mono })
+  txt(svg, L, bot + 14, "íntimo", { "font-size": 10.5, fill: C.soft, ...mono })
+  txt(svg, L + Wd, bot + 14, `≈ ${cum[cum.length - 1].toFixed(1).replace(".", ",")} m entre paradas`, { "font-size": 10.5, fill: C.soft, "text-anchor": "end", ...mono })
+})()
+
+// ------------------------------------------------------------------------- zone vignettes
+function vignette(svg, z) {
+  const W = 320, H = 180
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`)
+  const d = defs(svg)
+  const horizon = 92
+  const sky = {
+    1: [["0", "#0b1220"], ["1", "#2b2f4a"]], 2: [["0", "#3f3e5a"], ["1", "#d6b6a2"]], 3: [["0", "#aebfd2"], ["1", "#ece5d6"]],
+    4: [["0", "#f2dcae"], ["1", "#f7ecd6"]], 5: [["0", "#2a1e10"], ["1", "#5a3d1e"]], 6: [["0", "#c9643a"], ["1", "#f0bb87"]], 7: [["0", "#070b16"], ["1", "#141d33"]],
+  }[z.id]
+  el("rect", { width: W, height: H, fill: grad(d, `vs${z.id}`, sky) }, svg)
+  const floorFill = z.id === 7 ? "#111a30" : z.id === 5 ? "#16203a" : z.id === 1 ? "#a9a3a0" : "#e6dccb"
+  el("rect", { y: horizon, width: W, height: H - horizon, fill: floorFill }, svg)
+  if (z.id !== 7 && z.id !== 5) {
+    for (let k = 1; k < 9; k++) { const y = horizon + (H - horizon) * (k / 9) ** 1.7; el("line", { x1: 0, y1: y, x2: W, y2: y, stroke: z.id === 1 ? "rgba(60,70,100,.35)" : C.rule }, svg) }
+  }
+  const G = g(svg)
+  switch (z.id) {
+    case 1: {
+      el("path", { d: `M40,${H} L120,${horizon}`, stroke: C.margin, "stroke-width": 2, opacity: 0.7 }, G)
+      el("circle", { cx: 268, cy: 26, r: 18, fill: "#fff3d6", filter: "url(#soft)", opacity: 0.8 }, G)
+      el("circle", { cx: 268, cy: 26, r: 6, fill: "#fff8e6" }, G)
+      el("path", { d: `M200,140 q8,-34 26,-34 q18,0 26,34 Z`, fill: "#5a5560", opacity: 0.8 }, G)
+      txt(G, 196, 160, "el hueco", { "font-size": 8.5, fill: "rgba(239,232,218,.7)", ...mono })
+      el("rect", { x: 70, y: 102, width: 14, height: 18, fill: "#e6e0d4", opacity: 0.9 }, G)
+      txt(G, 72, 113, "···", { "font-size": 8, fill: C.ink })
+      el("ellipse", { cx: 150, cy: 150, rx: 60, ry: 14, fill: "rgba(242,182,90,.18)" }, G)
+      scope(G, 150, 152, 46, { look: 0.3 })
+      break
+    }
+    case 2: {
+      for (let k = 5; k >= 0; k--) {
+        const s = 1 - k * 0.13, cx = 160, w = 230 * s, top = horizon - 70 * s, base = horizon + 64 * s
+        el("path", { d: `M${cx - w / 2},${base} L${cx - w / 2},${top + 26 * s} Q${cx},${top - 14 * s} ${cx + w / 2},${top + 26 * s} L${cx + w / 2},${base}`, stroke: "#fbf7ee", "stroke-width": 7 * s, fill: "none", opacity: 0.6 + (5 - k) * 0.07 }, G)
+        el("path", { d: `M${cx - w / 2},${top + 26 * s} Q${cx},${top - 14 * s} ${cx + w / 2},${top + 26 * s}`, stroke: "rgba(154,59,42,.5)", "stroke-width": 1, fill: "none" }, G)
+      }
+      ;[[62, 0.8], [96, 0.92], [224, 0.92], [258, 0.8]].forEach(([x, s], i) => {
+        el("rect", { x: x - 14 * s, y: 150 - 54 * s, width: 28 * s, height: 54 * s, fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)", transform: i === 3 ? `rotate(-60 ${x} 150)` : "" }, G)
+        for (let l = 0; l < 4; l++) el("line", { x1: x - 9 * s, y1: 150 - 46 * s + l * 9 * s, x2: x + 9 * s, y2: 150 - 46 * s + l * 9 * s, stroke: "rgba(43,42,46,.45)", "stroke-width": 0.8, transform: i === 3 ? `rotate(-60 ${x} 150)` : "" }, G)
+      })
+      scope(G, 160, 156, 40, { look: -0.4 })
+      break
+    }
+    case 3: {
+      ;[[30, 40, 66], [86, 30, 58], [232, 34, 70], [282, 26, 54]].forEach(([x, w, hh]) => el("rect", { x, y: horizon + 8 - hh, width: w, height: hh, fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)" }, G))
+      el("path", { d: `M50,${horizon - 30} Q160,${horizon - 60} 250,${horizon - 20}`, stroke: C.margin, fill: "none", "stroke-width": 1.2 }, G)
+      ;[0, 1, 2, 3, 4].forEach((k) => {
+        const x = 90 + k * 34, y = 158
+        el("path", { d: `M${x - 13},${y} L${x},${y - 14 - k * 4} L${x + 13},${y} Z`, fill: k < 4 ? "#fbf7ee" : C.porcelain, stroke: k < 3 ? "rgba(28,27,33,.35)" : C.toast, "stroke-width": k === 4 ? 1.6 : 1 }, G)
+      })
+      txt(G, 88, 174, "plana → marcada → plegada → tostada → cocida", { "font-size": 7.5, fill: C.soft, ...mono })
+      scope(G, 60, 160, 34, { look: 0.6 })
+      break
+    }
+    case 4: {
+      el("ellipse", { cx: 160, cy: 132, rx: 150, ry: 40, fill: "rgba(241,235,223,.9)", stroke: "rgba(107,68,35,.6)", "stroke-width": 6 }, G)
+      el("path", { d: `M40,40 L120,132 L200,132 Z`, fill: "rgba(242,182,90,.0)" }, G)
+      el("path", { d: `M150,128 q24,-26 52,-12 t50,-4 l0,18 l-102,6 Z`, fill: C.celadon, stroke: "#5f8a76" }, G)
+      for (let k = 0; k < 3; k++) el("path", { d: `M${162 + k * 8},${124 - k * 3} q24,-${14 - k * 3} 46,-6`, stroke: C.amber, fill: "none", "stroke-width": 1, opacity: 0.9 }, G)
+      ;[0, 1, 2, 3].forEach((r) => { for (let k = 0; k < [4, 2, 1, 1][r]; k++) el("rect", { x: 44 + r * 18, y: 140 - r * 7 - k * 10, width: 13, height: 6 + r * 7, fill: C.terracotta, stroke: "#7d4128" }, G) })
+      el("circle", { cx: 104, cy: 108, r: 3, fill: "#e6e1a0" }, G)
+      el("ellipse", { cx: 268, cy: 138, rx: 20, ry: 7, fill: C.ink }, G)
+      el("ellipse", { cx: 26, cy: 120, rx: 9, ry: 4, fill: "rgba(251,247,238,.9)", stroke: C.toast, "stroke-dasharray": "2 2" }, G)
+      el("circle", { cx: 160, cy: 14, r: 18, fill: "#fff3d6", filter: "url(#soft)" }, G)
+      scope(G, 196, 120, 30, { look: -0.3 })
+      break
+    }
+    case 5: {
+      el("path", { d: `M0,${H} L0,60 C60,-6 260,-6 320,40 L320,${H} Z`, fill: grad(d, "vault", [["0", "#f4d39a"], ["1", "#b98a4c"]]), opacity: 0.95 }, G)
+      el("path", { d: `M0,60 C60,-6 260,-6 320,40`, stroke: "#fbe9c6", "stroke-width": 3, fill: "none" }, G)
+      for (let k = 0; k < 7; k++) el("path", { d: `M${30 + k * 40},${30 - Math.sin(k / 6 * Math.PI) * 10} l26,2`, stroke: "rgba(43,42,46,.35)", "stroke-width": 1.2 }, G)
+      ;[70, 130, 200, 262].forEach((x, k) => { el("line", { x1: x, y1: 22, x2: x, y2: 70 + k * 6, stroke: C.margin }, G); el("rect", { x: x - 11, y: 70 + k * 6, width: 22, height: 26, fill: "#fbf7ee", stroke: "rgba(28,27,33,.3)" }, G) })
+      el("rect", { y: 150, width: W, height: 30, fill: "#16203a" }, G)
+      scope(G, 160, 160, 38, { eyes: "up" })
+      break
+    }
+    case 6: {
+      el("rect", { x: 128, y: 34, width: 64, height: 58, fill: "#fbf7ee", stroke: "rgba(28,27,33,.35)" }, G)
+      el("path", { d: `M140,80 L160,46 L180,80 Z`, fill: "none", stroke: "rgba(43,42,46,.6)", "stroke-dasharray": "3 2" }, G)
+      for (let r = 0; r < 3; r++) for (let c = 0; c < 7; c++) {
+        const s = 0.7 + r * 0.18, x = 40 + c * 40 + (r % 2) * 10, y = 108 + r * 22, crooked = r === 2 && c === 4
+        el("path", { d: `M${x - 9 * s},${y + 8 * s} L${x},${y - 9 * s} L${x + 9 * s},${y + 8 * s} Z`, fill: C.paper2, stroke: crooked ? C.margin : "rgba(28,27,33,.45)", "stroke-width": crooked ? 1.6 : 1, transform: crooked ? `rotate(22 ${x} ${y})` : "" }, G)
+      }
+      scope(G, 230, 170, 30, { look: -0.7 })
+      break
+    }
+    case 7: {
+      el("path", { d: `M120,0 L40,${H} L300,${H} L176,0 Z`, fill: "rgba(242,182,90,.12)" }, G)
+      el("path", { d: `M222,${H - 6} q40,-48 80,0 Z`, fill: "#2b3d66", stroke: "#6d82b5" }, G)
+      el("line", { x1: 262, y1: 132, x2: 210, y2: 0, stroke: C.lamp, "stroke-width": 9 }, G)
+      el("path", { d: `M84,150 L170,146 L176,170 L82,176 Z`, fill: C.paper2 }, G)
+      for (let k = 0; k < 3; k++) el("line", { x1: 92, y1: 155 + k * 6, x2: 168, y2: 152 + k * 6, stroke: C.rule }, G)
+      el("line", { x1: 186, y1: 166, x2: 236, y2: 152, stroke: "#26365c", "stroke-width": 5, "stroke-linecap": "round" }, G)
+      el("path", { d: `M0,96 L60,${horizon + 4} L90,${H} L0,${H} Z`, fill: "#e2d8c6", opacity: 0.85 }, G)
+      scope(G, 128, 138, 34, { look: 0 })
+      break
+    }
+  }
+}
+;(function zones() {
+  const host = document.getElementById("zone-cards")
+  for (const z of ZONES) {
+    const card = document.createElement("article")
+    card.className = "zone"
+    card.id = `zone-${z.id}`
+    card.dataset.zone = z.id
+    const stops = STOPS.filter((s) => s[3] === z.id).map((s) => s[0]).join(" · ")
+    card.innerHTML = `
+      <svg role="img" aria-label="Boceto de ${z.place}: ${z.does.replace(/"/g, "")}"></svg>
+      <div class="body">
+        <p class="num">Zona ${z.id} · ${z.time}</p>
+        <h3>${z.name} <em>· ${z.place}</em></h3>
+        <dl>
+          <dt>Qué es</dt><dd>${z.does}</dd>
+          <dt>Contenido</dt><dd>${z.content}</dd>
+          <dt>Escala</dt><dd>${z.scale}</dd>
+          <dt>Reacciona</dt><dd>${z.react}</dd>
+          <dt>✦ Rincón</dt><dd>${z.corner}</dd>
+          <dt>Paradas</dt><dd>${stops}</dd>
+        </dl>
+      </div>`
+    host.appendChild(card)
+    vignette(card.querySelector("svg"), z)
+  }
+})()
+
+// ------------------------------------------------------------------------- installations
+;(function installations() {
+  const host = document.getElementById("installations")
+  const items = [
+    { t: "MathView · celadón", h: "La función que se pisa", chips: [["concept", "Representación del método"], ["real", "Producto real · 2 repositorios"], ["pending", "Demo: API caída"]],
+      p: "La pieza pasa a ser lo que MathView dibuja de verdad: la superficie |f(z)| de una función compleja, con el vidriado cambiando con la fase. Los ceros son hoyos y los polos, picos. Eliges entre unas pocas funciones y la pieza cambia con el mismo cálculo que hace su API (rejilla −2…2), recreado en el navegador. La demo real, cuando la API vuelva a estar en línea.",
+      draw: (svg) => { svg.setAttribute("viewBox", "0 0 300 160"); el("rect", { width: 300, height: 160, fill: "#f4e6c9" }, svg); el("path", { d: "M20,130 C70,60 120,70 150,95 S240,120 280,60 L280,140 L20,140 Z", fill: C.celadon, stroke: "#5f8a76" }, svg); for (let k = 0; k < 5; k++) el("path", { d: `M${30 + k * 10},${126 - k * 4} C${80},${70 + k * 6} ${130},${80 + k * 4} ${150},${100 - k} S${230},${120 - k * 3} ${270 - k * 6},${70 + k * 6}`, stroke: k === 2 ? C.amber : "rgba(255,240,200,.7)", "stroke-width": k === 2 ? 2.4 : 1, fill: "none" }, svg); el("circle", { cx: 150, cy: 96, r: 5, fill: C.amber, filter: "url(#glow)" }, svg); scope(svg, 182, 106, 26) } },
+    { t: "Tournamently · terracota", h: "Las gradas del cuadro", chips: [["engine", "Motor real · datos de ejemplo"], ["real", "Producto real (iframe)"]],
+      p: "Las gradas ya existen en el mundo aprobado: 8 → 4 → 2 → 1, cada ronda más alta, con la pelota en la final. Eliges ganadores y el cuadro lo resuelve resolveBracket, el motor real (src/lib/bracket.ts, puro y probado). «Abrir Tournamently» muestra tournamently.vercel.app, que hoy responde y se deja incrustar.",
+      draw: (svg) => { svg.setAttribute("viewBox", "0 0 300 160"); el("rect", { width: 300, height: 160, fill: "#f4e6c9" }, svg); [8, 4, 2, 1].forEach((n, r) => { for (let k = 0; k < n; k++) { const sp = 16 * 2 ** r, y = 80 + (k - (n - 1) / 2) * sp; el("rect", { x: 40 + r * 56, y: y - 6, width: 30, height: 12, rx: 2, fill: (r === 0 && k % 2 === 0) || (r === 1 && k === 0) || r > 1 ? C.terracotta : "#d9b49c", stroke: "#7d4128" }, svg) } }); el("circle", { cx: 223, cy: 80, r: 5, fill: "#e6e1a0", stroke: "#8a8650" }, svg); scope(svg, 255, 100, 24, { look: -0.5 }) } },
+    { t: "Sport Coach · negro tinta", h: "El dial", chips: [["real", "Producto real · repositorio"], ["pending", "Demo o capturas: pendientes"]],
+      p: "Ya está en el mundo. Hoy solo hay repositorio, así que se enlaza y nada del dial se presenta como función de la aplicación. Scope es la identidad de Sport Coach: el dial es su casa, y es el único sitio donde hace su Bounce sin que se lo pidas.",
+      draw: (svg) => { svg.setAttribute("viewBox", "0 0 300 160"); el("rect", { width: 300, height: 160, fill: "#f4e6c9" }, svg); el("ellipse", { cx: 150, cy: 112, rx: 92, ry: 30, fill: C.ink }, svg); for (let i = 0; i < 12; i++) { const a = (i / 12) * Math.PI * 2; el("line", { x1: 150 + Math.cos(a) * 70, y1: 112 + Math.sin(a) * 22, x2: 150 + Math.cos(a) * 84, y2: 112 + Math.sin(a) * 26, stroke: C.porcelain, "stroke-width": 2 }, svg) } scope(svg, 150, 112, 40) } },
+  ]
+  for (const it of items) {
+    const c = document.createElement("div")
+    c.className = "card"
+    c.innerHTML = `<svg role="img" aria-label="Boceto de la instalación ${it.h}"></svg><p class="t" style="margin-top:12px">${it.t}</p><b class="h">${it.h}</b><div class="chips">${it.chips.map(([k, s]) => `<span class="chip ${k}">${s}</span>`).join("")}</div><p>${it.p}</p>`
+    host.appendChild(c)
+    const svg = c.querySelector("svg"); defs(svg); it.draw(svg)
+  }
+})()
+
+// ------------------------------------------------------------------------- Tournamently storyboard
+;(function tm() {
+  const host = document.getElementById("tm-board")
+  const frames = [
+    { b: "1 · Te acercas", c: "Las gradas se despiertan: los partidos de cuartos se iluminan. Scope sube a la primera grada.", win: [], hl: [0, 1, 2, 3], scope: [0, 0] },
+    { b: "2 · Eliges ganadores", c: "Tocas un partido. resolveBracket decide quién pasa y a qué partido. Scope sube detrás de la pareja.", win: [[0, 0], [0, 2], [0, 5], [0, 6]], hl: [], scope: [1, 0] },
+    { b: "3 · Hay campeón", c: "El motor da el campeón. La final se enciende. Sello: «Motor real · datos de ejemplo».", win: [[0, 0], [0, 2], [0, 5], [0, 6], [1, 0], [1, 3], [2, 0]], hl: [], scope: [3, 0], champ: true },
+    { b: "4 · ✦ La pelota", c: "Scope empuja la pelota con la cara (Nudge). Rueda gradas abajo y el cuadro vuelve a empezar.", win: [], hl: [], scope: [3, 0], ball: true },
+  ]
+  for (const f of frames) {
+    const c = document.createElement("div")
+    c.className = "frame"
+    c.innerHTML = `<svg role="img" aria-label="${f.b}. ${f.c}"></svg><p class="cap"><b>${f.b}</b>${f.c}</p>`
+    host.appendChild(c)
+    const svg = c.querySelector("svg"); svg.setAttribute("viewBox", "0 0 300 188"); defs(svg)
+    el("rect", { width: 300, height: 188, fill: "#f3e3c3" }, svg)
+    const pos = (r, k, n) => [26 + r * 66, 94 + (k - (n - 1) / 2) * 20 * 2 ** r]
+    ;[8, 4, 2, 1].forEach((n, r) => {
+      for (let k = 0; k < n; k++) {
+        const [x, y] = pos(r, k, n)
+        const won = f.win.some(([wr, wk]) => wr === r && wk === k)
+        const lit = r === 0 && f.hl.includes(Math.floor(k / 2))
+        el("rect", { x, y: y - 7, width: 40, height: 14, rx: 2, fill: won ? C.terracotta : "#d9b49c", stroke: lit ? C.amber : "#7d4128", "stroke-width": lit ? 2 : 1 }, svg)
+        if (r === 3 && f.champ) el("rect", { x: x - 3, y: y - 10, width: 46, height: 20, rx: 3, fill: "none", stroke: C.amber, "stroke-width": 2, filter: "url(#glow)" }, svg)
+      }
+    })
+    const [sx, sy] = pos(f.scope[0], f.scope[1], [8, 4, 2, 1][f.scope[0]])
+    scope(svg, sx + 20, sy - 6, 22, { look: 0.2 })
+    if (f.ball) { el("path", { d: "M244,80 C220,120 160,150 70,160", stroke: C.soft, "stroke-dasharray": "3 3", fill: "none" }, svg); el("circle", { cx: 120, cy: 150, r: 5, fill: "#e6e1a0", stroke: "#8a8650" }, svg) }
+    else el("circle", { cx: pos(3, 0, 1)[0] + 20, cy: 80, r: 4.5, fill: "#e6e1a0", stroke: "#8a8650" }, svg)
+    txt(svg, 8, 180, "datos de ejemplo", { "font-size": 8.5, fill: C.soft, ...mono })
+  }
+})()
+
+// ------------------------------------------------------------------------- system diagram
+;(function system() {
+  const svg = document.getElementById("system")
+  const d = defs(svg)
+  const mk = el("marker", { id: "arr", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto" }, d)
+  el("path", { d: "M0,0 L10,5 L0,10 Z", fill: C.soft }, mk)
+  const box = (x, y, w, h, title, sub, fill = C.paper2, stroke = "rgba(28,27,33,.3)") => {
+    el("rect", { x, y, width: w, height: h, rx: 9, fill, stroke }, svg)
+    txt(svg, x + 14, y + 26, title, { "font-size": 15, "font-weight": 600, fill: C.ink, ...sans })
+    sub.forEach((s, i) => txt(svg, x + 14, y + 46 + i * 16, s, { "font-size": 11.5, fill: C.soft, ...mono }))
+  }
+  box(30, 92, 260, 150, "ProjectManifest", ["id · título · categoría · estado", "editorial · enlaces comprobados", "medios reales · experiencias", "instalación · peana · Scope · a11y"], "#fff8e8", C.amber)
+  const outs = [
+    ["Ficha HTML", "sellos · editorial · enlaces"],
+    ["Instalación", "arquetipo «pieza cocida» o módulo propio"],
+    ["Peana del círculo", "posición · suelo caminable · cámara"],
+    ["Scope", "al acercarse · al abrir · especial"],
+    ["Lectura y móvil", "misma ficha sin WebGL · pantalla completa"],
+  ]
+  outs.forEach(([t, s], i) => {
+    const y = 16 + i * 62
+    box(560, y, 300, 52, t, [s])
+    el("path", { d: `M290,167 C420,167 430,${y + 26} 556,${y + 26}`, stroke: C.soft, fill: "none", "marker-end": "url(#arr)" }, svg)
+  })
+  box(900, 92, 180, 150, "Añadir uno", ["1 · manifiesto", "2 · recursos reales", "3 · arquetipo o módulo", "4 · comprobación", "sin Blender"], "#eef3ee", "#2f6b4a")
+  el("path", { d: "M860,167 L896,167", stroke: C.soft, "marker-end": "url(#arr)" }, svg)
+})()
+
+// ------------------------------------------------------------------------- Scope: priorities, bands, timeline, gait
+;(function prio() {
+  const rows = [
+    [5, "Guion", "entrada · cierre del contacto · movimiento reducido", "#1c1b21", "#efe8da"],
+    [4, "Respuesta", "clic sobre él · proyecto abierto · nota abierta", "#3a3550", "#efe8da"],
+    [3, "Compañía", "reagrupar · cambio de zona · guiar · esperar", "#9a3b2a", "#fff"],
+    [2, "Curiosidad", "inspeccionar lo cercano · jugar con un objeto", "#c08a3e", "#1c1b21"],
+    [1, "Vida propia", "pasear sin alejarse · descansar", "#e8d3a8", "#1c1b21"],
+    [0, "Reposo", "idle: el estado dominante", "#f3eee3", "#1c1b21"],
+  ]
+  document.getElementById("prio").innerHTML = rows.map(([n, t, s, bg, fg]) => `<div style="background:${bg};color:${fg}"><b>${n}</b><b>${t}</b><span>${s}</span></div>`).join("")
+})()
+;(function bands() {
+  const svg = document.getElementById("bands")
+  defs(svg)
+  const cx = 190, cy = 175
+  el("rect", { width: 640, height: 330, rx: 6, fill: "#e9e1d1" }, svg)
+  ;[[150, "rgba(154,59,42,.10)", "perdido · > 0,9 m → reagrupar con prisa"], [104, "rgba(192,138,62,.16)", "tensa · 0,45–0,9 m → vuelve en 4–8 s"], [56, "rgba(47,107,74,.14)", "cómoda · 0,12–0,45 m → libre"], [16, "rgba(94,90,115,.25)", "< 0,12 m → se aparta (timidez)"]].forEach(([r, f, label], i) => {
+    el("ellipse", { cx, cy, rx: r * 1.15, ry: r * 0.95, fill: f, stroke: "rgba(28,27,33,.25)", "stroke-dasharray": i === 0 ? "4 4" : "" }, svg)
+    txt(svg, 372, 64 + i * 26, label, { "font-size": 11, fill: C.ink, ...mono })
+    el("line", { x1: 366, y1: 60 + i * 26, x2: cx + r * 1.15 * 0.7, y2: cy - r * 0.95 * 0.7, stroke: "rgba(28,27,33,.25)" }, svg)
+  })
+  el("circle", { cx, cy, r: 5, fill: C.amber, stroke: C.ink }, svg)
+  txt(svg, cx + 9, cy + 20, "ancla del visitante", { "font-size": 10.5, fill: C.soft, ...mono })
+  scope(svg, cx + 40, cy - 6, 26, { look: -0.4 })
+  scope(svg, cx - 130, cy + 70, 20, { look: 0.6 })
+  el("path", { d: `M${cx - 118},${cy + 56} Q${cx - 80},${cy + 10} ${cx - 30},${cy + 12}`, stroke: C.margin, "stroke-dasharray": "3 3", fill: "none" }, svg)
+  txt(svg, 20, 312, "Más de 3 s fuera de cuadro cuenta como «perdido», aunque esté cerca.", { "font-size": 10.5, fill: C.soft, ...mono })
+})()
+;(function timeline() {
+  const svg = document.getElementById("timeline")
+  const L = 150, R = 1080, T = (s) => L + (s / 4.5) * (R - L)
+  el("rect", { width: 1100, height: 250, rx: 6, fill: "#efe8da" }, svg)
+  const lanes = [["Visitante", 40], ["Cámara", 92], ["Scope · mirada", 144], ["Scope · cuerpo", 196]]
+  lanes.forEach(([n, y]) => { txt(svg, 16, y + 4, n, { "font-size": 12, "font-weight": 600, fill: C.ink, ...sans }); el("line", { x1: L, y1: y, x2: R, y2: y, stroke: "rgba(28,27,33,.12)" }, svg) })
+  for (let s = 0; s <= 4.5; s += 0.5) { el("line", { x1: T(s), y1: 18, x2: T(s), y2: 226, stroke: "rgba(28,27,33,.06)" }, svg); txt(svg, T(s), 242, `${String(s).replace(".", ",")} s`, { "font-size": 10, fill: C.soft, "text-anchor": "middle", ...mono }) }
+  const bar = (y, a, b, fill, label, dark) => { el("rect", { x: T(a), y: y - 12, width: T(b) - T(a), height: 24, rx: 5, fill }, svg); txt(svg, T(a) + 8, y + 4, label, { "font-size": 11, fill: dark ? "#fff" : C.ink, ...mono }) }
+  bar(40, 0, 0.25, C.amber, "→")
+  bar(40, 1.6, 4.5, "#e3d9c6", "lee o mira")
+  bar(92, 0, 1.2, "#5e5a73", "vuelo ≤ 1,2 s", true)
+  bar(92, 1.2, 4.5, "#e3d9c6", "asentada")
+  bar(144, 0, 0.9, "#c08a3e", "sigue el movimiento")
+  bar(144, 1.2, 2.4, "#c08a3e", "descubre / te mira")
+  bar(144, 2.4, 4.5, "#e3d9c6", "atención normal")
+  bar(196, 0.25, 0.6, "#9a3b2a", "impulso", true)
+  bar(196, 0.6, 1.5, "#9a3b2a", "trota con la cámara", true)
+  bar(196, 1.5, 2.6, "#3a3550", "LookAround (1.ª vez)", true)
+  bar(196, 2.6, 4.5, "#e3d9c6", "espera o curiosidad")
+  txt(svg, T(0.62), 222, "conoce la zona → se adelanta · nueva → va detrás, mirando", { "font-size": 10.5, fill: C.soft, ...mono })
+})()
+;(function gait() {
+  const svg = document.getElementById("gait")
+  el("rect", { width: 1100, height: 300, rx: 6, fill: "#efe8da" }, svg)
+  const L = 150, R = 1070, P = 0.29, Tt = 2 * P
+  const X = (t) => L + (t / Tt) * (R - L)
+  const lanes = [
+    ["hop (mm)", 46, (t) => { const ph = (t % P) / P; return ph > 0.15 && ph < 0.8 ? Math.sin(((ph - 0.15) / 0.65) * Math.PI) * 5 : 0 }, 5, C.margin],
+    ["squash", 106, (t) => { const ph = (t % P) / P; return ph < 0.15 ? -0.03 * Math.sin((ph / 0.15) * Math.PI) : ph > 0.8 ? -0.05 * Math.sin(((ph - 0.8) / 0.2) * Math.PI) : 0.01 * Math.sin(((ph - 0.15) / 0.65) * Math.PI) }, 0.05, "#3a3550"],
+    ["balanceo (°)", 166, (t) => 3.5 * Math.sin((t / Tt) * Math.PI * 2), 3.5, "#c08a3e"],
+    ["antena (°)", 226, (t) => 4 * Math.sin((t / Tt) * Math.PI * 2 - 0.9) * (0.7 + 0.3 * Math.sin((t / P) * Math.PI * 2)), 4, "#2f6b4a"],
+  ]
+  lanes.forEach(([n, y, f, amp, col]) => {
+    txt(svg, 16, y + 4, n, { "font-size": 12, fill: C.ink, ...mono })
+    el("line", { x1: L, y1: y, x2: R, y2: y, stroke: "rgba(28,27,33,.12)" }, svg)
+    let d = ""
+    for (let i = 0; i <= 200; i++) { const t = (i / 200) * Tt; d += `${i ? "L" : "M"}${X(t).toFixed(1)},${(y - (f(t) / amp) * 22).toFixed(1)}` }
+    el("path", { d, stroke: col, "stroke-width": 2, fill: "none" }, svg)
+  })
+  // feet lift bars
+  txt(svg, 16, 280, "patas", { "font-size": 12, fill: C.ink, ...mono })
+  for (let s = 0; s < 2; s++) {
+    el("rect", { x: X(s * P + 0.15 * P), y: 266, width: X(0.5 * P) - X(0), height: 7, rx: 3, fill: C.margin }, svg)
+    el("rect", { x: X(s * P + 0.25 * P), y: 276, width: X(0.5 * P) - X(0), height: 7, rx: 3, fill: "#c9a27a" }, svg)
+  }
+  txt(svg, X(0.45 * P), 262, "delanteras → traseras, 0,1 de ciclo después", { "font-size": 10, fill: C.soft, ...mono })
+  ;[0, P, 2 * P].forEach((t) => { el("line", { x1: X(t), y1: 18, x2: X(t), y2: 288, stroke: "rgba(28,27,33,.15)", "stroke-dasharray": "3 3" }, svg) })
+  txt(svg, X(P / 2), 16, "paso izquierdo · 0,29 s", { "font-size": 10.5, fill: C.soft, "text-anchor": "middle", ...mono })
+  txt(svg, X(1.5 * P), 16, "paso derecho", { "font-size": 10.5, fill: C.soft, "text-anchor": "middle", ...mono })
+})()
+
+// ------------------------------------------------------------------------- contact storyboard
+;(function contact() {
+  const host = document.getElementById("contact-board")
+  const frames = [
+    { b: "1 · Llegas", c: "Bajas por la esquina doblada. La lámpara ya ilumina la nota; Scope se pone al otro lado, de cara a ti. El panel HTML ya está a la vista." },
+    { b: "2 · Escribes", c: "Las líneas de la nota se llenan de grafito al ritmo de tus teclas, como reflejo abstracto: tu texto nunca se dibuja en el canvas." },
+    { b: "3 · Envías", c: "Solo cuando el servidor confirma (en producción). La nota se pliega sola y la luz de Scope la alcanza." },
+    { b: "4 · La nota cruza", c: "Se desliza por la mesa, sube la esquina doblada y cruza el pliego. Scope la sigue con la mirada." },
+    { b: "5 · Una pregunta nueva", c: "Queda de pie en el campo, junto a «· · ·». La lámpara baja. «Toda buena idea empieza con una conversación.» · Seguir explorando." },
+  ]
+  frames.forEach((f, i) => {
+    const c = document.createElement("div")
+    c.className = "frame"
+    c.innerHTML = `<svg role="img" aria-label="${f.b}. ${f.c}"></svg><p class="cap"><b>${f.b}</b>${f.c}</p>`
+    host.appendChild(c)
+    const svg = c.querySelector("svg"); svg.setAttribute("viewBox", "0 0 240 150"); const d = defs(svg)
+    const night = i === 4
+    el("rect", { width: 240, height: 150, fill: night ? "#060a14" : C.night }, svg)
+    if (i < 4) el("path", { d: "M100,0 L36,150 L230,150 L150,0 Z", fill: "rgba(242,182,90,.13)" }, svg)
+    if (i === 4) {
+      el("rect", { y: 86, width: 240, height: 64, fill: "#b7ad9c" }, svg)
+      for (let k = 1; k < 6; k++) el("line", { x1: 0, y1: 86 + k * 11, x2: 240, y2: 86 + k * 11, stroke: "rgba(60,70,100,.35)" }, svg)
+      ;[30, 70, 190].forEach((x, k) => el("rect", { x, y: 46 + k * 4, width: 18, height: 44 - k * 4, fill: "#e8e1d4" }, svg))
+      el("path", { d: "M118,92 l10,-26 l10,26 Z", fill: "#fbf7ee", stroke: C.amber, filter: "url(#glow)" }, svg)
+      el("rect", { x: 150, y: 74, width: 9, height: 14, fill: "#d8d1c4" }, svg); txt(svg, 151, 84, "···", { "font-size": 7, fill: C.ink })
+      scope(svg, 90, 120, 26, { look: 0.6 })
+      return
+    }
+    el("path", { d: "M176,146 q30,-36 60,0 Z", fill: C.lamp, stroke: "#33456e" }, svg)
+    el("line", { x1: 206, y1: 116, x2: 168, y2: 0, stroke: C.lamp, "stroke-width": 7 }, svg)
+    if (i === 0) el("path", { d: "M0,78 L46,84 L66,150 L0,150 Z", fill: "#e2d8c6", opacity: 0.85 }, svg)
+    if (i <= 1) {
+      el("path", { d: "M56,112 L130,108 L134,130 L54,134 Z", fill: C.paper2 }, svg)
+      for (let k = 0; k < 3; k++) el("line", { x1: 62, y1: 116 + k * 5, x2: i === 1 ? 62 + [62, 48, 22][k] : 66, y2: 114 + k * 5, stroke: i === 1 ? "#4a4850" : C.rule, "stroke-width": i === 1 ? 1.4 : 1 }, svg)
+      el("line", { x1: 142, y1: 128, x2: 180, y2: 118, stroke: "#26365c", "stroke-width": 4, "stroke-linecap": "round" }, svg)
+      scope(svg, 96, 100, 26, { look: i === 1 ? -0.5 : 0 })
+    }
+    if (i === 2) {
+      el("path", { d: "M84,124 l14,-18 l14,18 Z", fill: C.paper2, stroke: C.amber, "stroke-width": 1.4, filter: "url(#glow)" }, svg)
+      el("path", { d: "M70,96 L94,114", stroke: "rgba(242,182,90,.6)", "stroke-width": 6, "stroke-linecap": "round", filter: "url(#soft)" }, svg)
+      scope(svg, 60, 108, 26, { look: 0.5 })
+    }
+    if (i === 3) {
+      el("path", { d: "M150,130 C110,128 70,110 30,64", stroke: C.amber, "stroke-dasharray": "3 4", fill: "none" }, svg)
+      el("path", { d: "M30,70 l8,-12 l8,12 Z", fill: C.paper2, stroke: C.amber }, svg)
+      el("path", { d: "M0,58 L40,64 L54,150 L0,150 Z", fill: "#e2d8c6", opacity: 0.6 }, svg)
+      scope(svg, 140, 128, 26, { look: -0.8 })
+    }
+  })
+})()
+
+// ------------------------------------------------------------------------- streaming diagram
+;(function stream() {
+  const svg = document.getElementById("stream")
+  el("rect", { width: 1100, height: 200, rx: 6, fill: "#efe8da" }, svg)
+  const state = { 1: "núcleo", 2: "núcleo", 3: "cargada", 4: "aquí", 5: "precargando", 6: "silueta", 7: "silueta" }
+  const style = { núcleo: ["#1c1b21", "#efe8da"], cargada: ["#2f6b4a", "#fff"], aquí: ["#f2b65a", "#1c1b21"], precargando: ["#e8d3a8", "#1c1b21"], silueta: ["#efe8da", "#5b5865"] }
+  el("line", { x1: 90, y1: 92, x2: 1010, y2: 92, stroke: C.amber, "stroke-width": 3, "stroke-dasharray": "2 6", "stroke-linecap": "round" }, svg)
+  ZONES.forEach((z, i) => {
+    const x = 90 + i * (920 / 6), s = state[z.id], [bg, fg] = style[s]
+    el("circle", { cx: x, cy: 92, r: 34, fill: bg, stroke: s === "silueta" ? "#5b5865" : "none", "stroke-dasharray": s === "silueta" ? "4 3" : "" }, svg)
+    txt(svg, x, 97, String(z.id), { "font-size": 20, "font-weight": 600, fill: fg, "text-anchor": "middle", ...sans })
+    txt(svg, x, 146, z.place, { "font-size": 11.5, fill: C.ink, "text-anchor": "middle", ...sans })
+    txt(svg, x, 164, s, { "font-size": 10.5, fill: C.soft, "text-anchor": "middle", ...mono })
+  })
+  txt(svg, 20, 28, "El visitante está en el círculo (4): el núcleo siempre está; las vecinas (3 y 5) se cargan; las demás se ven como siluetas.", { "font-size": 12, fill: C.soft, ...mono })
+})()
+</script>
+</body>
+</html>
