@@ -4,7 +4,7 @@
 
 import { NavGrid, findPath, type NavGridMeta } from "../../prototype/src/scope/nav.ts"
 import type { P2 } from "../world-def.ts"
-import type { Ground } from "./ground.ts"
+import type { Ground, Keepout } from "./ground.ts"
 
 export interface BakedMeta extends NavGridMeta {
   rules: { scopeRadius: number; ballRadius: number; scopeHeight: number; climb: number; cliff: number; slope: number }
@@ -74,9 +74,10 @@ export class BakedGround implements Ground {
     return new NavGrid(this.meta, this.base)
   }
 
-  path(from: P2, to: P2, ball: P2 | null): P2[] | null {
+  path(from: P2, to: P2, ball: P2 | null, avoid: readonly Keepout[] = []): P2[] | null {
     this.scratch.set(this.base)
     if (ball) this.stamp(this.scratch, ball, 0.03 + this.meta.rules.scopeRadius - 0.005)
+    for (const k of avoid) this.stamp(this.scratch, k.at, k.r)
     return findPath(new NavGrid(this.meta, this.scratch), from, to)
   }
 

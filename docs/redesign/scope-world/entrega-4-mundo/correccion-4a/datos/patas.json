@@ -1,0 +1,66 @@
+{
+ "7": {
+  "still": {
+   "n": 363,
+   "meanBodyCmS": 0,
+   "footSlideMedianCmS": 0.35,
+   "p90": 12.6
+  },
+  "walk": {
+   "n": 601,
+   "meanBodyCmS": 6.3,
+   "footSlideMedianCmS": 0.19,
+   "p90": 5.47
+  },
+  "bound": {
+   "n": 1069,
+   "meanBodyCmS": 16.4,
+   "footSlideMedianCmS": 10.48,
+   "p90": 18.35
+  },
+  "trot": {
+   "n": 552,
+   "meanBodyCmS": 12.3,
+   "footSlideMedianCmS": 1.25,
+   "p90": 11.22
+  },
+  "gather": {
+   "n": 188,
+   "meanBodyCmS": 1.2,
+   "footSlideMedianCmS": 0.01,
+   "p90": 0.33
+  }
+ },
+ "8": {
+  "still": {
+   "n": 284,
+   "meanBodyCmS": 0,
+   "footSlideMedianCmS": 0.37,
+   "p90": 1.58
+  },
+  "walk": {
+   "n": 570,
+   "meanBodyCmS": 6.4,
+   "footSlideMedianCmS": 0.18,
+   "p90": 4.74
+  },
+  "bound": {
+   "n": 1035,
+   "meanBodyCmS": 17.1,
+   "footSlideMedianCmS": 10.34,
+   "p90": 17.41
+  },
+  "trot": {
+   "n": 653,
+   "meanBodyCmS": 12.3,
+   "footSlideMedianCmS": 2.27,
+   "p90": 12.88
+  },
+  "gather": {
+   "n": 188,
+   "meanBodyCmS": 1.2,
+   "footSlideMedianCmS": 0.01,
+   "p90": 0.33
+  }
+ }
+}

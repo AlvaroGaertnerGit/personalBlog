@@ -1,0 +1,42 @@
+{
+  "when": "2026-10-16T12:05:15.437Z",
+  "checks": [
+    {
+      "name": "llegas y Scope está en casa: sale de su linterna a recibirte",
+      "ok": true,
+      "detail": "sale a los 0.12 s; ahora en -0.99, -0.40"
+    },
+    {
+      "name": "se pone en marcha contigo en cada tramo (< 0,8 s)",
+      "ok": true,
+      "detail": "0.17 · 0.17 · 0.77 · 0.03 · 0.03 s"
+    },
+    {
+      "name": "se adelanta a enseñarte los lugares que no has visto",
+      "ok": true,
+      "detail": "1:guía 2:guía 3:guía 4:— 5:guía"
+    },
+    {
+      "name": "enseña lo que ofrece cada lugar (gabinete, bola, flor, radiómetro)",
+      "ok": true,
+      "detail": "1:acto:gesture 2:acto:nudge 3:acto:shine 4:— 5:acto:shine"
+    },
+    {
+      "name": "la flor de las preguntas se abre con su luz",
+      "ok": true,
+      "detail": "apertura máx. 1.05"
+    },
+    {
+      "name": "sin teletransportes en todo el recorrido (nunca más rápido que su prisa)",
+      "ok": true,
+      "detail": "máx. 12.4 mm por paso de 1/30 s"
+    },
+    {
+      "name": "continuidad sobre las superficies (papel, pliego, plato): sin saltos de altura",
+      "ok": true,
+      "detail": "máx. 1.67 mm por paso; alturas pisadas -1…7 mm"
+    }
+  ],
+  "perf": [],
+  "console": []
+}

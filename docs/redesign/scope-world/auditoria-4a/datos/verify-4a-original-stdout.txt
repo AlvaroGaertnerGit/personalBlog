@@ -1,0 +1,30 @@
+PASS  llegas y Scope está en casa: sale de su linterna a recibirte  (sale a los 0.03 s; ahora en -0.99, -0.40)
+PASS  se pone en marcha contigo en cada tramo (< 0,8 s)  (0.17 · 0.17 · 0.77 · 0.77 · 0.03 s)
+PASS  se adelanta a enseñarte los lugares que no has visto  (1:guía 2:guía 3:guía 4:— 5:guía)
+PASS  enseña lo que ofrece cada lugar (gabinete, bola, flor, radiómetro)  (1:acto:gesture 2:acto:nudge 3:acto:shine 4:— 5:acto:shine)
+PASS  la flor de las preguntas se abre con su luz  (apertura máx. 1.05)
+PASS  sin teletransportes en todo el recorrido (nunca más rápido que su prisa)  (máx. 12.4 mm por paso de 1/30 s)
+PASS  continuidad sobre las superficies (papel, pliego, plato): sin saltos de altura  (máx. 1.67 mm por paso; alturas pisadas -1…7 mm)
+
+7/7 comprobaciones · C:\Users\Profesor\AppData\Local\Temp\claude\C--Users-Profesor-Documents-projects-portfolio-pers-personalBlog\ca61e27f-0adf-4c96-ba80-27997eb59038\scratchpad\verify4a
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.screenshot: Timeout 30000ms exceeded.
+Call log:
+[2m  - taking page screenshot[22m
+[2m  - waiting for fonts to load...[22m
+[2m  - fonts loaded[22m
+
+    at shot (C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\docs\redesign\scope-world\entrega-4-mundo\mundo\tools\verify.mjs:66:35)
+    at C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\docs\redesign\scope-world\entrega-4-mundo\mundo\tools\verify.mjs:137:11 {
+  log: [
+    '  - taking page screenshot',
+    '  - waiting for fonts to load...',
+    '  - fonts loaded'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

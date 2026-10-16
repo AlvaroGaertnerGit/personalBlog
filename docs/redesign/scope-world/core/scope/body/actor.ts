@@ -18,7 +18,7 @@ import { loadScope3DModel, type Scope3DModel } from "../../../../../../src/compo
 import { Scope3DSecondary } from "../../../../../../src/components/scope-3d/engine/scope-3d-secondary.ts"
 import { Presence } from "../../../prototype/src/scope/presence.ts"
 import { bl } from "../../../prototype/src/world/world-data.ts"
-import type { P2, Places, WorldDef } from "../../world-def.ts"
+import type { P2, Places, Refinements, WorldDef } from "../../world-def.ts"
 
 type WorldGaits = NonNullable<WorldDef["gaits"]>
 import type { Clip } from "../gestures.ts"
@@ -48,6 +48,10 @@ export interface ActorWorld {
   eye: P2
   /** Would you see him standing there (his head inside the frame)? */
   inView(at: P2): boolean
+  /** The world's opt-in refinements (WorldDef.refine). */
+  refine: Refinements
+  /** Where the cameras stand (now, and where you are going): kept clear with refine.cameraClearance. */
+  cameras: P2[]
 }
 
 class LayeredMorph {

@@ -1,0 +1,88 @@
+{
+  "4A": {
+    "out": {
+      "minHmm": [
+        17.36,
+        17.38,
+        17.38,
+        17.36
+      ],
+      "still": {
+        "n": 425,
+        "meanBodyCmS": 0,
+        "footSlideMedianCmS": 1.29,
+        "footSlideP90CmS": 18.91
+      },
+      "walk": {
+        "n": 240,
+        "meanBodyCmS": 5.7,
+        "footSlideMedianCmS": 0.13,
+        "footSlideP90CmS": 8.78
+      },
+      "bound": {
+        "n": 634,
+        "meanBodyCmS": 23.2,
+        "footSlideMedianCmS": 13.15,
+        "footSlideP90CmS": 17.96
+      },
+      "trot": {
+        "n": 913,
+        "meanBodyCmS": 11.7,
+        "footSlideMedianCmS": 3.93,
+        "footSlideP90CmS": 13.84
+      }
+    },
+    "readoutKeys": [
+      "mode",
+      "phase",
+      "squash",
+      "leanDeg",
+      "rollDeg",
+      "liftMm",
+      "range"
+    ]
+  },
+  "lab": {
+    "out": {
+      "minHmm": [
+        17.42,
+        17.42,
+        17.42,
+        17.42
+      ],
+      "still": {
+        "n": 800,
+        "meanBodyCmS": 0,
+        "footSlideMedianCmS": 0.92,
+        "footSlideP90CmS": 12.63
+      },
+      "bound": {
+        "n": 509,
+        "meanBodyCmS": 13.8,
+        "footSlideMedianCmS": 10.08,
+        "footSlideP90CmS": 15.05
+      },
+      "walk": {
+        "n": 574,
+        "meanBodyCmS": 6.6,
+        "footSlideMedianCmS": 0.15,
+        "footSlideP90CmS": 5.63
+      },
+      "trot": {
+        "n": 899,
+        "meanBodyCmS": 10.2,
+        "footSlideMedianCmS": 1.58,
+        "footSlideP90CmS": 14.85
+      }
+    },
+    "readoutKeys": [
+      "mode",
+      "phase",
+      "squash",
+      "leanDeg",
+      "rollDeg",
+      "liftMm",
+      "range"
+    ]
+  }
+}

@@ -1,0 +1,10488 @@
+{
+  "4A": {
+    "name": "4A",
+    "samples": 6030,
+    "segments": [
+      {
+        "phase": "start",
+        "startS": 0.37,
+        "dMean": 0.098,
+        "dSd": 0.021,
+        "dMax": 0.134,
+        "visiblePct": 100,
+        "states": [
+          "salir del refugio",
+          "enseñar"
+        ],
+        "acts": [
+          "unfit:asomarse",
+          "unfit:salir",
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "fwd1",
+        "startS": 0.13,
+        "dMean": 0.194,
+        "dSd": 0.079,
+        "dMax": 0.286,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "reposo",
+          "enseñar",
+          "investigar"
+        ],
+        "acts": [
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "fwd2",
+        "startS": 0.13,
+        "dMean": 0.133,
+        "dSd": 0.08,
+        "dMax": 0.402,
+        "visiblePct": 73,
+        "states": [
+          "guiar",
+          "volver a tu lado",
+          "enseñar",
+          "reagrupar",
+          "investigar",
+          "reposo"
+        ],
+        "acts": [
+          "nudge:acercarse",
+          "nudge:alinearse",
+          "nudge:prepararse",
+          "nudge:empujar",
+          "nudge:recuperarse",
+          "nudge:mirar",
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "fwd3",
+        "startS": 0.67,
+        "dMean": 0.194,
+        "dSd": 0.02,
+        "dMax": 0.265,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "guiar (te espera allí)",
+          "reposo",
+          "enseñar",
+          "investigar"
+        ],
+        "acts": [
+          "shine:acercarse",
+          "shine:orientarse",
+          "shine:reunir luz",
+          "shine:iluminar",
+          "shine:reaccion",
+          "shine:apagar",
+          "shine:hecho"
+        ]
+      },
+      {
+        "phase": "fwd4",
+        "startS": 0,
+        "dMean": 0.173,
+        "dSd": 0.13,
+        "dMax": 0.661,
+        "visiblePct": 95,
+        "states": [
+          "acompañar",
+          "reposo",
+          "investigar"
+        ],
+        "acts": [
+          "gesture:clip",
+          "gesture:hecho"
+        ]
+      },
+      {
+        "phase": "fwd5",
+        "startS": 0.13,
+        "dMean": 0.176,
+        "dSd": 0.053,
+        "dMax": 0.205,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "guiar (te espera allí)",
+          "reposo",
+          "enseñar"
+        ],
+        "acts": [
+          "shine:acercarse",
+          "shine:orientarse",
+          "shine:reunir luz",
+          "shine:iluminar",
+          "shine:reaccion",
+          "shine:apagar"
+        ]
+      },
+      {
+        "phase": "back4",
+        "startS": 0.57,
+        "dMean": 0.106,
+        "dSd": 0.036,
+        "dMax": 0.221,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "reposo"
+        ],
+        "acts": []
+      },
+      {
+        "phase": "back3",
+        "startS": 0.5,
+        "dMean": 0.196,
+        "dSd": 0.104,
+        "dMax": 0.38,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "enseñar"
+        ],
+        "acts": [
+          "shine:acercarse",
+          "shine:orientarse"
+        ]
+      },
+      {
+        "phase": "back2",
+        "startS": 1.5,
+        "dMean": 0.167,
+        "dSd": 0.059,
+        "dMax": 0.286,
+        "visiblePct": 91,
+        "states": [
+          "acompañar",
+          "reposo",
+          "enseñar",
+          "recordar",
+          "investigar"
+        ],
+        "acts": [
+          "nudge:acercarse",
+          "nudge:alinearse",
+          "nudge:prepararse",
+          "nudge:empujar",
+          "nudge:recuperarse",
+          "nudge:mirar",
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "back1",
+        "startS": 0.7,
+        "dMean": 0.123,
+        "dSd": 0.031,
+        "dMax": 0.187,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "reposo",
+          "enseñar",
+          "recordar"
+        ],
+        "acts": [
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "back0",
+        "startS": 0.4,
+        "dMean": 0.128,
+        "dSd": 0.049,
+        "dMax": 0.275,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "reposo",
+          "enseñar",
+          "recordar",
+          "investigar"
+        ],
+        "acts": [
+          "gesture:clip",
+          "gesture:hecho"
+        ]
+      }
+    ],
+    "states": {
+      "salir del refugio": 3.9,
+      "enseñar": 52.9,
+      "guiar": 11.7,
+      "reposo": 58.4,
+      "investigar": 32,
+      "volver a tu lado": 2.7,
+      "reagrupar": 3.3,
+      "guiar (te espera allí)": 0.5,
+      "acompañar": 28.5,
+      "recordar": 7.2
+    },
+    "groups": {
+      "compania": 50.6,
+      "curiosidad": 92,
+      "reposo": 58.4
+    },
+    "maxStepMm": 12.4,
+    "notFreeSamples": 153,
+    "notFreeFirst": [
+      {
+        "t": 7.07,
+        "at": [
+          -1.029,
+          -0.49
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 7.6,
+        "at": [
+          -0.957,
+          -0.626
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 21.87,
+        "at": [
+          -1.271,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 21.9,
+        "at": [
+          -1.273,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 21.93,
+        "at": [
+          -1.274,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 31.47,
+        "at": [
+          -1.274,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.5,
+        "at": [
+          -1.269,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.53,
+        "at": [
+          -1.263,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      }
+    ],
+    "notFreeAll": [
+      {
+        "t": 7.07,
+        "at": [
+          -1.029,
+          -0.49
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 7.6,
+        "at": [
+          -0.957,
+          -0.626
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 21.87,
+        "at": [
+          -1.271,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 21.9,
+        "at": [
+          -1.273,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 21.93,
+        "at": [
+          -1.274,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 31.47,
+        "at": [
+          -1.274,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.5,
+        "at": [
+          -1.269,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.53,
+        "at": [
+          -1.263,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.63,
+        "at": [
+          -1.238,
+          -0.748
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.67,
+        "at": [
+          -1.234,
+          -0.748
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.7,
+        "at": [
+          -1.23,
+          -0.748
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.73,
+        "at": [
+          -1.221,
+          -0.749
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.77,
+        "at": [
+          -1.209,
+          -0.75
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.8,
+        "at": [
+          -1.197,
+          -0.751
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.83,
+        "at": [
+          -1.184,
+          -0.752
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.87,
+        "at": [
+          -1.172,
+          -0.752
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.9,
+        "at": [
+          -1.16,
+          -0.753
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.93,
+        "at": [
+          -1.155,
+          -0.753
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 31.97,
+        "at": [
+          -1.151,
+          -0.753
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 32,
+        "at": [
+          -1.142,
+          -0.754
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 32.03,
+        "at": [
+          -1.13,
+          -0.754
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 32.07,
+        "at": [
+          -1.118,
+          -0.755
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 81.6,
+        "at": [
+          -0.291,
+          -0.425
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.63,
+        "at": [
+          -0.29,
+          -0.426
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.67,
+        "at": [
+          -0.288,
+          -0.428
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.7,
+        "at": [
+          -0.287,
+          -0.431
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.73,
+        "at": [
+          -0.285,
+          -0.434
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.77,
+        "at": [
+          -0.284,
+          -0.436
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.8,
+        "at": [
+          -0.283,
+          -0.439
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.83,
+        "at": [
+          -0.282,
+          -0.441
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.87,
+        "at": [
+          -0.282,
+          -0.442
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.9,
+        "at": [
+          -0.281,
+          -0.443
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.93,
+        "at": [
+          -0.281,
+          -0.446
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 81.97,
+        "at": [
+          -0.281,
+          -0.45
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82,
+        "at": [
+          -0.281,
+          -0.453
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.03,
+        "at": [
+          -0.282,
+          -0.456
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.07,
+        "at": [
+          -0.282,
+          -0.459
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.1,
+        "at": [
+          -0.283,
+          -0.461
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.13,
+        "at": [
+          -0.283,
+          -0.462
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.17,
+        "at": [
+          -0.284,
+          -0.463
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.2,
+        "at": [
+          -0.285,
+          -0.466
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.23,
+        "at": [
+          -0.287,
+          -0.468
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.27,
+        "at": [
+          -0.289,
+          -0.471
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.3,
+        "at": [
+          -0.291,
+          -0.473
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.33,
+        "at": [
+          -0.294,
+          -0.475
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.37,
+        "at": [
+          -0.296,
+          -0.477
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.4,
+        "at": [
+          -0.298,
+          -0.478
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.43,
+        "at": [
+          -0.3,
+          -0.48
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.47,
+        "at": [
+          -0.307,
+          -0.485
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.5,
+        "at": [
+          -0.314,
+          -0.491
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 82.53,
+        "at": [
+          -0.321,
+          -0.498
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.47,
+        "at": [
+          0.176,
+          -0.072
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.5,
+        "at": [
+          0.181,
+          -0.073
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.53,
+        "at": [
+          0.186,
+          -0.074
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.57,
+        "at": [
+          0.193,
+          -0.075
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.6,
+        "at": [
+          0.201,
+          -0.075
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.63,
+        "at": [
+          0.208,
+          -0.074
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.67,
+        "at": [
+          0.211,
+          -0.073
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.7,
+        "at": [
+          0.214,
+          -0.072
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.73,
+        "at": [
+          0.22,
+          -0.069
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.77,
+        "at": [
+          0.229,
+          -0.065
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.8,
+        "at": [
+          0.238,
+          -0.059
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.83,
+        "at": [
+          0.246,
+          -0.052
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.87,
+        "at": [
+          0.253,
+          -0.044
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.9,
+        "at": [
+          0.26,
+          -0.035
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.93,
+        "at": [
+          0.262,
+          -0.031
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.97,
+        "at": [
+          0.264,
+          -0.027
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 107,
+        "at": [
+          0.267,
+          -0.02
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 133.3,
+        "at": [
+          0.255,
+          0.054
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.33,
+        "at": [
+          0.251,
+          0.053
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.37,
+        "at": [
+          0.247,
+          0.052
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.4,
+        "at": [
+          0.243,
+          0.05
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.43,
+        "at": [
+          0.239,
+          0.048
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.47,
+        "at": [
+          0.235,
+          0.046
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.5,
+        "at": [
+          0.231,
+          0.043
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.53,
+        "at": [
+          0.227,
+          0.041
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.57,
+        "at": [
+          0.223,
+          0.038
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.6,
+        "at": [
+          0.22,
+          0.035
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.63,
+        "at": [
+          0.216,
+          0.032
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.67,
+        "at": [
+          0.213,
+          0.029
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 133.7,
+        "at": [
+          0.209,
+          0.026
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.1,
+        "at": [
+          -0.196,
+          -0.582
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.13,
+        "at": [
+          -0.2,
+          -0.584
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.43,
+        "at": [
+          -0.239,
+          -0.593
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.47,
+        "at": [
+          -0.244,
+          -0.593
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.73,
+        "at": [
+          -0.278,
+          -0.584
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.77,
+        "at": [
+          -0.283,
+          -0.582
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.87,
+        "at": [
+          -0.295,
+          -0.575
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.17,
+        "at": [
+          -0.322,
+          -0.544
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.2,
+        "at": [
+          -0.323,
+          -0.54
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.23,
+        "at": [
+          -0.325,
+          -0.536
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.47,
+        "at": [
+          -0.331,
+          -0.504
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.5,
+        "at": [
+          -0.332,
+          -0.5
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.53,
+        "at": [
+          -0.332,
+          -0.495
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 179.5,
+        "at": [
+          -0.986,
+          -0.741
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.53,
+        "at": [
+          -0.989,
+          -0.741
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.57,
+        "at": [
+          -0.991,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.6,
+        "at": [
+          -0.993,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.63,
+        "at": [
+          -0.996,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.67,
+        "at": [
+          -0.998,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.7,
+        "at": [
+          -1,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.73,
+        "at": [
+          -1.003,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.77,
+        "at": [
+          -1.005,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.8,
+        "at": [
+          -1.007,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.83,
+        "at": [
+          -1.01,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.87,
+        "at": [
+          -1.012,
+          -0.745
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.9,
+        "at": [
+          -1.014,
+          -0.745
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.93,
+        "at": [
+          -1.017,
+          -0.745
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 179.97,
+        "at": [
+          -1.019,
+          -0.746
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180,
+        "at": [
+          -1.021,
+          -0.746
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.03,
+        "at": [
+          -1.023,
+          -0.746
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.07,
+        "at": [
+          -1.026,
+          -0.746
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.1,
+        "at": [
+          -1.028,
+          -0.747
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.13,
+        "at": [
+          -1.03,
+          -0.747
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.17,
+        "at": [
+          -1.033,
+          -0.747
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.2,
+        "at": [
+          -1.035,
+          -0.748
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.23,
+        "at": [
+          -1.037,
+          -0.748
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.27,
+        "at": [
+          -1.04,
+          -0.748
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.3,
+        "at": [
+          -1.042,
+          -0.749
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.33,
+        "at": [
+          -1.044,
+          -0.749
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.37,
+        "at": [
+          -1.047,
+          -0.749
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.4,
+        "at": [
+          -1.049,
+          -0.749
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.43,
+        "at": [
+          -1.051,
+          -0.75
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.47,
+        "at": [
+          -1.054,
+          -0.75
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.5,
+        "at": [
+          -1.056,
+          -0.75
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.53,
+        "at": [
+          -1.058,
+          -0.751
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.57,
+        "at": [
+          -1.06,
+          -0.751
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.6,
+        "at": [
+          -1.063,
+          -0.751
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.63,
+        "at": [
+          -1.065,
+          -0.752
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.67,
+        "at": [
+          -1.067,
+          -0.752
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.7,
+        "at": [
+          -1.07,
+          -0.752
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.73,
+        "at": [
+          -1.072,
+          -0.752
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.77,
+        "at": [
+          -1.074,
+          -0.753
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.8,
+        "at": [
+          -1.077,
+          -0.753
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.83,
+        "at": [
+          -1.079,
+          -0.753
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.87,
+        "at": [
+          -1.081,
+          -0.754
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.9,
+        "at": [
+          -1.084,
+          -0.754
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.93,
+        "at": [
+          -1.086,
+          -0.754
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 180.97,
+        "at": [
+          -1.088,
+          -0.755
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 181,
+        "at": [
+          -1.091,
+          -0.755
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "enseñar"
+      },
+      {
+        "t": 188.5,
+        "at": [
+          -0.987,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 188.6,
+        "at": [
+          -0.977,
+          -0.735
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 188.7,
+        "at": [
+          -0.969,
+          -0.725
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 188.73,
+        "at": [
+          -0.967,
+          -0.721
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 188.77,
+        "at": [
+          -0.965,
+          -0.717
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 188.93,
+        "at": [
+          -0.959,
+          -0.694
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 188.97,
+        "at": [
+          -0.958,
+          -0.69
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 189,
+        "at": [
+          -0.957,
+          -0.685
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 189.03,
+        "at": [
+          -0.957,
+          -0.681
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 189.07,
+        "at": [
+          -0.956,
+          -0.676
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 189.1,
+        "at": [
+          -0.955,
+          -0.671
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 189.43,
+        "at": [
+          -0.955,
+          -0.626
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 189.67,
+        "at": [
+          -0.967,
+          -0.596
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      }
+    ],
+    "notFreeActs": [
+      "go:camino"
+    ],
+    "lostMaxS": 4.03,
+    "lostWhere": "fwd2",
+    "movingWhileVisitorSettledPct": 34,
+    "stillWhileVisitorMovingPct": 24,
+    "aheadWhileTravellingPct": 10,
+    "recordar": 7.166666666666667,
+    "ballPath": [
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.66,
+        -0.55
+      ],
+      [
+        -0.716,
+        -0.495
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ],
+      [
+        -0.719,
+        -0.492
+      ]
+    ],
+    "log": [
+      {
+        "t": 177.5833333333668,
+        "text": "enseñar: en su gabinete: mira lo que ha ido encontrando (o pone la bola en su sitio)"
+      },
+      {
+        "t": 184.73333333337249,
+        "text": "recordar: vuelves a «El gabinete»: se acuerda de su gabinete"
+      },
+      {
+        "t": 187.2166666667078,
+        "text": "das la vuelta hacia «La linterna»: lo reconoce"
+      },
+      {
+        "t": 187.2166666667078,
+        "text": "acompañar: te mueves (0,02 m/s) hacia «La linterna»: va contigo"
+      },
+      {
+        "t": 189.96666666670998,
+        "text": "vuelves a «La linterna» (visita 2)"
+      },
+      {
+        "t": 190.60000000004382,
+        "text": "reposo: a tu lado (0,13 m), tranquilo"
+      },
+      {
+        "t": 191.16666666671094,
+        "text": "enseñar: estás en su casa: te la enseña"
+      },
+      {
+        "t": 197.40000000004923,
+        "text": "recordar: vuelves a «La linterna»: se acuerda de su casa"
+      },
+      {
+        "t": 199.68333333338438,
+        "text": "reposo: a tu lado (0,11 m), tranquilo"
+      },
+      {
+        "t": 199.96666666671794,
+        "text": "investigar: te has quedado aquí: se acerca al gabinete a mirarlo (LookAround)"
+      }
+    ],
+    "memory": {
+      "clips": [
+        "Tilt",
+        "Focus",
+        "Focus",
+        "Focus"
+      ],
+      "clicks": 0,
+      "zones": [
+        {
+          "visits": 2,
+          "lastAt": 189.96666666670998,
+          "guided": false,
+          "showcasedAt": 197.40000000004923,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "lantern",
+            "what": "su casa"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 176.38333333336584,
+          "guided": true,
+          "showcasedAt": 184.73333333337249,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "cabinet",
+            "what": "su gabinete"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 162.36666666668802,
+          "guided": true,
+          "showcasedAt": 169.40000000002695,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "ball",
+            "what": "la bola"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 148.31666666667684,
+          "guided": true,
+          "showcasedAt": 68.48333333333073,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "flower",
+            "what": "la flor"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 134.29999999999902,
+          "guided": false,
+          "showcasedAt": null,
+          "idleLookDone": false,
+          "lastThing": null
+        },
+        {
+          "visits": 1,
+          "lastAt": 109.31666666666175,
+          "guided": true,
+          "showcasedAt": 118.26666666666124,
+          "idleLookDone": true,
+          "lastThing": {
+            "object": "radiometer",
+            "what": "el radiómetro"
+          }
+        }
+      ]
+    },
+    "timeline": [
+      {
+        "t": 0,
+        "phase": "start",
+        "st": "salir del refugio",
+        "act": "unfit",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 1,
+        "phase": "start",
+        "st": "salir del refugio",
+        "act": "unfit",
+        "d": 0.1,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 2,
+        "phase": "start",
+        "st": "salir del refugio",
+        "act": "unfit",
+        "d": 0.06,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 3,
+        "phase": "start",
+        "st": "salir del refugio",
+        "act": "unfit",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 4,
+        "phase": "start",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 5,
+        "phase": "start",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 6,
+        "phase": "fwd1",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 7,
+        "phase": "fwd1",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 29.7
+      },
+      {
+        "t": 8,
+        "phase": "fwd1",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 3.9
+      },
+      {
+        "t": 9,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 10,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 11,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 12,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 13,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0.7
+      },
+      {
+        "t": 14,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 15,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 16,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 17,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 18,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 19,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 20,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.18,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 21,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.24,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 22,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0.7
+      },
+      {
+        "t": 23,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 24,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 25,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 26,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 27,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 28,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 29,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 30,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 31,
+        "phase": "fwd2",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.29,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 32,
+        "phase": "fwd2",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.4,
+        "vis": false,
+        "sp": 30
+      },
+      {
+        "t": 33,
+        "phase": "fwd2",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.25,
+        "vis": false,
+        "sp": 30
+      },
+      {
+        "t": 34,
+        "phase": "fwd2",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.12,
+        "vis": false,
+        "sp": 29.7
+      },
+      {
+        "t": 35,
+        "phase": "fwd2",
+        "st": "volver a tu lado",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 12.3
+      },
+      {
+        "t": 36,
+        "phase": "fwd2",
+        "st": "volver a tu lado",
+        "act": "go",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 37,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 38,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.1,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 39,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.15,
+        "vis": false,
+        "sp": 14
+      },
+      {
+        "t": 40,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.17,
+        "vis": false,
+        "sp": 0
+      },
+      {
+        "t": 41,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.16,
+        "vis": false,
+        "sp": 0
+      },
+      {
+        "t": 42,
+        "phase": "fwd2",
+        "st": "reagrupar",
+        "act": "go",
+        "d": 0.14,
+        "vis": false,
+        "sp": 14.2
+      },
+      {
+        "t": 43,
+        "phase": "fwd2",
+        "st": "reagrupar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 12.8
+      },
+      {
+        "t": 44,
+        "phase": "fwd2",
+        "st": "reagrupar",
+        "act": "go",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 45,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 46,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 47,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.06,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 48,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.06,
+        "vis": true,
+        "sp": 3.7
+      },
+      {
+        "t": 49,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 50,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 51,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 52,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 53,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 54,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 55,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 56,
+        "phase": "fwd3",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.07,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 57,
+        "phase": "fwd3",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.27,
+        "vis": true,
+        "sp": 30
+      },
+      {
+        "t": 58,
+        "phase": "fwd3",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.2,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 59,
+        "phase": "fwd3",
+        "st": "guiar (te espera allí)",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 60,
+        "phase": "fwd3",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.21,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 61,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 6.4
+      },
+      {
+        "t": 62,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 63,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 64,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 65,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 66,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 67,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 68,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 69,
+        "phase": "fwd3",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 70,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.2,
+        "vis": true,
+        "sp": 1.7
+      },
+      {
+        "t": 71,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 72,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 73,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 2.6
+      },
+      {
+        "t": 74,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 75,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 76,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 77,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 78,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 79,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 80,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 81,
+        "phase": "fwd4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 3.3
+      },
+      {
+        "t": 82,
+        "phase": "fwd4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.45,
+        "vis": true,
+        "sp": 7.5
+      },
+      {
+        "t": 83,
+        "phase": "fwd4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.66,
+        "vis": false,
+        "sp": 26
+      },
+      {
+        "t": 84,
+        "phase": "fwd4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.42,
+        "vis": true,
+        "sp": 30
+      },
+      {
+        "t": 85,
+        "phase": "fwd4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 30
+      },
+      {
+        "t": 86,
+        "phase": "fwd4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 1.2
+      },
+      {
+        "t": 87,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 88,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 89,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 90,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 91,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 92,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 93,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 94,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 95,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 96,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 1.1
+      },
+      {
+        "t": 97,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 98,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 99,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 100,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 101,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 102,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 103,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 104,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 105,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 106,
+        "phase": "fwd5",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 107,
+        "phase": "fwd5",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.05,
+        "vis": true,
+        "sp": 26.8
+      },
+      {
+        "t": 108,
+        "phase": "fwd5",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.06,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 109,
+        "phase": "fwd5",
+        "st": "guiar (te espera allí)",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 110,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 111,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.11,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 112,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 113,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 114,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 115,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 116,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 117,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 118,
+        "phase": "fwd5",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 119,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 120,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 121,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 122,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 123,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 124,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 125,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 126,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 127,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 128,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 129,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 130,
+        "phase": "fwd5",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 131,
+        "phase": "back4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 132,
+        "phase": "back4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.14,
+        "vis": true,
+        "sp": 7.5
+      },
+      {
+        "t": 133,
+        "phase": "back4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 10.9
+      },
+      {
+        "t": 134,
+        "phase": "back4",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 11.9
+      },
+      {
+        "t": 135,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 136,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 137,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 138,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 139,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 140,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 141,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 142,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 143,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 144,
+        "phase": "back4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 145,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 146,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.25,
+        "vis": true,
+        "sp": 30
+      },
+      {
+        "t": 147,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.26,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 148,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.28,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 149,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.33,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 150,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.38,
+        "vis": true,
+        "sp": 13.4
+      },
+      {
+        "t": 151,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.32,
+        "vis": true,
+        "sp": 13.6
+      },
+      {
+        "t": 152,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.18,
+        "vis": true,
+        "sp": 13.8
+      },
+      {
+        "t": 153,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.07,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 154,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 155,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 156,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.07,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 157,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.1,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 158,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.16,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 159,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.18,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 160,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.22,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 161,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.26,
+        "vis": false,
+        "sp": 14
+      },
+      {
+        "t": 162,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 163,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.05,
+        "vis": true,
+        "sp": 0.4
+      },
+      {
+        "t": 164,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.03,
+        "vis": true,
+        "sp": 14
+      },
+      {
+        "t": 165,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.13,
+        "vis": true,
+        "sp": 13.3
+      },
+      {
+        "t": 166,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.18,
+        "vis": true,
+        "sp": 13.9
+      },
+      {
+        "t": 167,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 168,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.2,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 169,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.19,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 170,
+        "phase": "back2",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.19,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 171,
+        "phase": "back2",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.19,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 172,
+        "phase": "back2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.19,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 173,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 174,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 28.2
+      },
+      {
+        "t": 175,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 176,
+        "phase": "back1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 177,
+        "phase": "back1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 178,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 179,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.07,
+        "vis": true,
+        "sp": 6.9
+      },
+      {
+        "t": 180,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 181,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 182,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 183,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 184,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 185,
+        "phase": "back1",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 186,
+        "phase": "back1",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 187,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 188,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.26,
+        "vis": true,
+        "sp": 13.5
+      },
+      {
+        "t": 189,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.23,
+        "vis": true,
+        "sp": 13.9
+      },
+      {
+        "t": 190,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 1.5
+      },
+      {
+        "t": 191,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 192,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 193,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 194,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 195,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 196,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 197,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 198,
+        "phase": "back0",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 199,
+        "phase": "back0",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 200,
+        "phase": "back0",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      }
+    ]
+  },
+  "lab": {
+    "name": "lab",
+    "samples": 4860,
+    "segments": [
+      {
+        "phase": "start",
+        "startS": 2.67,
+        "dMean": 0.12,
+        "dSd": 0.011,
+        "dMax": 0.13,
+        "visiblePct": 100,
+        "states": [
+          "reposo",
+          "enseñar"
+        ],
+        "acts": [
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "fwd1",
+        "startS": 0.13,
+        "dMean": 0.153,
+        "dSd": 0.069,
+        "dMax": 0.276,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "reposo",
+          "enseñar",
+          "investigar",
+          "volver a tu lado"
+        ],
+        "acts": [
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "fwd2",
+        "startS": 0.13,
+        "dMean": 0.12,
+        "dSd": 0.048,
+        "dMax": 0.17,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "guiar (te espera allí)",
+          "reposo",
+          "enseñar",
+          "investigar"
+        ],
+        "acts": [
+          "nudge:acercarse",
+          "nudge:alinearse",
+          "nudge:prepararse",
+          "nudge:empujar",
+          "nudge:recuperarse",
+          "nudge:mirar",
+          "nudge:hecho",
+          "gesture:clip",
+          "gesture:hecho"
+        ]
+      },
+      {
+        "phase": "fwd3",
+        "startS": 0.13,
+        "dMean": 0.121,
+        "dSd": 0.019,
+        "dMax": 0.168,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "reposo",
+          "enseñar",
+          "investigar"
+        ],
+        "acts": [
+          "shine:acercarse",
+          "shine:orientarse",
+          "shine:reunir luz",
+          "shine:iluminar",
+          "shine:reaccion",
+          "shine:apagar",
+          "shine:hecho"
+        ]
+      },
+      {
+        "phase": "fwd4",
+        "startS": 0,
+        "dMean": 0.118,
+        "dSd": 0.04,
+        "dMax": 0.274,
+        "visiblePct": 100,
+        "states": [
+          "guiar",
+          "reposo",
+          "enseñar",
+          "investigar"
+        ],
+        "acts": [
+          "shine:acercarse",
+          "shine:orientarse",
+          "shine:reunir luz",
+          "shine:iluminar",
+          "shine:reaccion",
+          "shine:apagar"
+        ]
+      },
+      {
+        "phase": "back3",
+        "startS": 0,
+        "dMean": 0.139,
+        "dSd": 0.05,
+        "dMax": 0.212,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "reposo",
+          "recordar",
+          "enseñar"
+        ],
+        "acts": [
+          "gesture:orientarse",
+          "gesture:clip",
+          "gesture:hecho",
+          "shine:acercarse",
+          "shine:orientarse",
+          "shine:reunir luz",
+          "shine:iluminar"
+        ]
+      },
+      {
+        "phase": "back2",
+        "startS": 0.13,
+        "dMean": 0.132,
+        "dSd": 0.081,
+        "dMax": 0.337,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "enseñar",
+          "recordar",
+          "reposo",
+          "investigar"
+        ],
+        "acts": [
+          "nudge:acercarse",
+          "nudge:alinearse",
+          "nudge:prepararse",
+          "nudge:empujar",
+          "nudge:recuperarse",
+          "nudge:mirar",
+          "gesture:clip"
+        ]
+      },
+      {
+        "phase": "back1",
+        "startS": 0,
+        "dMean": 0.172,
+        "dSd": 0.089,
+        "dMax": 0.424,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "enseñar",
+          "recordar",
+          "investigar"
+        ],
+        "acts": [
+          "gesture:clip",
+          "gesture:hecho"
+        ]
+      },
+      {
+        "phase": "back0",
+        "startS": 0.03,
+        "dMean": 0.137,
+        "dSd": 0.057,
+        "dMax": 0.287,
+        "visiblePct": 100,
+        "states": [
+          "acompañar",
+          "enseñar",
+          "recordar",
+          "reposo"
+        ],
+        "acts": [
+          "gesture:clip",
+          "gesture:hecho"
+        ]
+      }
+    ],
+    "states": {
+      "reposo": 22.4,
+      "enseñar": 60.8,
+      "guiar": 10.1,
+      "investigar": 38.5,
+      "volver a tu lado": 3.7,
+      "guiar (te espera allí)": 0.8,
+      "acompañar": 16,
+      "recordar": 9.6
+    },
+    "groups": {
+      "reposo": 22.4,
+      "curiosidad": 108.9,
+      "compania": 30.6
+    },
+    "maxStepMm": 9.1,
+    "notFreeSamples": 192,
+    "notFreeFirst": [
+      {
+        "t": 6.55,
+        "at": [
+          -0.996,
+          -0.402
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.58,
+        "at": [
+          -0.998,
+          -0.402
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.62,
+        "at": [
+          -1,
+          -0.403
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.65,
+        "at": [
+          -1.003,
+          -0.405
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.68,
+        "at": [
+          -1.005,
+          -0.406
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.72,
+        "at": [
+          -1.006,
+          -0.407
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.75,
+        "at": [
+          -1.007,
+          -0.409
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.78,
+        "at": [
+          -1.01,
+          -0.411
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      }
+    ],
+    "notFreeAll": [
+      {
+        "t": 6.55,
+        "at": [
+          -0.996,
+          -0.402
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.58,
+        "at": [
+          -0.998,
+          -0.402
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.62,
+        "at": [
+          -1,
+          -0.403
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.65,
+        "at": [
+          -1.003,
+          -0.405
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.68,
+        "at": [
+          -1.005,
+          -0.406
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.72,
+        "at": [
+          -1.006,
+          -0.407
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.75,
+        "at": [
+          -1.007,
+          -0.409
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 6.78,
+        "at": [
+          -1.01,
+          -0.411
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 7.12,
+        "at": [
+          -1.02,
+          -0.47
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 7.15,
+        "at": [
+          -1.017,
+          -0.479
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 7.92,
+        "at": [
+          -0.957,
+          -0.63
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 7.95,
+        "at": [
+          -0.956,
+          -0.639
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 20.68,
+        "at": [
+          -1.258,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 20.72,
+        "at": [
+          -1.26,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 20.75,
+        "at": [
+          -1.262,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 20.78,
+        "at": [
+          -1.264,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 20.82,
+        "at": [
+          -1.265,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "investigar"
+      },
+      {
+        "t": 24.95,
+        "at": [
+          -1.263,
+          -0.739
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 24.98,
+        "at": [
+          -1.26,
+          -0.739
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.02,
+        "at": [
+          -1.257,
+          -0.739
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.05,
+        "at": [
+          -1.253,
+          -0.739
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.08,
+        "at": [
+          -1.249,
+          -0.739
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.12,
+        "at": [
+          -1.244,
+          -0.74
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.15,
+        "at": [
+          -1.24,
+          -0.74
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.18,
+        "at": [
+          -1.236,
+          -0.74
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.22,
+        "at": [
+          -1.231,
+          -0.74
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.25,
+        "at": [
+          -1.227,
+          -0.74
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.28,
+        "at": [
+          -1.223,
+          -0.741
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.32,
+        "at": [
+          -1.218,
+          -0.741
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.35,
+        "at": [
+          -1.214,
+          -0.741
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.38,
+        "at": [
+          -1.21,
+          -0.741
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.42,
+        "at": [
+          -1.205,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.45,
+        "at": [
+          -1.201,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.48,
+        "at": [
+          -1.197,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.52,
+        "at": [
+          -1.192,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.55,
+        "at": [
+          -1.188,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.58,
+        "at": [
+          -1.184,
+          -0.743
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.62,
+        "at": [
+          -1.179,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.65,
+        "at": [
+          -1.175,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.68,
+        "at": [
+          -1.171,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.72,
+        "at": [
+          -1.166,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 25.75,
+        "at": [
+          -1.162,
+          -0.745
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "volver a tu lado"
+      },
+      {
+        "t": 82.05,
+        "at": [
+          -0.504,
+          -0.572
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.08,
+        "at": [
+          -0.501,
+          -0.574
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.12,
+        "at": [
+          -0.5,
+          -0.575
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.15,
+        "at": [
+          -0.499,
+          -0.576
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.18,
+        "at": [
+          -0.495,
+          -0.58
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.22,
+        "at": [
+          -0.491,
+          -0.584
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.25,
+        "at": [
+          -0.488,
+          -0.589
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.28,
+        "at": [
+          -0.486,
+          -0.595
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.32,
+        "at": [
+          -0.483,
+          -0.601
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.35,
+        "at": [
+          -0.482,
+          -0.605
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.38,
+        "at": [
+          -0.482,
+          -0.607
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.42,
+        "at": [
+          -0.481,
+          -0.61
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.45,
+        "at": [
+          -0.482,
+          -0.617
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.48,
+        "at": [
+          -0.481,
+          -0.625
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.52,
+        "at": [
+          -0.48,
+          -0.633
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.55,
+        "at": [
+          -0.478,
+          -0.642
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.58,
+        "at": [
+          -0.476,
+          -0.65
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.62,
+        "at": [
+          -0.473,
+          -0.656
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.65,
+        "at": [
+          -0.472,
+          -0.659
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.68,
+        "at": [
+          -0.471,
+          -0.662
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.72,
+        "at": [
+          -0.466,
+          -0.669
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.75,
+        "at": [
+          -0.462,
+          -0.677
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 82.78,
+        "at": [
+          -0.457,
+          -0.685
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "guiar"
+      },
+      {
+        "t": 106.52,
+        "at": [
+          -0.212,
+          -0.588
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.55,
+        "at": [
+          -0.208,
+          -0.592
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.58,
+        "at": [
+          -0.205,
+          -0.595
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.62,
+        "at": [
+          -0.202,
+          -0.599
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.65,
+        "at": [
+          -0.201,
+          -0.601
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.68,
+        "at": [
+          -0.2,
+          -0.603
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.72,
+        "at": [
+          -0.197,
+          -0.611
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.75,
+        "at": [
+          -0.195,
+          -0.618
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.78,
+        "at": [
+          -0.194,
+          -0.626
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.82,
+        "at": [
+          -0.194,
+          -0.634
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.85,
+        "at": [
+          -0.195,
+          -0.642
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.88,
+        "at": [
+          -0.196,
+          -0.648
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.92,
+        "at": [
+          -0.197,
+          -0.651
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.95,
+        "at": [
+          -0.198,
+          -0.654
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 106.98,
+        "at": [
+          -0.202,
+          -0.661
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 114.95,
+        "at": [
+          -0.347,
+          -0.654
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 114.98,
+        "at": [
+          -0.347,
+          -0.652
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.02,
+        "at": [
+          -0.346,
+          -0.65
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.05,
+        "at": [
+          -0.346,
+          -0.648
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.08,
+        "at": [
+          -0.345,
+          -0.645
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.12,
+        "at": [
+          -0.345,
+          -0.643
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.15,
+        "at": [
+          -0.344,
+          -0.641
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.18,
+        "at": [
+          -0.344,
+          -0.638
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.22,
+        "at": [
+          -0.343,
+          -0.636
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.25,
+        "at": [
+          -0.343,
+          -0.634
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.28,
+        "at": [
+          -0.342,
+          -0.632
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.32,
+        "at": [
+          -0.342,
+          -0.629
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.35,
+        "at": [
+          -0.342,
+          -0.627
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.38,
+        "at": [
+          -0.341,
+          -0.625
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.42,
+        "at": [
+          -0.341,
+          -0.622
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.45,
+        "at": [
+          -0.34,
+          -0.62
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.48,
+        "at": [
+          -0.34,
+          -0.618
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.52,
+        "at": [
+          -0.339,
+          -0.616
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.55,
+        "at": [
+          -0.339,
+          -0.613
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.58,
+        "at": [
+          -0.338,
+          -0.611
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.62,
+        "at": [
+          -0.338,
+          -0.609
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.65,
+        "at": [
+          -0.337,
+          -0.606
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.68,
+        "at": [
+          -0.337,
+          -0.604
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.72,
+        "at": [
+          -0.336,
+          -0.602
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.75,
+        "at": [
+          -0.336,
+          -0.6
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.78,
+        "at": [
+          -0.336,
+          -0.597
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 115.82,
+        "at": [
+          -0.335,
+          -0.595
+        ],
+        "act": "shine",
+        "ph": "acercarse",
+        "st": "enseñar"
+      },
+      {
+        "t": 120.75,
+        "at": [
+          -0.335,
+          -0.558
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.78,
+        "at": [
+          -0.336,
+          -0.564
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.82,
+        "at": [
+          -0.336,
+          -0.573
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.85,
+        "at": [
+          -0.337,
+          -0.582
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.88,
+        "at": [
+          -0.337,
+          -0.591
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.92,
+        "at": [
+          -0.336,
+          -0.6
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.95,
+        "at": [
+          -0.336,
+          -0.609
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 120.98,
+        "at": [
+          -0.336,
+          -0.612
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.02,
+        "at": [
+          -0.336,
+          -0.615
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.05,
+        "at": [
+          -0.338,
+          -0.621
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.08,
+        "at": [
+          -0.34,
+          -0.629
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.12,
+        "at": [
+          -0.344,
+          -0.637
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.15,
+        "at": [
+          -0.347,
+          -0.645
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.18,
+        "at": [
+          -0.349,
+          -0.65
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.22,
+        "at": [
+          -0.351,
+          -0.655
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.28,
+        "at": [
+          -0.355,
+          -0.662
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.55,
+        "at": [
+          -0.379,
+          -0.682
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 121.58,
+        "at": [
+          -0.383,
+          -0.684
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.72,
+        "at": [
+          -1.142,
+          -0.744
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.75,
+        "at": [
+          -1.142,
+          -0.742
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.78,
+        "at": [
+          -1.142,
+          -0.74
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.82,
+        "at": [
+          -1.142,
+          -0.738
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.85,
+        "at": [
+          -1.142,
+          -0.735
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.88,
+        "at": [
+          -1.141,
+          -0.733
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.92,
+        "at": [
+          -1.141,
+          -0.732
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.95,
+        "at": [
+          -1.141,
+          -0.731
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 148.98,
+        "at": [
+          -1.141,
+          -0.73
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.02,
+        "at": [
+          -1.139,
+          -0.727
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.05,
+        "at": [
+          -1.138,
+          -0.725
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.08,
+        "at": [
+          -1.137,
+          -0.724
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.12,
+        "at": [
+          -1.135,
+          -0.722
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.15,
+        "at": [
+          -1.134,
+          -0.72
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.18,
+        "at": [
+          -1.132,
+          -0.718
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.22,
+        "at": [
+          -1.13,
+          -0.717
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.25,
+        "at": [
+          -1.127,
+          -0.715
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.28,
+        "at": [
+          -1.124,
+          -0.714
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.32,
+        "at": [
+          -1.121,
+          -0.712
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.35,
+        "at": [
+          -1.117,
+          -0.711
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.38,
+        "at": [
+          -1.114,
+          -0.71
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.42,
+        "at": [
+          -1.11,
+          -0.71
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.45,
+        "at": [
+          -1.106,
+          -0.71
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.48,
+        "at": [
+          -1.101,
+          -0.71
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.52,
+        "at": [
+          -1.097,
+          -0.711
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.55,
+        "at": [
+          -1.093,
+          -0.711
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.58,
+        "at": [
+          -1.089,
+          -0.712
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.62,
+        "at": [
+          -1.084,
+          -0.713
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.65,
+        "at": [
+          -1.08,
+          -0.714
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.68,
+        "at": [
+          -1.076,
+          -0.715
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.72,
+        "at": [
+          -1.072,
+          -0.717
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.75,
+        "at": [
+          -1.068,
+          -0.718
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.78,
+        "at": [
+          -1.064,
+          -0.719
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.82,
+        "at": [
+          -1.06,
+          -0.721
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.85,
+        "at": [
+          -1.056,
+          -0.722
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.88,
+        "at": [
+          -1.051,
+          -0.723
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.92,
+        "at": [
+          -1.047,
+          -0.725
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.95,
+        "at": [
+          -1.043,
+          -0.726
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 149.98,
+        "at": [
+          -1.039,
+          -0.728
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.02,
+        "at": [
+          -1.035,
+          -0.729
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.05,
+        "at": [
+          -1.031,
+          -0.731
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.08,
+        "at": [
+          -1.027,
+          -0.732
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.12,
+        "at": [
+          -1.023,
+          -0.734
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.15,
+        "at": [
+          -1.019,
+          -0.735
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.18,
+        "at": [
+          -1.015,
+          -0.736
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.22,
+        "at": [
+          -1.011,
+          -0.737
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.25,
+        "at": [
+          -1.007,
+          -0.737
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.28,
+        "at": [
+          -1.002,
+          -0.737
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.32,
+        "at": [
+          -0.999,
+          -0.737
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.35,
+        "at": [
+          -0.995,
+          -0.737
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.38,
+        "at": [
+          -0.991,
+          -0.736
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.42,
+        "at": [
+          -0.987,
+          -0.735
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.45,
+        "at": [
+          -0.984,
+          -0.733
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.48,
+        "at": [
+          -0.98,
+          -0.731
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.52,
+        "at": [
+          -0.977,
+          -0.729
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.58,
+        "at": [
+          -0.972,
+          -0.724
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.62,
+        "at": [
+          -0.969,
+          -0.721
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.65,
+        "at": [
+          -0.967,
+          -0.718
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.68,
+        "at": [
+          -0.965,
+          -0.715
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.85,
+        "at": [
+          -0.958,
+          -0.695
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.88,
+        "at": [
+          -0.957,
+          -0.69
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.92,
+        "at": [
+          -0.956,
+          -0.686
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.95,
+        "at": [
+          -0.956,
+          -0.682
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 150.98,
+        "at": [
+          -0.955,
+          -0.678
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.38,
+        "at": [
+          -0.955,
+          -0.626
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.62,
+        "at": [
+          -0.967,
+          -0.599
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      },
+      {
+        "t": 151.65,
+        "at": [
+          -0.969,
+          -0.595
+        ],
+        "act": "go",
+        "ph": "camino",
+        "st": "acompañar"
+      }
+    ],
+    "notFreeActs": [
+      "go:camino",
+      "shine:acercarse"
+    ],
+    "lostMaxS": 0,
+    "lostWhere": "",
+    "movingWhileVisitorSettledPct": 44,
+    "stillWhileVisitorMovingPct": 9,
+    "aheadWhileTravellingPct": 7,
+    "recordar": 9.633333333333333,
+    "ballPath": [
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.71,
+        -0.67
+      ],
+      [
+        -0.7,
+        -0.721
+      ],
+      [
+        -0.694,
+        -0.748
+      ],
+      [
+        -0.694,
+        -0.748
+      ],
+      [
+        -0.694,
+        -0.748
+      ],
+      [
+        -0.694,
+        -0.748
+      ],
+      [
+        -0.694,
+        -0.748
+      ],
+      [
+        -0.682,
+        -0.824
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.681,
+        -0.829
+      ],
+      [
+        -0.671,
+        -0.881
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ],
+      [
+        -0.666,
+        -0.909
+      ]
+    ],
+    "log": [
+      {
+        "t": 137.00000000000117,
+        "text": "vuelves a «El gabinete» (visita 2)"
+      },
+      {
+        "t": 138.6333333333358,
+        "text": "enseñar: en su gabinete: mira lo que ha ido encontrando (o pone la bola en su sitio)"
+      },
+      {
+        "t": 145.23333333334105,
+        "text": "recordar: vuelves a «El gabinete»: se acuerda de su gabinete"
+      },
+      {
+        "t": 147.56666666667624,
+        "text": "investigar: te has quedado aquí: se acerca al gabinete a mirarlo (LookAround)"
+      },
+      {
+        "t": 148.2666666666768,
+        "text": "das la vuelta hacia «La linterna»: lo reconoce"
+      },
+      {
+        "t": 148.2666666666768,
+        "text": "acompañar: te mueves (0,03 m/s) hacia «La linterna»: va contigo"
+      },
+      {
+        "t": 151.0000000000123,
+        "text": "vuelves a «La linterna» (visita 2)"
+      },
+      {
+        "t": 152.63333333334694,
+        "text": "enseñar: estás en su casa: te la enseña"
+      },
+      {
+        "t": 158.566666666685,
+        "text": "recordar: vuelves a «La linterna»: se acuerda de su casa"
+      },
+      {
+        "t": 160.85000000002015,
+        "text": "reposo: a tu lado (0,11 m), tranquilo"
+      }
+    ],
+    "memory": {
+      "clips": [
+        "Tilt",
+        "Focus",
+        "Focus",
+        "Focus"
+      ],
+      "clicks": 0,
+      "zones": [
+        {
+          "visits": 2,
+          "lastAt": 151.0000000000123,
+          "guided": false,
+          "showcasedAt": 158.566666666685,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "lantern",
+            "what": "su casa"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 137.00000000000117,
+          "guided": true,
+          "showcasedAt": 145.23333333334105,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "cabinet",
+            "what": "su gabinete"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 123.01666666666097,
+          "guided": true,
+          "showcasedAt": 127.7166666666607,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "ball",
+            "what": "la bola"
+          }
+        },
+        {
+          "visits": 2,
+          "lastAt": 109.01666666666176,
+          "guided": true,
+          "showcasedAt": 70.56666666666395,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "flower",
+            "what": "la flor"
+          }
+        },
+        {
+          "visits": 1,
+          "lastAt": 84.01666666666318,
+          "guided": true,
+          "showcasedAt": 94.61666666666258,
+          "idleLookDone": false,
+          "lastThing": {
+            "object": "radiometer",
+            "what": "el radiómetro"
+          }
+        }
+      ]
+    },
+    "timeline": [
+      {
+        "t": 0,
+        "phase": "start",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 1,
+        "phase": "start",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 2,
+        "phase": "start",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 3,
+        "phase": "start",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 4,
+        "phase": "start",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.4
+      },
+      {
+        "t": 5,
+        "phase": "start",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 6,
+        "phase": "fwd1",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 7,
+        "phase": "fwd1",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.14,
+        "vis": true,
+        "sp": 21.9
+      },
+      {
+        "t": 8,
+        "phase": "fwd1",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.06,
+        "vis": true,
+        "sp": 21.1
+      },
+      {
+        "t": 9,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 10,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 11,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 12,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 13,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.14,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 14,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 15,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 16,
+        "phase": "fwd1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 17,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 18,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 19,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.18,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 20,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.24,
+        "vis": true,
+        "sp": 6.9
+      },
+      {
+        "t": 21,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.28,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 22,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.28,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 23,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.28,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 24,
+        "phase": "fwd1",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.28,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 25,
+        "phase": "fwd1",
+        "st": "volver a tu lado",
+        "act": "go",
+        "d": 0.23,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 26,
+        "phase": "fwd1",
+        "st": "volver a tu lado",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 27,
+        "phase": "fwd1",
+        "st": "volver a tu lado",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 10
+      },
+      {
+        "t": 28,
+        "phase": "fwd1",
+        "st": "volver a tu lado",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 29,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 30,
+        "phase": "fwd1",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 31,
+        "phase": "fwd2",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 32,
+        "phase": "fwd2",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7.1
+      },
+      {
+        "t": 33,
+        "phase": "fwd2",
+        "st": "guiar (te espera allí)",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 34,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.1,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 35,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.1,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 36,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.06,
+        "vis": true,
+        "sp": 12.9
+      },
+      {
+        "t": 37,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.11,
+        "vis": true,
+        "sp": 2.7
+      },
+      {
+        "t": 38,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 39,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 40,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.07,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 41,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.04,
+        "vis": true,
+        "sp": 0.2
+      },
+      {
+        "t": 42,
+        "phase": "fwd2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.03,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 43,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.04,
+        "vis": true,
+        "sp": 3.5
+      },
+      {
+        "t": 44,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 45,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.16,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 46,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 47,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 48,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 49,
+        "phase": "fwd2",
+        "st": "investigar",
+        "act": "gesture",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 50,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 51,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 52,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 53,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 54,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 55,
+        "phase": "fwd2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 56,
+        "phase": "fwd3",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.17,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 57,
+        "phase": "fwd3",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 58,
+        "phase": "fwd3",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 5.5
+      },
+      {
+        "t": 59,
+        "phase": "fwd3",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 60,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.12,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 61,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.12,
+        "vis": true,
+        "sp": 2
+      },
+      {
+        "t": 62,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 63,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 64,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 2.4
+      },
+      {
+        "t": 65,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 66,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 67,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 68,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 69,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 70,
+        "phase": "fwd3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.14,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 71,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 5.7
+      },
+      {
+        "t": 72,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 73,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 74,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 2.6
+      },
+      {
+        "t": 75,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 76,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 77,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 78,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 79,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 80,
+        "phase": "fwd3",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 81,
+        "phase": "fwd4",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 4.1
+      },
+      {
+        "t": 82,
+        "phase": "fwd4",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.27,
+        "vis": true,
+        "sp": 14.9
+      },
+      {
+        "t": 83,
+        "phase": "fwd4",
+        "st": "guiar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 22
+      },
+      {
+        "t": 84,
+        "phase": "fwd4",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.1,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 85,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.1,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 86,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.07,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 87,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.06,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 88,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.11,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 89,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 90,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 91,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 92,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 93,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 94,
+        "phase": "fwd4",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 95,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 3.1
+      },
+      {
+        "t": 96,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 97,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 98,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 2.5
+      },
+      {
+        "t": 99,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 100,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 101,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 102,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 103,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 104,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 105,
+        "phase": "fwd4",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 1.8
+      },
+      {
+        "t": 106,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 3.3
+      },
+      {
+        "t": 107,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.17,
+        "vis": true,
+        "sp": 12.9
+      },
+      {
+        "t": 108,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.13,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 109,
+        "phase": "back3",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0.9
+      },
+      {
+        "t": 110,
+        "phase": "back3",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 111,
+        "phase": "back3",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 112,
+        "phase": "back3",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 113,
+        "phase": "back3",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.09,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 114,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.09,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 115,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.13,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 116,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.18,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 117,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.21,
+        "vis": true,
+        "sp": 0.3
+      },
+      {
+        "t": 118,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.21,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 119,
+        "phase": "back3",
+        "st": "enseñar",
+        "act": "shine",
+        "d": 0.21,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 120,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.21,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 121,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.33,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 122,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.27,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 123,
+        "phase": "back2",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 124,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 125,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.07,
+        "vis": true,
+        "sp": 1.9
+      },
+      {
+        "t": 126,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.06,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 127,
+        "phase": "back2",
+        "st": "enseñar",
+        "act": "nudge",
+        "d": 0.1,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 128,
+        "phase": "back2",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 129,
+        "phase": "back2",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 130,
+        "phase": "back2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 131,
+        "phase": "back2",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.08,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 132,
+        "phase": "back2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 4
+      },
+      {
+        "t": 133,
+        "phase": "back2",
+        "st": "investigar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 134,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.22,
+        "vis": true,
+        "sp": 4.3
+      },
+      {
+        "t": 135,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.42,
+        "vis": true,
+        "sp": 8.2
+      },
+      {
+        "t": 136,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.32,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 137,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.19,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 138,
+        "phase": "back1",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 1.4
+      },
+      {
+        "t": 139,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 140,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.07,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 141,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 142,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0.3
+      },
+      {
+        "t": 143,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 144,
+        "phase": "back1",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 145,
+        "phase": "back1",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 146,
+        "phase": "back1",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 147,
+        "phase": "back1",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 148,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.15,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 149,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.22,
+        "vis": true,
+        "sp": 10
+      },
+      {
+        "t": 150,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.28,
+        "vis": true,
+        "sp": 12.8
+      },
+      {
+        "t": 151,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.22,
+        "vis": true,
+        "sp": 13
+      },
+      {
+        "t": 152,
+        "phase": "back0",
+        "st": "acompañar",
+        "act": "go",
+        "d": 0.12,
+        "vis": true,
+        "sp": 1.4
+      },
+      {
+        "t": 153,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.1,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 154,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.08,
+        "vis": true,
+        "sp": 7
+      },
+      {
+        "t": 155,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "go",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0.6
+      },
+      {
+        "t": 156,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 157,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 158,
+        "phase": "back0",
+        "st": "enseñar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 159,
+        "phase": "back0",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 160,
+        "phase": "back0",
+        "st": "recordar",
+        "act": "gesture",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      },
+      {
+        "t": 161,
+        "phase": "back0",
+        "st": "reposo",
+        "act": "idle",
+        "d": 0.11,
+        "vis": true,
+        "sp": 0
+      }
+    ]
+  }
+}

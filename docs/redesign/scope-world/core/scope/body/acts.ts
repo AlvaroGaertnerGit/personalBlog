@@ -8,6 +8,7 @@ import type { Act, Look } from "../mind/types.ts"
 import { BODY, type ActorWorld, type LabScope } from "./actor.ts"
 import type { GaitPose } from "./gait.ts"
 import { dist, headingTo, type Gait } from "./locomotor.ts"
+import { pathLength } from "../../../prototype/src/scope/nav.ts"
 
 export interface Runner {
   phase: string
@@ -96,11 +97,50 @@ function planFrom(from: P2, goal: P2, world: ActorWorld): P2[] | null {
   const ball = world.ball?.at ?? null
   const LANTERN = world.places.lantern
   const LANTERN_DOOR = world.places.lanternDoor
-  if (dist(from, LANTERN.center) < LANTERN.outerR + 0.05) {
-    const rest = world.ground.path(LANTERN_DOOR.outside, goal, ball)
-    return [from, LANTERN_DOOR.doorway, LANTERN_DOOR.outside, ...(rest ? rest.slice(1) : [])]
+  const avoid = keepouts(from, world)
+  const to = clearOfCameras(goal, world)
+  const inside = dist(from, LANTERN.center) < LANTERN.outerR + (world.refine.doorFromInside ? 0 : 0.05)
+  const start = inside ? LANTERN_DOOR.outside : from
+  // round the camera's foreground, unless that is a long detour: then the plain way
+  const plain = () => world.ground.path(start, to, ball)
+  let path = avoid.length ? world.ground.path(start, to, ball, avoid) : plain()
+  if (avoid.length) {
+    const direct = plain()
+    if (!path || (direct && pathLength(path) > pathLength(direct) * 1.6 + 0.15)) path = direct
   }
-  return world.ground.path(from, goal, ball)
+  if (inside) return [from, LANTERN_DOOR.doorway, LANTERN_DOOR.outside, ...(path ? path.slice(1) : [])]
+  return path
+}
+
+/**
+ * The cameras' foregrounds he must not cross on his way (refine.cameraClearance). If he is
+ * already inside one (the camera of the place you are going to can stand where he is), only
+ * the part nearer the lens than he is: his way out leads away from it, never under it.
+ */
+function keepouts(from: P2, world: ActorWorld) {
+  const r = world.refine.cameraClearance
+  if (!r) return []
+  return world.cameras.map((at) => ({ at, r: Math.min(r, dist(from, at) - 0.02) })).filter((k) => k.r > 0.06)
+}
+
+/** A goal inside a camera's foreground moves out to its edge, straight away from the camera. */
+function clearOfCameras(goal: P2, world: ActorWorld): P2 {
+  const r = world.refine.cameraClearance
+  if (!r) return goal
+  let g = goal
+  for (const c of world.cameras) {
+    const d = dist(g, c)
+    if (d >= r || d < 1e-6) continue
+    const k = (r + 0.01) / d
+    g = [c[0] + (g[0] - c[0]) * k, c[1] + (g[1] - c[1]) * k]
+  }
+  return g
+}
+
+/** Would standing here put him in a camera's foreground? */
+function inForeground(at: P2, world: ActorWorld) {
+  const r = world.refine.cameraClearance
+  return !!r && world.cameras.some((c) => dist(at, c) < r)
 }
 
 // --- idle: come to a calm halt -------------------------------------------------------------
@@ -323,6 +363,8 @@ class Nudge extends Phased {
     const back = world.places.ball.radius + BODY.radius + BODY.ahead + 0.014
     const pre: P2 = [ball.at[0] - this.dir[0] * back, ball.at[1] - this.dir[1] * back]
     this.planned = ball.at
+    // pushing it from there would put him in the camera's foreground: he leaves it where it is
+    if (inForeground(pre, world)) return this.finish()
     if (dist(pre, this.s.at) < 0.008) return this.go("alinearse")
     if (!this.walkTo(pre, dist(pre, this.s.at) > 0.15 ? "trot" : "walk", world)) return this.finish()
     this.go("acercarse")
@@ -504,7 +546,7 @@ function shineSpot(obj: P2, from: P2, world: ActorWorld): P2 | null {
     for (const sign of [near, -near]) {
       const out = unit([side[0] * sign - toEye[0] * behind, side[1] * sign - toEye[1] * behind])
       const spot: P2 = [obj[0] + out[0] * 0.13, obj[1] + out[1] * 0.13]
-      if (!world.ground.isFree(spot) || (seen && !world.inView(spot))) continue
+      if (!world.ground.isFree(spot) || (seen && !world.inView(spot)) || inForeground(spot, world)) continue
       const path = world.ground.path(from, spot, world.ball?.at ?? null)
       if (!path) continue
       let len = 0

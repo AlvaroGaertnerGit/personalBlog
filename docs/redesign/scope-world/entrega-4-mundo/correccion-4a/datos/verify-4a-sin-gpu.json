@@ -1,0 +1,249 @@
+{
+  "when": "2026-10-16T15:05:34.785Z",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "gpu": false,
+  "checks": [
+    {
+      "name": "llegas y Scope está en casa: sale de su linterna a recibirte",
+      "ok": true,
+      "detail": "sale a los 0.12 s"
+    },
+    {
+      "name": "se pone en marcha contigo en cada tramo: gira o anda en < 0,8 s",
+      "ok": true,
+      "detail": "responde 0.03 · 0.03 · 0.03 · 0.03 · 0.03 s; empieza a andar 0.17 · 0.83 · 0.20 · 0.23 · 0.03 s"
+    },
+    {
+      "name": "se adelanta a enseñarte los lugares que tienen algo que enseñar (≥ 3 de 4)",
+      "ok": true,
+      "detail": "4 tramos con «guiar»"
+    },
+    {
+      "name": "enseña lo que ofrece cada lugar: gabinete, bola, flor y radiómetro",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "la flor de las preguntas se abre con su luz",
+      "ok": true,
+      "detail": "apertura máx. 1.05"
+    },
+    {
+      "name": "sin teletransportes: nunca más rápido que su prisa aprobada",
+      "ok": true,
+      "detail": "máx. 9.1 mm por 1/30 s (límite 9.1)"
+    },
+    {
+      "name": "continuidad sobre papel, pliego y plato: sin saltos de altura",
+      "ok": true,
+      "detail": "máx. 1.16 mm por paso"
+    },
+    {
+      "name": "escritorio · salto 0→5: nunca perdido (lejos o fuera de cuadro) más de 6 s",
+      "ok": true,
+      "detail": "0.5 s; la vista llega en 10.4 s; al final a 0.21 m"
+    },
+    {
+      "name": "escritorio · salto 5→0: nunca perdido (lejos o fuera de cuadro) más de 6 s",
+      "ok": true,
+      "detail": "3.2 s; la vista llega en 10.9 s; al final a 0.08 m"
+    },
+    {
+      "name": "escritorio · salto 1→5: nunca perdido (lejos o fuera de cuadro) más de 6 s",
+      "ok": true,
+      "detail": "3.9 s; la vista llega en 9.2 s; al final a 0.21 m"
+    },
+    {
+      "name": "móvil · salto 0→5: nunca perdido (lejos o fuera de cuadro) más de 6 s",
+      "ok": true,
+      "detail": "1.7 s; la vista llega en 10.4 s; al final a 0.20 m"
+    },
+    {
+      "name": "móvil · salto 5→0: nunca perdido (lejos o fuera de cuadro) más de 6 s",
+      "ok": true,
+      "detail": "2.6 s; la vista llega en 10.9 s; al final a 0.08 m"
+    },
+    {
+      "name": "móvil · salto 1→5: nunca perdido (lejos o fuera de cuadro) más de 6 s",
+      "ok": true,
+      "detail": "4.2 s; la vista llega en 9.2 s; al final a 0.20 m"
+    },
+    {
+      "name": "a la vista, su cabeza nunca a menos de 30 cm del objetivo (6 lugares, escritorio y móvil, quieto y llegando)",
+      "ok": true,
+      "detail": "mínimo 34.2 cm en escritorio lugar 3 (llega)"
+    },
+    {
+      "name": "ya en un lugar, nunca fuera de cuadro más de 6 s",
+      "ok": true,
+      "detail": "máximo 3.4 s en móvil lugar 2 (llega)"
+    },
+    {
+      "name": "escritorio · el margen: te acerca la bola empujándola con la cara, sin meterla en el primer plano",
+      "ok": true,
+      "detail": "2 empujones; la bola, como mucho a 43 cm de la cámara"
+    },
+    {
+      "name": "móvil · el margen: te acerca la bola empujándola con la cara, sin meterla en el primer plano",
+      "ok": true,
+      "detail": "3 empujones; la bola, como mucho a 60 cm de la cámara"
+    },
+    {
+      "name": "el trote no resbala más que el aprobado",
+      "ok": true,
+      "detail": "pata apoyada: mediana 1.25 cm/s (laboratorio 1,6; 4A antes 3,9)"
+    },
+    {
+      "name": "la prisa no resbala más que la aprobada",
+      "ok": true,
+      "detail": "mediana 10.48 cm/s (laboratorio 10,1; 4A antes 13,2)"
+    },
+    {
+      "name": "cada lugar tiene la luz que le dio la Entrega 2",
+      "ok": true,
+      "detail": "0:Noche 1:Amanecer 2:Amanecer 3:Día 4:Día 5:Día"
+    },
+    {
+      "name": "de la noche de la linterna al amanecer del margen sin cortes de luz",
+      "ok": true,
+      "detail": "mayor cambio en 0,1 s: 0.043"
+    },
+    {
+      "name": "el botón recorre «la del lugar» y los cuatro ambientes",
+      "ok": true,
+      "detail": "Luz: Amanecer → Luz: Día → Luz: Atardecer → Luz: Noche → Luz: la del lugar"
+    },
+    {
+      "name": "de día el radiómetro gira despacio con la lámpara, y deprisa con la luz de Scope",
+      "ok": true,
+      "detail": "con su luz 23.4 rad/s; solo la lámpara 0.37 rad/s"
+    },
+    {
+      "name": "de noche (lámpara apagada) solo lo mueve su luz: cuando se va, se para",
+      "ok": true,
+      "detail": "con su luz 23.0 rad/s; después 0.00 rad/s"
+    },
+    {
+      "name": "su casa, de noche: se mete en el refugio tras un rato quieto (60 s)",
+      "ok": true,
+      "detail": "sentado a los 71.5 s"
+    },
+    {
+      "name": "y sale en menos de 1 s si te mueves",
+      "ok": true,
+      "detail": "0.02 s"
+    },
+    {
+      "name": "clic real sobre Scope: reacción completa, ladeo y parpadeo",
+      "ok": true,
+      "detail": "le has tocado · segundo toque seguido · 3.º toque en 8 s"
+    },
+    {
+      "name": "clic real sobre la bola: va a empujarla hacia ti",
+      "ok": true,
+      "detail": "acudir: señalas la bola: va a empujarla hacia ti"
+    },
+    {
+      "name": "leyendo no se desplaza",
+      "ok": true,
+      "detail": "0.0 mm"
+    },
+    {
+      "name": "clic real sobre la flor: va a iluminarla (en la auditoría contaba como suelo)",
+      "ok": true,
+      "detail": "acudir: señalas la flor: va a iluminarlo"
+    },
+    {
+      "name": "ráfaga de rueda: nunca perdido más de 6 s",
+      "ok": true,
+      "detail": "0.0 s; al final a 0.21 m"
+    },
+    {
+      "name": "recargar vuelve al principio: en su casa, en la linterna",
+      "ok": true,
+      "detail": "t 0.10 s, lugar 0"
+    },
+    {
+      "name": "paso dentro del rango aprobado (squash 0,91–1,07; vuelo ≤ 11 mm)",
+      "ok": true,
+      "detail": "squash 0.958–1.011, vuelo 7.0 mm"
+    },
+    {
+      "name": "la carcasa nunca atraviesa el plano donde se apoya",
+      "ok": true,
+      "detail": "mínimo 0.02 mm"
+    },
+    {
+      "name": "movimiento reducido (preferencia del sistema): la cámara corta y Scope ya está allí, sin andar ni gestos",
+      "ok": true,
+      "detail": "distancia 0.32 m"
+    },
+    {
+      "name": "móvil (iPhone 13, táctil): los lugares funcionan y te acompaña",
+      "ok": true,
+      "detail": "lugar 3, a 0.18 m"
+    },
+    {
+      "name": "teclado: Fin lleva hacia «La luz», Inicio a su casa; la cinta marca el lugar",
+      "ok": true,
+      "detail": "s 0.84 tras Fin"
+    },
+    {
+      "name": "sin WebGL: los lugares y sus notas como HTML legible",
+      "ok": true,
+      "detail": "6 lugares"
+    },
+    {
+      "name": "el visor de la Entrega 2 sigue cargando su mundo",
+      "ok": true,
+      "detail": "330 llamadas"
+    },
+    {
+      "name": "consola sin errores ni avisos",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "perf": [
+    {
+      "place": 0,
+      "fps": 9.15126852158602,
+      "p95": 104.59999999776483,
+      "calls": 34,
+      "triangles": 179753,
+      "software": true
+    },
+    {
+      "place": 2,
+      "fps": 8.755161897533517,
+      "p95": 194.69999999925494,
+      "calls": 98,
+      "triangles": 203686,
+      "software": true
+    },
+    {
+      "place": 3,
+      "fps": 7.525303834140897,
+      "p95": 194.69999999925494,
+      "calls": 165,
+      "triangles": 211964,
+      "software": true
+    },
+    {
+      "place": 5,
+      "fps": 7.506568247216314,
+      "p95": 154.90000000223517,
+      "calls": 133,
+      "triangles": 208022,
+      "software": true
+    }
+  ],
+  "console": [],
+  "load": {
+    "loadMs": 175,
+    "envTris": 52657,
+    "envBytes": 1155056,
+    "worldTris": 65979,
+    "worldBytes": 2264200
+  }
+}

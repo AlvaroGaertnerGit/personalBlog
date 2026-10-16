@@ -1,0 +1,46 @@
+{
+  "clicks": [
+    {
+      "world": "4A",
+      "what": "scope",
+      "lugar": 2,
+      "attempt": 0,
+      "point": {
+        "x": 1349,
+        "y": 597,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 reacción al clic: le has tocado: se gira hacia ti y reacciona",
+        "23.1 reposo: a tu lado (0,07 m), tranquilo"
+      ]
+    },
+    {
+      "world": "4A",
+      "what": "flower",
+      "lugar": 3,
+      "attempt": 0,
+      "point": {
+        "x": 903,
+        "y": 696,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 acudir: señalas el suelo cerca de él: va a ver qué hay"
+      ]
+    }
+  ],
+  "keys": {
+    "start": 0,
+    "right": 1,
+    "right2": 2,
+    "left": 1,
+    "end": 5,
+    "home": 0,
+    "enterOnPlace3": 3,
+    "focusableOverWorld": 0
+  },
+  "errors": []
+}

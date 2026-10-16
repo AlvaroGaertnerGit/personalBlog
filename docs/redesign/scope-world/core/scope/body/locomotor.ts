@@ -73,6 +73,12 @@ export class Locomotor {
   gatherS = 0.16
   /** Set by the caller (gait.ts in bound): speed multiplier for this instant. */
   speedFactor = 1
+  /**
+   * A new path while he is barely moving (below this speed, m/s) starts as from standing:
+   * a sharp change of direction is a turn on the spot, not a slow arc. 0 (the lab): any
+   * path in progress counts as moving.
+   */
+  restartBelow = 0
   /** Fired once when he comes to rest at the end of a path. */
   onArrive: () => void = () => {}
 
@@ -109,11 +115,12 @@ export class Locomotor {
       this.stop()
       return
     }
-    const wasMoving = this.path.length > 0 || this.state.speed > 0.01
+    const crawling = this.restartBelow > 0 && this.state.speed < this.restartBelow
+    const wasMoving = (this.path.length > 0 && !crawling) || this.state.speed > Math.max(0.01, this.restartBelow)
     this.path = pts
     this.seg = 0
     this.faceGoal = null
-    if (!wasMoving && this.state.phase === "still") {
+    if (!wasMoving && (this.state.phase === "still" || crawling)) {
       // in a hurry he turns on the way (a wide arc), unless it is right behind him
       const off = Math.abs(wrap(headingTo(this.state.at, pts[0]) - this.state.heading))
       this.state.phase = off > (gait === "bound" ? TURN_FIRST * 1.8 : TURN_FIRST) ? "turn" : "gather"

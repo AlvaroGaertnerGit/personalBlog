@@ -1,11 +1,16 @@
 # Scope World 2.0 · Entrega 4 · Hito 4A: el mundo y Scope, juntos
 
-Estado: **4A terminado, para que lo pruebes.** No he empezado 4B (las siete zonas), 4C
-(contenido) ni 4D (pulido).
+Estado: **4A corregido tras la auditoría, pendiente de tu validación.** No he empezado 4B (las siete
+zonas), 4C (contenido) ni 4D (pulido).
+
+> **Corrección del 16‑10‑2026:** ver **[CORRECCION_4A.md](CORRECCION_4A.md)** (qué se corrigió, archivos,
+> evidencias antes/después, pruebas y lo pendiente). Donde este documento y la corrección difieran,
+> vale la corrección: marchas aprobadas (trote 13 y prisa 22 cm/s), luz por lugares, la bola a media
+> distancia en el margen, saltos largos a su ritmo y pruebas sin GPU.
 
 - Producción, el GLB de Scope, su rig y sus clips, MathView: **intactos**.
 - El `tsconfig` y la configuración de ESLint de la raíz: **intactos**.
-- Sin commits ni despliegues. Puerto 3130 (nunca el 3000).
+- 4A está en el commit `4467e0a entrega4`; la corrección, sin commit. Sin despliegues. Puerto 3130 (nunca el 3000).
 
 ## 1. Cómo probarlo
 
@@ -107,7 +112,7 @@ opción `--map` imprime además un mapa ASCII para revisarlo a ojo.
 
 - **Escala.** Los lugares están a unos 0,4 m (los del laboratorio, a 0,27 m):
   - **Bandas:** cómoda 0,30 m y tensa 0,65 m.
-  - **Marchas:** trote 14 cm/s y prisa 30 cm/s (eran 13 y 22). La cadencia se adapta sola y el vuelo sigue en 7 mm.
+  - **Marchas:** las aprobadas, trote 13 cm/s y prisa 22 cm/s. (4A las había subido a 14 y 30 y resbalaban; corregido.)
   - **Cámara:** su muelle se suaviza en los tramos largos, así que se avanza a un paso de visita parecido.
   - **Refugio:** a los 60 s quieto en su casa (90 s en la Fase A, 30 s en el laboratorio).
 - **El radiómetro**, en el borde del círculo de la lámpara, en **(0,27, −0,13)**, como en la Fase A. Lo elegí buscando en el suelo horneado un punto que cumpliera tres cosas:
@@ -160,8 +165,8 @@ El `tsc` de la raíz sigue pasando.
 |---|---|
 | `core/tools/check.mjs` | TypeScript, ESLint y **43 de 43 tests**: mente, locomotor, suelo horneado, enganche de la presencia y los tests de la 1.0 |
 | `tsc` de la raíz del proyecto | Sin errores |
-| `mundo/tools/verify.mjs` (mundo 4A, Chrome) | **22 de 22**, consola sin errores ni avisos |
-| `lab/tools/verify.mjs` (laboratorio, tras unificar) | **20 de 20**, sin cambios de comportamiento |
+| `mundo/tools/verify.mjs` (mundo 4A, Chrome) | Cifras de la entrega original, **no reproducibles sin GPU** (se colgaba). Tras la corrección: **40 de 40** sin GPU (CORRECCION_4A.md) |
+| `lab/tools/verify.mjs` (laboratorio, tras unificar) | Cifra de la entrega original, no reproducible sin GPU. La equivalencia del laboratorio la comprueba ahora `tools/check-approved.mjs` |
 
 Lo que comprueba el mundo:
 
@@ -171,7 +176,7 @@ Lo que comprueba el mundo:
 - Enseña lo que ofrece cada uno: el gabinete, la bola (empujada), la flor (se abre) y el radiómetro.
 - No hay teletransportes: nunca va más rápido que su prisa.
 - La altura es continua sobre las tres superficies.
-- Tras saltar de su casa a «La luz» (2,1 m), llega corriendo: 8,7 s lejos o fuera de cuadro, para 7 s de carrera.
+- Tras saltar de su casa a «La luz»: 8,7 s lejos o fuera de cuadro (por encima del criterio aprobado de 6 s; corregido: 0,5–1,7 s).
 - El radiómetro responde a la lámpara y a su luz, de día y de noche.
 - El refugio: se mete a los 71 s (60 s sin hacer nada y el tiempo que tarda en llegar y acomodarse) y sale en 0,02 s.
 - Los clics no van a más y, mientras lees, no se mueve.
@@ -187,7 +192,7 @@ Lo que comprueba el mundo:
 - la flor abierta, de noche, en las preguntas;
 - el móvil en vertical.
 
-**Rendimiento medido, con GPU (GTX 1660 Ti, 1440 × 900, mundo completo de 4A):**
+**Rendimiento medido, con GPU (GTX 1660 Ti, 1440 × 900, mundo completo de 4A)** — cifras de la entrega original; no las he podido reproducir (el equipo de la corrección no tiene GPU):
 
 | Lugar | FPS | p95 | Llamadas | Triángulos |
 |---|---|---|---|---|
@@ -224,7 +229,7 @@ zonas.
   - Las preguntas y MathView se ven, pero no se abren.
   - No he tocado MathView.
 - **El pliegue largo no tiene nada propio**: Scope solo investiga lo que haya cerca. Encaja con la zona 3 de 4B.
-- **Saltos largos.** Cruzar el mundo entero de golpe le cuesta unos 9 s, porque va corriendo de verdad. Los atajos por los huecos del kirigami (Fase A §4.4) son para 4B, cuando el mundo sea más grande.
+- **Saltos largos.** Tras la corrección, la vista viaja a su ritmo: cruzar el mundo entero dura ~10,5 s y él no se pierde más de ~4 s. Los atajos por los huecos del kirigami (Fase A §4.4) son para 4B.
 - **La flor y la bola son del laboratorio**, ahora en el mundo: no forman parte del Blender aprobado.
 - **El suelo horneado no conoce la escalera del mirador** (sus escalones superan 8 mm): es inalcanzable, y le tocará en 4B (zona 2). Tampoco hay ajuste del pie al suelo (IK): en el borde del pliego, una pata puede quedar 1 mm dentro.
 - **No lo he probado en un móvil real** (solo emulado) ni en GPU modestas.

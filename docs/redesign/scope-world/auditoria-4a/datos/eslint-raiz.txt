@@ -1,0 +1,19 @@
+[BABEL] Note: The code generator has deoptimised the styling of C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\docs\redesign\scope-world\entrega-2-entorno\visor\dist\visor.js as it exceeds the max of 500KB.
+[BABEL] Note: The code generator has deoptimised the styling of C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\docs\redesign\scope-world\entrega-3-comportamiento\lab\dist\lab.js as it exceeds the max of 500KB.
+[BABEL] Note: The code generator has deoptimised the styling of C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\docs\redesign\scope-world\entrega-4-mundo\mundo\dist\mundo.js as it exceeds the max of 500KB.
+[BABEL] Note: The code generator has deoptimised the styling of C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\docs\redesign\scope-world\prototype\dist\app.js as it exceeds the max of 500KB.
+
+C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\.claude\skills\portfolio-writing\scripts\lint-copy.mjs
+  129:44  warning  'text' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Profesor\Documents\projects\portfolio-pers\personalBlog\src\components\theme\theme-transition-controller.tsx
+  8:10  warning  'duration' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+ESLint found too many warnings (maximum: 0).
+
+real	0m25.439s
+user	0m0.000s
+sys	0m0.015s
+exit 1

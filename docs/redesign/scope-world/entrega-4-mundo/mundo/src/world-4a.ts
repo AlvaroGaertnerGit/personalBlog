@@ -15,13 +15,22 @@
 // inside the frame (at (0.50, −0.18) it sat on the frame's lower edge).
 
 import type { CameraPose, P2, Places, Station, WorldDef } from "../../../core/world-def.ts"
+import { GAITS } from "../../../core/scope/body/locomotor.ts"
+
+/**
+ * Nearest Scope goes to the camera on his own (ground, m). The margin's approved camera
+ * stands 10 cm above the paper: closer than this, he fills the frame (the 4A audit, H1).
+ */
+const CAMERA_CLEARANCE = 0.34
 
 export const WORLD_PLACES: Places = {
   lantern: { center: [-1.2, -0.4], wallR: 0.105, outerR: 0.14, dishR: 0.08, dishTop: 0.0067 },
   lanternDoor: { outside: [-0.99, -0.4], doorway: [-1.1, -0.4], seat: [-1.2, -0.4] },
   cabinet: { min: [-1.236, -0.688], max: [-1.019, -0.632], look: [-1.1, -0.66, 0.06] },
-  // his ball lives in the margin, his place; its corner is by the cabinet
-  ball: { start: [-0.66, -0.55], radius: 0.03, tidy: [-0.97, -0.75] },
+  // his ball lives in the margin, his place; its corner is by the cabinet. It rests in the
+  // middle ground of the margin's view (~0.5 m from its camera, on the phone too), with
+  // open floor behind it: pushing it toward you he faces you and stays clear of the lens
+  ball: { start: [-0.66, -0.2], radius: 0.03, tidy: [-0.97, -0.75] },
   // the light flower grows in the field of questions: light makes paper legible (rule 4)
   flower: { at: [-0.24, -0.5], baseR: 0.03 },
   radiometer: { at: [0.27, -0.13], baseR: 0.02, bulbR: 0.036, bulbZ: 0.075 },
@@ -47,6 +56,8 @@ const LIGHT_CAM: CameraPose = { pos: [0.88, -0.32, 0.55], target: [0.42, 0.22, 0
 const STATIONS: Station[] = [
   {
     id: "linterna",
+    // light: the Entrega 2 lantern shot (e2-linterna): night, his home lit from within
+    mood: "noche",
     label: "La linterna",
     anchor: [-1.08, -0.46],
     camera: LANTERN_CAM,
@@ -57,6 +68,8 @@ const STATIONS: Station[] = [
   },
   {
     id: "gabinete",
+    // light: leaving home, the dawn of the margin begins (zone 1, El despertar)
+    mood: "amanecer",
     label: "El gabinete",
     anchor: [-1.0, -0.68],
     camera: CABINET_CAM,
@@ -67,27 +80,34 @@ const STATIONS: Station[] = [
   },
   {
     id: "margen",
+    // light: the approved home shot (e2-home): dawn
+    mood: "amanecer",
     label: "El margen",
     anchor: [-0.64, -0.46],
     camera: MARGIN_CAM,
-    // Entrega 1 `home-m`: the phone's own camera of this place
-    portrait: { pos: [-0.7, -0.69, 0.1], target: [-0.62, -0.26, 0.16], lens: 26 },
+    // like the other places: a little further back and higher than its own (the Entrega 1
+    // `home-m` stood 24 cm from you: no room in front of it for Scope and his ball)
+    portrait: portraitOf(MARGIN_CAM),
     wait: [-0.52, -0.34],
     offer: { kind: "nudge", object: "ball" },
     note: "La línea bermellón del margen: donde termina lo escrito y empieza lo que aún no existe. Aquí vive Scope, y aquí juega con su bola de papel.",
   },
   {
     id: "preguntas",
+    // light: toward the lamp's circle, the clear day of e2-dia
+    mood: "dia",
     label: "Las preguntas",
     anchor: [-0.3, -0.22],
     camera: QUESTIONS_CAM,
     portrait: portraitOf(QUESTIONS_CAM),
-    wait: [-0.36, -0.42],
+    wait: [-0.36, -0.385],
     offer: { kind: "shine", object: "flower" },
     note: "El campo de preguntas: cuadernos abiertos y hojas de pie. Entre ellas crece una flor de papel que guarda la luz que recibe.",
   },
   {
     id: "pliegue",
+    // light: the clear day of e2-dia
+    mood: "dia",
     label: "El pliegue largo",
     anchor: [0.05, -0.03],
     camera: FOLD_CAM,
@@ -98,6 +118,8 @@ const STATIONS: Station[] = [
   },
   {
     id: "luz",
+    // light: the lamp's circle by day (e2-dia)
+    mood: "dia",
     label: "La luz",
     anchor: [0.4, 0.14],
     camera: LIGHT_CAM,
@@ -115,9 +137,7 @@ export const WORLD_4A: WorldDef = {
   id: "mundo-4a",
   stations: STATIONS,
   places: WORLD_PLACES,
-  // places here are ~0.4 m apart (the lab's, 0.27 m): a little more room, and a quicker hurry
-  gaits: { trot: { speed: 0.14 }, bound: { speed: 0.3, accel: 0.85, decel: 0.9 } },
-  bands: { tooClose: 0.2, comfort: 0.3, tense: 0.65 },
+  bands: { tooClose: CAMERA_CLEARANCE, comfort: 0.3, tense: 0.65 },
   offscreenLostS: 3,
   settledS: 0.6,
   timing: {
@@ -140,6 +160,17 @@ export const WORLD_4A: WorldDef = {
     const d = Math.hypot(at[0] - POOL.at[0], at[1] - POOL.at[1])
     const k = Math.min(1, Math.max(0, (POOL.r * 1.25 - d) / (POOL.r * 0.75)))
     return mood.lamp * 8 * k // on the rim (k ≈ 0.33): enough to turn the vanes slowly
+  },
+  refine: {
+    cameraClearance: CAMERA_CLEARANCE,
+    // a jump across places is a run toward it, beside a view that travels at his hurry (the
+    // approved gait): a faster view leaves him behind, out of frame (measured: 0.26 m/s already does)
+    followTarget: true,
+    visitorMaxSpeed: GAITS.bound.speed * 0.9,
+    doorFromInside: true,
+    restartBelow: 0.03,
+    finishRun: true,
+    flowerPick: true,
   },
   // he is home when you arrive: seated in his lantern, he comes out to meet you
   start: { at: WORLD_PLACES.lanternDoor.seat, heading: Math.atan2(1, 0) },

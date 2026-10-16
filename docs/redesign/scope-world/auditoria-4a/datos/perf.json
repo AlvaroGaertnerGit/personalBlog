@@ -1,0 +1,169 @@
+[
+  {
+    "label": "visor ready ms",
+    "readyMs": 713
+  },
+  {
+    "label": "visor general",
+    "fps": 1.89,
+    "p95ms": 1966,
+    "worstMs": 1966,
+    "calls": 330,
+    "triangles": 436112,
+    "heapMB": 31
+  },
+  {
+    "label": "visor horizonte",
+    "fps": 21.22,
+    "p95ms": 53,
+    "worstMs": 57,
+    "calls": 16,
+    "triangles": 190196,
+    "heapMB": 25
+  },
+  {
+    "label": "visor margen",
+    "fps": 7.52,
+    "p95ms": 418,
+    "worstMs": 423,
+    "calls": 212,
+    "triangles": 412124,
+    "heapMB": 21
+  },
+  {
+    "label": "visor escala",
+    "fps": 4.6,
+    "p95ms": 418,
+    "worstMs": 423,
+    "calls": 316,
+    "triangles": 431200,
+    "heapMB": 20
+  },
+  {
+    "label": "visor linterna",
+    "fps": 8.79,
+    "p95ms": 334,
+    "worstMs": 336,
+    "calls": 27,
+    "triangles": 178095,
+    "heapMB": 19
+  },
+  {
+    "label": "lab ready ms",
+    "readyMs": 554
+  },
+  {
+    "label": "lab 0",
+    "fps": 7.1,
+    "p95ms": 280,
+    "worstMs": 782,
+    "calls": 34,
+    "triangles": 179753,
+    "heapMB": 21
+  },
+  {
+    "label": "lab 1",
+    "fps": 9.64,
+    "p95ms": 125,
+    "worstMs": 154,
+    "calls": 53,
+    "triangles": 182319,
+    "heapMB": 21
+  },
+  {
+    "label": "lab 2",
+    "fps": 8.75,
+    "p95ms": 136,
+    "worstMs": 259,
+    "calls": 83,
+    "triangles": 188561,
+    "heapMB": 20
+  },
+  {
+    "label": "lab 3",
+    "fps": 8.17,
+    "p95ms": 141,
+    "worstMs": 283,
+    "calls": 117,
+    "triangles": 206328,
+    "heapMB": 21
+  },
+  {
+    "label": "lab 4",
+    "fps": 8.56,
+    "p95ms": 137,
+    "worstMs": 139,
+    "calls": 166,
+    "triangles": 211336,
+    "heapMB": 20
+  },
+  {
+    "label": "4A ready ms",
+    "readyMs": 784
+  },
+  {
+    "label": "4A 0",
+    "fps": 7.76,
+    "p95ms": 205,
+    "worstMs": 697,
+    "calls": 34,
+    "triangles": 179753,
+    "heapMB": 23
+  },
+  {
+    "label": "4A 1",
+    "fps": 9.66,
+    "p95ms": 121,
+    "worstMs": 145,
+    "calls": 53,
+    "triangles": 182319,
+    "heapMB": 23
+  },
+  {
+    "label": "4A 2",
+    "fps": 7.7,
+    "p95ms": 177,
+    "worstMs": 315,
+    "calls": 101,
+    "triangles": 203722,
+    "heapMB": 25
+  },
+  {
+    "label": "4A 3",
+    "fps": 6.68,
+    "p95ms": 177,
+    "worstMs": 503,
+    "calls": 164,
+    "triangles": 211644,
+    "heapMB": 22
+  },
+  {
+    "label": "4A 4",
+    "fps": 7.08,
+    "p95ms": 153,
+    "worstMs": 170,
+    "calls": 158,
+    "triangles": 210154,
+    "heapMB": 21
+  },
+  {
+    "label": "4A 5",
+    "fps": 7.23,
+    "p95ms": 151,
+    "worstMs": 152,
+    "calls": 133,
+    "triangles": 208022,
+    "heapMB": 21
+  },
+  {
+    "label": "4A load",
+    "load": {
+      "loadMs": 184,
+      "envTris": 52657,
+      "envBytes": 1155056,
+      "worldTris": 65979,
+      "worldBytes": 2264200
+    },
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  }
+]

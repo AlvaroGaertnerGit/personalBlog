@@ -64,6 +64,8 @@ export interface Perception {
     /** Route parameter (0..stations-1) and its rate (stations/s). */
     s: number
     sVel: number
+    /** Where the camera is going (route parameter); read only with WorldDef.refine.followTarget. */
+    target?: number
     /** Station the camera is at or settling on. */
     zone: number
     /** The camera has been still for the world's settledS. */

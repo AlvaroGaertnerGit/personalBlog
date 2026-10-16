@@ -19,7 +19,7 @@
   ],
   "stats": {
     "triangles": 118636,
-    "inRegion": 71665,
+    "inRegion": 69097,
     "byMaterial": {
       "web_Axis_Porcelain": 1104,
       "web_Paper_local_paused": 12,
@@ -64,24 +64,19 @@
       "web_Thread_Red": 1200,
       "Found_Wood": 92,
       "Paper_Standing": 48,
-      "Radio_White": 52,
-      "Radio_Black": 24,
-      "Radio_Mirror": 36,
       "Scope_Dish": 188,
       "Found_Steel": 84,
-      "Radio_Porcelain": 248,
       "Found_Porcelain": 20,
       "Paper_World": 10,
       "Paper_Lantern": 376,
       "Found_Ink": 960,
       "Found_Graphite": 168,
-      "Radio_Glass": 2208,
       "Found_Paint": 1152,
       "Trail_Graphite": 20
     },
-    "upSamples": 251393,
-    "solidSamples": 4250202,
-    "walkable": 64116,
-    "walkableM2": 6.41
+    "upSamples": 251305,
+    "solidSamples": 4240878,
+    "walkable": 64384,
+    "walkableM2": 6.44
   }
 }

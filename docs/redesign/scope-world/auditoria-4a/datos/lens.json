@@ -1,0 +1,992 @@
+[
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 0,
+    "minHeadToLensCm": 69.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 1,
+    "minHeadToLensCm": 69.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 2,
+    "minHeadToLensCm": 69.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 3,
+    "minHeadToLensCm": 69.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 4,
+    "minHeadToLensCm": 69.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 0,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 1,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 2,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 3,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 4,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 0,
+    "minHeadToLensCm": 24.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 4
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 1,
+    "minHeadToLensCm": 24.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 4
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 2,
+    "minHeadToLensCm": 24.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 4
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 3,
+    "minHeadToLensCm": 24.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 4
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 4,
+    "minHeadToLensCm": 24.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 4
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 0,
+    "minHeadToLensCm": 31.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 1,
+    "minHeadToLensCm": 31.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 2,
+    "minHeadToLensCm": 31.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 3,
+    "minHeadToLensCm": 31.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 4,
+    "minHeadToLensCm": 31.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 0,
+    "minHeadToLensCm": 67.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 1,
+    "minHeadToLensCm": 67.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 2,
+    "minHeadToLensCm": 67.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 3,
+    "minHeadToLensCm": 67.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 4,
+    "minHeadToLensCm": 67.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 5,
+    "run": 0,
+    "minHeadToLensCm": 83.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 5,
+    "run": 1,
+    "minHeadToLensCm": 83.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 5,
+    "run": 2,
+    "minHeadToLensCm": 83.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 5,
+    "run": 3,
+    "minHeadToLensCm": 83.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "desktop",
+    "lugar": 5,
+    "run": 4,
+    "minHeadToLensCm": 83.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 0,
+    "run": 0,
+    "minHeadToLensCm": 86.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 0,
+    "run": 1,
+    "minHeadToLensCm": 86.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 0,
+    "run": 2,
+    "minHeadToLensCm": 86.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 0,
+    "run": 3,
+    "minHeadToLensCm": 86.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 0,
+    "run": 4,
+    "minHeadToLensCm": 86.9,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 1,
+    "run": 0,
+    "minHeadToLensCm": 88.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 1,
+    "run": 1,
+    "minHeadToLensCm": 88.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 1,
+    "run": 2,
+    "minHeadToLensCm": 88.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 1,
+    "run": 3,
+    "minHeadToLensCm": 88.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 1,
+    "run": 4,
+    "minHeadToLensCm": 88.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 2,
+    "run": 0,
+    "minHeadToLensCm": 5.8,
+    "sWithin15cm": 3.9,
+    "sNotVisible": 12.3
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 2,
+    "run": 1,
+    "minHeadToLensCm": 5.8,
+    "sWithin15cm": 3.9,
+    "sNotVisible": 11.9
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 2,
+    "run": 2,
+    "minHeadToLensCm": 5.8,
+    "sWithin15cm": 3.9,
+    "sNotVisible": 11.5
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 2,
+    "run": 3,
+    "minHeadToLensCm": 5.8,
+    "sWithin15cm": 3.9,
+    "sNotVisible": 11.5
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 2,
+    "run": 4,
+    "minHeadToLensCm": 5.8,
+    "sWithin15cm": 3.9,
+    "sNotVisible": 11.6
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 3,
+    "run": 0,
+    "minHeadToLensCm": 52.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 3,
+    "run": 1,
+    "minHeadToLensCm": 52.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 3,
+    "run": 2,
+    "minHeadToLensCm": 51.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 3,
+    "run": 3,
+    "minHeadToLensCm": 52.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 3,
+    "run": 4,
+    "minHeadToLensCm": 52.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 4,
+    "run": 0,
+    "minHeadToLensCm": 97,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 4,
+    "run": 1,
+    "minHeadToLensCm": 97,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 4,
+    "run": 2,
+    "minHeadToLensCm": 97,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 4,
+    "run": 3,
+    "minHeadToLensCm": 97,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 4,
+    "run": 4,
+    "minHeadToLensCm": 97,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 5,
+    "run": 0,
+    "minHeadToLensCm": 102.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 5,
+    "run": 1,
+    "minHeadToLensCm": 102.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 5,
+    "run": 2,
+    "minHeadToLensCm": 102.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 5,
+    "run": 3,
+    "minHeadToLensCm": 102.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "4A",
+    "device": "phone",
+    "lugar": 5,
+    "run": 4,
+    "minHeadToLensCm": 102.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 0,
+    "minHeadToLensCm": 64.6,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 1,
+    "minHeadToLensCm": 64.6,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 2,
+    "minHeadToLensCm": 64.6,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 3,
+    "minHeadToLensCm": 64.6,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 0,
+    "run": 4,
+    "minHeadToLensCm": 64.6,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 0,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 1,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 2,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 3,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 1,
+    "run": 4,
+    "minHeadToLensCm": 71.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 0,
+    "minHeadToLensCm": 65.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 1,
+    "minHeadToLensCm": 65.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 2,
+    "minHeadToLensCm": 65.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 3,
+    "minHeadToLensCm": 65.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 2,
+    "run": 4,
+    "minHeadToLensCm": 65.2,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 0,
+    "minHeadToLensCm": 69.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 1,
+    "minHeadToLensCm": 69.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 2,
+    "minHeadToLensCm": 69.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 3,
+    "minHeadToLensCm": 69.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 3,
+    "run": 4,
+    "minHeadToLensCm": 69.3,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 0,
+    "minHeadToLensCm": 70.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 1,
+    "minHeadToLensCm": 70.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 2,
+    "minHeadToLensCm": 70.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 3,
+    "minHeadToLensCm": 70.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "desktop",
+    "lugar": 4,
+    "run": 4,
+    "minHeadToLensCm": 70.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 0,
+    "run": 0,
+    "minHeadToLensCm": 107.1,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 0,
+    "run": 1,
+    "minHeadToLensCm": 107.1,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 0,
+    "run": 2,
+    "minHeadToLensCm": 107.1,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 0,
+    "run": 3,
+    "minHeadToLensCm": 107.1,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 0,
+    "run": 4,
+    "minHeadToLensCm": 107.1,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 1,
+    "run": 0,
+    "minHeadToLensCm": 111.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 1,
+    "run": 1,
+    "minHeadToLensCm": 111.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 1,
+    "run": 2,
+    "minHeadToLensCm": 111.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 1,
+    "run": 3,
+    "minHeadToLensCm": 111.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 1,
+    "run": 4,
+    "minHeadToLensCm": 111.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 2,
+    "run": 0,
+    "minHeadToLensCm": 91.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 2,
+    "run": 1,
+    "minHeadToLensCm": 91.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 2,
+    "run": 2,
+    "minHeadToLensCm": 91.8,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 2,
+    "run": 3,
+    "minHeadToLensCm": 91.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 2,
+    "run": 4,
+    "minHeadToLensCm": 91.7,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 3,
+    "run": 0,
+    "minHeadToLensCm": 105.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 3,
+    "run": 1,
+    "minHeadToLensCm": 105.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 3,
+    "run": 2,
+    "minHeadToLensCm": 105.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 3,
+    "run": 3,
+    "minHeadToLensCm": 105.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 3,
+    "run": 4,
+    "minHeadToLensCm": 105.4,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 4,
+    "run": 0,
+    "minHeadToLensCm": 107.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 4,
+    "run": 1,
+    "minHeadToLensCm": 107.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 4,
+    "run": 2,
+    "minHeadToLensCm": 107.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 4,
+    "run": 3,
+    "minHeadToLensCm": 107.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  },
+  {
+    "world": "lab",
+    "device": "phone",
+    "lugar": 4,
+    "run": 4,
+    "minHeadToLensCm": 107.5,
+    "sWithin15cm": 0,
+    "sNotVisible": 0
+  }
+]

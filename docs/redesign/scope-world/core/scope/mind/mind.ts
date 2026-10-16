@@ -54,6 +54,10 @@ interface Running extends Behavior {
 }
 
 const STILL: Act = { kind: "idle" }
+/** A jump: the visitor is going more than this many places away (refine.followTarget)... */
+const JUMP = 1.2
+/** ...and he runs this far ahead of the view (places), toward where you are going. */
+const JUMP_LEAD = 1
 const VISITOR: Look = { kind: "visitor" }
 const lookAt = (id: ObjectId): Look => ({ kind: "object", id })
 const fmt = (n: number) => n.toFixed(2).replace(".", ",")
@@ -245,7 +249,8 @@ export class ScopeMind {
       return { key: "salir", group: "compania", state: "salir del refugio", reason: moving ? "te pones en marcha: se asoma y sale" : "has vuelto: sale a verte", steps: [{ kind: "unfit" }] }
     // guiding is for a walk to the next place; a jump across the route is a regroup
     const heading = v.s + v.sVel * 0.6
-    if (moving && v.sVel > 0.1 && v.sVel < 1 && heading < Math.floor(v.s + 1e-6) + 1.6 && !p.reduced) {
+    const jump = this.jump(p)
+    if (moving && v.sVel > 0.1 && v.sVel < 1 && heading < Math.floor(v.s + 1e-6) + 1.6 && !p.reduced && jump === null) {
       const j = Math.min(this.def.stations.length - 1, Math.floor(v.s + 1e-6) + 1)
       const zj = this.memory.zones[j]
       const offer = this.def.stations[j].offer
@@ -256,7 +261,7 @@ export class ScopeMind {
     // going home): that errand ends in view; only real distance cuts it short
     const errand = !!this.cur && !this.cur.finished && (this.cur.group === "curiosidad" || this.cur.group === "respuesta" || this.cur.key === "refugio")
     if (band === "perdido" || (offscreenFor > this.def.offscreenLostS && !errand)) {
-      const slot = moving ? slotWhileMoving(this.def, v.s, v.sVel, true, v.eye) : slotWhenSettled(this.def, v.zone, scope.at, v.anchor, false).at
+      const slot = moving ? slotWhileMoving(this.def, v.s, v.sVel, true, v.eye, jump ?? undefined) : slotWhenSettled(this.def, v.zone, scope.at, v.anchor, false).at
       const why = offscreenFor > this.def.offscreenLostS ? `lleva ${offscreenFor.toFixed(1)} s fuera de cuadro` : `está a ${fmt(d)} m de ti`
       return {
         key: "reagrupar",
@@ -276,7 +281,7 @@ export class ScopeMind {
     if (moving) {
       const visitorSpeed = Math.abs(v.sVel) * segmentLength(this.def, v.s)
       const ahead = v.sVel > 0
-      const slot = slotWhileMoving(this.def, v.s, v.sVel, ahead, v.eye)
+      const slot = slotWhileMoving(this.def, v.s, v.sVel, ahead, v.eye, jump ?? undefined)
       const ds = dist(scope.at, slot)
       const gait: Gait = ds > 0.3 || visitorSpeed > 0.16 ? "bound" : ds > 0.1 || visitorSpeed > 0.07 ? "trot" : "walk"
       return {
@@ -309,13 +314,15 @@ export class ScopeMind {
     const busyCurious = !!this.cur && !this.cur.finished && (this.cur.group === "curiosidad" || this.cur.group === "respuesta" || this.cur.key === "refugio")
     if (v.settled && !busyCurious && (band === "tensa" || band === "cerca" || (!scope.visible && !scope.inRefuge))) {
       const spot = slotWhenSettled(this.def, v.zone, scope.at, v.anchor, scope.visible, v.eye)
+      // (refine.cameraClearance: too close and out of sight is beside or behind the lens, not a step from you: he trots back into view)
+      const besideLens = band === "cerca" && !scope.visible && !!this.def.refine?.cameraClearance
       if (!spot.stay && !scope.inRefuge)
         return {
           key: `volver:${v.zone}`,
           group: "compania",
           state: "volver a tu lado",
-          reason: band === "cerca" ? "está demasiado cerca de ti: se aparta un paso" : `te has parado a ${fmt(d)} m: vuelve sin prisa`,
-          steps: [{ kind: "go", goal: spot.at, gait: band === "cerca" ? "walk" : "trot", face: VISITOR, follow: false }],
+          reason: besideLens ? "está junto a la cámara, fuera de cuadro: vuelve a donde lo ves" : band === "cerca" ? "está demasiado cerca de ti: se aparta un paso" : `te has parado a ${fmt(d)} m: vuelve sin prisa`,
+          steps: [{ kind: "go", goal: spot.at, gait: band === "cerca" && !besideLens ? "walk" : "trot", face: VISITOR, follow: false }],
         }
     }
 
@@ -352,6 +359,17 @@ export class ScopeMind {
 
     // 0 · reposo
     return { key: "reposo", group: "reposo", state: "reposo", reason: band === "comoda" ? `a tu lado (${fmt(d)} m), tranquilo` : "tranquilo", steps: [STILL], hold: true, keep: () => true }
+  }
+
+  /**
+   * With refine.followTarget: how far ahead (places) to run while you jump across the
+   * route toward a place more than one away; null when it is a walk to the next one.
+   */
+  private jump(p: Perception): number | null {
+    const v = p.visitor
+    if (!this.def.refine?.followTarget || v.target === undefined) return null
+    const left = v.target - v.s
+    return Math.abs(left) > JUMP ? Math.sign(left) * Math.min(Math.abs(left), JUMP_LEAD) : null
   }
 
   private visitorActive(p: Perception) {
@@ -455,7 +473,9 @@ export class ScopeMind {
       alternate: object,
       // he waits there while you are on your way; once you stop, the places decide
       // (if you stopped there, "enseñar" takes over at once)
-      keep: (q) => !q.visitor.settled && q.visitor.sVel > -0.06,
+      // (refine.finishRun: if you stop before he gets there, he still finishes his run)
+      // (refine.followTarget: if you are going past it, he stops waiting there)
+      keep: (q) => (!q.visitor.settled && q.visitor.sVel > -0.06 && !(this.def.refine?.followTarget && q.visitor.target !== undefined && Math.round(q.visitor.target) > j)) || (!!this.def.refine?.finishRun && q.scope.act.kind === "go" && !q.scope.act.done && Math.abs(q.visitor.sVel) < 0.06 && q.visitor.zone === j),
       onStart: () => (this.memory.zones[j].guided = true),
     }
   }
@@ -537,7 +557,14 @@ export class ScopeMind {
   /** In front of your anchor, toward the camera, where the floor is open. */
   private towardYou(p: Perception): P2 {
     const a = anchorAt(this.def, p.visitor.s)
-    return [a[0] + (p.visitor.eye[0] - a[0]) * 0.25, a[1] + (p.visitor.eye[1] - a[1]) * 0.25]
+    const e = p.visitor.eye
+    const t: P2 = [a[0] + (e[0] - a[0]) * 0.25, a[1] + (e[1] - a[1]) * 0.25]
+    // with a camera clearance the ball comes toward you but stops before the camera's foreground
+    const clear = this.def.refine?.cameraClearance
+    const d = dist(t, e)
+    if (!clear || d >= clear + this.def.places.ball.radius || d < 1e-6) return t
+    const k = (clear + this.def.places.ball.radius) / d
+    return [e[0] + (t[0] - e[0]) * k, e[1] + (t[1] - e[1]) * k]
   }
 
   private inspect(p: Perception): Behavior | null {

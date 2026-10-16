@@ -1,0 +1,163 @@
+{
+  "clicks": [
+    {
+      "world": "4A",
+      "what": "scope",
+      "lugar": 2,
+      "attempt": 2,
+      "point": {
+        "x": 1349,
+        "y": 598,
+        "inFront": true
+      },
+      "reacted": false,
+      "fresh": []
+    },
+    {
+      "world": "4A",
+      "what": "ball",
+      "lugar": 2,
+      "attempt": 0,
+      "point": {
+        "x": 910,
+        "y": 726,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 acudir: señalas la bola: va a empujarla hacia ti"
+      ]
+    },
+    {
+      "world": "4A",
+      "what": "flower",
+      "lugar": 3,
+      "attempt": 2,
+      "point": {
+        "x": 901,
+        "y": 615,
+        "inFront": true
+      },
+      "reacted": false,
+      "fresh": []
+    },
+    {
+      "world": "4A",
+      "what": "radiometer",
+      "lugar": 5,
+      "attempt": 0,
+      "point": {
+        "x": 150,
+        "y": 524,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 acudir: señalas el radiómetro: va a iluminarlo"
+      ]
+    },
+    {
+      "world": "4A",
+      "what": "scope",
+      "lugar": 0,
+      "attempt": 0,
+      "point": {
+        "x": 576,
+        "y": 472,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 reacción al clic: le has tocado: se gira hacia ti y reacciona",
+        "22.9 reposo: a tu lado (0,10 m), tranquilo"
+      ]
+    },
+    {
+      "world": "4A",
+      "what": "scope",
+      "lugar": 5,
+      "attempt": 0,
+      "point": {
+        "x": 303,
+        "y": 451,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 reacción al clic: le has tocado: se gira hacia ti y reacciona",
+        "23.2 reposo: a tu lado (0,21 m), tranquilo"
+      ]
+    },
+    {
+      "world": "lab",
+      "what": "scope",
+      "lugar": 2,
+      "attempt": 0,
+      "point": {
+        "x": 890,
+        "y": 493,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 reacción al clic: le has tocado: se gira hacia ti y reacciona"
+      ]
+    },
+    {
+      "world": "lab",
+      "what": "ball",
+      "lugar": 2,
+      "attempt": 0,
+      "point": {
+        "x": 728,
+        "y": 550,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 acudir: señalas la bola: va a empujarla hacia ti"
+      ]
+    },
+    {
+      "world": "lab",
+      "what": "flower",
+      "lugar": 3,
+      "attempt": 0,
+      "point": {
+        "x": 773,
+        "y": 445,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 acudir: señalas el suelo cerca de él: va a ver qué hay"
+      ]
+    },
+    {
+      "world": "lab",
+      "what": "radiometer",
+      "lugar": 4,
+      "attempt": 0,
+      "point": {
+        "x": 779,
+        "y": 433,
+        "inFront": true
+      },
+      "reacted": true,
+      "fresh": [
+        "20.1 acudir: señalas el radiómetro: va a iluminarlo"
+      ]
+    }
+  ],
+  "keys": {
+    "start": 0,
+    "right": 1,
+    "right2": 2,
+    "left": 1,
+    "end": 5,
+    "home": 0,
+    "enterOnPlace3": 3,
+    "focusableOverWorld": 0
+  },
+  "errors": []
+}

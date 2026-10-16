@@ -1,0 +1,500 @@
+{
+  "clicks": [
+    {
+      "target": "scope",
+      "box": {
+        "n": 39717,
+        "cx": 1322.2009215197522,
+        "cy": 728.1370194123423,
+        "box": [
+          1036,
+          78,
+          1439,
+          885
+        ]
+      },
+      "clickAt": [
+        1322.2009215197522,
+        728.1370194123423
+      ],
+      "before": {
+        "n": 6,
+        "last": [
+          {
+            "t": 10.600000000000106,
+            "text": "investigar: te has quedado aquí: se acerca a la bola a mirarlo (Tilt)"
+          }
+        ]
+      },
+      "after": [
+        {
+          "t": 0.6000000000000002,
+          "text": "llegas por primera vez a «El margen»"
+        },
+        {
+          "t": 1.816666666666665,
+          "text": "enseñar: la bola de papel: te la acerca empujándola con la cara"
+        },
+        {
+          "t": 6.633333333333315,
+          "text": "reagrupar: lleva 3.4 s fuera de cuadro: vuelve con prisa"
+        },
+        {
+          "t": 9.916666666666739,
+          "text": "reposo: a tu lado (0,17 m), tranquilo"
+        },
+        {
+          "t": 10.600000000000106,
+          "text": "investigar: te has quedado aquí: se acerca a la bola a mirarlo (Tilt)"
+        },
+        {
+          "t": 16.700000000000333,
+          "text": "reposo: a tu lado (0,07 m), tranquilo"
+        }
+      ]
+    },
+    {
+      "target": "ball",
+      "box": {
+        "n": 47282,
+        "cx": 1219.3001776574595,
+        "cy": 727.4261452561228,
+        "box": [
+          785,
+          78,
+          1439,
+          899
+        ]
+      },
+      "clickAt": [
+        1219.3001776574595,
+        727.4261452561228
+      ],
+      "before": {
+        "n": 6,
+        "last": [
+          {
+            "t": 10.600000000000106,
+            "text": "investigar: te has quedado aquí: se acerca a la bola a mirarlo (LookAround)"
+          }
+        ]
+      },
+      "after": [
+        {
+          "t": 0.6000000000000002,
+          "text": "llegas por primera vez a «El margen»"
+        },
+        {
+          "t": 1.816666666666665,
+          "text": "enseñar: la bola de papel: te la acerca empujándola con la cara"
+        },
+        {
+          "t": 6.633333333333315,
+          "text": "reagrupar: lleva 3.4 s fuera de cuadro: vuelve con prisa"
+        },
+        {
+          "t": 9.916666666666739,
+          "text": "reposo: a tu lado (0,17 m), tranquilo"
+        },
+        {
+          "t": 10.600000000000106,
+          "text": "investigar: te has quedado aquí: se acerca a la bola a mirarlo (LookAround)"
+        },
+        {
+          "t": 17.233333333333636,
+          "text": "reposo: a tu lado (0,07 m), tranquilo"
+        }
+      ]
+    },
+    {
+      "target": "flower",
+      "box": {
+        "n": 99764,
+        "cx": 657.7734854256045,
+        "cy": 588.5624573994627,
+        "box": [
+          444,
+          123,
+          1397,
+          806
+        ]
+      },
+      "clickAt": [
+        657.7734854256045,
+        588.5624573994627
+      ],
+      "before": {
+        "n": 5,
+        "last": [
+          {
+            "t": 10.600000000000106,
+            "text": "investigar: te has quedado aquí: se acerca a la flor a mirarlo (Tilt)"
+          }
+        ]
+      },
+      "after": [
+        {
+          "t": 0.6000000000000002,
+          "text": "llegas por primera vez a «Las preguntas»"
+        },
+        {
+          "t": 1.816666666666665,
+          "text": "enseñar: la flor: lo activa con su luz para que lo veas"
+        },
+        {
+          "t": 9.150000000000034,
+          "text": "reposo: a tu lado (0,18 m), tranquilo"
+        },
+        {
+          "t": 10.600000000000106,
+          "text": "investigar: te has quedado aquí: se acerca a la flor a mirarlo (Tilt)"
+        },
+        {
+          "t": 16.733333333333665,
+          "text": "reacción al clic: le has tocado de camino: se para, te mira, un saltito y sigue"
+        },
+        {
+          "t": 18.983333333333537,
+          "text": "reposo: a tu lado (0,20 m), tranquilo"
+        }
+      ]
+    },
+    {
+      "target": "radiometer",
+      "box": {
+        "n": 8674,
+        "cx": 287.89163015909617,
+        "cy": 527.5390823149643,
+        "box": [
+          101,
+          101,
+          1327,
+          644
+        ]
+      },
+      "clickAt": [
+        287.89163015909617,
+        527.5390823149643
+      ],
+      "before": {
+        "n": 6,
+        "last": [
+          {
+            "t": 13.76666666666693,
+            "text": "reposo: a tu lado (0,21 m), tranquilo"
+          }
+        ]
+      },
+      "after": [
+        {
+          "t": 0.6000000000000002,
+          "text": "llegas por primera vez a «La luz»"
+        },
+        {
+          "t": 1.816666666666665,
+          "text": "enseñar: el radiómetro: lo activa con su luz para que lo veas"
+        },
+        {
+          "t": 9.600000000000056,
+          "text": "reposo: a tu lado (0,20 m), tranquilo"
+        },
+        {
+          "t": 10.600000000000106,
+          "text": "investigar: te has quedado aquí: se acerca al radiómetro a mirarlo (Tilt)"
+        },
+        {
+          "t": 13.76666666666693,
+          "text": "reposo: a tu lado (0,21 m), tranquilo"
+        },
+        {
+          "t": 16.16666666666703,
+          "text": "reacción al clic: le has tocado: se gira hacia ti y reacciona"
+        }
+      ]
+    },
+    {
+      "target": "lantern",
+      "box": {
+        "n": 29469,
+        "cx": 718.2535545827819,
+        "cy": 265.1814449082086,
+        "box": [
+          413,
+          32,
+          1352,
+          627
+        ]
+      },
+      "clickAt": [
+        718.2535545827819,
+        265.1814449082086
+      ],
+      "before": {
+        "n": 8,
+        "last": [
+          {
+            "t": 16.383333333333685,
+            "text": "te mira una vez: llevas 16 s sin hacer nada"
+          }
+        ]
+      },
+      "after": [
+        {
+          "t": 4.133333333333324,
+          "text": "enseñar: estás en su casa: te la enseña"
+        },
+        {
+          "t": 8.04999999999998,
+          "text": "reposo: a tu lado (0,11 m), tranquilo"
+        },
+        {
+          "t": 10.600000000000106,
+          "text": "investigar: te has quedado aquí: se acerca al gabinete a mirarlo (Tilt)"
+        },
+        {
+          "t": 16.1333333333337,
+          "text": "reposo: a tu lado (0,10 m), tranquilo"
+        },
+        {
+          "t": 16.383333333333685,
+          "text": "te mira una vez: llevas 16 s sin hacer nada"
+        },
+        {
+          "t": 16.533333333333676,
+          "text": "refugio: señalas su casa: entra a descansar"
+        }
+      ]
+    }
+  ],
+  "navigation": {
+    "s0": {
+      "s": 0,
+      "sVel": 0,
+      "zone": 0,
+      "settled": false,
+      "anchor": [
+        -1.08,
+        -0.46
+      ]
+    },
+    "afterWheel": {
+      "s": 0.5847253312632088,
+      "sVel": 0.7756488506421442,
+      "zone": 1,
+      "settled": false,
+      "anchor": [
+        -1.0332219734989434,
+        -0.5886395728779059
+      ]
+    },
+    "afterDrag": {
+      "s": 1.5968709838604633,
+      "sVel": 0.5028586925511566,
+      "zone": 2,
+      "settled": false,
+      "anchor": [
+        -0.7851264458102332,
+        -0.5486883835506982
+      ]
+    },
+    "afterRight": {
+      "s": 2.026883302104296,
+      "sVel": 1.2480941651194712,
+      "zone": 2,
+      "settled": false,
+      "anchor": [
+        -0.6308596772845394,
+        -0.453548007494969
+      ]
+    },
+    "afterLeft": {
+      "s": 2.2007491812663114,
+      "sVel": 0.14117456464244194,
+      "zone": 2,
+      "settled": false,
+      "anchor": [
+        -0.5717452783694541,
+        -0.4118201964960853
+      ]
+    },
+    "afterEnd": {
+      "s": 2.4622693979314016,
+      "sVel": 2.072179770004829,
+      "zone": 2,
+      "settled": false,
+      "anchor": [
+        -0.48282840470332344,
+        -0.3490553444964636
+      ]
+    },
+    "afterHome": {
+      "s": 2.582654926141365,
+      "sVel": -1.9741952982699265,
+      "zone": 3,
+      "settled": false,
+      "anchor": [
+        -0.44189732511193586,
+        -0.32016281772607236
+      ]
+    },
+    "noteVisible": "La línea bermellón del margen: donde termina lo escrito y empieza lo que aún no existe. Aquí vive Scope, y aquí juega con su bola de papel.",
+    "focus": [
+      {
+        "tag": "BUTTON",
+        "text": "Las preguntas",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "El pliegue largo",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "La luz",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Opciones",
+        "outline": "auto 1px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Leer la nota (L)",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Luz: Atardecer",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Tiempo ×1",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Depuración (D)",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Reiniciar",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BODY",
+        "text": "Scope está en su linterna. Cargando el m",
+        "outline": "none 3px"
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Scope World · 4A",
+        "outline": "auto 1px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "La linterna",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "El gabinete",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "El margen",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Las preguntas",
+        "outline": "solid 2px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "El pliegue largo",
+        "outline": "solid 2px"
+      }
+    ],
+    "aria": {
+      "live": "polite",
+      "canvasLabel": "El mundo de Scope en 3D. Scope te acompaña por seis lugares; puedes tocarle a él y a los objetos.",
+      "lang": "es",
+      "buttons": [
+        "Cerrar",
+        "La linterna",
+        "El gabinete",
+        "El margen",
+        "Las preguntas",
+        "El pliegue largo",
+        "La luz",
+        "Leer la nota (L)",
+        "Luz: Atardecer",
+        "Tiempo ×1",
+        "Depuración (D)",
+        "Reiniciar"
+      ]
+    },
+    "moodLabel": "Luz: Noche",
+    "afterReload": {
+      "now": 0,
+      "at": [
+        -1.2,
+        -0.4
+      ],
+      "zone": 0,
+      "mood": "Luz: Atardecer"
+    }
+  },
+  "reducedMedia": {
+    "maxSpeed": 0,
+    "d": 0.20880613017821092,
+    "clips": [],
+    "camS": 3
+  },
+  "phone": [
+    {
+      "zone": 0,
+      "visible": true,
+      "d": 0.11,
+      "state": "reposo"
+    },
+    {
+      "zone": 1,
+      "visible": true,
+      "d": 0.15,
+      "state": "enseñar"
+    },
+    {
+      "zone": 2,
+      "visible": false,
+      "d": 0.19,
+      "state": "enseñar"
+    },
+    {
+      "zone": 3,
+      "visible": true,
+      "d": 0.18,
+      "state": "enseñar"
+    },
+    {
+      "zone": 4,
+      "visible": true,
+      "d": 0.12,
+      "state": "reposo"
+    },
+    {
+      "zone": 5,
+      "visible": true,
+      "d": 0.19,
+      "state": "enseñar"
+    },
+    {
+      "tapZone": 2
+    }
+  ]
+}

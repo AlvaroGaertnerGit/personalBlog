@@ -167,8 +167,10 @@ for (const file of SOURCES) {
     const minX = Math.min(a[0], b[0], c[0]), maxX = Math.max(a[0], b[0], c[0])
     const minY = Math.min(a[1], b[1], c[1]), maxY = Math.max(a[1], b[1], c[1])
     if (maxX < REGION.x0 || minX > REGION.x1 || maxY < REGION.y0 || minY > REGION.y1) continue
-    stats.inRegion++
     const kind = mat.replace(/\.\d+$/, "")
+    // the world does not draw the 2.0 radiometer (core/env/stage.ts, withoutRadiometer): it is not there to bump into
+    if (kind.startsWith("Radio_")) continue
+    stats.inRegion++
     stats.byMaterial[kind] = (stats.byMaterial[kind] ?? 0) + 1
     const ux = b[0] - a[0], uy = b[1] - a[1], uz = b[2] - a[2]
     const vx = c[0] - a[0], vy = c[1] - a[1], vz = c[2] - a[2]

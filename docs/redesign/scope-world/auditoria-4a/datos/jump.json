@@ -1,0 +1,174 @@
+{
+  "4A": [
+    {
+      "there": {
+        "worstLostS": 8.8,
+        "arriveS": 9.5,
+        "maxSpeedCmS": 30
+      },
+      "back": {
+        "worstLostS": 6.9,
+        "arriveS": 8.4,
+        "maxSpeedCmS": 30
+      },
+      "wheelFwd": {
+        "worstLostS": 1.6,
+        "arriveS": 2.9,
+        "maxSpeedCmS": 30
+      },
+      "wheelBack": {
+        "worstLostS": 1.2,
+        "arriveS": 3,
+        "maxSpeedCmS": 30
+      },
+      "log": [
+        "vuelves a «La linterna» (visita 3)",
+        "reposo: a tu lado (0,09 m), tranquilo",
+        "recordar: vuelves a «La linterna»: se acuerda de su casa",
+        "reposo: a tu lado (0,09 m), tranquilo"
+      ]
+    },
+    {
+      "there": {
+        "worstLostS": 8.8,
+        "arriveS": 9.5,
+        "maxSpeedCmS": 30
+      },
+      "back": {
+        "worstLostS": 7.3,
+        "arriveS": 8.8,
+        "maxSpeedCmS": 30
+      },
+      "wheelFwd": {
+        "worstLostS": 2.3,
+        "arriveS": 2.9,
+        "maxSpeedCmS": 30
+      },
+      "wheelBack": {
+        "worstLostS": 1.2,
+        "arriveS": 3,
+        "maxSpeedCmS": 30
+      },
+      "log": [
+        "reposo: a tu lado (0,09 m), tranquilo",
+        "recordar: vuelves a «La linterna»: se acuerda de su casa",
+        "reposo: a tu lado (0,09 m), tranquilo",
+        "investigar: te has quedado aquí: se acerca al gabinete a mirarlo (LookAround)"
+      ]
+    },
+    {
+      "there": {
+        "worstLostS": 8.8,
+        "arriveS": 9.5,
+        "maxSpeedCmS": 30
+      },
+      "back": {
+        "worstLostS": 7.2,
+        "arriveS": 8.7,
+        "maxSpeedCmS": 30
+      },
+      "wheelFwd": {
+        "worstLostS": 2.3,
+        "arriveS": 2.9,
+        "maxSpeedCmS": 30
+      },
+      "wheelBack": {
+        "worstLostS": 1.2,
+        "arriveS": 3,
+        "maxSpeedCmS": 30
+      },
+      "log": [
+        "reposo: a tu lado (0,09 m), tranquilo",
+        "recordar: vuelves a «La linterna»: se acuerda de su casa",
+        "reposo: a tu lado (0,09 m), tranquilo",
+        "investigar: te has quedado aquí: se acerca al gabinete a mirarlo (Tilt)"
+      ]
+    }
+  ],
+  "lab": [
+    {
+      "there": {
+        "worstLostS": 4.7,
+        "arriveS": 6.4,
+        "maxSpeedCmS": 22
+      },
+      "back": {
+        "worstLostS": 2.2,
+        "arriveS": 3.7,
+        "maxSpeedCmS": 22
+      },
+      "wheelFwd": {
+        "worstLostS": 0,
+        "arriveS": 2.6,
+        "maxSpeedCmS": 22
+      },
+      "wheelBack": {
+        "worstLostS": 0,
+        "arriveS": 2.7,
+        "maxSpeedCmS": 22
+      },
+      "log": [
+        "reposo: a tu lado (0,11 m), tranquilo",
+        "recordar: vuelves a «La linterna»: se acuerda de su casa",
+        "reposo: a tu lado (0,11 m), tranquilo",
+        "enseñar: estás en su casa: te la enseña"
+      ]
+    },
+    {
+      "there": {
+        "worstLostS": 4.7,
+        "arriveS": 6.4,
+        "maxSpeedCmS": 22
+      },
+      "back": {
+        "worstLostS": 2.2,
+        "arriveS": 3.7,
+        "maxSpeedCmS": 22
+      },
+      "wheelFwd": {
+        "worstLostS": 0,
+        "arriveS": 2.6,
+        "maxSpeedCmS": 22
+      },
+      "wheelBack": {
+        "worstLostS": 0,
+        "arriveS": 2.7,
+        "maxSpeedCmS": 22
+      },
+      "log": [
+        "reposo: a tu lado (0,11 m), tranquilo",
+        "recordar: vuelves a «La linterna»: se acuerda de su casa",
+        "reposo: a tu lado (0,11 m), tranquilo",
+        "enseñar: estás en su casa: te la enseña"
+      ]
+    },
+    {
+      "there": {
+        "worstLostS": 4.7,
+        "arriveS": 6.4,
+        "maxSpeedCmS": 22
+      },
+      "back": {
+        "worstLostS": 2.2,
+        "arriveS": 3.7,
+        "maxSpeedCmS": 22
+      },
+      "wheelFwd": {
+        "worstLostS": 0,
+        "arriveS": 2.6,
+        "maxSpeedCmS": 22
+      },
+      "wheelBack": {
+        "worstLostS": 0,
+        "arriveS": 2.7,
+        "maxSpeedCmS": 22
+      },
+      "log": [
+        "reposo: a tu lado (0,12 m), tranquilo",
+        "recordar: vuelves a «La linterna»: se acuerda de su casa",
+        "reposo: a tu lado (0,12 m), tranquilo",
+        "enseñar: estás en su casa: te la enseña"
+      ]
+    }
+  ]
+}

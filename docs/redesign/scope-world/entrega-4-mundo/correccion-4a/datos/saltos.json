@@ -1,0 +1,242 @@
+[
+ {
+  "phone": false,
+  "from": 0,
+  "to": 5,
+  "seed": 7,
+  "worst": 0.47,
+  "farS": 0,
+  "hiddenS": 0.5,
+  "camSettled": 10.5
+ },
+ {
+  "phone": false,
+  "from": 0,
+  "to": 5,
+  "seed": 8,
+  "worst": 0.47,
+  "farS": 0,
+  "hiddenS": 0.5,
+  "camSettled": 10.5
+ },
+ {
+  "phone": false,
+  "from": 0,
+  "to": 5,
+  "seed": 9,
+  "worst": 0.47,
+  "farS": 0,
+  "hiddenS": 0.5,
+  "camSettled": 10.5
+ },
+ {
+  "phone": false,
+  "from": 5,
+  "to": 0,
+  "seed": 7,
+  "worst": 3.2,
+  "farS": 0,
+  "hiddenS": 3.2,
+  "camSettled": 10.9
+ },
+ {
+  "phone": false,
+  "from": 5,
+  "to": 0,
+  "seed": 8,
+  "worst": 2.17,
+  "farS": 0,
+  "hiddenS": 2.2,
+  "camSettled": 10.9
+ },
+ {
+  "phone": false,
+  "from": 5,
+  "to": 0,
+  "seed": 9,
+  "worst": 3.2,
+  "farS": 0,
+  "hiddenS": 3.2,
+  "camSettled": 10.9
+ },
+ {
+  "phone": false,
+  "from": 1,
+  "to": 5,
+  "seed": 7,
+  "worst": 3.9,
+  "farS": 0,
+  "hiddenS": 5.5,
+  "camSettled": 9.3
+ },
+ {
+  "phone": false,
+  "from": 1,
+  "to": 5,
+  "seed": 8,
+  "worst": 1.3,
+  "farS": 0,
+  "hiddenS": 2.5,
+  "camSettled": 9.3
+ },
+ {
+  "phone": false,
+  "from": 1,
+  "to": 5,
+  "seed": 9,
+  "worst": 3.9,
+  "farS": 0,
+  "hiddenS": 5.5,
+  "camSettled": 9.3
+ },
+ {
+  "phone": false,
+  "from": 0,
+  "to": 3,
+  "seed": 7,
+  "worst": 0,
+  "farS": 0,
+  "hiddenS": 0,
+  "camSettled": 6.4
+ },
+ {
+  "phone": false,
+  "from": 0,
+  "to": 3,
+  "seed": 8,
+  "worst": 0,
+  "farS": 0,
+  "hiddenS": 0,
+  "camSettled": 6.4
+ },
+ {
+  "phone": false,
+  "from": 0,
+  "to": 3,
+  "seed": 9,
+  "worst": 0,
+  "farS": 0,
+  "hiddenS": 0,
+  "camSettled": 6.4
+ },
+ {
+  "phone": true,
+  "from": 0,
+  "to": 5,
+  "seed": 7,
+  "worst": 1.67,
+  "farS": 0,
+  "hiddenS": 1.7,
+  "camSettled": 10.5
+ },
+ {
+  "phone": true,
+  "from": 0,
+  "to": 5,
+  "seed": 8,
+  "worst": 1.67,
+  "farS": 0,
+  "hiddenS": 1.7,
+  "camSettled": 10.5
+ },
+ {
+  "phone": true,
+  "from": 0,
+  "to": 5,
+  "seed": 9,
+  "worst": 1.67,
+  "farS": 0,
+  "hiddenS": 1.7,
+  "camSettled": 10.5
+ },
+ {
+  "phone": true,
+  "from": 5,
+  "to": 0,
+  "seed": 7,
+  "worst": 2.57,
+  "farS": 0,
+  "hiddenS": 2.6,
+  "camSettled": 10.9
+ },
+ {
+  "phone": true,
+  "from": 5,
+  "to": 0,
+  "seed": 8,
+  "worst": 1.47,
+  "farS": 0,
+  "hiddenS": 1.6,
+  "camSettled": 10.9
+ },
+ {
+  "phone": true,
+  "from": 5,
+  "to": 0,
+  "seed": 9,
+  "worst": 2.57,
+  "farS": 0,
+  "hiddenS": 2.6,
+  "camSettled": 10.9
+ },
+ {
+  "phone": true,
+  "from": 1,
+  "to": 5,
+  "seed": 7,
+  "worst": 4.07,
+  "farS": 0,
+  "hiddenS": 6.6,
+  "camSettled": 9.3
+ },
+ {
+  "phone": true,
+  "from": 1,
+  "to": 5,
+  "seed": 8,
+  "worst": 2.1,
+  "farS": 0,
+  "hiddenS": 3.4,
+  "camSettled": 9.3
+ },
+ {
+  "phone": true,
+  "from": 1,
+  "to": 5,
+  "seed": 9,
+  "worst": 4.07,
+  "farS": 0,
+  "hiddenS": 6.6,
+  "camSettled": 9.3
+ },
+ {
+  "phone": true,
+  "from": 0,
+  "to": 3,
+  "seed": 7,
+  "worst": 0,
+  "farS": 0,
+  "hiddenS": 0,
+  "camSettled": 6.4
+ },
+ {
+  "phone": true,
+  "from": 0,
+  "to": 3,
+  "seed": 8,
+  "worst": 0,
+  "farS": 0,
+  "hiddenS": 0,
+  "camSettled": 6.4
+ },
+ {
+  "phone": true,
+  "from": 0,
+  "to": 3,
+  "seed": 9,
+  "worst": 0,
+  "farS": 0,
+  "hiddenS": 0,
+  "camSettled": 6.4
+ }
+]

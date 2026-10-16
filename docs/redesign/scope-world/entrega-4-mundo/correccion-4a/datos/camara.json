@@ -1,0 +1,1124 @@
+[
+ {
+  "device": "escritorio",
+  "lugar": 0,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 69.9,
+  "minCm": 69.9,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 60.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 0,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 69.9,
+  "minCm": 69.9,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 60.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 0,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 69.9,
+  "minCm": 69.9,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 60.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 1,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 71.2,
+  "minCm": 71.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 114.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 1,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 71.2,
+  "minCm": 71.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 114.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 1,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 71.2,
+  "minCm": 71.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 114.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 1,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 71.1,
+  "minCm": 71.1,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 86.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 1,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 71.1,
+  "minCm": 71.1,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 86.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 1,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 71.1,
+  "minCm": 71.1,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 86.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 2,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 43.2,
+  "minCm": 43.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 42.6,
+  "pushes": 2,
+  "ball": [
+   -0.59,
+   -0.34
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 2,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 43.2,
+  "minCm": 43.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 42.6,
+  "pushes": 2,
+  "ball": [
+   -0.59,
+   -0.34
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 2,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 43.2,
+  "minCm": 43.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 42.6,
+  "pushes": 2,
+  "ball": [
+   -0.59,
+   -0.34
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 2,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 38.6,
+  "minCm": 27.3,
+  "near25": 0,
+  "hiddenSettled": 2.7,
+  "ballMinCm": 42.6,
+  "pushes": 2,
+  "ball": [
+   -0.59,
+   -0.34
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 2,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 38.6,
+  "minCm": 27.5,
+  "near25": 0,
+  "hiddenSettled": 2.8,
+  "ballMinCm": 42.6,
+  "pushes": 2,
+  "ball": [
+   -0.59,
+   -0.34
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 2,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 38.6,
+  "minCm": 27.3,
+  "near25": 0,
+  "hiddenSettled": 2.7,
+  "ballMinCm": 42.6,
+  "pushes": 2,
+  "ball": [
+   -0.59,
+   -0.34
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 3,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 34.2,
+  "minCm": 34.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 61.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 3,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 34.2,
+  "minCm": 34.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 61.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 3,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 34.2,
+  "minCm": 34.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 61.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 3,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 34.2,
+  "minCm": 34.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 51.9,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 3,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 34.2,
+  "minCm": 34.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 51.9,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 3,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 34.2,
+  "minCm": 34.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 51.9,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 4,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 67.7,
+  "minCm": 67.7,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 103.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 4,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 67.7,
+  "minCm": 67.7,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 103.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 4,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 67.7,
+  "minCm": 67.7,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 103.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 4,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 34.3,
+  "minCm": 34.3,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 83,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 4,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 34.3,
+  "minCm": 34.3,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 83,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 4,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 34.3,
+  "minCm": 34.3,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 83,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 5,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 83.5,
+  "minCm": 83.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 154.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 5,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 83.2,
+  "minCm": 83.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 154.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 5,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 83.5,
+  "minCm": 83.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 154.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 5,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 56.5,
+  "minCm": 56.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 121.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 5,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 56.5,
+  "minCm": 56.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 121.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "escritorio",
+  "lugar": 5,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 56.5,
+  "minCm": 56.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 121.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 0,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 86.9,
+  "minCm": 86.9,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 73.9,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 0,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 86.9,
+  "minCm": 86.9,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 73.9,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 0,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 86.9,
+  "minCm": 86.9,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 73.9,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 1,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 88.8,
+  "minCm": 88.8,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 129.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 1,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 88.8,
+  "minCm": 88.8,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 129.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 1,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 88.8,
+  "minCm": 88.8,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 129.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 1,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 88.5,
+  "minCm": 88.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 99.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 1,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 88.5,
+  "minCm": 88.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 99.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 1,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 88.5,
+  "minCm": 88.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 99.3,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 2,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 59.4,
+  "minCm": 59.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 60.3,
+  "pushes": 3,
+  "ball": [
+   -0.61,
+   -0.31
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 2,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 59.4,
+  "minCm": 59.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 60.3,
+  "pushes": 3,
+  "ball": [
+   -0.61,
+   -0.31
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 2,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 59.4,
+  "minCm": 59.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 60.3,
+  "pushes": 3,
+  "ball": [
+   -0.61,
+   -0.31
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 2,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 58.8,
+  "minCm": 24,
+  "near25": 1.2,
+  "hiddenSettled": 3.4,
+  "ballMinCm": 60.3,
+  "pushes": 3,
+  "ball": [
+   -0.61,
+   -0.31
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 2,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 58.5,
+  "minCm": 24.6,
+  "near25": 0.7,
+  "hiddenSettled": 4,
+  "ballMinCm": 60.3,
+  "pushes": 3,
+  "ball": [
+   -0.61,
+   -0.31
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 2,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 58.8,
+  "minCm": 24,
+  "near25": 1.2,
+  "hiddenSettled": 3.4,
+  "ballMinCm": 60.3,
+  "pushes": 3,
+  "ball": [
+   -0.61,
+   -0.31
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 3,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 52.4,
+  "minCm": 52.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 78.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 3,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 52.4,
+  "minCm": 52.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 78.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 3,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 52.2,
+  "minCm": 52.2,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 78.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 3,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 52.2,
+  "minCm": 52.2,
+  "near25": 0,
+  "hiddenSettled": 0.3,
+  "ballMinCm": 69.1,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 3,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 51.5,
+  "minCm": 51.5,
+  "near25": 0,
+  "hiddenSettled": 0.3,
+  "ballMinCm": 69.1,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 3,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 52.4,
+  "minCm": 52.4,
+  "near25": 0,
+  "hiddenSettled": 0.3,
+  "ballMinCm": 69.1,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 4,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 97,
+  "minCm": 97,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 123.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 4,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 97,
+  "minCm": 97,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 123.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 4,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 97,
+  "minCm": 97,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 123.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 4,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 55.4,
+  "minCm": 55.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 101.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 4,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 55.4,
+  "minCm": 55.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 101.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 4,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 55.4,
+  "minCm": 55.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 101.5,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 5,
+  "mode": "en",
+  "seed": 7,
+  "minVisCm": 102.4,
+  "minCm": 102.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 170.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 5,
+  "mode": "en",
+  "seed": 8,
+  "minVisCm": 102.4,
+  "minCm": 102.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 170.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 5,
+  "mode": "en",
+  "seed": 9,
+  "minVisCm": 102.4,
+  "minCm": 102.4,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 170.2,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 5,
+  "mode": "llega",
+  "seed": 7,
+  "minVisCm": 77.9,
+  "minCm": 77.6,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 134.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 5,
+  "mode": "llega",
+  "seed": 8,
+  "minVisCm": 77.9,
+  "minCm": 77.6,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 134.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ },
+ {
+  "device": "movil",
+  "lugar": 5,
+  "mode": "llega",
+  "seed": 9,
+  "minVisCm": 77.9,
+  "minCm": 77.5,
+  "near25": 0,
+  "hiddenSettled": 0,
+  "ballMinCm": 134.8,
+  "pushes": 0,
+  "ball": [
+   -0.66,
+   -0.2
+  ],
+  "errors": 0
+ }
+]

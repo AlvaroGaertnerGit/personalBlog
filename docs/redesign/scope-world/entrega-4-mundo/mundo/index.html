@@ -49,6 +49,9 @@
     #status { position: fixed; inset: 0; display: grid; place-items: center; color: #e9e4da; font: 500 13px "Geist Mono", monospace; text-align: center; padding: 24px; pointer-events: none; }
     body:not(.loading):not(.no-webgl) #status { display: none; }
     body.no-webgl .hud, body.no-webgl .intro, body.no-webgl #view { display: none; }
+    /* only without a GPU (the 1.0 prototype's notice) */
+    .software-only { display: none; }
+    body.software .intro p.software-only { display: block; color: var(--margin); }
     .fallback { max-width: 640px; text-align: left; font: 15px/1.55 Geist, system-ui, sans-serif; color: #e9e4da; overflow: auto; max-height: 100%; }
     .fallback h1 { font-size: 22px; margin-bottom: 6px; }
     .fallback h2 { font-size: 16px; margin-top: 14px; }
@@ -79,6 +82,7 @@
   <details class="card intro lab-only" open>
     <summary>Scope World · 4A</summary>
     <p>Desde su linterna hasta la luz de la lámpara: la rueda, deslizar, ← → o los lugares. Tócale a él, a su bola, a la flor, al radiómetro, a la linterna o al gabinete. Quédate quieto o abre la nota para leer. <b>D</b>: depuración.</p>
+    <p class="software-only">Este equipo dibuja el 3D sin tarjeta gráfica, así que el mundo se ve con menos resolución, sin sombras, y puede ir a tirones.</p>
   </details>
 
   <aside id="note" class="card lab-only" hidden aria-label="Nota del lugar">

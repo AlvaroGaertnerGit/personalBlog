@@ -25,10 +25,11 @@ const ground = new BakedGround(
   ],
 )
 
-test("every place's waiting spot, his door and the toys stand on free floor", () => {
+test("every place's waiting spot and his door stand on free floor; the ball on the ball's", () => {
   for (const s of WORLD_4A.stations) assert.ok(ground.isFree(s.wait), `${s.id} wait ${s.wait}`)
   assert.ok(ground.isFree(WORLD_PLACES.lanternDoor.outside))
-  assert.ok(ground.isFree(WORLD_PLACES.ball.start))
+  // the ball rests on floor the ball can roll on (against the margin's standing notes: where he
+  // stands to push it, and his way there, are checked in mundo/src/world-4a.test.ts)
   assert.ok(!ground.ballBlocked(WORLD_PLACES.ball.start))
 })
 

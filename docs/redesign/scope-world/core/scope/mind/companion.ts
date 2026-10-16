@@ -35,9 +35,10 @@ export function nearestStation(def: WorldDef, s: number) {
  * camera's line (so he stays in view) and either AHEAD along the route (he
  * knows the way) or with you.
  */
-export function slotWhileMoving(def: WorldDef, s: number, direction: number, ahead: boolean, eye: P2): P2 {
+export function slotWhileMoving(def: WorldDef, s: number, direction: number, ahead: boolean, eye: P2, jumpLead?: number): P2 {
   const lead = ahead ? 0.4 : -0.15
-  const a = anchorAt(def, s + Math.sign(direction || 1) * lead)
+  // a jump (refine.followTarget): further ahead, toward where you are going
+  const a = anchorAt(def, jumpLead !== undefined ? s + jumpLead : s + Math.sign(direction || 1) * lead)
   const d = dist(a, eye) || 1
   return [a[0] + ((eye[0] - a[0]) / d) * 0.06, a[1] + ((eye[1] - a[1]) / d) * 0.06]
 }

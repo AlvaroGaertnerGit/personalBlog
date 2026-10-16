@@ -18,7 +18,8 @@ import { ScopeMind } from "../scope/mind/mind.ts"
 import type { ClickEvent, Intent, Look, ObjectId, Perception } from "../scope/mind/types.ts"
 import type { Ground } from "../scope/ground.ts"
 import { Ball, Flower, Radiometer } from "../scope/props.ts"
-import { createStage, MOODS, probeGL, type Stage, type StageOptions } from "../env/stage.ts"
+import { createStage, probeGL, type Stage, type StageOptions } from "../env/stage.ts"
+import { mixMoods, MOODS, routeLight, type Mood } from "../env/moods.ts"
 import { renderDebug } from "./debug.ts"
 import { VisitorRig } from "./visitor.ts"
 import { bl } from "../../prototype/src/world/world-data.ts"
@@ -39,6 +40,7 @@ const DT = 1 / 60
 export async function startScopeWorld(opt: AppOptions) {
   const { def } = opt
   const { places } = def
+  const refine = def.refine ?? {}
   const LANTERN = places.lantern
   const CABINET = places.cabinet
   const STATIONS = def.stations
@@ -52,11 +54,14 @@ export async function startScopeWorld(opt: AppOptions) {
     document.body.classList.add("no-webgl")
     return
   }
+  // a page may tell you it is drawn without a GPU (4A does; the class alone changes nothing)
+  document.body.classList.toggle("software", gl.software)
   const stage = await createStage($<HTMLCanvasElement>("view"), { software: gl.software, light: params.has("ligero"), ...opt.stage })
   const ground = await opt.ground(stage)
   if (opt.mode && (await opt.mode(params, stage, ground))) return
 
   const scope = await LabScope.load("/scope/scope.glb", ground, places, def.start, def.gaits)
+  scope.loco.restartBelow = refine.restartBelow ?? 0
   const ball = new Ball(ground, places.ball)
   const flower = new Flower(ground.height(places.flower.at), places.flower)
   const radiometer = new Radiometer(ground.height(places.radiometer.at), places.radiometer)
@@ -71,6 +76,13 @@ export async function startScopeWorld(opt: AppOptions) {
   const cabinetPick = new THREE.Mesh(new THREE.BoxGeometry(CABINET.max[0] - CABINET.min[0], 0.08, CABINET.max[1] - CABINET.min[1]), pickMat)
   cabinetPick.position.copy(bl((CABINET.min[0] + CABINET.max[0]) / 2, (CABINET.min[1] + CABINET.max[1]) / 2, 0.04))
   stage.scene.add(lanternPick, cabinetPick)
+  // refine.flowerPick: the bud's petals are too thin to hit; an invisible column around it is the flower
+  // (made only when asked: every three.js object draws on Math.random for its id, and the lab's seeded runs must not shift)
+  const flowerPick = refine.flowerPick ? new THREE.Mesh(new THREE.CylinderGeometry(places.flower.baseR + 0.01, places.flower.baseR + 0.01, 0.12, 16), pickMat) : null
+  if (flowerPick) {
+    flowerPick.position.copy(bl(places.flower.at[0], places.flower.at[1], ground.height(places.flower.at) + 0.06))
+    stage.scene.add(flowerPick)
+  }
 
   const reducedQuery = matchMedia("(prefers-reduced-motion: reduce)")
   const reduced = params.has("reduced") || reducedQuery.matches
@@ -81,17 +93,37 @@ export async function startScopeWorld(opt: AppOptions) {
   const lookAt = new THREE.Vector3()
 
   let now = 0
+  // tests pause the real-time loop: only advance() moves the sim, render() draws on demand
+  let paused = false
   let timeScale = 1
   let reading = false
   let lookingAtScope = false
   let lastIntent: Intent | null = null
   const clicks: ClickEvent[] = []
-  let moodName = params.get("hora") ?? "atardecer"
-  stage.setMood(moodName)
+  // the light: in a world whose places have their own (Entrega 2), it follows the view along the
+  // route ("lugar") and the button can hold any of the four moods; otherwise (the lab) one mood
+  const zoned = STATIONS.some((s) => s.mood)
+  const LIGHTS = zoned ? ["lugar", ...Object.keys(MOODS)] : ["atardecer", "noche"]
+  let moodName = params.get("hora") ?? (zoned ? "lugar" : "atardecer")
+  let light: Mood | null = null
+  const targetLight = () => (moodName === "lugar" ? routeLight(def, rig.s) : (MOODS[moodName] ?? MOODS.atardecer))
+  /** Ease the light toward where you are (τ 0.8 s: a cut with reduced motion still fades). */
+  function stepLight(dt: number) {
+    const target = targetLight()
+    light = light ? mixMoods(light, target, 1 - Math.exp(-dt / 0.8)) : target
+    stage.applyMood(light)
+  }
+  function setLight(name: string) {
+    moodName = name
+    if (zoned) stepLight(0) // the fade starts from the light you see
+    else stage.setMood(name)
+  }
+  if (!zoned) stage.setMood(moodName)
   rig.portrait = innerHeight > innerWidth * 1.1
 
   const startStation = Math.min(STATIONS.length - 1, Math.max(0, Number(params.get("lugar") ?? 0)))
   rig.s = rig.sTarget = startStation
+  if (zoned) stepLight(0) // the light of the place you start at
   if (startStation !== 0) scope.place(STATIONS[startStation].wait, def.start.heading, ground)
 
   // --- the world as the mind and the body see it -------------------------------------------
@@ -140,7 +172,19 @@ export async function startScopeWorld(opt: AppOptions) {
       ndc.copy(bl(at[0], at[1], ground.height(at) + 0.06)).project(stage.camera)
       return ndc.z < 1 && Math.abs(ndc.x) < 0.85 && Math.abs(ndc.y) < 0.85
     },
+    refine,
+    cameras: cameras(),
   })
+  // the camera of the place you are going to, and the one you look through while it is still
+  // (a travelling camera sweeps the floor: keeping clear of it would close every corridor)
+  const cameras = (): P2[] => {
+    if (!refine.cameraClearance) return []
+    const to = STATIONS[Math.round(rig.sTarget)]
+    const pose = rig.portrait ? to.portrait : to.camera
+    const out: P2[] = [[pose.pos[0], pose.pos[1]]]
+    if (Math.abs(rig.sVel) < 0.03) out.push([stage.camera.position.x, -stage.camera.position.z])
+    return out
+  }
 
   const ndc = new THREE.Vector3()
   function scopeVisible() {
@@ -158,6 +202,7 @@ export async function startScopeWorld(opt: AppOptions) {
         eye,
         s: rig.s,
         sVel: rig.sVel,
+        target: rig.sTarget,
         zone: rig.zone,
         settled: rig.settled,
         reading,
@@ -182,6 +227,9 @@ export async function startScopeWorld(opt: AppOptions) {
     now += dt
     rig.update(dt, now)
     rig.pose(stage.camera, lookAt)
+    if (zoned) stepLight(dt)
+    // paused (tests stepping without drawing): the view he is seen through must be this step's
+    if (paused) stage.camera.updateMatrixWorld()
     const p = perceive()
     const intent = mind.tick(p)
     lastIntent = intent
@@ -205,7 +253,7 @@ export async function startScopeWorld(opt: AppOptions) {
   const pickables: [THREE.Object3D, ClickEvent["target"]][] = [
     [scope.proxy, { kind: "scope" }],
     [ball.mesh, { kind: "object", id: "ball" }],
-    [flower.group, { kind: "object", id: "flower" }],
+    [flowerPick ?? flower.group, { kind: "object", id: "flower" }],
     [radiometer.group, { kind: "object", id: "radiometer" }],
     [lanternPick, { kind: "object", id: "lantern" }],
     [cabinetPick, { kind: "object", id: "cabinet" }],
@@ -297,11 +345,10 @@ export async function startScopeWorld(opt: AppOptions) {
   readBtn.addEventListener("click", () => toggleReading())
   $("note-close").addEventListener("click", () => toggleReading(false))
   const moodBtn = $<HTMLButtonElement>("mood")
-  const setMoodLabel = () => (moodBtn.textContent = `Luz: ${MOODS[moodName].label}`)
+  const setMoodLabel = () => (moodBtn.textContent = `Luz: ${moodName === "lugar" ? "la del lugar" : MOODS[moodName].label}`)
   setMoodLabel()
   moodBtn.addEventListener("click", () => {
-    moodName = moodName === "atardecer" ? "noche" : "atardecer"
-    stage.setMood(moodName)
+    setLight(LIGHTS[(LIGHTS.indexOf(moodName) + 1) % LIGHTS.length])
     setMoodLabel()
   })
   const speedBtn = $<HTMLButtonElement>("speed")
@@ -374,6 +421,7 @@ export async function startScopeWorld(opt: AppOptions) {
     })
   }
   stage.renderer.setAnimationLoop(() => {
+    if (paused) return
     const t = performance.now()
     const real = Math.min(0.1, (t - last) / 1000)
     frames.push(t - last)
@@ -396,11 +444,19 @@ export async function startScopeWorld(opt: AppOptions) {
   // --- test hooks (tools/verify.mjs) -------------------------------------------------------------
   Object.assign(window, {
     __lab: {
-      advance(seconds: number) {
+      /** Run the sim; `render: false` skips the frame (the tests sample many steps without drawing). */
+      advance(seconds: number, opt: { render?: boolean } = {}) {
         for (let k = 0; k < Math.round(seconds / DT); k++) sim(DT)
-        render()
+        if (opt.render !== false) render()
         return this.state()
       },
+      /** Stop (or restart) the real-time loop, so nothing but advance() moves the sim. */
+      pause(on = true) {
+        paused = on
+        last = performance.now()
+        acc = 0
+      },
+      render,
       state() {
         const i = lastIntent
         return {
@@ -423,6 +479,7 @@ export async function startScopeWorld(opt: AppOptions) {
           memory: { clips: [...mind.memory.clips], clicks: mind.memory.clicks.length, zones: mind.memory.zones.map((z) => ({ ...z })) },
           log: mind.memory.log.slice(-10),
           timeIn: Object.fromEntries(mind.timeIn),
+          light: { mode: moodName, label: stage.mood.label, lamp: stage.mood.lamp, sunEl: stage.mood.sun.el, sunAz: stage.mood.sun.az, exposure: stage.mood.exposure, hemi: stage.mood.hemi, lantern: stage.mood.lantern },
         }
       },
       scope,
@@ -436,6 +493,14 @@ export async function startScopeWorld(opt: AppOptions) {
         const f = forwardOf(scope.heading)
         return { pos: [l.pos.x, -l.pos.z, l.pos.y], dir: [l.dir.x, -l.dir.z, l.dir.y], level: l.level, forward: f }
       },
+      /** Where Scope's head (or a thing) is on the screen, in CSS pixels (tests click there with the real pointer). */
+      screenOf(what: "scope" | ObjectId) {
+        const p = what === "scope" ? scope.headPosition(new THREE.Vector3()) : objectPoint(what)
+        stage.camera.updateMatrixWorld()
+        p.project(stage.camera)
+        const r = canvas.getBoundingClientRect()
+        return { x: r.left + ((p.x + 1) / 2) * r.width, y: r.top + ((1 - p.y) / 2) * r.height, inFront: p.z < 1 }
+      },
       goTo: (i: number) => rig.goTo(i),
       step: (d: number) => rig.step(d),
       wheel: (d: number) => rig.wheel(d),
@@ -447,8 +512,7 @@ export async function startScopeWorld(opt: AppOptions) {
       },
       look: (on: boolean) => (lookingAtScope = on),
       mood: (m: string) => {
-        moodName = m
-        stage.setMood(m)
+        setLight(m)
         setMoodLabel()
       },
       perf: () => ({ calls: stage.renderer.info.render.calls, triangles: stage.renderer.info.render.triangles, frames: [...frames], software: gl.software, renderer: gl.renderer, load: stage.stats }),

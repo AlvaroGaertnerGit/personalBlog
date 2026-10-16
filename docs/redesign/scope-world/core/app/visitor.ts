@@ -97,9 +97,16 @@ export class VisitorRig {
       // the spring of the segment you are in: a longer way takes a little longer
       const K = this.def.visitorStiffness(segmentLength(this.def, this.s))
       const c = 2 * Math.sqrt(K)
+      const vMax = this.def.refine?.visitorMaxSpeed
       for (let t = 0; t < dt - 1e-9; t += 1 / 240) {
         const h = Math.min(1 / 240, dt - t)
         this.sVel += (K * (this.sTarget - this.s) - c * this.sVel) * h
+        // a jump of more than one place travels the route at a pace he can keep (places per
+        // second = m/s ÷ segment); the last place is the approved spring's, so it eases in as before
+        if (vMax && Math.abs(this.sTarget - this.s) > 1) {
+          const cap = vMax / Math.max(segmentLength(this.def, this.s), 0.05)
+          this.sVel = THREE.MathUtils.clamp(this.sVel, -cap, cap)
+        }
         this.s += this.sVel * h
       }
       if (Math.abs(this.sTarget - this.s) < 1e-4 && Math.abs(this.sVel) < 1e-3) {

@@ -5,9 +5,15 @@
 import type { NavGrid } from "../../prototype/src/scope/nav.ts"
 import type { P2 } from "../world-def.ts"
 
+/** A circle his centre must keep out of (a camera's foreground, refine.cameraClearance). */
+export interface Keepout {
+  at: P2
+  r: number
+}
+
 export interface Ground {
-  /** Shortest walkable path, avoiding where the ball is now. */
-  path(from: P2, to: P2, ball: P2 | null): P2[] | null
+  /** Shortest walkable path, avoiding where the ball is now (and, if the ground supports it, the keep-outs). */
+  path(from: P2, to: P2, ball: P2 | null, avoid?: readonly Keepout[]): P2[] | null
   isFree(p: P2): boolean
   /** Floor height (Blender z) at (x, y). */
   height(p: P2): number

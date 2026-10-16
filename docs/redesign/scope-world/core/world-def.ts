@@ -35,6 +35,29 @@ export interface Station {
   offer: Offer | null
   /** What there is to read here. */
   note: string
+  /** The light of this place (a stage mood: amanecer, dia, atardecer, noche); between places it blends. */
+  mood?: string
+}
+
+/**
+ * Entrega 4 refinements of the companion, all opt-in: a world that does not set
+ * them (the approved Entrega 3 lab) keeps its exact behaviour.
+ */
+export interface Refinements {
+  /** Nearest he goes to the camera on his own (ground distance, m): goals and paths keep clear of it, and a push that would need him there is skipped. */
+  cameraClearance?: number
+  /** He knows where you are going: a jump across places is a run toward it, not a guide to the next place. */
+  followTarget?: boolean
+  /** Leave by the lantern's door only from inside it (the lab also sends him through the doorway from just outside, and a run that replans there circles the door). */
+  doorFromInside?: boolean
+  /** The flower is touched through an invisible column around it (its petals are too thin to hit: the 4A audit, B1). */
+  flowerPick?: boolean
+  /** A run ahead to show you a place is finished even if you stop there before he arrives (the lab hands over to a walk back). */
+  finishRun?: boolean
+  /** A new way while he is barely moving (below this, m/s) starts as from standing: turn on the spot first (Locomotor.restartBelow). */
+  restartBelow?: number
+  /** Fastest the view travels along the route (m/s on the ground): a long jump is a journey he can keep up with. */
+  visitorMaxSpeed?: number
 }
 
 /** Scope's own places and toys. */
@@ -80,6 +103,7 @@ export interface WorldDef {
   ambientAt: (at: P2, mood: { lamp: number; ambientLight: number }) => number
   /** Where Scope starts: at his door. */
   start: { at: P2; heading: number }
+  refine?: Refinements
 }
 
 const last = (def: WorldDef) => def.stations.length - 1

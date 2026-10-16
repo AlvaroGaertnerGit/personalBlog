@@ -1,0 +1,27 @@
+{
+  "when": "2026-10-16T12:10:12.881Z",
+  "checks": [
+    {
+      "name": "se pone en marcha contigo (antes de que la cámara llegue, ~1,3 s)",
+      "ok": true,
+      "detail": "a los 0.02 s"
+    },
+    {
+      "name": "se adelanta para enseñarte un lugar nuevo",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "nunca está perdido (lejos o fuera de cuadro) más de 6 s tras un salto",
+      "ok": true,
+      "detail": "4.6 s"
+    },
+    {
+      "name": "sin teletransportes: desplazamiento máximo por paso ≤ 22 cm/s · 1/60 s (+ embestida)",
+      "ok": true,
+      "detail": "4.53 mm/paso"
+    }
+  ],
+  "perf": {},
+  "console": []
+}
